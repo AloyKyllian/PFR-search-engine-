@@ -1,0 +1,7 @@
+[1] Nombre de mots clé : 5
+[2] Similarité : 50
+[3] Niveau : 255
+[4] Informations Utilisateur :
+    - Nom1 : NULL MDP1 : NULL Nom2 : NULL MDP2 : NULL Nom3 : NULL MDP3 : NULL Nom4 : NULL MDP4 : NULL Nom5 : NULL MDP5 : NULL
+[5] Informations Administrateur :
+    - Nom1 : NULL MDP1 : NULL Nom2 : NULL MDP2 : NULL Nom3 : NULL MDP3 : NULL Nom4 : NULL MDP4 : NULL Nom5 : NULL MDP5 : NULL
