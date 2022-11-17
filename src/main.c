@@ -2,4 +2,5 @@
 
 main(){
     int val;
+    printf("hello world");
 }
