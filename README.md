@@ -10,3 +10,4 @@ faire terminal new terminal
 puis vous selectionner bash dans le + en bas a droite de votre interface
 
 puis vous ferez la commande "git clone https://github.com/thepandou05/PFR.git"
+HELLO
