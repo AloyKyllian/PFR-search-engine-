@@ -2,6 +2,7 @@
 
 main(){
     int val;
+    print(val);
 }
 
 //test
