@@ -2,6 +2,8 @@
 
 ## Tuto
 
+### installation et utilisation de git avec vscode
+
 pour le pfr je suis en train de creer le repository du projet
 
 pour valider on add puis on push pour le mettre sur github
@@ -12,6 +14,8 @@ faire terminal new terminal
 puis vous selectionner bash dans le + en bas a droite de votre interface
 
 puis vous ferez la commande "git clone https://github.com/thepandou05/PFR.git"
+
+### compilation et run du programme
 
 pour la compilation et le run suivez le tuto de ce lien - pour windows : https://code.visualstudio.com/docs/cpp/config-mingw
                                                         - pour linus :  https://code.visualstudio.com/docs/cpp/config-linux
