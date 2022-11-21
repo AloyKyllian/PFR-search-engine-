@@ -10,6 +10,6 @@ faire terminal new terminal
 puis vous selectionner bash dans le + en bas a droite de votre interface
 
 puis vous ferez la commande "git clone https://github.com/thepandou05/PFR.git"
-HELLO
 
-j'ecris une nouveele ligne
+
+mettre une majuscule devant le nom de fichier
