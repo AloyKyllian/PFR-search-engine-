@@ -1,6 +1,6 @@
 # PFR
 
-##Tuto
+## Tuto
 
 pour le pfr je suis en train de creer le repository du projet
 
@@ -18,7 +18,7 @@ pour la compilation et le run suivez le tuto de ce lien - pour windows : https:/
                                                         - pour mac : https://code.visualstudio.com/docs/cpp/config-clang-mac
 
 
-##Regle
+## Regle
 
 Mettre une majuscule devant le nom de fichier
 
@@ -28,7 +28,7 @@ Les fichiers .c dans le source
 Chacun ca branche pas touche au branche des autres 
 Si pb avec le programme du copain lui en parler directement on ne modifie pas ce qui n'est pas a nous 
 
-##Aide
+## Aide
 
 Pensez a faire git pull avant de commencer pour recuperer les fichier du github
 Pensez a push et commit dès que possible 
