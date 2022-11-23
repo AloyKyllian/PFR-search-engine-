@@ -1,6 +1,5 @@
 #include "../head/Global.h"
 
-
 void viderBuffer()
 {
     int c;

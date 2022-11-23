@@ -10,11 +10,13 @@
 #define MAX_UTILISATEUR 5
 #define MAX_CHAINE 100
 
+
+
 typedef struct
 {
     char chaine[MAX_CHAINE];
 }String;
 
-void viderBuffer();
+void viderBuffer(void);
 
 #endif

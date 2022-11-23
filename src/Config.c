@@ -1,8 +1,7 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "../head/Config.h"
-#include "../head/Global.h"
+#include "../head/Config.h"
 
+//Work
 CONFIG Lire_CONFIG()
 {
     CONFIG config;
@@ -18,7 +17,7 @@ CONFIG Lire_CONFIG()
     }
     else
     {
-        printf("Impossible d'ouvrir le fichier Config.txt");
+        printf("Erreur !\nImpossible d'ouvrir le fichier Config.txt");
     }
 
     return config;
@@ -26,7 +25,7 @@ CONFIG Lire_CONFIG()
 }
 
 //Work
-void afficher_CONFIG(CONFIG config)
+void Afficher_CONFIG(CONFIG config)
 {
     printf("nb_mots_cle = %d\n",config.nb_mots_cle);
     printf("similariter = %d\n",config.similariter);
@@ -47,10 +46,35 @@ void afficher_CONFIG(CONFIG config)
     printf("Nom5 = %s\tMDP5 = %s\n",config.nom_admin[4].chaine,config.mdp_admin[4].chaine);
 }
 
+//Work
+CONFIG Lire_mot_cle(CONFIG config)
+{
+    int tmp;
+    printf("\nEntrer le nouveau nombre de mots cle (superieur a 0)\n");
+    while (1)
+    {
+        if(!scanf("%d",&tmp))
+        {
+            printf("Erreur !\nIl faut rentrer un nombre\n");
+            viderBuffer();
+        }
+        else if(tmp <= 0)
+        {
+            printf("Erreur !\n Il faut un nombre superieur a 0\n");
+        }
+        else
+        {
+            config.nb_mots_cle = tmp;
+            return config;
+        } 
+    }
+}
 
 void main()
 {
     CONFIG config;
     config = Lire_CONFIG();
-    afficher_CONFIG(config);
+    Afficher_CONFIG(config);
+    config = Lire_mot_cle(config);
+    Afficher_CONFIG(config);
 }
