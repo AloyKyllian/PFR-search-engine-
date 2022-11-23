@@ -60,7 +60,7 @@ CONFIG Lire_mot_cle(CONFIG config)
         }
         else if(tmp <= 0)
         {
-            printf("Erreur !\n Il faut un nombre superieur a 0\n");
+            printf("Erreur !\nIl faut un nombre superieur a 0\n");
         }
         else
         {
@@ -70,11 +70,34 @@ CONFIG Lire_mot_cle(CONFIG config)
     }
 }
 
+CONFIG Lire_similariter(CONFIG config)
+{
+    int tmp;
+    printf("\nEntrer le pourcentage de similarite (entre 0 et 100)\n");
+    while (1)
+    {
+        if(!scanf("%d",&tmp))
+        {
+            printf("Erreur !\nIl faut rentrer un nombre\n");
+            viderBuffer();
+        }
+        else if(tmp <= 0 || tmp >= 100)
+        {
+            printf("Erreur !\nIl faut un nombre entre 0 et 100\n");
+        }
+        else
+        {
+            config.similariter = tmp;
+            return config;
+        } 
+    }
+}
 void main()
 {
     CONFIG config;
     config = Lire_CONFIG();
     Afficher_CONFIG(config);
-    config = Lire_mot_cle(config);
+    //config = Lire_mot_cle(config);
+    config = Lire_similariter(config);
     Afficher_CONFIG(config);
 }
