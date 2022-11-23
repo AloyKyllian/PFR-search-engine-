@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../head/Config.h"
+#include "../head/Global.h"
 
 CONFIG Lire_CONFIG()
 {
@@ -24,6 +25,7 @@ CONFIG Lire_CONFIG()
 
 }
 
+//Work
 void afficher_CONFIG(CONFIG config)
 {
     printf("nb_mots_cle = %d\n",config.nb_mots_cle);
@@ -44,6 +46,7 @@ void afficher_CONFIG(CONFIG config)
     printf("Nom4 = %s\tMDP4 = %s\n",config.nom_admin[3].chaine,config.mdp_admin[3].chaine);
     printf("Nom5 = %s\tMDP5 = %s\n",config.nom_admin[4].chaine,config.mdp_admin[4].chaine);
 }
+
 
 void main()
 {

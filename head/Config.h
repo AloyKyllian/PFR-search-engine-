@@ -2,14 +2,8 @@
 #define CONFIG_H
 #include <stdlib.h>
 #include <stdio.h>
+#include "../head/Global.h"
 
-#define MAX_UTILISATEUR 5
-#define MAX_CHAINE 100
-
-typedef struct
-{
-    char chaine[MAX_CHAINE];
-}String;
 
 typedef struct
 { 
@@ -24,6 +18,18 @@ typedef struct
 }CONFIG;
 
 CONFIG Lire_CONFIG();
-void afficher_CONFIG(CONFIG config);
+void Afficher_CONFIG(CONFIG config);
+
+CONFIG Lire_mot_cle(CONFIG config);
+CONFIG Lire_similariter(CONFIG config);
+CONFIG Lire_niveau(CONFIG config);
+bool Presence_utilisateur(CONFIG config);
+CONFIG Ajouter_utilisateur(CONFIG config);
+CONFIG Ajouter_administrateur(CONFIG config);
+CONFIG Supprimer_utilisateur(CONFIG config);
+CONFIG Supprimer_administrateur(CONFIG config);
+void Ecrire_CONFIG(CONFIG config);
+CONFIG Modifier_info_utilisateur(CONFIG config);
+
 
 #endif
