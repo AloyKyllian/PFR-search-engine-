@@ -18,9 +18,9 @@ typedef struct
 
 CONFIG Lire_CONFIG();
 void Afficher_CONFIG(CONFIG config);
-
 CONFIG Lire_mot_cle(CONFIG config);
 CONFIG Lire_similariter(CONFIG config);
+
 CONFIG Lire_niveau(CONFIG config);
 bool Presence_utilisateur(CONFIG config);
 CONFIG Ajouter_utilisateur(CONFIG config);

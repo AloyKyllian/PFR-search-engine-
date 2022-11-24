@@ -70,6 +70,7 @@ CONFIG Lire_mot_cle(CONFIG config)
     }
 }
 
+//Work
 CONFIG Lire_similariter(CONFIG config)
 {
     int tmp;
@@ -92,12 +93,49 @@ CONFIG Lire_similariter(CONFIG config)
         } 
     }
 }
+
+//Work
+CONFIG Lire_niveau(CONFIG config)
+{
+    int tmp;
+    double tmp2;
+    printf("\nEntrer le nouveau nombre de niveau (doit etre une puissance de deux entre 0 et 256)\n");
+    while (1)
+    {
+        if(!scanf("%d",&tmp))
+        {
+            printf("Erreur !\nIl faut rentrer un nombre\n");
+            viderBuffer();
+        }
+        else if(tmp >= 256 || tmp <=0)
+        {
+            printf("Erreur !\nIl faut un nombre entre 0 et 256\n");
+        }
+        else 
+        {
+            tmp2 = log2((double)tmp);
+		    if(tmp2 == (int)tmp2)
+            {
+                config.niveau = tmp;
+                return config;
+            }
+            else
+            {
+                printf("Erreur !\nIl faut une puissance de 2\n");
+            }
+        } 
+    }
+}
+
+
+
 void main()
 {
     CONFIG config;
     config = Lire_CONFIG();
     Afficher_CONFIG(config);
     //config = Lire_mot_cle(config);
-    config = Lire_similariter(config);
+    //config = Lire_similariter(config);
+    config = Lire_niveau(config);
     Afficher_CONFIG(config);
 }
