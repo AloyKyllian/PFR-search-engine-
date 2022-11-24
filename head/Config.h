@@ -13,13 +13,13 @@ typedef struct
 
 }CONFIG;
 
-CONFIG Lire_CONFIG();
-void Afficher_CONFIG(CONFIG config);
-CONFIG Lire_mot_cle(CONFIG config);
-CONFIG Lire_similariter(CONFIG config);
-CONFIG Lire_niveau(CONFIG config);
-CONFIG Lire_nb_fenetre(CONFIG config);
-CONFIG Lire_intervale(CONFIG config);
-void Ecrire_CONFIG(CONFIG config);
+CONFIG Lire_CONFIG(String*);
+void Afficher_CONFIG(CONFIG);
+CONFIG Lire_mot_cle(CONFIG,String*);
+CONFIG Lire_similariter(CONFIG,String*);
+CONFIG Lire_niveau(CONFIG,String*);
+CONFIG Lire_nb_fenetre(CONFIG,String*);
+CONFIG Lire_intervale(CONFIG,String*);
+void Ecrire_CONFIG(CONFIG,String*);
 
 #endif
