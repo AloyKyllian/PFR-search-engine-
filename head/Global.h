@@ -7,7 +7,6 @@
 #include <string.h>
 #include <math.h>
 
-#define MAX_UTILISATEUR 5
 #define MAX_CHAINE 100
 
 

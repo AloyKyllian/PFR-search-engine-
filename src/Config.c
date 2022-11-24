@@ -6,14 +6,11 @@ CONFIG Lire_CONFIG()
 {
     CONFIG config;
     FILE* fichier = NULL;
-    int nb_utilisateur = 0;
-    int nb_administrateur = 0;
 
-    char chaine[20];
     fichier = fopen("../Config.txt","r");
     if(fichier != NULL)
     {
-        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Informations Utilisateur :\n\t- Nom1 : %s MDP1 : %s Nom2 : %s MDP2 : %s Nom3 : %s MDP3 : %s Nom4 : %s MDP4 : %s Nom5 : %s MDP5 : %s\n[5] Informations Administrateur :\n\t- Nom1 : %s MDP1 : %s Nom2 : %s MDP2 : %s Nom3 : %s MDP3 : %s Nom4 : %s MDP4 : %s Nom5 : %s MDP5 : %s",&config.nb_mots_cle,&config.similariter,&config.niveau,&config.nom_utilisateur[0].chaine,&config.mdp_utilisateur[0].chaine,&config.nom_utilisateur[1].chaine,&config.mdp_utilisateur[1].chaine,&config.nom_utilisateur[2].chaine,&config.mdp_utilisateur[2].chaine,&config.nom_utilisateur[3].chaine,&config.mdp_utilisateur[3].chaine,&config.nom_utilisateur[4].chaine,&config.mdp_utilisateur[4].chaine,&config.nom_admin[0].chaine,&config.mdp_admin[0].chaine,&config.nom_admin[1].chaine,&config.mdp_admin[1].chaine,&config.nom_admin[2].chaine,&config.mdp_admin[2].chaine,&config.nom_admin[3].chaine,&config.mdp_admin[3].chaine,&config.nom_admin[4].chaine,&config.mdp_admin[4].chaine);
+        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f",&config.nb_mots_cle,&config.similariter,&config.niveau,&config.nb_fenetre,&config.intervale);
     }
     else
     {
@@ -27,23 +24,11 @@ CONFIG Lire_CONFIG()
 //Work
 void Afficher_CONFIG(CONFIG config)
 {
-    printf("nb_mots_cle = %d\n",config.nb_mots_cle);
-    printf("similariter = %d\n",config.similariter);
-    printf("niveau = %d\n",config.niveau);
-
-    printf("Informations Utilisateur :\n");
-    printf("Nom1 = %s\tMDP1 = %s\n",config.nom_utilisateur[0].chaine,config.mdp_utilisateur[0].chaine);
-    printf("Nom2 = %s\tMDP2 = %s\n",config.nom_utilisateur[1].chaine,config.mdp_utilisateur[1].chaine);
-    printf("Nom3 = %s\tMDP3 = %s\n",config.nom_utilisateur[2].chaine,config.mdp_utilisateur[2].chaine);
-    printf("Nom4 = %s\tMDP4 = %s\n",config.nom_utilisateur[3].chaine,config.mdp_utilisateur[3].chaine);
-    printf("Nom5 = %s\tMDP5 = %s\n",config.nom_utilisateur[4].chaine,config.mdp_utilisateur[4].chaine);
-
-    printf("Informations Administrateur :\n");
-    printf("Nom1 = %s\tMDP1 = %s\n",config.nom_admin[0].chaine,config.mdp_admin[0].chaine);
-    printf("Nom2 = %s\tMDP2 = %s\n",config.nom_admin[1].chaine,config.mdp_admin[1].chaine);
-    printf("Nom3 = %s\tMDP3 = %s\n",config.nom_admin[2].chaine,config.mdp_admin[2].chaine);
-    printf("Nom4 = %s\tMDP4 = %s\n",config.nom_admin[3].chaine,config.mdp_admin[3].chaine);
-    printf("Nom5 = %s\tMDP5 = %s\n",config.nom_admin[4].chaine,config.mdp_admin[4].chaine);
+    printf("Nombre de mots cle = %d\n",config.nb_mots_cle);
+    printf("Similariter = %d\n",config.similariter);
+    printf("Niveau = %d\n",config.niveau);
+    printf("Nombre de fenetre = %d\n",config.nb_fenetre);
+    printf("Intervale = %f\n",config.intervale);
 }
 
 //Work
@@ -127,15 +112,68 @@ CONFIG Lire_niveau(CONFIG config)
     }
 }
 
-
-
-void main()
+//Work
+CONFIG Lire_nb_fenetre(CONFIG config)
 {
-    CONFIG config;
-    config = Lire_CONFIG();
-    Afficher_CONFIG(config);
-    //config = Lire_mot_cle(config);
-    //config = Lire_similariter(config);
-    config = Lire_niveau(config);
-    Afficher_CONFIG(config);
+    int tmp;
+    printf("\nEntrer le nouveau nombre fenetre (superieur a 0)\n");
+    while (1)
+    {
+        if(!scanf("%d",&tmp))
+        {
+            printf("Erreur !\nIl faut rentrer un nombre\n");
+            viderBuffer();
+        }
+        else if(tmp <= 0)
+        {
+            printf("Erreur !\nIl faut un nombre superieur a 0\n");
+        }
+        else
+        {
+            config.nb_fenetre = tmp;
+            return config;
+        } 
+    }
 }
+
+//Work
+CONFIG Lire_intervale(CONFIG config)
+{
+    float tmp;
+    printf("\nEntrer l'intevale\n");
+    while (1)
+    {
+        if(!scanf("%f",&tmp))
+        {
+            printf("Erreur !\nIl faut rentrer un nombre\n");
+            viderBuffer();
+        }
+        else if(tmp <= 0)
+        {
+            printf("Erreur !\nIl faut un nombre superieur a 0\n");
+        }
+        else
+        {
+            printf("%f",tmp);
+            config.intervale = tmp;
+            return config;
+        } 
+    }
+}
+
+//Work
+void Ecrire_CONFIG(CONFIG config)
+{
+    FILE* fichier = NULL;
+
+    fichier = fopen("../Config.txt","w");
+    if(fichier != NULL)
+    {
+        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f",config.nb_mots_cle,config.similariter,config.niveau,config.nb_fenetre,config.intervale);
+    }
+    else
+    {
+        printf("Erreur !\nImpossible d'ouvrir le fichier Config.txt");
+    }
+}
+

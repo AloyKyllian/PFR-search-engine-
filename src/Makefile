@@ -1,4 +1,5 @@
 gcc -c Config.c
 gcc -c Global.c
-gcc -o Config.exe Config.o Global.o
-./Config.exe
+gcc -c tst_config.c
+gcc -o tst_Config.exe Config.o Global.o tst_config.o
+./tst_config.exe
