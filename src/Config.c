@@ -1,6 +1,7 @@
 #include "../head/Config.h"
 #include "../head/Config.h"
 
+//Lis Config.txt et renvoie les parametre dans la structure CONFIG
 CONFIG Lire_CONFIG(String *Erreur)
 {
     CONFIG config;
@@ -19,7 +20,7 @@ CONFIG Lire_CONFIG(String *Erreur)
 
     return config;
 }
-
+//Affiche toute les valeur des parametres de configration
 void Afficher_CONFIG(CONFIG config)
 {
     printf("Nombre de mots cle = %d\n", config.nb_mots_cle);
@@ -28,7 +29,7 @@ void Afficher_CONFIG(CONFIG config)
     printf("Nombre de fenetre = %d\n", config.nb_fenetre);
     printf("Intervale = %f\n", config.intervale);
 }
-
+//Lis et verifie la validiter de la valeur du nombre de mots cle
 CONFIG Lire_mot_cle(CONFIG config, String *Erreur)
 {
     int tmp;
@@ -48,7 +49,7 @@ CONFIG Lire_mot_cle(CONFIG config, String *Erreur)
     }
     return config;
 }
-
+//Lis et verifie la validiter de la valeur de la similarite
 CONFIG Lire_similariter(CONFIG config, String *Erreur)
 {
     int tmp;
@@ -72,7 +73,7 @@ CONFIG Lire_similariter(CONFIG config, String *Erreur)
     }
     return config;
 }
-
+//Lis et verifie la validiter de la valeur du niveau
 CONFIG Lire_niveau(CONFIG config, String *Erreur)
 {
     int tmp;
@@ -105,7 +106,7 @@ CONFIG Lire_niveau(CONFIG config, String *Erreur)
     }
     return config;
 }
-
+//Lis et verifie la validiter de la valeur du nombre de fenetre
 CONFIG Lire_nb_fenetre(CONFIG config, String *Erreur)
 {
     int tmp;
@@ -125,7 +126,7 @@ CONFIG Lire_nb_fenetre(CONFIG config, String *Erreur)
     }
     return config;
 }
-
+//Lis et verifie la validiter de la valeur de l'intervale
 CONFIG Lire_intervale(CONFIG config, String *Erreur)
 {
     float tmp;
@@ -145,7 +146,7 @@ CONFIG Lire_intervale(CONFIG config, String *Erreur)
     }
     return config;
 }
-
+//Ecrit dans Config.txt les valeur stocker dans la structure CONFIG
 void Ecrire_CONFIG(CONFIG config, String *Erreur)
 {
     FILE *fichier = NULL;

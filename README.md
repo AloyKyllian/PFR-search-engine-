@@ -1,14 +1,5 @@
 # PFR
-
-pour le pfr je suis en train de creer le repository du projet
-
-pour valider on add puis on push pour le mettre sur github
-
-alors vous commencerez par créer un dossier
-
-faire terminal new terminal
-puis vous selectionner bash dans le + en bas a droite de votre interface
-
-puis vous ferez la commande "git clone https://github.com/thepandou05/PFR.git"
-
-test
+Les fonction de la Config son fini.
+Vous pouvez utiliser toute les fonction qui sont dans Config.h.
+Inutile d'aller regarder dans le .c
+Si il y a des bug ou des parametre à rajouter dite le moi.
