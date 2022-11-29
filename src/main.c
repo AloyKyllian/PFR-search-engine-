@@ -1,6 +1,12 @@
 //premier fichier main
+#include<stdint.h>
+#include <stdio.h>
 
-main(){
+void main(){
     int val;
-    printf("hello world");
+    val=6;
+    printf("hello world %d",val);
+    //test du merge
 }
+
+
