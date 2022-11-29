@@ -40,3 +40,9 @@ Pensez a push et commit dès que possible
 Pour revenir en arriere vous avez timeline en bas a gauche qui recapepette tout vos commits 
 
 Si votre programme fonctionne et que vous voulez rajoutez une fonction vous pouvez creer une nouvelle branche jusqu'a que votre fonction fonctionne XD
+
+
+Les fonction de la Config son fini.
+Vous pouvez utiliser toute les fonction qui sont dans Config.h.
+Inutile d'aller regarder dans le .c
+Si il y a des bug ou des parametre à rajouter dite le moi.
