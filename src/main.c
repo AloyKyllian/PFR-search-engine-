@@ -44,9 +44,9 @@ void Menu_general(){
 
 
             void Menu_Admin(){
-                 printf("Menu général de l'administrateur\nFonctionnalité:\n");
+                 printf("Menu général de l'administrateur\nFonctionnalité :\n");
                  char choix;
-                 printf("Veuillez faire votre choix  : ");
+                 printf("Veuillez faire votre choix  : \n");
                  printf("[1] Indexation\n [2] Comparaison\n [3] Moteur de recherche \n[R] Retour\n[Q] Déconnexion\n");
                  scanf("%c",choix);
 
@@ -77,7 +77,7 @@ void Menu_general(){
                            void Menu_Indexation(){
                                  printf("Indexation :\n");
                                  char choix;
-                                 printf("Veuillez faire votre choix  : ");
+                                 printf("Veuillez faire votre choix  : \n");
                                  printf("[1] Automatique\n [2] ouvrir descripteur\n [3] Configuration \n[R] Retour\n[Q] Déconnexion\n");
                                  scanf("%c",choix);
 
@@ -111,19 +111,28 @@ void Menu_general(){
                            void Menu_Comparaison(){
                                  printf("Comparaison :\n");
                                  char choix;
+                                 char choix2;
                                  printf("Veuillez faire votre choix  : ");
-                                 printf("[1] \n [2] \n [3] \n[R] Retour\n[Q] Déconnexion\n");
-                                 scanf("%c",choix);
+                                 printf("[1] Texte\n [2] Image\n [3] Audio\n[R] Retour\n[Q] Déconnexion\n");
+                                 scanf("%c",&choix);
 
+                                 if( (choix=='1') || (choix=='2') || (choix='3')){
+                                     printf("Veuillez faire votre choix  : ");
+                                     printf("[1] Fichiers\n [2] Descripteurs\n[R] Retour\n[Q] Déconnexion\n");
+                                     scanf("%c",choix2);
+                                 } 
                                  switch (choix) {
                                          case '1' :
-                                             //
+                                             //Texte
+                                             
                                              break;
                                          case '2' :
-                                             // 
+                                             // Image
+
                                              break;  
                                          case '3' :
-                                             // 
+                                             // Audio
+
                                              break;
                                          case 'R' :
                                              Menu_Admin();
