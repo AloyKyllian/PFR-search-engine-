@@ -7,6 +7,7 @@ void main(){
     val=6;
     printf("hello world %d",val);
     //test du merge
+    // menuuuuu 
 }
 
 
