@@ -9,12 +9,7 @@
 
 #define MAX_CHAINE 100
 
-
-
-typedef struct
-{
-    char chaine[MAX_CHAINE];
-}String;
+typedef char String[MAX_CHAINE];
 
 void viderBuffer(void);
 
