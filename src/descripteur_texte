@@ -5,67 +5,78 @@ int comptemot ()
 {
     int cpt=0;
     char mot;
-    while(scanf("%c",&mot)!=0)
+    while(scanf("%s",&mot)!="<texte>")
     {
-        cpt++;
+        
+        return null;
     }
-
+    while(scanf("%c",&mot)!="</texte>")
+    {
+        if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
+        {
+            cpt++;
+        }
+    }
+    
 return cpt;
 }
 
 
 void descripteur_texte( int nbr_mot, int nbr_occ)
 {
-    char tab[2][nbr_mot];
+    char tab_mot[nbr_mot];
+    int tab_app[nbr_mot];
     char mot;
     int case=0;
     bool verif;
     scanf("%c",&mot);
     for(int j=0;i<nbr_mot;j++)
     {
-        tab[1][j]=0;
+        tab_app[j]=0;
     }
     for(int i=0;i<nbr_mot;i++)
     {
-        if(mot==tab[0][i])
+        if(mot==tab_mot[i])
         {
-            tab[1][i]++;
+            tab_app[i]++;
             verif =true;
         }
     }
     if(verif==false && case <=nbr_mot)
     {
-        tab[0][case]=mot;
+        tab_mot[case]=mot;
         case++;
     }
 
     // 2eme partie
 
-    int max=0;
+    int max=1;
     int nbr=0;
     int case_occ=0;
     int cpt=0;
-    char tab_occ[2][nbr_occ];
+    char tab_occ_mot[nbr_occ];
+    int tab_occ_app[nbr_occ];
     while(cpt<nbr_occ)
     {
     for(int y=0;y<nbr_mot;y++)
     {
-        if(tab[1][y]=>max)
+        if(tab_occ_app[y]=>max && max!=0)
         {
-            max=tab[1][y];
+            max=tab_occ_app[y];
             nbr=y;
         }
     }
-    tab_occ[0][case_occ]=tab[0][nbr];
-    tab_occ[1][case_occ]=max;
-    tab[1][nbr]=0;
+    tab_occ_mot[case_occ]=tab[nbr];
+    tab_occ_app[case_occ]=max;
+    tab_app[nbr]=0;
     cpt++;
+    max=1;
     }
     //Affichage
 
     for(int x=0;x<nbr_occ;x++)
     {
-        printf("%c",tab_occ[0][x],": %c",tab_occ[1][x],"   |   ");
+        printf("%c",tab_occ_mot[x],": %c",tab_occ_app[x],"   |   ");
     }
 
 
