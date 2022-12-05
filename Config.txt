@@ -1,5 +1,5 @@
 [1] Nombre de mots clé : 10
-[2] Similarité : 12
+[2] Similarité : 2
 [3] Niveau : 2
-[4] Nombre de fenetre : 12
+[4] Nombre de fenetre : 8
 [5] Intervale de temps : 12.000000
