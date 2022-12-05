@@ -33,7 +33,7 @@ void Menu_general(){
         // utilisatuer 
         break;  
     case 'Q' :
-        return ;//???
+        return ;//??? Shutdown
         break;
     default:
         printf("erreur de choix\n");
