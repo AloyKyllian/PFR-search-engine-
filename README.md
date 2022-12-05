@@ -42,7 +42,7 @@ Si votre programme fonctionne et que vous voulez rajoutez une fonction vous pouv
 
 ## loic config
 
-Les fonction de la Config son fini.
+Les fonction de la Config son fini. Il faudra rajouter les commandes linux.
 Vous pouvez utiliser toute les fonction qui sont dans Config.h.
 Inutile d'aller regarder dans le .c
 Si il y a des bug ou des parametre à rajouter dite le moi.
