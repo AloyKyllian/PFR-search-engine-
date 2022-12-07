@@ -9,6 +9,6 @@ int main()
     bool result;
     result=seconnecter(tablogin, test,&erreur);
     printf("\nConnexion ");
-    (result)? printf("Réussi\n\n") : printf("Failed\n\n");
+    (result)? printf("Réussi\n\n") : printf("Échoué\n\n");
     return 0;
 }
