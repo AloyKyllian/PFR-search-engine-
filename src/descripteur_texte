@@ -1,35 +1,50 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <Global.h>
+
 
 int comptemot ()
 {
     int cpt=0;
-    char mot;
-    while(scanf("%s",&mot)!="<texte>")
+    String mot;
+    while(fscanf("%s",&mot)!="<texte>")
     {
         
         return null;
     }
-    while(scanf("%c",&mot)!="</texte>")
-    {
-        if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
-        {
-            cpt++;
-        }
-    }
-    
+  
 return cpt;
 }
 
+void nettoyage()
+{
+//strcat
+//strchr
+
+//return ?
+}
+
+void filtrage()
+{
+ while(fscanf("%c",&mot)!="</texte>")
+    {
+        if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
+        {
+            cpt++; //Utiliser un fichier
+        }
+    }
+
+//return ?
+}
 
 void descripteur_texte( int nbr_mot, int nbr_occ)
 {
-    char tab_mot[nbr_mot];
+    String tab_mot[nbr_mot];
     int tab_app[nbr_mot];
-    char mot;
+    String mot;
     int case=0;
     bool verif;
-    scanf("%c",&mot);
+    fscanf("%s",&mot);
     for(int j=0;i<nbr_mot;j++)
     {
         tab_app[j]=0;
@@ -54,7 +69,7 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
     int nbr=0;
     int case_occ=0;
     int cpt=0;
-    char tab_occ_mot[nbr_occ];
+    String tab_occ_mot[nbr_occ];
     int tab_occ_app[nbr_occ];
     while(cpt<nbr_occ)
     {
@@ -76,7 +91,7 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
 
     for(int x=0;x<nbr_occ;x++)
     {
-        printf("%c",tab_occ_mot[x],": %c",tab_occ_app[x],"   |   ");
+        printf("%s",tab_occ_mot[x],": %d",tab_occ_app[x],"   |   ");
     }
 
 
