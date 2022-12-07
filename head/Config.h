@@ -10,7 +10,7 @@ typedef struct
     int similariter;
     int niveau;
     int nb_fenetre;
-    float intervale;
+    int intervale;
 }CONFIG;
 
 //Lis Config.txt et renvoie les parametre dans la structure CONFIG
