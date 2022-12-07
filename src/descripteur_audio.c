@@ -10,12 +10,14 @@ char Descripteur_test(int fenetre,int intervalle){
     int nbr_val;
     int k;//(nbr_val_fenetre)
     double tab_valeur[1000000];
-int y;
-int i=0;
+    int y;
+    int i=0;
 
     double val;
     FILE* fichier = NULL;
     char c;
+
+
     fichier = fopen("../son/corpus_fi.txt", "r");
 
 
@@ -29,7 +31,6 @@ int i=0;
 
     while(fscanf(fichier,"%lf",&val)!=EOF){
         nbr_val++;
-        //printf("%.10lf\r\n",val);
     }
 
     
@@ -42,12 +43,17 @@ int i=0;
     printf("%.10lf\r\n",pas);
 
     rewind(fichier);
+ 
 
     while(fscanf(fichier,"%lf",&val)!=EOF){
 
         if(i==fenetre)
-            fe++;
-        for(y=0;y*pas<=1;y++)
+        {
+            i=0;
+              fe++;
+        }
+          
+        for(y=0;-1+y*pas<=1;y++)
         {
              
             if(val>-1+pas*y && val<-1+pas*(y+1))
@@ -62,35 +68,20 @@ int i=0;
     fclose(fichier);
 
    affiche_tableau(tab,fe,y);
-/*
-    for(int i=0;i<=nbr_val;i++)
-    {
-        if(i==fenetre)
-            fe++;
-        for(y=0;y*pas<=1;y++)
-        {
-             
-            if(tab_valeur[i]>-1+pas*y && tab_valeur[i]<-1+pas*(y+1))
-                a++;
-                //tab[fe][y]++;
-        }
-         
-    }
 
-  
-
-
-
-  
-*/
 }
 
 
 void affiche_tableau(int (*tab)[2], int n, int m)
 {
     for (unsigned i = 0; i < n; ++i)
+    {
         for (unsigned j = 0; j < m; ++j)
-            printf("tab[%u][%u] = %d\n", i, j, tab[i][j]);
+        {
+            printf(" |%3d| ",tab[i][j]);
+        }
+        printf("\r\n");
+    }
 }
 
 
