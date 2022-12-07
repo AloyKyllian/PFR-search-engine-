@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <termios.h>
 
 #define MAX_CHAINE 100
 

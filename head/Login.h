@@ -1,6 +1,7 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
+#define MAXPW 32
 #include "../head/Global.h"
 
 // structure login :
@@ -36,7 +37,9 @@ LOGIN saisir_login();
 // importe id et mdp du fichier texte a la structure
 void lire_fichier_login (lesLogins tablogin, String * erreur);
 
-// remplie le fichier texte avec la structure 
-void remplir_fichier_login (lesLogins tablogin, String * erreur);
+
+
+
+
 
 #endif
