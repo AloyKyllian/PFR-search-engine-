@@ -2,15 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 //#include "Global.h"
-typedef double tab_intervalle[];
 
-char Descripteur_test(int fenetre,int intervalle){
+char Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier){//demander comment recuperer le chemin et nom du fichier
     double pas;
-    int fe=0;
-    int nbr_val;
+    int fe=0;//(nombre de fenetre)
+    int nbr_val=0;
     int k;//(nbr_val_fenetre)
-    double tab_valeur[1000000];
-    int y;
+    int m;
     int i=0;
 
     double val;
@@ -18,29 +16,24 @@ char Descripteur_test(int fenetre,int intervalle){
     char c;
 
 
-    fichier = fopen("../son/corpus_fi.txt", "r");
+    //chemin_fichier="../son/jingle_fi.txt";
 
-
-        if(fichier==NULL){
-                                            
+    fichier = fopen(chemin_fichier, "r");
+    if(fichier==NULL){                           
         printf("Erreur lors de l'ouverture d'un fichier");
-       exit(1);
-        }
+        exit(1);
+    }
 
-    nbr_val=0;
 
     while(fscanf(fichier,"%lf",&val)!=EOF){
         nbr_val++;
     }
 
-    
 
-    printf("%d\r\n",nbr_val);
     k=nbr_val/fenetre;
     int tab[k][intervalle];
+    k=0;
     pas=2./intervalle;
-    printf("%d\r\n",k);
-    printf("%.10lf\r\n",pas);
 
     rewind(fichier);
  
@@ -50,15 +43,15 @@ char Descripteur_test(int fenetre,int intervalle){
         if(i==fenetre)
         {
             i=0;
-              fe++;
+            k++;
         }
           
-        for(y=0;-1+y*pas<=1;y++)
+        for(m=0;-1+m*pas<=1;m++)
         {
              
-            if(val>-1+pas*y && val<-1+pas*(y+1))
+            if(val>-1+pas*m && val<=-1+pas*(m+1))
             {
-                 tab[fe][y]++;
+                 tab[k][m]++;
             }
                
         }
@@ -67,7 +60,7 @@ char Descripteur_test(int fenetre,int intervalle){
 
     fclose(fichier);
 
-   affiche_tableau(tab,fe,y);
+   affiche_tableau(tab,k,m);
 
 }
 
@@ -76,6 +69,7 @@ void affiche_tableau(int (*tab)[2], int n, int m)
 {
     for (unsigned i = 0; i < n; ++i)
     {
+        //printf("%d",i);//afficher le numero de fenetre
         for (unsigned j = 0; j < m; ++j)
         {
             printf(" |%3d| ",tab[i][j]);
@@ -85,8 +79,9 @@ void affiche_tableau(int (*tab)[2], int n, int m)
 }
 
 
-
+/*
 
 void main(){
-    Descripteur_test(1024,30);
+    Descripteur_test(1024,30,"../son/jingle_fi.txt");
 }
+*/
