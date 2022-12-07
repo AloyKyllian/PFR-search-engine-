@@ -19,12 +19,15 @@ void afficher_les_login (lesLogins tablogin)
 // entrer id
 LOGIN saisir_login()
 {   LOGIN login;
+    char *mdp;
     printf("Enter ID : ");
     scanf(" %[^\n]", login.id);
     viderBuffer();
-    printf("Enter mot de passe : ");
-    scanf(" %[^\n]", login.mdp);
-    viderBuffer();
+    mdp = getpass("Enter mot de passe : ");
+    // on voit le mot de passe
+  //  printf("Enter mot de passe : ");
+  //  scanf(" %[^\n]", login.mdp);
+    strcpy(login.mdp,mdp);
     return login;
 }
 
