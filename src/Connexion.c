@@ -10,7 +10,6 @@ bool seconnecter (lesLogins tablogin, LOGIN newlogin )
         if (!strcmp(tablogin[i].id,newlogin.id) & !strcmp(tablogin[i].mdp,newlogin.mdp) )
           { 
             return true;
-          
           }
     }
     return false;

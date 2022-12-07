@@ -17,3 +17,6 @@ connexion : Login.c Global.c Connexion.c tst_connexion.c
 	gcc -c Global.c 
 	gcc -c tst_connexion.c
 	gcc -o tst_connexion.out Login.o Connexion.o Global.o tst_connexion.o -lm
+
+clean : 
+	rm -rf *.o
