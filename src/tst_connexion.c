@@ -7,11 +7,7 @@ int main()
     LOGIN test;
     lesLogins tablogin;
     bool result;
-
-    printf("\nlire_fichier_login\n");
-    lire_fichier_login(tablogin,&erreur);
-    printf("%s\n",erreur);
-    result=seconnecter(tablogin, test);
+    result=seconnecter(tablogin, test,&erreur);
     printf("\nConnexion ");
     (result)? printf("Réussi\n\n") : printf("Failed\n\n");
     return 0;

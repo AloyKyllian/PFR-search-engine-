@@ -1,9 +1,10 @@
 #include "../head/Connexion.h"
 #include "../head/Login.h"
 
-bool seconnecter (lesLogins tablogin, LOGIN newlogin )
+bool seconnecter (lesLogins tablogin, LOGIN newlogin, String *erreur  )
 {   int i ;
     newlogin=saisir_login();
+    lire_fichier_login(tablogin,erreur);
     for(i=0; i<5;i++)
     {
 
