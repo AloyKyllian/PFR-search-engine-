@@ -13,10 +13,10 @@ IMAGE Lire_image(String *Erreur, String Path)
 
         fscanf(fichier,"%d %d %d",&img.Nb_Ligne,&img.Nb_Colonne,&img.Nb_composante);
         
-        img.adr_Matrice = malloc(img.Nb_Ligne*img.Nb_composante*sizeof(int*));
+        img.adr_Matrice = malloc(img.Nb_Ligne*img.Nb_composante*sizeof(*img.adr_Matrice));
         for(int i = 0; i < img.Nb_Ligne*img.Nb_composante; i++)
         {
-            img.adr_Matrice[i] = malloc(img.Nb_Colonne*sizeof(int));
+            img.adr_Matrice[i] = malloc(img.Nb_Colonne*sizeof(**img.adr_Matrice));
         }
         if(img.adr_Matrice != NULL)
         {
@@ -35,15 +35,20 @@ IMAGE Lire_image(String *Erreur, String Path)
     }
     else
     {
-        printf("Erreur : Fichier introuvable");
+        strcpy(*Erreur,"Erreur : Fichier introuvable");
     }
     return img;
 }
 
 IMAGE Pre_traitement(IMAGE img)
 {
-    int Nv_mat[img.Nb_Ligne][img.Nb_Colonne];
+    int **Nv_mat;
     int R1,R2,G1,G2,B1,B2;
+    Nv_mat = malloc(img.Nb_Ligne*sizeof(*Nv_mat));
+    for(int i = 0; i < img.Nb_Ligne; i++)
+    {
+        Nv_mat[i] = malloc(img.Nb_Colonne*sizeof(**Nv_mat));
+    }
     for(int cptligne = 0; cptligne <img.Nb_Ligne; cptligne++)
     {
         for(int cptcolonne = 0; cptcolonne < img.Nb_Colonne; cptcolonne++)
@@ -60,12 +65,51 @@ IMAGE Pre_traitement(IMAGE img)
             Nv_mat[cptligne][cptcolonne] = R1+R2+G1+G2+B1+B2;
         }
     }
-     
-    for(int i = 0; i < img.Nb_Ligne*img.Nb_composante; i++)
+    for(int cptligne = 0; cptligne <img.Nb_Ligne*img.Nb_composante; cptligne++)
     {
-        free(img.adr_Matrice[i]);
+        free(img.adr_Matrice[cptligne]);
     }
     free(img.adr_Matrice);
-    *(img.adr_Matrice) = *Nv_mat;
+    img.adr_Matrice = Nv_mat;
     return img;
+}
+
+DESCRIPTEUR_IMAGE Creation_Discripteur(IMAGE img,int niveau, String *Erreur)
+{
+    DESCRIPTEUR_IMAGE di;
+    di.Bilan = malloc( pow(2,niveau*img.Nb_composante)*sizeof(*di.Bilan));
+    for(int i = 0; i < pow(2,niveau*img.Nb_composante); i++)
+    {
+        di.Bilan[i] = malloc(2*sizeof(**di.Bilan));
+    }
+    if(di.Bilan != NULL)
+    {
+        for(int cptligne = 0; cptligne <pow(2,niveau*img.Nb_composante); cptligne++)
+        {
+            for(int cptcolonne = 0; cptcolonne < 2; cptcolonne++)
+            {
+                if(cptcolonne == 0)
+                {
+                    di.Bilan[cptligne][cptcolonne] = cptligne;
+                }
+                else
+                {
+                    di.Bilan[cptligne][cptcolonne] = 0;
+                }
+            }
+        }
+        for(int cptligne = 0; cptligne < img.Nb_Ligne; cptligne++)
+        {
+            for(int cptcolonne = 0; cptcolonne < img.Nb_Colonne; cptcolonne++)
+            {
+                di.Bilan[img.adr_Matrice[cptligne][cptcolonne]][1]++;
+            }
+        }
+    }
+    else
+    {
+        strcpy(*Erreur,"Erreur : Allocation");
+    }
+    
+    return di;
 }
