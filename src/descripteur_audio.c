@@ -82,6 +82,6 @@ void affiche_tableau(int (*tab)[2], int n, int m)
 /*
 
 void main(){
-    Descripteur_test(1024,30,"../son/jingle_fi.txt");
+    Descripteur_audio(1024,30,"../son/jingle_fi.txt");
 }
 */
