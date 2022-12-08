@@ -1,11 +1,55 @@
 #include<stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define Quitter Q
 
+//Menus Principaux
+enum ETAT {Menugeneral,MenuAdmin,MenuIndexation, MenuUtilisateur};
+//Menu General
+enum General {Administrateur,Utilisateur,Quitter};
+//Menu Admin
+enum Admin{Indexation, Configuration,Visualisation, Retour_Utilisateur };
 
-enum General {Administrateur=1,Utilisateur=2,Quitter} ;
 
+void MAE(){
 
+     int etat_courant=Menu_general;
+
+    switch (etat_courant)
+    {
+        case Menu_general :
+             printf("Menu général\n");
+             printf("Veuillez faire votre choix : \n");
+             printf("[1] Administrateur \n[2] Utilisateur \n[Q] Quitter\n");
+             scanf("%c",&General);
+          
+            switch (General){
+
+                 case Administrateur :
+                 //admin
+                 //Connexion();
+                 //Menu_Admin();
+                 etat_courant=Menu_Admin;
+                 break;
+                 case Utilisateur :
+                 // utilisateur 
+                 etat_courant=Menu_Utilisateur;
+                 break;  
+                 case Quitter :
+                 printf("vous avez quitté le programme\n");
+                 break;
+                 default:
+                 printf("erreur de choix\n");
+                 etat_courant=Menu_general;
+                 break;
+                 }
+    break;
+
+    default:
+    break;
+    }
+
+}
 
 void Menu_general(){
     char General='0';
@@ -16,7 +60,7 @@ void Menu_general(){
     
     switch (General)
     {
-    case '1' :
+    case Administrateur :
         //admin
         //Connexion();
         Menu_Admin();
@@ -138,3 +182,4 @@ void Menu_general(){
                                          break;
                                         }
                              }
+
