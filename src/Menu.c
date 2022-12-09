@@ -1,50 +1,118 @@
 #include<stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define Quitter Q
 
-//Menus Principaux
-enum ETAT {Menugeneral,MenuAdmin,MenuIndexation, MenuUtilisateur};
+
+//Etat :
+//MENUS PRINCIPAUX
+#define Menu_general 1
+#define Menu_Admin 2
+#define Menu_Indexation 3
+#define Menu_Utilisateur 4
+
 //Menu General
-enum General {Administrateur,Utilisateur,Quitter};
+#define Administrateur 1
+#define Utilisateur 2
+#define Quitter 'Q'
+#define Deconnexion Q
+
+
 //Menu Admin
-enum Admin{Indexation, Configuration,Visualisation, Retour_Utilisateur };
+#define Indexation 1
+#define Configuration 2
+#define Visualisation 3
+#define Retour_Utilisateur 4
+
+//Menu configuration 
+#define Nombre de mot clé 1
+#define Similarité 2
+#define Niveau 3
+#define Nombre de fenetre 4
+#define Intervalle de temps 5
+
+//Visualisation descripeteur
+//Menu Utilisateur
+#define texte 1
+#define image 2
+#define audio 3
+
+//Menu recherche texte
+#define Recherche par mots clé 1
+#define Recherche par comparaison textes 2
+#define Retour R
+
+//Menu recherche image
+#define Recherche par nom couleur 1
+#define Recherche par comparaison imges 2
+
+//Menu recherche audio
+#define Recherche par comparaison audio 1
+
+
+
 
 
 void MAE(){
 
-     int etat_courant=Menu_general;
+    char etat_courant=Menu_general;
 
     switch (etat_courant)
     {
         case Menu_general :
+             char choix;
              printf("Menu général\n");
              printf("Veuillez faire votre choix : \n");
              printf("[1] Administrateur \n[2] Utilisateur \n[Q] Quitter\n");
-             scanf("%c",&General);
+             scanf("%c",&choix);
           
-            switch (General){
+            switch (choix){
 
                  case Administrateur :
-                 //admin
-                 //Connexion();
-                 //Menu_Admin();
-                 etat_courant=Menu_Admin;
-                 break;
+                    //Connexion();
+                    etat_courant=Menu_Admin;
+                    break;
                  case Utilisateur :
-                 // utilisateur 
-                 etat_courant=Menu_Utilisateur;
-                 break;  
+                    // utilisateur 
+                    etat_courant=Menu_Utilisateur;
+                    break;  
                  case Quitter :
-                 printf("vous avez quitté le programme\n");
-                 break;
+                    printf("vous avez quitté le programme\n");
+                    //etat_courant=??????
+                    break;
                  default:
                  printf("erreur de choix\n");
                  etat_courant=Menu_general;
                  break;
                  }
-    break;
+        break;
 
+        case Menu_Admin:
+             char choix;
+             printf("Menu général de l'administrateur\nFonctionnalité :\n");
+             printf("Veuillez faire votre choix  : \n");
+             printf("[1] Indexation\n [2] Comparaison\n [3] Moteur de recherche \n[R] Retour\n[Q] Déconnexion\n");
+             scanf("%c",&choix);
+
+            switch (choix){
+                 case Indexation :
+                        //Indexation
+                        break;
+                 case  Configuration :
+                        // Configuration
+                        break;  
+                 case Visualisation :
+                        break;
+                 case 'R' :
+                        
+                        break;
+                 case 'Q' :
+                        return ;//????
+                        break;
+                default:
+                        return NULL; 
+                        break;
+                        }
+    break;
     default:
     break;
     }
