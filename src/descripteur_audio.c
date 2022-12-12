@@ -3,7 +3,7 @@
 #include <stdio.h>
 //#include "Global.h"
 
-char Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier){//demander comment recuperer le chemin et nom du fichier
+void Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,void* tableau){//demander comment recuperer le chemin et nom du fichier
     double pas;
     int fe=0;//(nombre de fenetre)
     int nbr_val=0;
@@ -32,8 +32,13 @@ char Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier){//demand
 
     k=nbr_val/fenetre;
     int tab[k][intervalle];
+    printf("k=%d",k);
     k=0;
     pas=2./intervalle;
+
+
+
+    printf("k=%d\n%d\n%d\n%d\n%f\n",k,nbr_val,fenetre,intervalle,pas);
 
     rewind(fichier);
  
@@ -60,7 +65,9 @@ char Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier){//demand
 
     fclose(fichier);
 
-   affiche_tableau(tab,k,m);
+    tableau=tab;
+
+   affiche_tableau(tableau,k,m);
 
 }
 
@@ -77,11 +84,16 @@ void affiche_tableau(int (*tab)[2], int n, int m)
         printf("\r\n");
     }
 }
+//|1670505936|
 
 
-/*
 
 void main(){
-    Descripteur_audio(1024,30,"../son/jingle_fi.txt");
+    void* tab;
+    Descripteur_audio(2048,30,"../son/jingle_fi.txt",tab);
+    printf("\n\n\n\n\n");
+
+   // printf("%ls",(int * )tab);
+
+    //affiche_tableau((int *)tab,10,10);
 }
-*/
