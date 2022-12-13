@@ -9,10 +9,12 @@ typedef struct
     int Nb_Colonne;
     int Nb_composante;
     int **adr_Matrice;
+    String Path;
 }IMAGE;
 typedef struct
 {
     String ID;
+    String Path;
     int **Bilan;
 }DESCRIPTEUR_IMAGE;
 
@@ -20,7 +22,7 @@ typedef struct
 
 IMAGE Lire_image(String *, String);
 
-IMAGE Pre_traitement(IMAGE img);
+IMAGE Pre_traitement(IMAGE, int);
 
 DESCRIPTEUR_IMAGE Creation_Discripteur(IMAGE,int, String *);
 

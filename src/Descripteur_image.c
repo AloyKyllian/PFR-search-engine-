@@ -6,6 +6,7 @@ IMAGE Lire_image(String *Erreur, String Path)
     IMAGE img;
     FILE *fichier = NULL;
 
+    strcpy(img.Path,Path);
     fichier = fopen(Path, "r");
     if (fichier != NULL)
     {
@@ -40,51 +41,66 @@ IMAGE Lire_image(String *Erreur, String Path)
     return img;
 }
 
-IMAGE Pre_traitement(IMAGE img)
+IMAGE Pre_traitement(IMAGE img, int Nb_bitfort )
 {
+    //Variables
     int **Nv_mat;
-    int R1,R2,G1,G2,B1,B2;
+    int bitR = 0;
+    int bitG = 0;
+    int bitB = 0;
+    int masque = 0x80;
+    int taille_bit_arranger = Nb_bitfort*img.Nb_composante;
+
+    //Allocation mémoire du tableau 2D
     Nv_mat = malloc(img.Nb_Ligne*sizeof(*Nv_mat));
     for(int i = 0; i < img.Nb_Ligne; i++)
     {
         Nv_mat[i] = malloc(img.Nb_Colonne*sizeof(**Nv_mat));
     }
+
+    //Remplissage de la matrice avec les pixel traiter
     for(int cptligne = 0; cptligne <img.Nb_Ligne; cptligne++)
     {
         for(int cptcolonne = 0; cptcolonne < img.Nb_Colonne; cptcolonne++)
         {
-            R1 = (img.adr_Matrice[cptligne][cptcolonne] & 0x80)>>7-5;
-            R2 = (img.adr_Matrice[cptligne][cptcolonne] & 0x40)>>6-4;
-            if(img.Nb_composante == 3)
+            Nv_mat[cptligne][cptcolonne] = 0;
+            for(int cptbit = 0; cptbit < Nb_bitfort; cptbit++)
             {
-                G1 = (img.adr_Matrice[cptligne*2][cptcolonne] & 0x80)>>7-3;
-                G2 = (img.adr_Matrice[cptligne*2][cptcolonne] & 0x40)>>6-2;
-                B1 = (img.adr_Matrice[cptligne*3][cptcolonne] & 0x80)>>7-1;
-                B2 = (img.adr_Matrice[cptligne*3][cptcolonne] & 0x40)>>6;
+                bitR = ((img.adr_Matrice[cptligne][cptcolonne] & (masque>>cptbit)))>>(7-cptbit);
+                if(img.Nb_composante == 3)
+                { 
+                    bitG = ((img.adr_Matrice[cptligne+img.Nb_Ligne][cptcolonne] & (masque>>cptbit)))>>(7-cptbit);
+                    bitB = ((img.adr_Matrice[cptligne+img.Nb_Ligne*2][cptcolonne] & (masque>>cptbit)))>>(7-cptbit);
+                }
+                Nv_mat[cptligne][cptcolonne] = Nv_mat[cptligne][cptcolonne] | bitR<<(taille_bit_arranger-(cptbit+1)) | bitG<<(taille_bit_arranger-Nb_bitfort-(cptbit+1)) | bitB<<(taille_bit_arranger-(Nb_bitfort*2)-(cptbit+1));
             }
-            Nv_mat[cptligne][cptcolonne] = R1+R2+G1+G2+B1+B2;
         }
     }
+
+    //Libert l'espace memoire du tableau image
     for(int cptligne = 0; cptligne <img.Nb_Ligne*img.Nb_composante; cptligne++)
     {
         free(img.adr_Matrice[cptligne]);
     }
     free(img.adr_Matrice);
+
+    //Afectation de la matrice traiter à la structure
     img.adr_Matrice = Nv_mat;
     return img;
 }
 
-DESCRIPTEUR_IMAGE Creation_Discripteur(IMAGE img,int niveau, String *Erreur)
+DESCRIPTEUR_IMAGE Creation_Discripteur(IMAGE img,int Nb_bitfort, String *Erreur)
 {
     DESCRIPTEUR_IMAGE di;
-    di.Bilan = malloc( pow(2,niveau*img.Nb_composante)*sizeof(*di.Bilan));
-    for(int i = 0; i < pow(2,niveau*img.Nb_composante); i++)
+    strcpy(di.Path,img.Path);
+    di.Bilan = malloc( pow(2,Nb_bitfort*img.Nb_composante)*sizeof(*di.Bilan));
+    for(int i = 0; i < pow(2,Nb_bitfort*img.Nb_composante); i++)
     {
         di.Bilan[i] = malloc(2*sizeof(**di.Bilan));
     }
     if(di.Bilan != NULL)
     {
-        for(int cptligne = 0; cptligne <pow(2,niveau*img.Nb_composante); cptligne++)
+        for(int cptligne = 0; cptligne <pow(2,Nb_bitfort*img.Nb_composante); cptligne++)
         {
             for(int cptcolonne = 0; cptcolonne < 2; cptcolonne++)
             {
