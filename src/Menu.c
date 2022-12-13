@@ -7,28 +7,29 @@
 //MENUS PRINCIPAUX
 #define Menu_general 1
 #define Menu_Admin 2
-#define Menu_Indexation 3
-#define Menu_Utilisateur 4
+#define Menu_Utilisateur 3
+
 
 //Menu General
 #define Administrateur 1
 #define Utilisateur 2
 #define Quitter 'Q'
-#define Deconnexion Q
+#define Deconnexion 'Q'
 
 
 //Menu Admin
 #define Indexation 1
-#define Configuration 2
+#define Menu_Configuration 2
 #define Visualisation 3
+#define Menu_Visualition 2
 #define Retour_Utilisateur 4
 
 //Menu configuration 
-#define Nombre de mot clé 1
+#define Nombre_de_mot_cle 1
 #define Similarité 2
 #define Niveau 3
-#define Nombre de fenetre 4
-#define Intervalle de temps 5
+#define Nombre_de_fenetre 4
+#define Intervalle_de_temps 5
 
 //Visualisation descripeteur
 //Menu Utilisateur
@@ -39,7 +40,7 @@
 //Menu recherche texte
 #define Recherche par mots clé 1
 #define Recherche par comparaison textes 2
-#define Retour R
+#define Retour 'R'
 
 //Menu recherche image
 #define Recherche par nom couleur 1
@@ -47,7 +48,7 @@
 
 //Menu recherche audio
 #define Recherche par comparaison audio 1
-
+char choix;
 
 
 
@@ -59,7 +60,6 @@ void MAE(){
     switch (etat_courant)
     {
         case Menu_general :
-             char choix;
              printf("Menu général\n");
              printf("Veuillez faire votre choix : \n");
              printf("[1] Administrateur \n[2] Utilisateur \n[Q] Quitter\n");
@@ -87,31 +87,67 @@ void MAE(){
         break;
 
         case Menu_Admin:
-             char choix;
              printf("Menu général de l'administrateur\nFonctionnalité :\n");
              printf("Veuillez faire votre choix  : \n");
-             printf("[1] Indexation\n [2] Comparaison\n [3] Moteur de recherche \n[R] Retour\n[Q] Déconnexion\n");
+             printf("[1] Indexation\n [2] Configuration\n [3] Visualisation des recueils des descripteurs\n[4] Retour en mode utilisateur\n");
              scanf("%c",&choix);
 
             switch (choix){
                  case Indexation :
                         //Indexation
                         break;
-                 case  Configuration :
+                 case  Menu_Configuration :
                         // Configuration
+                        etat_courant=Menu_Configuration;
                         break;  
                  case Visualisation :
+                        //visualisation
                         break;
-                 case 'R' :
-                        
+                 case Retour_Utilisateur :
+                        etat_courant=Menu_Utilisateur;
                         break;
                  case 'Q' :
                         return ;//????
                         break;
-                default:
-                        return NULL; 
+                 default:
+                        printf("erreur de choix\n");
+                        etat_courant=Menu_Admin;
                         break;
                         }
+        case Menu_Configuration :
+             printf("Configuration :\n");
+             printf("Veuillez faire votre choix  : \n");
+             printf("[1] Nombre de mots clé\n [2] Similarité\n [3] Niveau \n[4] Nombre de fenetre\n");
+             printf("[5] Intervalle de temps\n [R] Retour\n[Q] Déconnexion\n");
+             scanf("%c",choix);
+             switch (choix) {
+                    case Nombre_de_mot_cle :
+                         //fct pour changer le nombre de mot cle                   
+                         break;
+                    case Similarité :
+                         // pour changer similarité
+                         
+                         break;  
+                    case Niveau :
+                         // pour changer niveau
+                         break;
+                    case Nombre_de_fenetre :
+                        //fct pour changer le nombre de fenetre
+                    case Intervalle_de_temps :
+                        //fct pour changer l'intervalle de temps
+                    case Retour :
+                        
+
+                     
+                    case 'Q' :
+                        return ;//????
+                        break;
+                    default:
+                        printf("erreur de choix\n");
+                        etat_courant=Menu_Admin;
+                        break;
+                        }                     
+                                        }
     break;
     default:
     break;
