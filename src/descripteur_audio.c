@@ -35,9 +35,9 @@ void Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,void* tab
     int tab[k][intervalle+1];
         if((nbr_val%fenetre)!=0)
     {
-        printf("");
+        printf("la\r\n");
         derrnier_fenetre=nbr_val-fenetre;
-        init_tableau(tab,k,intervalle+1);
+        init_tableau(tab,k+1,intervalle+1);
     }
     else
     {
@@ -97,7 +97,7 @@ void Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,void* tab
 
     tableau=tab;
 
-    affiche_tableau(tab,k,m);
+    affiche_tableau(tab,k+1,m);
 
 }
 
@@ -134,7 +134,7 @@ void init_tableau(int (*tab)[2], int n, int m)
 
 void main(){
     void* tab;
-    Descripteur_audio(1024,30,"../son/jingle_fi.txt",tab);
+    Descripteur_audio(2048,30,"../son/jingle_fi.txt",tab);
     printf("\n\n\n\n\n");
 
    // printf("%ls",(int * )tab);
