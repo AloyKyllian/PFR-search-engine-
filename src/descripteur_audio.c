@@ -10,10 +10,10 @@ void Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,void* tab
     int k;//(nbr_val_fenetre)
     int m;
     int i=0;
-
     double val;
     FILE* fichier = NULL;
     char c;
+    int derrnier_fenetre;
 
 
     //chemin_fichier="../son/jingle_fi.txt";
@@ -31,16 +31,29 @@ void Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,void* tab
 
 
     k=nbr_val/fenetre;
-    int tab[k][intervalle];
+
+    int tab[k][intervalle+1];
+        if((nbr_val%fenetre)!=0)
+    {
+        printf("");
+        derrnier_fenetre=nbr_val-fenetre;
+        init_tableau(tab,k,intervalle+1);
+    }
+    else
+    {
+        init_tableau(tab,k,intervalle);
+    }
+    
     printf("k=%d",k);
     k=0;
     pas=2./intervalle;
 
-
+    affiche_tableau(tab,k,intervalle);
 
     printf("k=%d\n%d\n%d\n%d\n%f\n",k,nbr_val,fenetre,intervalle,pas);
 
     rewind(fichier);
+ 
  
 
     while(fscanf(fichier,"%lf",&val)!=EOF){
@@ -50,24 +63,41 @@ void Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,void* tab
             i=0;
             k++;
         }
+
+        if(nbr_val<=fenetre)
+        {
+            for(m=0;-1+m*pas<=1;m++)
+            {
+                    //printf("%d\r\n",m);
+                if(val>-1+pas*m && val<=-1+pas*(m+1))
+                {
+                
+                    if(val<1&&val>-1&&m<intervalle)
+                        tab[k+1][m]++;
+                }
+                
+            }
+        }
           
         for(m=0;-1+m*pas<=1;m++)
         {
-             
+                //printf("%d\r\n",m);
             if(val>-1+pas*m && val<=-1+pas*(m+1))
             {
-                 tab[k][m]++;
+             
+                if(val<1&&val>-1&&m<intervalle)
+                    tab[k][m]++;
             }
                
         }
         i++;
+        nbr_val--;
     }
-
     fclose(fichier);
 
     tableau=tab;
 
-   affiche_tableau(tableau,k,m);
+    affiche_tableau(tab,k,m);
 
 }
 
@@ -84,13 +114,27 @@ void affiche_tableau(int (*tab)[2], int n, int m)
         printf("\r\n");
     }
 }
-//|1670505936|
+
+
+void init_tableau(int (*tab)[2], int n, int m)
+{
+    for (unsigned i = 0; i < n; ++i)
+    {
+        //printf("%d",i);//afficher le numero de fenetre
+        for (unsigned j = 0; j < m; ++j)
+        {
+            tab[i][j]=0;
+            printf(" |%3d| ",tab[i][j]);
+        }
+        printf("\r\n");
+    }
+}
 
 
 
 void main(){
     void* tab;
-    Descripteur_audio(2048,30,"../son/jingle_fi.txt",tab);
+    Descripteur_audio(1024,30,"../son/jingle_fi.txt",tab);
     printf("\n\n\n\n\n");
 
    // printf("%ls",(int * )tab);
