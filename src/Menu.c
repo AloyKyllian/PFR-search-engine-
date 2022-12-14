@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Menu.h"
+#include "../head/Connexion.h"
+#include "../head/Login.h"
 
-
+int i;
 void MAE(){
 
     char etat_courant=Menu_general;
@@ -20,7 +22,17 @@ void MAE(){
 
                  case Administrateur :
                     //Connexion();
-                    etat_courant=Menu_Admin;
+                    for( i=0:i<3;i++){
+                        String erreur;
+                        LOGIN test;
+                        lesLogins tablogin;
+                        bool result;
+                        result=seconnecter(tablogin, test,&erreur);
+                        printf("\nConnexion ");
+                        (result)? printf("Réussi\n\n") : printf("Échoué\n\n");}
+                    if(result)
+                         etat_courant=Menu_Admin;
+                    
                     break;
                  case Utilisateur :
                     // utilisateur 
