@@ -22,7 +22,7 @@ void MAE(){
 
                  case Administrateur :
                     //Connexion();
-                    for( i=0:i<3;i++){
+                    do{
                         String erreur;
                         LOGIN test;
                         lesLogins tablogin;
@@ -30,17 +30,26 @@ void MAE(){
                         result=seconnecter(tablogin, test,&erreur);
                         printf("\nConnexion ");
                         (result)? printf("Réussi\n\n") : printf("Échoué\n\n");
+                        if(result)
+                                etat_courant=Menu_Admin;
                         if(i==3 && result==0){
-                            
-                        }
+                                printf("Souhaitez vous basculer en mode utilisateur ou essayer de se connecter ?\n");
+                                printf("[1] Mode utilisateur\n[2] nouvelle tentative de connexion\n");
+                                scanf("%c",&choix);
+                                if(choix=='1')
+                                  etat_courant=Menu_Utilisateur;
+                                if(choix=='2'){
+	                            int nbr_microsec=0;
+	                            printf("Vous devez attendre 30 seconde pour réessayer\n");
+	                            usleep(nbr_microsec);
+	                            sleep(30);
+	                            printf("fin 30 sec, Vous pouvez réessayer maintenant\n");
+                                i=0;
+                                }
                             }
-                    if(result)
-                         etat_courant=Menu_Admin;
-                    else{
-                        // faire le compteur de 30 avec un printf
-
-                    }
-                    
+                        i++;  
+                        }while(i<4);
+                
                     break;
                  case Utilisateur :
                     // utilisateur 
@@ -50,11 +59,11 @@ void MAE(){
                     printf("vous avez quitté le programme\n");
                     //etat_courant=??????
                     break;
-                 default:
-                 printf("erreur de choix\n");
-                 etat_courant=Menu_general;
-                 break;
-                 }
+                    default:
+                    printf("erreur de choix\n");
+                    etat_courant=Menu_general;
+                    break;}
+                 
         break;
 
         case Menu_Admin:
@@ -66,6 +75,7 @@ void MAE(){
             switch (choix){
                  case Indexation :
                         //Indexation
+                        
                         break;
                  case  Configuration :
                         // Configuration
