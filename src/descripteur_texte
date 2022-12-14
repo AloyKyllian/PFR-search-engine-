@@ -3,7 +3,7 @@
 #include <Global.h>
 
 
-/*int comptemot ()
+int comptemot ()
 {
     int cpt=0;
     String mot;
@@ -23,19 +23,23 @@ String carac;
 fscanf("%s",Mot_Lu);
 if(Mot_Lu[0]=='<')
 {
-    carac=strchr(Mot_Lu,'>');
-    Mot_Lu=strcpy(Mot_Lu,carac+1);
+    carac=strnchr(Mot_Lu,'>');
+    Mot_Lu=strcpy(Mot_Lu,Mot_Lu[carac+1],(sizeof(Mot_Lu-carac+1)));
 }
 else if(Mot_Lu[sizeof(Mot_Lu)-1]==">")
 {
     carac=strchr(Mot_Lu,'.');
-    Mot_Lu=strcpy(Mot_Lu,carac-1);
+    Mot_Lu=strncpy(Mot_Lu,Mot_Lu[0],carac-1);
 
 }
 else if(Mot_Lu[1]=="'")
 {
-    Mot_Lu=strcpy(Mot_Lu,carac+1);
+    Mot_Lu=strcpy(Mot_Lu,Mot_Lu[2],sizeof(Mot_Lu-2));
 
+}
+else if(Mot_Lu[sizeof(Mot_Lu)-1]=="," || Mot_Lu[sizeof(Mot_Lu)-1]==";")
+{
+    Mot_Lu=strcpy(Mot_Lu,Mot_Lu[0],sizeof(Mot_Lu-1));
 }
 }
 
@@ -45,7 +49,7 @@ void filtrage()
     {
         if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
         {
-            cpt++; //Utiliser un fichier
+            //Appel Fonction Descripteur
         }
     }
 
@@ -110,14 +114,5 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
     }
 
 
-}*/
-
-int main()
-{
-    String test ="Bonjour";
-    String mot;
-    mot=strcpy(test,test[2]);
-    printf("%s",test);
-    printf("%s",mot);
-
 }
+

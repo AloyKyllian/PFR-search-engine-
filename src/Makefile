@@ -8,7 +8,7 @@ config : Config.c Global.c tst_config.c
 	./tst_Config.out
 
 
-	Descripteur_texte : Config.c Global.c descripteur_texte.c 
+Descripteur_texte : Config.c Global.c descripteur_texte.c 
 	gcc -c Config.c 
 	gcc -c Global.c 
 	gcc -c descripteur_texte.c
