@@ -3,6 +3,7 @@
         "config.h": "c",
         "stdio.h": "c",
         "Global.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "connexion.h": "c"
     }
 }
