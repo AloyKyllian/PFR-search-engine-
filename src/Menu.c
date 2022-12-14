@@ -29,9 +29,17 @@ void MAE(){
                         bool result;
                         result=seconnecter(tablogin, test,&erreur);
                         printf("\nConnexion ");
-                        (result)? printf("Réussi\n\n") : printf("Échoué\n\n");}
+                        (result)? printf("Réussi\n\n") : printf("Échoué\n\n");
+                        if(i==3 && result==0){
+                            
+                        }
+                            }
                     if(result)
                          etat_courant=Menu_Admin;
+                    else{
+                        // faire le compteur de 30 avec un printf
+
+                    }
                     
                     break;
                  case Utilisateur :

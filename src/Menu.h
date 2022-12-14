@@ -1,5 +1,5 @@
-#ifndef Menu_H_INCLUS    /*--  Inclusion conditionnelle --> si pas déjà inclus           */
-#define Menu_H_INCLUS    /*--  alors créer la constante symbolique MODULE_IMAGE_H_INCLUS */
+#ifndef Menu_H_INCLUS    
+#define Menu_H_INCLUS   
 
 
 #include<stdint.h>
