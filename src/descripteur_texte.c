@@ -5,14 +5,20 @@
 #include <ctype.h>
 
 
-int comptemot()
+int comptemot(char* mot_lu)
 {
     int nbr_mot=0;
     char* mot;
-    while(fscanf("%s",*mot)!="<texte>")
+    /*while(mot_lu!="<texte>")
     {
-        nbr_mot++;
+        
+    }*/
+    while(mot_lu!="les")
+    {
+        printf("%d   ", nbr_mot);
+      nbr_mot++;  
     }
+    
 return nbr_mot;    
 }
 
@@ -82,7 +88,7 @@ char *nettoyage(char mot_lu[100])
 bool filtrage(char* mot)
 {
     bool verif=true;
- while((mot[0])!='</texte>')
+ while((mot)!="</texte>")
     {
         if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
         {
@@ -99,7 +105,6 @@ void descripteur_texte( int nbr_mot, char* mot, char* tab_mot[nbr_mot],int tab_a
 {
     //char* tab_mot[nbr_mot];
     //int tab_app[nbr_mot];
-    char* mot;
     int index=0;
     bool verif;
     //fscanf("%s",&mot);
@@ -117,7 +122,7 @@ void descripteur_texte( int nbr_mot, char* mot, char* tab_mot[nbr_mot],int tab_a
     }
     if(verif==false && index <=nbr_mot)
     {
-        *tab_mot[index]=mot;
+        tab_mot[index]=mot;
         index++;
     }
 }
@@ -161,13 +166,8 @@ int main()
 {
     int nbr_occ=3;
     bool passe;
-    int nbr_mot=comptemot();
-    char* tab_mot[nbr_mot];
-    int tab_app[nbr_mot];
-    char* tab_occ_mot[nbr_occ];
-    int tab_occ_app[nbr_occ];
-    char *mot;
     char mot_lu[100];
+    int nbr_mot;
     FILE* fichier = NULL;
     fichier = fopen("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml", "r");
     if(fichier==NULL){
@@ -175,16 +175,36 @@ int main()
         exit(1);
     }
     fseek(fichier,340,SEEK_SET);
+    printf("Bonsoir 1");
+    while(fscanf(fichier,"%s",mot_lu)!=EOF){
+        printf("Bonsoir 2");
+   // nbr_mot=comptemot(mot_lu);
+    nbr_mot++;
+    }
+    printf("%d",nbr_mot);
+    char* tab_mot[nbr_mot];
+    int tab_app[nbr_mot];
+    char* tab_occ_mot[nbr_occ];
+    int tab_occ_app[nbr_occ];
+    char *mot;
+    
+   /* FILE* fichier = NULL;
+    fichier = fopen("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml", "r");
+    if(fichier==NULL){
+        printf("Erreur lors de l'ouverture d'un fichier");
+        exit(1);
+    }
+    fseek(fichier,340,SEEK_SET);*/
     while(fscanf(fichier,"%s",mot_lu)!=EOF){
     mot = nettoyage(mot_lu);
     passe=filtrage(mot);
     if(passe==true)
     {
-        descripteur_texte(nbr_mot,mot,tab_mot[nbr_mot],tab_app[nbr_mot]);
+        descripteur_texte(nbr_mot,mot,tab_mot,tab_app);
     }
     }
     //Après le while
-    tab_occ(nbr_mot,nbr_occ,tab_mot[nbr_mot],tab_app[nbr_mot],tab_occ_mot[nbr_occ],tab_occ_app[nbr_occ]);
+    tab_occ(nbr_mot,nbr_occ,tab_mot,tab_app,tab_occ_mot,tab_occ_app);
 /*
     char mabite[100]="laaile";
     char test[100];
