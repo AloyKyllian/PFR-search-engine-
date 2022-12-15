@@ -19,43 +19,44 @@ return cpt;
 
 void nettoyage()
 {
-char mot_lu[100]="Amis,";
-
-printf("%c \n\r 1 :",mot_lu[2]);
+char mot_lu[100]="moncul,";
 char* ptr;
-char* test;
 //fscanf("%s",mot_lu);
 if(mot_lu[0]=='<')
 {
-    printf("1");
-    ptr=strchr(mot_lu,'>');
-    printf("2");
-    strcpy(mot_lu,&mot_lu);
-    printf("3");
+    ptr=strchr(mot_lu,'>'); //ptr c un pointeur vers le caractere c l'addresse du carractere *ptr c'est le caractere et non pas sa position dans le tableau
+    strcpy(mot_lu,ptr+1);
 }
-if(mot_lu[sizeof(mot_lu)-1]=='>')
+if(strchr(mot_lu,'.')!=0)
 {
     ptr=strchr(mot_lu,'.');
-    strncpy(mot_lu,mot_lu,(*ptr-1));
+    char Chaine[]={'\0'};
+    strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
 
 }
-//printf("test %p \n\r  ",strchr(mot_lu,'\''));
-if(strchr(mot_lu,'\'')!=0)
+if(strchr(mot_lu,'\'')!=0 && *(strchr(mot_lu,'\'')-2)==0)//pb quand il y 4 lettres apres l'apostrophe (surement pb de la fonction strcpy)
 {
-    //printf("%s \n\r la ",mot_lu);
-    strcpy(mot_lu,&mot_lu[2]);
-   // printf("%s \n\r la2 ",mot_lu);
-
+    ptr=strchr(mot_lu,'\'');
+    //printf("mot lu avant : %s \n",mot_lu);
+    //printf("ptr avant : %s \n",ptr+1);
+    strcpy(mot_lu,ptr+1);
+    //printf("mot lu apres : %s \n",mot_lu);
 }
-test=strchr(mot_lu,',');
-printf("la la %d ",(*test));
-if(strchr(mot_lu,',')!=0 || strchr(mot_lu,';')!=0)
+
+if(strchr(mot_lu,',')!=0)
 {
-    printf("%s \n\r la ",mot_lu);
     ptr=strchr(mot_lu,',');
-    strncpy(mot_lu,&mot_lu,*ptr-1);
+    char Chaine[]={'\0'};
+    strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
 }
-printf("%s \n\r",mot_lu);
+if(strchr(mot_lu,';')!=0)
+{
+    ptr=strchr(mot_lu,';');
+    char Chaine[]={'\0'};
+    strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
+}
+
+printf("mot finale : %s \n\r",mot_lu);
 }
 
 /*void filtrage()
@@ -132,6 +133,12 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
 }*/
 int main()
 {
+    /*
+    char mabite[100]="laaile";
+    char test[100];
+    strcpy(test,&mabite[1]);
+    printf("mot finale : %s \n\r",test);
+*/
     nettoyage();
 
 }
