@@ -1,3 +1,13 @@
+test_audio2 : descript_audio.c Global.c
+	gcc -c Global.c 
+	gcc -c descript_audio.c 
+	gcc -o test_audio2.out Global.o descript_audio.o -lm
+	rm -rf *.o
+	./test_audio2.out 
+
+
+
+
 test_audio : descripteur_audio.c Global.c
 	gcc -c Global.c 
 	gcc -c descripteur_audio.c 
