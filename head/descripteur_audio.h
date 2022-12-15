@@ -2,6 +2,6 @@
 #define DESCRIPTEUR_AUDIO_H
 
 
-char Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier);
+void Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,int* tableau);
 
 #endif
