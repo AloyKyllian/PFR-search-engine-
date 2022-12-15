@@ -2,27 +2,43 @@
 #include <stdio.h>
 #include "../head/Global.h"
 #include <string.h>
+#include <ctype.h>
 
 
-/*int comptemot ()
+int comptemot()
 {
-    int cpt=0;
-    String mot;
-    while(fscanf("%s",&mot)!="<texte>")
+    int nbr_mot=0;
+    char* mot;
+    while(fscanf("%s",*mot)!="<texte>")
     {
-        
-        return null;
+        nbr_mot++;
     }
-  
-return cpt;
-}*/
+return nbr_mot;    
+}
 
-char *nettoyage()
+
+
+char *nettoyage(char mot_lu[100])
 {
-    char mot_lu[100]="";//.</texte>
+    /*FILE* fichier = NULL;
+    fichier = fopen("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml", "r");
+    if(fichier==NULL){
+        printf("Erreur lors de l'ouverture d'un fichier");
+        exit(1);
+    }
+    char mot_lu[100];//.</texte>*/
     char* mot_envoyer;
     char* ptr;
+    /*fseek(fichier,340,SEEK_SET);
+    while(fscanf(fichier,"%s",mot_lu)!=EOF){*/
+        //printf(" ||||||%s ",mot_lu);
     //fscanf("%s",mot_lu);
+    //  Maj
+    for(int i=0;mot_lu[i]!='\0';i++)
+    {
+        if(mot_lu[i]>='A' && mot_lu[i]<='Z')
+        mot_lu[i]=mot_lu[i]+32;
+    }
     if(mot_lu[0]=='<')
     {
         ptr=strchr(mot_lu,'>'); //ptr c un pointeur vers le caractere c l'addresse du carractere *ptr c'est le caractere et non pas sa position dans le tableau
@@ -50,38 +66,44 @@ char *nettoyage()
     if(strchr(mot_lu,'\'')!=0 && *(strchr(mot_lu,'\'')-2)==0)
     {
         ptr=strchr(mot_lu,'\'');
-        return ptr+1;
+       // printf("ptr+1 : %s",ptr+1);
+        //return ptr+1;
     }
+    //printf("Mot lu : %s    ",mot_lu);
+    //}
 
     mot_envoyer= strdup(mot_lu);
-
+   
     return mot_envoyer;
-     free( mot_envoyer );
-    //printf("mot finale : %s \n\r",mot_lu);
+    free( mot_envoyer );
+     //printf("mot finale : %s \n\r",mot_lu);
 }
 
-/*void filtrage()
+bool filtrage(char* mot)
 {
- while(fscanf("%s",&mot)!="</texte>")
+    bool verif=true;
+ while((mot[0])!='</texte>')
     {
         if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
         {
-            //Appel Fonction Descripteur
+           verif=false;
         }
     }
 
-//return ? 
+return verif;
 }
 
-void descripteur_texte( int nbr_mot, int nbr_occ)
+
+
+void descripteur_texte( int nbr_mot, char* mot, char* tab_mot[nbr_mot],int tab_app[nbr_mot])
 {
-    String tab_mot[nbr_mot];
-    int tab_app[nbr_mot];
-    String mot;
-    int case=0;
+    //char* tab_mot[nbr_mot];
+    //int tab_app[nbr_mot];
+    char* mot;
+    int index=0;
     bool verif;
-    fscanf("%s",&mot);
-    for(int j=0;i<nbr_mot;j++)
+    //fscanf("%s",&mot);
+    for(int j=0;j<nbr_mot;j++)
     {
         tab_app[j]=0;
     }
@@ -93,31 +115,34 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
             verif =true;
         }
     }
-    if(verif==false && case <=nbr_mot)
+    if(verif==false && index <=nbr_mot)
     {
-        tab_mot[case]=mot;
-        case++;
+        *tab_mot[index]=mot;
+        index++;
     }
+}
 
+void tab_occ(int nbr_mot,int nbr_occ,char* tab_mot[nbr_mot],int tab_app[nbr_mot],char* tab_occ_mot[nbr_occ],int tab_occ_app[nbr_occ])
+{
     // 2eme partie
 
     int max=1;
     int nbr=0;
     int case_occ=0;
     int cpt=0;
-    String tab_occ_mot[nbr_occ];
-    int tab_occ_app[nbr_occ];
+    //char* tab_occ_mot[nbr_occ];
+    //int tab_occ_app[nbr_occ];
     while(cpt<nbr_occ)
     {
     for(int y=0;y<nbr_mot;y++)
     {
-        if(tab_occ_app[y]=>max && max!=0)
+        if(tab_occ_app[y] >= max && max!=0)
         {
             max=tab_occ_app[y];
             nbr=y;
         }
     }
-    tab_occ_mot[case_occ]=tab[nbr];
+    *tab_occ_mot[case_occ]=*tab_mot[nbr];
     tab_occ_app[case_occ]=max;
     tab_app[nbr]=0;
     cpt++;
@@ -131,10 +156,35 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
     }
 
 
-}*/
+}
 int main()
 {
-
+    int nbr_occ=3;
+    bool passe;
+    int nbr_mot=comptemot();
+    char* tab_mot[nbr_mot];
+    int tab_app[nbr_mot];
+    char* tab_occ_mot[nbr_occ];
+    int tab_occ_app[nbr_occ];
+    char *mot;
+    char mot_lu[100];
+    FILE* fichier = NULL;
+    fichier = fopen("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml", "r");
+    if(fichier==NULL){
+        printf("Erreur lors de l'ouverture d'un fichier");
+        exit(1);
+    }
+    fseek(fichier,340,SEEK_SET);
+    while(fscanf(fichier,"%s",mot_lu)!=EOF){
+    mot = nettoyage(mot_lu);
+    passe=filtrage(mot);
+    if(passe==true)
+    {
+        descripteur_texte(nbr_mot,mot,tab_mot[nbr_mot],tab_app[nbr_mot]);
+    }
+    }
+    //Après le while
+    tab_occ(nbr_mot,nbr_occ,tab_mot[nbr_mot],tab_app[nbr_mot],tab_occ_mot[nbr_occ],tab_occ_app[nbr_occ]);
 /*
     char mabite[100]="laaile";
     char test[100];
@@ -142,10 +192,9 @@ int main()
     printf("mot finale : %s \n\r",test);
 */
   
-  char *mabite;
-   mabite = nettoyage();
+ 
 
- printf("mot finale : %s \n\r",mabite);
+ //printf("mot finale : %s \n\r",mot);
 
 }
 
