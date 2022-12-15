@@ -1,9 +1,10 @@
 #include <stdint.h>
-//#include <stdio.h>
-#include <Global.h>
+#include <stdio.h>
+#include "../head/Global.h"
+#include <string.h>
 
 
-int comptemot ()
+/*int comptemot ()
 {
     int cpt=0;
     String mot;
@@ -14,36 +15,50 @@ int comptemot ()
     }
   
 return cpt;
-}
+}*/
 
 void nettoyage()
 {
-String Mot_Lu;
-String carac;
-fscanf("%s",Mot_Lu);
-if(Mot_Lu[0]=='<')
+char mot_lu[100]="Amis,";
+
+printf("%c \n\r 1 :",mot_lu[2]);
+char* ptr;
+char* test;
+//fscanf("%s",mot_lu);
+if(mot_lu[0]=='<')
 {
-    carac=strnchr(Mot_Lu,'>');
-    Mot_Lu=strcpy(Mot_Lu,Mot_Lu[carac+1],(sizeof(Mot_Lu-carac+1)));
+    printf("1");
+    ptr=strchr(mot_lu,'>');
+    printf("2");
+    strcpy(mot_lu,&mot_lu);
+    printf("3");
 }
-else if(Mot_Lu[sizeof(Mot_Lu)-1]==">")
+if(mot_lu[sizeof(mot_lu)-1]=='>')
 {
-    carac=strchr(Mot_Lu,'.');
-    Mot_Lu=strncpy(Mot_Lu,Mot_Lu[0],carac-1);
+    ptr=strchr(mot_lu,'.');
+    strncpy(mot_lu,mot_lu,(*ptr-1));
 
 }
-else if(Mot_Lu[1]=="'")
+//printf("test %p \n\r  ",strchr(mot_lu,'\''));
+if(strchr(mot_lu,'\'')!=0)
 {
-    Mot_Lu=strcpy(Mot_Lu,Mot_Lu[2],sizeof(Mot_Lu-2));
+    //printf("%s \n\r la ",mot_lu);
+    strcpy(mot_lu,&mot_lu[2]);
+   // printf("%s \n\r la2 ",mot_lu);
 
 }
-else if(Mot_Lu[sizeof(Mot_Lu)-1]=="," || Mot_Lu[sizeof(Mot_Lu)-1]==";")
+test=strchr(mot_lu,',');
+printf("la la %d ",(*test));
+if(strchr(mot_lu,',')!=0 || strchr(mot_lu,';')!=0)
 {
-    Mot_Lu=strcpy(Mot_Lu,Mot_Lu[0],sizeof(Mot_Lu-1));
+    printf("%s \n\r la ",mot_lu);
+    ptr=strchr(mot_lu,',');
+    strncpy(mot_lu,&mot_lu,*ptr-1);
 }
+printf("%s \n\r",mot_lu);
 }
 
-void filtrage()
+/*void filtrage()
 {
  while(fscanf("%s",&mot)!="</texte>")
     {
@@ -113,6 +128,11 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
         printf("%s",tab_occ_mot[x],": %d",tab_occ_app[x],"   |   ");
     }
 
+
+}*/
+int main()
+{
+    nettoyage();
 
 }
 
