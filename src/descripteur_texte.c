@@ -17,46 +17,47 @@
 return cpt;
 }*/
 
-void nettoyage()
+char *nettoyage()
 {
-char mot_lu[100]="moncul,";
-char* ptr;
-//fscanf("%s",mot_lu);
-if(mot_lu[0]=='<')
-{
-    ptr=strchr(mot_lu,'>'); //ptr c un pointeur vers le caractere c l'addresse du carractere *ptr c'est le caractere et non pas sa position dans le tableau
-    strcpy(mot_lu,ptr+1);
-}
-if(strchr(mot_lu,'.')!=0)
-{
-    ptr=strchr(mot_lu,'.');
-    char Chaine[]={'\0'};
-    strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
+    char mot_lu[100]="";//.</texte>
+    char* mot_envoyer;
+    char* ptr;
+    //fscanf("%s",mot_lu);
+    if(mot_lu[0]=='<')
+    {
+        ptr=strchr(mot_lu,'>'); //ptr c un pointeur vers le caractere c l'addresse du carractere *ptr c'est le caractere et non pas sa position dans le tableau
+        strcpy(mot_lu,ptr+1);
+    }
+    if(strchr(mot_lu,'.')!=0)
+    {
+        ptr=strchr(mot_lu,'.');
+        char Chaine[]={'\0'};
+        strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
 
-}
-if(strchr(mot_lu,'\'')!=0 && *(strchr(mot_lu,'\'')-2)==0)//pb quand il y 4 lettres apres l'apostrophe (surement pb de la fonction strcpy)
-{
-    ptr=strchr(mot_lu,'\'');
-    //printf("mot lu avant : %s \n",mot_lu);
-    //printf("ptr avant : %s \n",ptr+1);
-    strcpy(mot_lu,ptr+1);
-    //printf("mot lu apres : %s \n",mot_lu);
-}
+    }
+    if(strchr(mot_lu,',')!=0)
+    {
+        ptr=strchr(mot_lu,',');
+        char Chaine[]={'\0'};
+        strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
+    }
+    if(strchr(mot_lu,';')!=0)
+    {
+        ptr=strchr(mot_lu,';');
+        char Chaine[]={'\0'};
+        strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
+    }
+    if(strchr(mot_lu,'\'')!=0 && *(strchr(mot_lu,'\'')-2)==0)
+    {
+        ptr=strchr(mot_lu,'\'');
+        return ptr+1;
+    }
 
-if(strchr(mot_lu,',')!=0)
-{
-    ptr=strchr(mot_lu,',');
-    char Chaine[]={'\0'};
-    strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
-}
-if(strchr(mot_lu,';')!=0)
-{
-    ptr=strchr(mot_lu,';');
-    char Chaine[]={'\0'};
-    strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
-}
+    mot_envoyer= strdup(mot_lu);
 
-printf("mot finale : %s \n\r",mot_lu);
+    return mot_envoyer;
+     free( mot_envoyer );
+    //printf("mot finale : %s \n\r",mot_lu);
 }
 
 /*void filtrage()
@@ -69,7 +70,7 @@ printf("mot finale : %s \n\r",mot_lu);
         }
     }
 
-//return ?
+//return ? 
 }
 
 void descripteur_texte( int nbr_mot, int nbr_occ)
@@ -133,13 +134,18 @@ void descripteur_texte( int nbr_mot, int nbr_occ)
 }*/
 int main()
 {
-    /*
+
+/*
     char mabite[100]="laaile";
     char test[100];
     strcpy(test,&mabite[1]);
     printf("mot finale : %s \n\r",test);
 */
-    nettoyage();
+  
+  char *mabite;
+   mabite = nettoyage();
+
+ printf("mot finale : %s \n\r",mabite);
 
 }
 
