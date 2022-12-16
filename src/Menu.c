@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Menu.h"
-#include "../head/Connexion.h"
-#include "../head/Login.h"
+
 
 int i;
 void MAE(){
@@ -75,7 +74,7 @@ void MAE(){
             switch (choix){
                  case Indexation :
                         //Indexation
-                        
+
                         break;
                  case  Configuration :
                         // Configuration
@@ -193,7 +192,7 @@ void MAE(){
              scanf("%c",&choix);
              switch (choix) {
                     case Recherche_mots_cle :
-                        //                  
+                        Creation_Descripteur_txt(CONFIG nb_mots_cle, str[nb_mots_cle]); 
                         break;
                     case Recherche_par_comparaison :
                         // 
