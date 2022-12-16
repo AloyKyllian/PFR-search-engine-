@@ -133,30 +133,42 @@ return verif;
 
 
 
-tab_total descripteur_texte( int nbr_mot, char* mot, char* tab_mot[nbr_mot],int tab_app[nbr_mot])
+tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
 {
+    printf("%s ",mot);
+    //tab->tab_mot[0]="teste0";
+    for(int i=0;i<nbr_mot;i++)
+{
+    printf("%s    ",tab.tab_mot[i]);
+    printf("%d\n",tab.tab_app[i]);
+
+}
     //char* tab_mot[nbr_mot];
     //int tab_app[nbr_mot];
     int index=0;
     bool verif;
     //fscanf("%s",&mot);
-    for(int j=0;j<nbr_mot;j++)
-    {
-        tab_app[j]=0;
-    }
+    printf("la");
     for(int i=0;i<nbr_mot;i++)
     {
-        if(mot==tab_mot[i])
+        printf(" la ");
+        printf("%s",mot);
+        printf("%s",tab.tab_mot[i]);
+        if(*mot==tab.tab_mot[i])
         {
-            tab_app[i]++;
+            
+            tab.tab_app[i]++;
             verif =true;
         }
     }
+    printf(" salut ");
     if(verif==false && index <=nbr_mot)
     {
-        tab_mot[index]=mot;
+        tab.tab_mot[index]=*mot;
         index++;
     }
+
+    return tab;
 }
 
 void tab_occ(int nbr_mot,int nbr_occ,char* tab_mot[nbr_mot],int tab_app[nbr_mot],char* tab_occ_mot[nbr_occ],int tab_occ_app[nbr_occ])
@@ -257,8 +269,17 @@ int main()
 
     tab_total tab;
 
-    tab.tab_app[nbr_mot];
-    tab.tab_mot[nbr_mot];
+    tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
+    tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
+
+    for(int i=0;i<nbr_mot;i++)
+{
+    tab.tab_mot[0]="test";
+    tab.tab_app[i]=0;
+    printf("%s    ",tab.tab_mot[i]);
+    printf("%d\n",tab.tab_app[i]);
+
+}
     
     //char* tab_mot[nbr_mot];
     
@@ -284,7 +305,10 @@ int main()
     //printf("%d\n",passe);
     if(passe==true)
     {
-        tab=descripteur_texte(nbr_mot,mot,&tab.tab_mot,tab.tab_app);
+        printf("la");
+        printf("%s  ", mot);
+        tab=descripteur_texte(nbr_mot,mot,tab);
+        printf("%s    ",tab.tab_mot[0]);
     }
     }
 
