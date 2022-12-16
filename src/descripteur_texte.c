@@ -7,7 +7,7 @@
 
 typedef struct 
 {
-    char *tab_mot;
+    String *tab_mot;
     int *tab_app;
 }tab_total;
 
@@ -272,11 +272,14 @@ int main()
     tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
     tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
 
+String test;
+strcpy(test,"salut");
+
     for(int i=0;i<nbr_mot;i++)
 {
-    tab.tab_mot[0]="test";
-    tab.tab_app[i]=0;
-    printf("%s    ",tab.tab_mot[i]);
+    *(tab.tab_mot+i)="salut";
+    tab.tab_app[i]=20;
+    printf("%c    ",tab.tab_mot[i]);
     printf("%d\n",tab.tab_app[i]);
 
 }
