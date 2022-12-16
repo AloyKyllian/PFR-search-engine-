@@ -3,11 +3,15 @@
 
 #include "../head/Global.h"
 
+typedef struct Estruct_empiler
+{   String CHEMIN;
+    String nom_fic;
+} struct_empiler;
 
 // 1 // fonction pour recuperer chemin d'acces de chaque type de fichier et stocker resultat dans un tableau
               // appeler trois fois main pour chaque type de fichier
               // avoir trois tableaux de string
-void recup_path(String *tableau, char typefichier);
+void recup_path(Estruct_empiler *tab, char typefichier);
 
 // 2 // fonction recuperer leurs structures et lempiler dans une pile
              //appeler leur fonctions descripteur
