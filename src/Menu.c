@@ -1,7 +1,10 @@
 #include<stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Menu.h"
+#include "../head/Menu.h"
+#include "../head/Connexion.h"
+#include "../head/Login.h"
+#include "../head/Config.h"
 
 
 int i;
@@ -56,7 +59,7 @@ void MAE(){
                     break;  
                  case Quitter :
                     printf("vous avez quitté le programme\n");
-                    //etat_courant=??????
+                    return 0;
                     break;
                     default:
                     printf("erreur de choix\n");
@@ -74,7 +77,7 @@ void MAE(){
             switch (choix){
                  case Indexation :
                         //Indexation
-
+                        
                         break;
                  case  Configuration :
                         // Configuration
@@ -99,13 +102,14 @@ void MAE(){
         
         case Menu_Configuration :
              printf("Configuration :\n");
-             printf("Veuillez faire votre choix  : \n");
+             Afficher_CONFIG(CONFIG config);
+             printf("Si vous voulez changer une valeur, veuillez faire votre choix  : \n");
              printf("[1] Nombre de mots clé\n [2] Similarité\n [3] Niveau \n[4] Nombre de fenetre\n");
              printf("[5] Intervalle de temps\n [R] Retour\n[Q] Déconnexion\n");
              scanf("%c",&choix);
              switch (choix) {
                     case Nombre_de_mot_cle :
-                         //fct pour changer le nombre de mot cle                   
+                                           
                          break;
                     case Similarité :
                          // pour changer similarité
@@ -192,7 +196,7 @@ void MAE(){
              scanf("%c",&choix);
              switch (choix) {
                     case Recherche_mots_cle :
-                        Creation_Descripteur_txt(CONFIG nb_mots_cle, str[nb_mots_cle]); 
+                         
                         break;
                     case Recherche_par_comparaison :
                         // 
@@ -242,7 +246,7 @@ void MAE(){
              scanf("%c",&choix);
              switch (choix) {
                     case Recherche_par_comparaison :
-                        // 
+                         
                         break;  
                     case Retour :
                         etat_courant=Menu_Utilisateur;

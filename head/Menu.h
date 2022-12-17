@@ -6,10 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../head/Connexion.h"
-#include "../head/Login.h"
-#include "../head/Config.h"
-#include "../head/Config.h"
+
 
 
 //Etat :
