@@ -90,9 +90,6 @@ void MAE(){
                  case Retour_Utilisateur :
                         etat_courant=Menu_Utilisateur;
                         break;
-                 case Quitter :
-                        return ;//????
-                        break;
                  default:
                         printf("erreur de choix\n");
                         etat_courant=Menu_Admin;
@@ -102,6 +99,7 @@ void MAE(){
         
         case Menu_Configuration :
              printf("Configuration :\n");
+             CONFIG Lire_CONFIG(String *Erreur);
              Afficher_CONFIG(CONFIG config);
              printf("Si vous voulez changer une valeur, veuillez faire votre choix  : \n");
              printf("[1] Nombre de mots clé\n [2] Similarité\n [3] Niveau \n[4] Nombre de fenetre\n");
@@ -109,23 +107,46 @@ void MAE(){
              scanf("%c",&choix);
              switch (choix) {
                     case Nombre_de_mot_cle :
-                                           
+                         CONFIG Lire_mot_cle(CONFIG config, String *Erreur);     
+                         void Ecrire_CONFIG(CONFIG config, String *Erreur);             
                          break;
                     case Similarité :
                          // pour changer similarité
-                         
+                         CONFIG Lire_similariter(CONFIG config, String *Erreur);
+                         void Ecrire_CONFIG(CONFIG config, String *Erreur);
                          break;  
                     case Niveau :
                          // pour changer niveau
+                         CONFIG Lire_niveau(CONFIG config, String *Erreur);
+                         void Ecrire_CONFIG(CONFIG config, String *Erreur);
                          break;
                     case Nombre_de_fenetre :
                         //fct pour changer le nombre de fenetre
+                        CONFIG Lire_nb_fenetre(CONFIG config, String *Erreur);
+                        void Ecrire_CONFIG(CONFIG config, String *Erreur);
+                        break;
                     case Intervalle_de_temps :
                         //fct pour changer l'intervalle de temps
+                        CONFIG Lire_intervale(CONFIG config, String *Erreur);
+                        void Ecrire_CONFIG(CONFIG config, String *Erreur);
+                        break;
                     case Retour :
                         etat_courant=Menu_Admin;
-                    case Quitter :
-                        return ;//????
+                        break;
+                    case Deconnexion :
+                        choix='3';
+                        while(choix!='1' || choix!='2'){
+                        printf("vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non ");
+                        scanf("%c",&choix);
+                        switch(choix){
+                            case '1':
+                            etat_courant=Menu_Utilisateur;
+                            break;
+                            case '2' :
+                            printf("vous avez quitté le programme\n");
+                            return 0;
+                            break;}
+                        }
                         break;
                     default:
                         printf("erreur de choix\n");
@@ -141,7 +162,8 @@ void MAE(){
              scanf("%c",&choix);
              switch (choix) {
                     case texte :
-                         //                 
+                         // 
+
                          break;
                     case image :
                          // 
