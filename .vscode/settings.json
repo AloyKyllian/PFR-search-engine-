@@ -4,6 +4,7 @@
         "stdio.h": "c",
         "Global.h": "c",
         "stdint.h": "c",
-        "connexion.h": "c"
+        "connexion.h": "c",
+        "login.h": "c"
     }
 }
