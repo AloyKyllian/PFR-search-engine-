@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+typedef char String[MAX_CHAINE];
 
 // notre element est une structure avec le nom du fichier, le chemin d'acces et ID
 

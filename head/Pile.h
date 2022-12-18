@@ -2,11 +2,9 @@
 #define PILE_h
 #include "element.h"
 
-
 //structure
 typedef struct eCellule
-{
-    ELEMENT element;
+{   ELEMENT element;
     struct eCellule * suiv;
 }Cellule,*PILE;
 
