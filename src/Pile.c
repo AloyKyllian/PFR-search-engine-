@@ -10,16 +10,14 @@ void affichePILE(PILE pile)
     int i;
     PILE temp= pile;
       if(PILE_estVide(pile)==1)
-          {printf("\n---\n---\n");}
+          {printf("VIDE\n\n");}
        else
        {
            printf("\nAffichage de la pile:\n");
            do
            {
-               printf("\n---\n");
                affiche_ELEMENT((*temp).element);
                temp= (*temp).suiv;
-               printf(" \n---\n");
            }while(temp!=NULL);
        }
 }
