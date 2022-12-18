@@ -6,7 +6,7 @@
 void affiche_ELEMENT(ELEMENT element)
 {
       char commande[1000];
-	  printf( "id = %s \n", element.id);
+	  printf( "id = %d \n", element.id);
       printf( "nom fichier = %s \n", element.nom_fic);
 	  strcpy(commande, "wc -l ");
 	  strcat(commande, element.CHEMIN); 
