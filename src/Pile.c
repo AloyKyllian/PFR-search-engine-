@@ -1,4 +1,4 @@
-#include "/head/Pile.h"
+#include "../head/Pile.h"
 
 //initialisation pile
 PILE init_PILE()
