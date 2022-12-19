@@ -5,8 +5,7 @@
 #include "../head/Connexion.h"
 #include "../head/Login.h"
 #include "../head/Config.h"
-
-int i;
+#include "../head/FichierExist.h"
 void MAE()
 {
 
@@ -155,6 +154,9 @@ void MAE()
                     printf("vous avez quitté le programme\n");
                     return 0;
                     break;
+                default:
+                etat_courant = Menu_Utilisateur;
+                break;
                 }
             }
             break;
@@ -185,7 +187,8 @@ void MAE()
         case Retour:
             etat_courant = Menu_Admin;
         case Quitter:
-            return; //????
+            printf("vous avez quitté le programme\n");
+            return 0;
             break;
         default:
             printf("erreur de choix\n");
@@ -214,7 +217,8 @@ void MAE()
             etat_courant = Menu_general;
             break;
         case Quitter:
-            return; //????
+            printf("vous avez quitté le programme\n");
+            return 0;
             break;
         default:
             printf("erreur de choix\n");
@@ -235,14 +239,34 @@ void MAE()
             break;
         case Recherche_par_comparaison:
             // verification si le fichier existe
-            // car_test -e fichier;
-            printf("entrez le chemin de votre fichier\n");
-            scanf("%s", chemin);
-            extension=strstr(chemin,"xml");
-            if (extension==NULL){
-                   printf("Ce fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
+            test=-1;
+            while(test==-1){
+                printf("entrez le chemin de votre fichier\n");
+                scanf("%s", chemin);
+                test=FichierExist(chemin);
+                if(test==-1)
+                     printf("Le fichier n'existe pas");
+                     printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
+                     scanf("%c",&choix);
+                     switch (choix)
+                     {
+                     case '2':
+                        etat_courant=Menu_Utilisateur;
+                        break;
+                     case '1':
+                        test=-1;
+                        break;
+                     default:
+                        etat_courant=Menu_Utilisateur;
+                        break;
+                     }}
+            //verification si le fichier passer est un fichier texte
+            test=VerifExtension(chemin,"xml");
+            if (test==-1){
+                   printf("Ce fichier n'est pas de type texte\nVeuiller faire le choix de recherche qui vous correspond\n");
                    etat_courant=Menu_Utilisateur;}
-            //recherche      
+            else 
+                //recherche 
             break;
         case Retour:
             etat_courant = Menu_Utilisateur;
@@ -252,7 +276,7 @@ void MAE()
             break;
         default:
             printf("erreur de choix\n");
-            etat_courant = texte;
+            etat_courant = Menu_texte;
             break;
         }
         break;
@@ -269,41 +293,66 @@ void MAE()
             break;
         case Recherche_par_comparaison:
             printf("Votres image est une :\n[1] Image couleur\n[2] Image noir et blanc\n");
-            scanf("%c",&choix);
+            scanf("%c",&choixImage);
             printf("entrez le chemin de votre fichier\n");
             scanf("%s", chemin);
-            switch (choix)
+            // verification si le fichier existe
+            test=-1;
+            while(test==-1){
+                printf("entrez le chemin de votre fichier\n");
+                scanf("%s", chemin);
+                test=FichierExist(chemin);
+                if(test==-1)
+                     printf("Le fichier n'existe pas");
+                     printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
+                     scanf("%c",&choix);
+                     switch (choix)
+                     {
+                     case '2':
+                        etat_courant=Menu_Utilisateur;
+                        break;
+                     case '1':
+                        test=-1;
+                        break;
+                     default:
+                        etat_courant=Menu_Utilisateur;
+                        break;
+                     }}
+            //verification si le fichier passer est un fichier texte
+            
+            switch (choixImage)
             {
             case '1' :
-                extension=strstr(chemin,"jpg");
-                if (extension==NULL){
-                        printf("Ce fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
-                        etat_courant=Menu_Utilisateur;}
-                //recherche
+                test=VerifExtension(chemin,"jpg");
+                 if (test==-1){
+                   printf("Ce fichier n'est pas de type image\nVeuiller faire le choix de recherche qui vous correspond\n");
+                   etat_courant=Menu_Utilisateur;}
+            else 
+                //recherche 
                 break;
             case '2':
-                extension=strstr(chemin,"bmp");
-                if (extension==NULL){
-                        printf("Ce fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
-                        etat_courant=Menu_Utilisateur;}
-                //recherche
+                test=VerifExtension(chemin,"bmp");
+                 if (test==-1){
+                   printf("Ce fichier n'est pas de type image\nVeuiller faire le choix de recherche qui vous correspond\n");
+                   etat_courant=Menu_Utilisateur;}
+            else 
+                //recherche 
             default:
                 printf("erreur de choix\n");
-                etat_courant = Menu_Utilisateur;
+                etat_courant = Menu_image;
                 break;
             }
-            
-           
             break;
         case Retour:
             etat_courant = Menu_Utilisateur;
             break;
         case Quitter:
-            return; //????
+            printf("vous avez quitté le programme\n");
+            return 0;
             break;
         default:
             printf("erreur de choix\n");
-            etat_courant = image;
+            etat_courant = Menu_image;
             break;
         }
         break;
@@ -318,6 +367,7 @@ void MAE()
         case Recherche_par_comparaison:
             printf("entrez le chemin de votre fichier\n");
             scanf("%s", chemin);
+
             extension=strstr(chemin,"wav");
             if (extension==NULL){
                 extension=strstr(chemin,"bin");}
@@ -330,15 +380,18 @@ void MAE()
             etat_courant = Menu_Utilisateur;
             break;
         case Quitter:
-            return;  //????
+            printf("vous avez quitté le programme\n");
+            return 0;
             break;
         default:
             printf("erreur de choix\n");
-            etat_courant = audio;
+            etat_courant = Menu_audio;
             break;
         }
         break;
-    default:
+        default:
+           
         break;
     }
 }
+
