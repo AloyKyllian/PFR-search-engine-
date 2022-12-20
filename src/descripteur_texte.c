@@ -5,6 +5,7 @@
 #include <ctype.h>
 
 
+
 int comptemot(char* mot_lu)
 {
     int nbr_mot=0;
@@ -90,7 +91,8 @@ bool filtrage(char* mot)
     String test;
     bool verif=true;
  while((mot)!="</texte>")
-    {
+    { 
+        
         //grep motif nomfichier
         //cat nomfichier|grep motif
         //grep "la" ficherPoubelle
@@ -100,6 +102,18 @@ bool filtrage(char* mot)
         /*if(cat /tmp/test |grep -w vache)
         {
             verif=false;            //Concrètement il faut faire ça
+        }*/
+        /*int TailleMax=100;
+        char* motbanni[100];
+        FILE* fichierALire = NULL;
+        fichierALire = fopen("fichierMotBANNI", "r");               Solution Alternative
+        fgets(motbanni,TailleMax, fichierALire);
+        for(int i=0; i<TailleMax;i++)
+        {
+            if(strcmp(motbanni[i],mot))
+            {
+                verif=false;
+            }
         }*/
         if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
         {
