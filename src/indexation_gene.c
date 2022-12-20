@@ -1,5 +1,5 @@
 #include "../head/indexation_gene.h"
-#include "../head/element.h"
+#include "element.h"
 
 void recup_path( receuillefichiers doctexte, String path, String *Erreur)
 {
