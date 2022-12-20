@@ -181,7 +181,7 @@ int main()
    // nbr_mot=comptemot(mot_lu);
     nbr_mot++;
     }
-    printf("%d",nbr_mot);
+    printf("Nombre de mot : %d",nbr_mot);
     char* tab_mot[nbr_mot];
     int tab_app[nbr_mot];
     char* tab_occ_mot[nbr_occ];
