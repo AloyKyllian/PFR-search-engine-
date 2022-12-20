@@ -3,7 +3,7 @@
 void main()
 {
     String path;
-    String *Erreur;
-    receuillefichiers doctexte;
-    recup_path(doctexte, String path, String *Erreur);
+    String Erreur;
+    ELEMENT receuillefichiers[500];
+    recup_path(doctexte,path, &Erreur);
 }
