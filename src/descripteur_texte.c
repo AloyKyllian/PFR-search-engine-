@@ -87,9 +87,20 @@ char *nettoyage(char mot_lu[100])
 
 bool filtrage(char* mot)
 {
+    String test;
     bool verif=true;
  while((mot)!="</texte>")
     {
+        //grep motif nomfichier
+        //cat nomfichier|grep motif
+        //grep "la" ficherPoubelle
+        //cat /tmp/test |grep -w vache recherche le mot vache
+        // Il existe une fonction find sur windows qui fait pareil
+
+        /*if(cat /tmp/test |grep -w vache)
+        {
+            verif=false;            //Concrètement il faut faire ça
+        }*/
         if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
         {
            verif=false;
