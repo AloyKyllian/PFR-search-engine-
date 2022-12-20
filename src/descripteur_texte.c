@@ -15,7 +15,7 @@ int comptemot(char* mot_lu)
     }*/
     while(mot_lu!="les")
     {
-        printf("%d   ", nbr_mot);
+        printf("Nombre de mot : %d   ", nbr_mot);
       nbr_mot++;  
     }
     
@@ -175,9 +175,9 @@ int main()
         exit(1);
     }
     fseek(fichier,340,SEEK_SET);
-    printf("Bonsoir 1");
+    //printf("Bonsoir 1");
     while(fscanf(fichier,"%s",mot_lu)!=EOF){
-        printf("Bonsoir 2");
+       // printf("Bonsoir 2");
    // nbr_mot=comptemot(mot_lu);
     nbr_mot++;
     }
