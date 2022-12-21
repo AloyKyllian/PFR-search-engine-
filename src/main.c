@@ -2,7 +2,9 @@
 #include<stdint.h>
 #include <stdio.h>
 
-void main(){
+int main(){
+    do{
     MAE();
+    }while(1);
     
 }
