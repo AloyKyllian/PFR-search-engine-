@@ -1,8 +1,4 @@
-#include <stdint.h>
-#include <stdio.h>
-#include "../head/Global.h"
-#include <string.h>
-#include <ctype.h>
+#include "Descripteur_texte.h"
 
 typedef struct 
 {
