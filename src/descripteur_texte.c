@@ -9,6 +9,7 @@ typedef struct
 {
     String *tab_mot;
     int *tab_app;
+    int index;
 }tab_total;
 
 
@@ -96,8 +97,8 @@ char *nettoyage(char mot_lu[100])
 
 bool filtrage(char* mot)
 {
-    int nombre_mot=15;
-    char *tab_p[100]={"la","le","les","des","ma","mon","me","l'","de","mes","m'","de","des","dans","et"};
+    int nombre_mot=17;
+    char *tab_p[100]={"la","le","les","des","ma","mon","me","l'","de","mes","m'","de","des","dans","et","","</texte>"};
 
     bool verif=true;
 
@@ -135,37 +136,40 @@ return verif;
 
 tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
 {
-    printf("%s ",mot);
+    //printf("%s ",mot);
     //tab->tab_mot[0]="teste0";
-    for(int i=0;i<nbr_mot;i++)
+    /*for(int i=0;i<tab.index;i++)
 {
     printf("%s    ",tab.tab_mot[i]);
     printf("%d\n",tab.tab_app[i]);
 
-}
+}*/
     //char* tab_mot[nbr_mot];
     //int tab_app[nbr_mot];
-    int index=0;
+
     bool verif;
     //fscanf("%s",&mot);
-    printf("la");
+    //printf("\n\n\n\n");
     for(int i=0;i<nbr_mot;i++)
     {
-        printf(" la ");
-        printf("%s",mot);
-        printf("%s",tab.tab_mot[i]);
-        if(*mot==tab.tab_mot[i])
+        //printf(" la ");
+        //printf("%s  ",mot);
+        //printf("%s      ",tab.tab_mot[i]);
+
+         if(strcmp(mot,tab.tab_mot[i])==0)
         {
-            
+            //printf("kjfns");
             tab.tab_app[i]++;
             verif =true;
+            //printf(" salut ");
         }
     }
-    printf(" salut ");
-    if(verif==false && index <=nbr_mot)
+
+    if(verif==false && tab.index <=nbr_mot)
     {
-        tab.tab_mot[index]=*mot;
-        index++;
+        strcpy(tab.tab_mot[tab.index],mot);
+        tab.tab_app[tab.index]=1;
+        tab.index++;
     }
 
     return tab;
@@ -268,7 +272,7 @@ int main()
     
 
     tab_total tab;
-
+    tab.index=0;
     tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
     tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
 
@@ -277,10 +281,10 @@ strcpy(test,"salut");
 
     for(int i=0;i<nbr_mot;i++)
 {
-    *(tab.tab_mot+i)="salut";
-    tab.tab_app[i]=20;
-    printf("%c    ",tab.tab_mot[i]);
-    printf("%d\n",tab.tab_app[i]);
+    strcpy(tab.tab_mot[i],"");
+    //tab.tab_app[i]=1;
+    //printf("%c    ",tab.tab_mot[i]);
+    //printf("%d\n",tab.tab_app[i]);
 
 }
     
@@ -308,14 +312,14 @@ strcpy(test,"salut");
     //printf("%d\n",passe);
     if(passe==true)
     {
-        printf("la");
-        printf("%s  ", mot);
         tab=descripteur_texte(nbr_mot,mot,tab);
-        printf("%s    ",tab.tab_mot[0]);
+        //printf("tab mot 0 : %s    ",tab.tab_mot[0]);
     }
     }
 
-    for(int i;i<nbr_mot;i++)
+    printf("%d",tab.index);
+
+    for(int i=0;i<tab.index;i++)
 {
     printf("%s    ",tab.tab_mot[i]);
     printf("%d\n",tab.tab_app[i]);
