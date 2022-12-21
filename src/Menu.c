@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "../head/Menu.h"
 #include "../head/Connexion.h"
-#include "../head/Login.h"
 #include "../head/Config.h"
 #include "../head/FichierExist.h"
 void MAE()
@@ -42,7 +41,7 @@ void MAE()
                     etat_courant = Menu_Admin;
                 if (i == 3 && result == 0)
                 {
-                    printf("Souhaitez vous basculer en mode utilisateur ou essayer de se connecter ?\n");
+                    printf("Souhaitez vous basculer en mode utilisateur ou essayer de se connecter une nouvelle fois ?\n");
                     printf("[1] Mode utilisateur\n[2] nouvelle tentative de connexion\n");
                     scanf("%c", &choix);
                     if (choix == '1')
@@ -86,7 +85,7 @@ void MAE()
         switch (choix)
         {
         case Indexation:
-            // Indexation
+            // Indexation generale avec config.txt a voir avec yasmine
 
             break;
         case Configuration:
@@ -160,7 +159,7 @@ void MAE()
                     return 0;
                     break;
                 default:
-                etat_courant = Menu_Utilisateur;
+                printf("mauvais choix\n");
                 break;
                 }
             }
@@ -181,7 +180,7 @@ void MAE()
         {
         case texte:
             //
-            
+
             break;
         case image:
             //
@@ -191,7 +190,7 @@ void MAE()
             break;
         case Retour:
             etat_courant = Menu_Admin;
-        case Quitter:
+        case Quitter://DECONNEXION 
             printf("vous avez quitté le programme\n");
             return 0;
             break;
@@ -268,8 +267,8 @@ void MAE()
             //verification si le fichier passer est un fichier texte
             test=VerifExtension(chemin,"xml");
             if (test==-1){
-                   printf("Ce fichier n'est pas de type texte\nVeuiller faire le choix de recherche qui vous correspond\n");
-                   etat_courant=Menu_Utilisateur;}
+                   printf("Ce fichier n'est pas de type texte\nVeuiller mettre un fichier texte\n");
+                   etat_courant=Menu_texte;}
             else 
                 //recherche 
             break;
@@ -392,13 +391,12 @@ void MAE()
                         break;
                      }}
             //verification si le fichier passer est un fichier texte
-            test=VerifExtension(chemin,"wav");
-            test1=VerifExtension(chemin,"bin");
-            if (test==-1|| test1==-1){
+            test=VerifExtension(chemin,"txt");
+            if (test==-1){
                    printf("Ce fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
                    etat_courant=Menu_Utilisateur;}
             else 
-                //recherche 
+                //recherche comparaison
 
             break;
         case Retour:
@@ -415,7 +413,8 @@ void MAE()
         }
         break;
         default:
-           
+        printf("il y a une erreur, vous allez etre redirigez vers le menu general\n");
+        etat_courant=Menu_general;
         break;
     }
 }
