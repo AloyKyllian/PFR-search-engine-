@@ -48,9 +48,5 @@
 
 //Menu recherche audio
 #define Recherche_comparaison_audio '1'
-char choix;
-char choixImage;
-char chemin[100];
-char *extension;
-int i;
+
 #endif
