@@ -4,6 +4,7 @@
         "stdio.h": "c",
         "Global.h": "c",
         "descripteur_texte": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "descripteur_texte.h": "c"
     }
 }
