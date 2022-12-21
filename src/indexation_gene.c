@@ -1,18 +1,16 @@
 #include "../head/indexation_gene.h"
 
-// modifier recup path avec grep 
-//une fonction que pour texte
-void recup_path( receuillefichiers *doctexte, String path, String *Erreur)
+void recup_path_img_audio( receuillefichiers *doctexte, String path, String *Erreur)
 {
      int i =0;
-      char commande[1000] ;
+      char commande[500] ;
       FILE * ptr_fic;  
     /*------------------------------------------------------*/
     /* RECUPERATION DU CONTENU DU REPERTOIRE  CHEMIN        */
     /*------------------------------------------------------*/
      strcpy(commande, "ls -l ");
      strcat(commande, path);
-     strcat(commande, " > fic_temp"); 
+     strcat(commande, " | grep \".txt\" > fic_temp");
 
      printf("execution de %s\n", commande); 
      fflush(stdout);
@@ -29,7 +27,6 @@ void recup_path( receuillefichiers *doctexte, String path, String *Erreur)
 
 if( ptr_fic != NULL)
 {   
-    fscanf( ptr_fic, "%*s %*s");
     fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*doctexte)[i].nom_fic);
        while ( !feof(ptr_fic) )
     {   
@@ -58,7 +55,7 @@ else
 }
 
 
-void recup_path( receuillefichiers *doctexte, String path, String *Erreur)
+void recup_path_texte( receuillefichiers *doctexte, String path, String *Erreur)
 {
      int i =0;
       char commande[1000] ;
