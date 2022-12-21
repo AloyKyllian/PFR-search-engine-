@@ -11,7 +11,7 @@ CONFIG Lire_CONFIG(String *Erreur)
     if (fichier != NULL)
     {
         strcpy(*Erreur,"Erreur : NULL");
-        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f", &config.nb_mots_cle, &config.similariter, &config.niveau, &config.nb_fenetre, &config.intervale);
+        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", &config.nb_mots_cle, &config.similariter, &config.niveau, &config.nb_fenetre, &config.intervale);
     }
     else
     {
@@ -27,7 +27,7 @@ void Afficher_CONFIG(CONFIG config)
     printf("Similariter = %d\n", config.similariter);
     printf("Niveau = %d\n", config.niveau);
     printf("Nombre de fenetre = %d\n", config.nb_fenetre);
-    printf("Intervale = %f\n", config.intervale);
+    printf("Intervale = %d\n", config.intervale);
 }
 //Lis et verifie la validiter de la valeur du nombre de mots cle
 CONFIG Lire_mot_cle(CONFIG config, String *Erreur)
@@ -129,8 +129,8 @@ CONFIG Lire_nb_fenetre(CONFIG config, String *Erreur)
 //Lis et verifie la validiter de la valeur de l'intervale
 CONFIG Lire_intervale(CONFIG config, String *Erreur)
 {
-    float tmp;
-    if (!scanf("%f", &tmp))
+    int tmp;
+    if (!scanf("%d", &tmp))
     {
         strcpy(*Erreur,"Erreur : Pas un nombre");
         viderBuffer();
@@ -155,7 +155,7 @@ void Ecrire_CONFIG(CONFIG config, String *Erreur)
     if (fichier != NULL)
     {
         strcpy(*Erreur,"Erreur : NULL");
-        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f", config.nb_mots_cle, config.similariter, config.niveau, config.nb_fenetre, config.intervale);
+        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", config.nb_mots_cle, config.similariter, config.niveau, config.nb_fenetre, config.intervale);
     }
     else
     {
