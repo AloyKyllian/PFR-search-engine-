@@ -32,7 +32,7 @@ void comparaison_audio(int fenetre,int intervalle,descri_audio descri,char* chem
         {
             lig=0;
         }
-        //if(val_lu[0]!='i' || val_lu[1]!='d')//nouveau descripteur
+        //if(val_lu<0)//nouveau descripteur
         //{
            pourcentage = bonneval/nbr_val*100;
 
