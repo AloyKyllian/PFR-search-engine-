@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../head/descript_audio.h"
+#include "/head/descript_audio.h"
 
 
 
@@ -10,7 +10,6 @@ void comparaison_audio(int fenetre,int intervalle,descri_audio descri,char* chem
 
     int nbr_val;
     int val_lu;
-    //char val_lu[100];
     FILE* fichier = NULL;
     fichier = fopen(chemin_descripteur_audio, "r");
     if(fichier==NULL){
@@ -32,14 +31,14 @@ void comparaison_audio(int fenetre,int intervalle,descri_audio descri,char* chem
         {
             lig=0;
         }
-        //if(val_lu<0)//nouveau descripteur
-        //{
+        if(val_lu<0)//nouveau descripteur
+        {
            pourcentage = bonneval/nbr_val*100;
 
             nbr_val=0;
             col=0;
             lig=0;
-        //}
+        }
         if(val_lu==descri.tab[lig][col])//valeur bonne
         {
             bonneval++;
