@@ -1,0 +1,9 @@
+ERREUR 0: NULL
+ERREUR 1: Alocation memoire
+ERREUR 2: Nombre inferieur a 0
+ERREUR 3: Nombre inferieur a 256
+ERREUR 4: Nombre superieur a 0
+ERREUR 5: Nombre superieur a 8
+ERREUR 6: Pas une puissance de 2
+ERREUR 7: Fichier introuvable
+ERREUR 8: La valeur rentree n'es tpas un nombre
