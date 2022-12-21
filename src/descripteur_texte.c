@@ -97,7 +97,7 @@ bool filtrage(char* mot)
         //cat nomfichier|grep motif
         //grep "la" ficherPoubelle
         //cat /tmp/test |grep -w vache recherche le mot vache
-        // Il existe une fonction find sur windows qui fait pareil
+        // Il existe une fonction find sur windows qui fait pareil (on s'en bat les couille on est pas sur windows)
 
         /*if(cat /tmp/test |grep -w vache)
         {
