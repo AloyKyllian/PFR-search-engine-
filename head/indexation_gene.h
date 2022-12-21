@@ -1,5 +1,5 @@
-#ifndef INDEXATIN_GENE_H
-#define INDEXATION_GENE_H
+#ifndef indexation_gene_h
+#define indexation_gene_h
 
 #include "element.h"
 #include "../head/Global.h"
@@ -12,7 +12,7 @@ typedef struct Estruct_empiler
 // 1 // fonction pour recuperer chemin d'acces de chaque type de fichier et stocker resultat dans un tableau
               // appeler trois fois main pour chaque type de fichier
               // avoir trois tableaux de string
-void recup_path( receuillefichiers doctexte, String path, String *Erreur);
+void recup_path( receuillefichiers * doctexte, String path, String *Erreur);
 
 // 2 // fonction recuperer leurs structures et lempiler dans une pile
              //appeler leur fonctions descripteur

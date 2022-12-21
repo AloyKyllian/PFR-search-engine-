@@ -10,6 +10,12 @@ testpile : element.c Pile.c testpile.c
 	gcc -c Pile.c
 	gcc -c testpile.c
 	gcc -o testpile.out element.o Pile.o testpile.o
+
+inde : element.c indexation_gene.c testindexgeneral.c
+	gcc -c element.c
+	gcc -Wall -c indexation_gene.c
+	gcc -Wall -c testindexgeneral.c
+	gcc -Wall -o inde.out element.o indexation_gene.o testindexgeneral.o
 	
 clean :
 	rm -rf *.o
