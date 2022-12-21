@@ -102,6 +102,7 @@ char *nettoyage(char mot_lu[100])
 
 bool filtrage(char* mot)
 {
+<<<<<<< HEAD
     char mot_Banni[100];
     String tab_p[100];
     int cpt=0;
@@ -110,6 +111,39 @@ bool filtrage(char* mot)
     if(fichierBanni==NULL){
         printf("Erreur fichier");
         exit(1);
+=======
+    String test;
+    bool verif=true;
+ while((mot)!="</texte>")
+    { 
+        
+        //grep motif nomfichier
+        //cat nomfichier|grep motif
+        //grep "la" ficherPoubelle
+        //cat /tmp/test |grep -w vache recherche le mot vache
+        // Il existe une fonction find sur windows qui fait pareil (on s'en bat les couille on est pas sur windows)
+
+        /*if(cat /tmp/test |grep -w vache)
+        {
+            verif=false;            //Concrètement il faut faire ça
+        }*/
+        /*int TailleMax=100;
+        char* motbanni[100];
+        FILE* fichierALire = NULL;
+        fichierALire = fopen("fichierMotBANNI", "r");               Solution Alternative
+        fgets(motbanni,TailleMax, fichierALire);
+        for(int i=0; i<TailleMax;i++)
+        {
+            if(strcmp(motbanni[i],mot))
+            {
+                verif=false;
+            }
+        }*/
+        if(mot!="la" && mot!="le" && mot!="les" && mot!="ma" && mot!="mon" && mot!="me" && mot!="l'" && mot!="de" && mot!="mes" && mot!="m'" && mot!="à" && mot!="car" && mot!="où" && mot!="donc" && mot!="or" && mot!="ni" && mot!="un" && mot!="une")
+        {
+           verif=false;
+        }
+>>>>>>> 3559959e65047705aa3338faa714e5c7d073f6d8
     }
 
      while(fscanf(fichierBanni,"%s",mot_Banni)!=EOF){
