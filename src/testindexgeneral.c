@@ -26,6 +26,5 @@ int main()
     recup_path_img_audio(&image,image.taille,path, &Erreurimage);
     strcpy(path,"DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
     recup_path_img_audio(&image,image.taille,path, &Erreurimage);
-
     return 0;
 }
