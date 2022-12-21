@@ -1,11 +1,4 @@
-#include "../head/Descripteur_texte.h"
-
-typedef struct 
-{
-    String *tab_mot;
-    int *tab_app;
-    int index;
-}tab_total;
+#include "../head/descripteur_texte.h"
 
 
 int comptemot(char* mot_lu)
