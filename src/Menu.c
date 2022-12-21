@@ -10,7 +10,12 @@ void MAE()
 {
 
     char etat_courant = Menu_general;
-
+    int test,test1;
+    char choix;
+    char choixImage;
+    char chemin[100];
+    char *extension;
+    int i;
     switch (etat_courant)
     {
     case Menu_general:
@@ -176,7 +181,7 @@ void MAE()
         {
         case texte:
             //
-
+            
             break;
         case image:
             //
@@ -284,13 +289,10 @@ void MAE()
     case Menu_image:
         printf("Recherche fichier image :\n");
         printf("Veuillez faire votre choix  : \n");
-        printf("[1] Recherche par nom de couleur\n [2] Recherche par comparaison d'images\n[R] Retour\n[Q] Quitter\n");
+        printf("[1] Recherche par comparaison d'images\n[R] Retour\n[Q] Quitter\n");
         scanf("%c", &choix);
         switch (choix)
         {
-        case Recherche_nom_couleur:
-            //
-            break;
         case Recherche_par_comparaison:
             printf("Votres image est une :\n[1] Image couleur\n[2] Image noir et blanc\n");
             scanf("%c",&choixImage);
@@ -367,14 +369,37 @@ void MAE()
         case Recherche_par_comparaison:
             printf("entrez le chemin de votre fichier\n");
             scanf("%s", chemin);
-
-            extension=strstr(chemin,"wav");
-            if (extension==NULL){
-                extension=strstr(chemin,"bin");}
-                if(extension==NULL){ 
+            // verification si le fichier existe
+            test=-1;
+            while(test==-1){
+                printf("entrez le chemin de votre fichier\n");
+                scanf("%s", chemin);
+                test=FichierExist(chemin);
+                if(test==-1)
+                     printf("Le fichier n'existe pas");
+                     printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
+                     scanf("%c",&choix);
+                     switch (choix)
+                     {
+                     case '2':
+                        etat_courant=Menu_Utilisateur;
+                        break;
+                     case '1':
+                        test=-1;
+                        break;
+                     default:
+                        etat_courant=Menu_Utilisateur;
+                        break;
+                     }}
+            //verification si le fichier passer est un fichier texte
+            test=VerifExtension(chemin,"wav");
+            test1=VerifExtension(chemin,"bin");
+            if (test==-1|| test1==-1){
                    printf("Ce fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
                    etat_courant=Menu_Utilisateur;}
-            //recherche      
+            else 
+                //recherche 
+
             break;
         case Retour:
             etat_courant = Menu_Utilisateur;
