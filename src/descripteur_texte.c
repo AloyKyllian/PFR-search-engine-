@@ -20,46 +20,45 @@ char *nettoyage(char mot_lu[100])
 {
 
     char* mot_envoyer;
-    char* ptr;
-    //printf("Mot Lu : %s", mot_lu);
+    char* ptr;                                          //L'Objectif est de nettoyer les caracteres indesirable
     for(int i=0;mot_lu[i]!='\0';i++)
     {
-        if(mot_lu[i]>='A' && mot_lu[i]<='Z')
+        if(mot_lu[i]>='A' && mot_lu[i]<='Z')            // Ici on tranforme les majuscule en minuscule pour que les mots ne soient pas traiter differemment
         mot_lu[i]=mot_lu[i]+32;
     } 
     if(mot_lu[0]=='<')
     {
-        ptr=strchr(mot_lu,'>'); //ptr c un pointeur vers le caractere c l'addresse du carractere *ptr c'est le caractere et non pas sa position dans le tableau
+        ptr=strchr(mot_lu,'>');                         //Ici on nettoie les balises
         strcpy(mot_lu,ptr+1);
     }
     if(strchr(mot_lu,'.')!=0)
     {
         ptr=strchr(mot_lu,'.');
         char Chaine[]={'\0'};
-        strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
+        strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);     //Ici on nettoie les .
 
     }
     if(strchr(mot_lu,',')!=0)
     {
         ptr=strchr(mot_lu,',');
         char Chaine[]={'\0'};
-        strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
+        strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);         //Ici on nettoie les ,
     }
     if(strchr(mot_lu,';')!=0)
     {
         ptr=strchr(mot_lu,';');
-        char Chaine[]={'\0'};
+        char Chaine[]={'\0'};                                           //Ici on nettoie les ;
         strcpy(&mot_lu[strlen(mot_lu)-strlen(ptr)],Chaine);
     }
     if(strchr(mot_lu,'\'')!=0 && (*(strchr(mot_lu,'\'')-2)==0 || *(strchr(mot_lu,'\'')-2)!='>' ))
     {
-        ptr=strchr(mot_lu,'\'');
+        ptr=strchr(mot_lu,'\'');                                                                            //Ici on nettoie les ' comme pour l'
         strcpy(mot_lu,ptr+1);
 
     } 
     if(mot_lu[0]=='-')
     {
-        strcpy(mot_lu,&mot_lu[1]);
+        strcpy(mot_lu,&mot_lu[1]);                                                                      //Ici on nettoie les -
     }
     if(mot_lu[strlen(mot_lu)-1]=='-')
     {
@@ -68,7 +67,7 @@ char *nettoyage(char mot_lu[100])
     }
     if(strchr(mot_lu,'(')!=0)
     {
-        strcpy(mot_lu,&mot_lu[1]);
+        strcpy(mot_lu,&mot_lu[1]);                                                                  //Ici on nettoie les ()
 
     }
     if(strchr(mot_lu,')')!=0)
@@ -78,9 +77,7 @@ char *nettoyage(char mot_lu[100])
         strcpy(&mot_lu[strlen(ptr)],Chaine);
     }
     
-
     mot_envoyer= strdup(mot_lu);
-   //printf("\tMot Lu apres : %s \n", mot_envoyer);
     return mot_envoyer;
     free( mot_envoyer );
 
@@ -94,27 +91,21 @@ bool filtrage(char* mot)
     FILE* fichierBanni = NULL;
     fichierBanni = fopen("../MotBanni.txt", "r");
     if(fichierBanni==NULL){
-        printf("Erreur fichier");
+        printf("Erreur fichier");               //Vérification ouverture du fichier
         exit(1);
     }
 
-     while(fscanf(fichierBanni,"%s",mot_Banni)!=EOF){
+    while(fscanf(fichierBanni,"%s",mot_Banni)!=EOF)                       //Ouverture MotBanni pour enlever les mots indésirables comme "le" "un" etc
+    {       
         strcpy(tab_p[cpt],mot_Banni);
         cpt++;
-     }
-    //char *tab_p[100]={"la","le","les","des","ma","mon","me","l'","de","mes","m'","de","des","dans","et","","</texte>"};
-   // printf("%s MotBanni", mot_Banni );
-    bool verif=true;
-    /*for(int j=0;j<100;j++)
-    {
-    if(strcpy(mot_cmp[j],mot_Banni[j])==0)
-        verif=false;
-    }*/
+    }
     
+    bool verif=true;
+
     for(int i=0;i<100;i++)
     {
-       // printf("%s",tab_p[i]);
-    if(strcmp(mot,tab_p[i])==0)
+    if(strcmp(mot,tab_p[i])==0)                                 // Si le mot en entrée est présent dans les mots bannis on ne le garde pas
         verif=false;
     }
 
@@ -131,7 +122,7 @@ tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
     for(int i=0;i<tab.index;i++)
     {
 
-         if(strcmp(mot,tab.tab_mot[i])==0)
+         if(strcmp(mot,tab.tab_mot[i])==0)   //Verification si le mot existe deja dans le tableau
         {
             tab.tab_app[i]++;
             verif =true;
@@ -140,7 +131,7 @@ tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
 
     if(verif==false)
     {
-        strcpy(tab.tab_mot[tab.index],mot);
+        strcpy(tab.tab_mot[tab.index],mot);         // Si ce n'est pas le cas on l'ajoute et on dit qu'il est apparu 1 fois
         tab.tab_app[tab.index]=1;
         tab.index++;
     }
@@ -158,7 +149,6 @@ tab_total tab_occ(int nbr_occ,tab_total tab,tab_total tab_occ_finale)
 
     while(cpt<nbr_occ && case_occ<tab.index)
     {
-        //printf("index : %d", tab.index);
         for(int y=0;y<tab.index;y++)
         {
             if(tab.tab_app[y] >= max && tab.tab_app[y]!=0)                       // On balaye mon tableau d'apparition de mot pour déterminer celui qui apparait le plus
@@ -169,15 +159,15 @@ tab_total tab_occ(int nbr_occ,tab_total tab,tab_total tab_occ_finale)
         }
         strcpy(tab_occ_finale.tab_mot[case_occ],tab.tab_mot[nbr]);
         tab_occ_finale.tab_app[case_occ]=max;
-        tab.tab_app[nbr]=0;
-        cpt++;
+        tab.tab_app[nbr]=0;                                             //On copie le mot le plus cité ainsi que son nombre de fois dans le tableau d'occurence à renvoyer
+        cpt++;                                                          // On met le nombre d'apparition des mots déjà traiter à 0 pour éviter qu'il ne perturbe la fonction
         case_occ++;
         max=1;
     }
 
     for(int x=0;x<nbr_occ;x++)
     {
-        printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);
+        printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final
     }
 
     return tab_occ_finale;
@@ -190,23 +180,23 @@ tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total ta
     char mot_lu[100];
     int nbr_mot;
     FILE* fichier = NULL;
-    fichier = fopen(chemin_fichier, "r");
+    fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
         printf("Erreur lors de l'ouverture d'un fichier");
         exit(1);
     }
 
-    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter l'entet du fichier
+    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter le début du fichier
     {
         fscanf(fichier,"%s",mot_lu);
     }
 
-    while(fscanf(fichier,"%s",mot_lu)!=EOF){
-    nbr_mot++;
+    while(fscanf(fichier,"%s",mot_lu)!=EOF)
+    {
+        nbr_mot++;
     }
     
     rewind(fichier);
-    
 
     tab_total tab;
     tab.index=0;
@@ -214,48 +204,42 @@ tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total ta
     tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
 
     for(int i=0;i<nbr_mot;i++)
-{
-    strcpy(tab.tab_mot[i],"");
-
-}
+    {
+        strcpy(tab.tab_mot[i],"");
+    }
 
     char *mot;
  
-        while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter l'entet du fichier
+    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter le début du fichier
     {
         fscanf(fichier,"%s",mot_lu);
     }
 
-    while(fscanf(fichier,"%s",mot_lu)!=EOF){
-    mot = nettoyage(mot_lu);
-    passe=filtrage(mot);
-    if(passe==true)
+    while(fscanf(fichier,"%s",mot_lu)!=EOF)
     {
-        tab=descripteur_texte(nbr_mot,mot,tab);
+        mot = nettoyage(mot_lu);
+        passe=filtrage(mot);
+        if(passe==true)
+        {
+            tab=descripteur_texte(nbr_mot,mot,tab);
 
+        }
     }
-    }
-    /*for(int i=0;i<tab.index;i++)
-    {
-        printf("%s \n" , tab.tab_mot[i]);
-    }*/
+
     tab_total tab_occ_finale;
     tab_renvoyer.index=0;
     tab_renvoyer.tab_mot = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_mot));//creation du tableau
     tab_renvoyer.tab_app = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_app));//creation du tableau
 
     for(int i=0;i<nbr_occ;i++)
-{
-    strcpy(tab_renvoyer.tab_mot[i],"");
-    tab_renvoyer.tab_app[i]=0;
-}
+    {
+        strcpy(tab_renvoyer.tab_mot[i],"");                     // Initialise le tableau
+        tab_renvoyer.tab_app[i]=0;
+    }
 
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
-
-
 }
-
 
 
 int main()
@@ -325,9 +309,9 @@ if( ptr_fic != NULL)
 	 
 	 /* nom de fichier suivant */
 	fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", nom_fic);
-     }
-      fclose(ptr_fic);
     }
+      fclose(ptr_fic);
+}
 else
 {
    fprintf(stderr, "ERREUR :  PB avec liste_rep\n");
