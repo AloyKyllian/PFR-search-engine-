@@ -1,4 +1,4 @@
-#include "Descripteur_texte.h"
+#include "../head/Descripteur_texte.h"
 
 typedef struct 
 {
