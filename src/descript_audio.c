@@ -1,6 +1,6 @@
 #include "../head/descript_audio.h"
 
-descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci){//demander comment recuperer le chemin et nom du fichier
+descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci){
     double pas;
     int nbr_val=0;
     int k;//(nbr_val_fenetre)
