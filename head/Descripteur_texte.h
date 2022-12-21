@@ -15,3 +15,6 @@ typedef struct
 }tab_total;
 
 int comptemot(char* mot_lu);
+
+
+#endif
