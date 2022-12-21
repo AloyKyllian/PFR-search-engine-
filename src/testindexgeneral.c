@@ -2,33 +2,30 @@
 
 int main()
 {
-    char path [100] = "DATA_FIL_ROUGE_DEV/Textes/";
-    String Erreur;
-    receuillefichiers doctexte;
-   // receuillefichiers docimage;
-    receuillefichiers docaudio;
-    recup_path_texte(&doctexte,path, &Erreur);
-    for(int i =0;i<10;i++)
-    {
-        printf("%s\n",doctexte[i].CHEMIN );
-        printf("%s\n",doctexte[i].nom_fic );
-        printf("%d\n",doctexte[i].id );
-    }
+    char path [100];
+    String Erreurtexte, Erreuraudio, Erreurimage;
+    STR texte,image,audio;
+    texte.taille=0;
+    audio.taille=0;
+    image.taille=0;
+
+    //_________________
+    //TEXTE
+    //_________________
+    strcpy(path,"DATA_FIL_ROUGE_DEV/Textes/");
+    recup_path_texte(&texte,texte.taille,path, &Erreurtexte);
+    //_________________
+    //AUDIO
+    //_________________
     strcpy(path,"DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
-    recup_path_img_audio(&docaudio,path, &Erreur);
-    for(int i =0;i<2;i++)
-    {
-        printf("chemin : %s\n",docaudio[i].CHEMIN );
-        printf("nom %s\n",docaudio[i].nom_fic );
-        printf("id %d\n",docaudio[i].id );
-    }
+    recup_path_img_audio(&audio,image.taille,path, &Erreuraudio);
+    //_________________
+    //IMAGE
+    //_________________
+    strcpy(path,"DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
+    recup_path_img_audio(&image,image.taille,path, &Erreurimage);
     strcpy(path,"DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
-    recup_path_img_audio(&docaudio,path, &Erreur);
-    for(int i =0;i<2;i++)
-    {
-        printf("chemin : %s\n",docaudio[i].CHEMIN );
-        printf("nom %s\n",docaudio[i].nom_fic );
-        printf("id %d\n",docaudio[i].id );
-    }
+    recup_path_img_audio(&image,image.taille,path, &Erreurimage);
+
     return 0;
 }

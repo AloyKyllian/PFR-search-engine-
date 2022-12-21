@@ -1,8 +1,7 @@
 #include "../head/indexation_gene.h"
 
-void recup_path_img_audio( receuillefichiers *doctexte, String path, String *Erreur)
+void recup_path_img_audio( STR *str, int deb, String path, String *Erreur)
 {
-     int i =0;
       char commande[500] ;
       FILE * ptr_fic;  
     /*------------------------------------------------------*/
@@ -27,23 +26,24 @@ void recup_path_img_audio( receuillefichiers *doctexte, String path, String *Err
 
 if( ptr_fic != NULL)
 {   
-    fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*doctexte)[i].nom_fic);
+    fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*str).receuillefichiers[deb].nom_fic);
        while ( !feof(ptr_fic) )
     {   
-         (*doctexte)[i].id = i +1;
-         strcpy((*doctexte)[i].CHEMIN,path);
-          printf( "nom fichier = %s \n", (*doctexte)[i].nom_fic);
+         (*str).receuillefichiers[deb].id = deb +1;
+         strcpy((*str).receuillefichiers[deb].CHEMIN,path);
+          printf( "nom fichier = %s \n", (*str).receuillefichiers[deb].nom_fic);
 	  
 	      /* nouvelle commande appliqu?e ? chaque fichier de la liste */
 	      strcpy(commande, "wc -l ");
-	      strcat(commande, (*doctexte)[i].CHEMIN); 
-	      strcat(commande, (*doctexte)[i].nom_fic);
+	      strcat(commande, (*str).receuillefichiers[deb].CHEMIN); 
+	      strcat(commande, (*str).receuillefichiers[deb].nom_fic);
 	      system(commande);
 	     printf("\n==================================\n");
 	 
 	     /* nom de fichier suivant */
-        i++;
-	    fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*doctexte)[i].nom_fic);
+        deb++;
+        (*str).taille=deb;
+	    fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*str).receuillefichiers[deb].nom_fic);
      }
       fclose(ptr_fic);
 }
@@ -55,9 +55,8 @@ else
 }
 
 
-void recup_path_texte( receuillefichiers *doctexte, String path, String *Erreur)
+void recup_path_texte( STR *str, int deb ,String path, String *Erreur)
 {
-     int i =0;
       char commande[1000] ;
       FILE * ptr_fic;  
     /*------------------------------------------------------*/
@@ -83,23 +82,24 @@ void recup_path_texte( receuillefichiers *doctexte, String path, String *Erreur)
 if( ptr_fic != NULL)
 {   
     fscanf( ptr_fic, "%*s %*s");
-    fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*doctexte)[i].nom_fic);
+    fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*str).receuillefichiers[deb].nom_fic);
        while ( !feof(ptr_fic) )
     {   
-         (*doctexte)[i].id = i +1;
-         strcpy((*doctexte)[i].CHEMIN,path);
-          printf( "nom fichier = %s \n", (*doctexte)[i].nom_fic);
+         (*str).receuillefichiers[deb].id = deb +1;
+         strcpy((*str).receuillefichiers[deb].CHEMIN,path);
+          printf( "nom fichier = %s \n", (*str).receuillefichiers[deb].nom_fic);
 	  
 	      /* nouvelle commande appliqu?e ? chaque fichier de la liste */
 	      strcpy(commande, "wc -l ");
-	      strcat(commande, (*doctexte)[i].CHEMIN); 
-	      strcat(commande, (*doctexte)[i].nom_fic);
+	      strcat(commande, (*str).receuillefichiers[deb].CHEMIN); 
+	      strcat(commande, (*str).receuillefichiers[deb].nom_fic);
 	      system(commande);
 	     printf("\n==================================\n");
 	 
 	     /* nom de fichier suivant */
-        i++;
-	    fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*doctexte)[i].nom_fic);
+        deb++;
+        (*str).taille=deb;
+	    fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", (*str).receuillefichiers[deb].nom_fic);
      }
       fclose(ptr_fic);
 }

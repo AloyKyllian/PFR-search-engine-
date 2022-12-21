@@ -12,8 +12,8 @@ typedef struct Estruct_empiler
 // 1 // fonction pour recuperer chemin d'acces de chaque type de fichier et stocker resultat dans un tableau
               // appeler trois fois main pour chaque type de fichier
               // avoir trois tableaux de string
-void recup_path_img_audio( receuillefichiers * doctexte, String path, String *Erreur);
-void recup_path_texte( receuillefichiers * doctexte, String path, String *Erreur);
+void recup_path_img_audio( STR *str, int deb,String path, String *Erreur);
+void recup_path_texte( STR *str, int deb , String path, String *Erreur);
 
 // 2 // fonction recuperer leurs structures et lempiler dans une pile
              //appeler leur fonctions descripteur

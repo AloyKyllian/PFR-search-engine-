@@ -15,7 +15,13 @@ typedef struct eELEMENT
     String CHEMIN;
     int id;
 }ELEMENT;
-typedef ELEMENT receuillefichiers[500];
+
+typedef struct 
+{
+    ELEMENT receuillefichiers[500];
+    int taille;
+} STR;
+
 
 void affiche_ELEMENT(ELEMENT element);
 void affect_ELEMENT(ELEMENT *elemaffect, ELEMENT e2);
