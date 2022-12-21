@@ -1,17 +1,18 @@
 #include "../head/Config.h"
 #include "../head/Config.h"
 
-//Lis Config.txt et renvoie les parametre dans la structure CONFIG
 CONFIG Lire_CONFIG(String *Erreur)
 {
+    // Variables
     CONFIG config;
     FILE *fichier = NULL;
 
+    // Lie le fichier .txt et enregistre les valuer dans la structure CONFIG
     fichier = fopen("../Config.txt", "r");
     if (fichier != NULL)
     {
         strcpy(*Erreur,"Erreur : NULL");
-        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f", &config.nb_mots_cle, &config.similariter, &config.niveau, &config.nb_fenetre, &config.intervale);
+        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
     }
     else
     {
@@ -20,19 +21,22 @@ CONFIG Lire_CONFIG(String *Erreur)
 
     return config;
 }
-//Affiche toute les valeur des parametres de configration
+
 void Afficher_CONFIG(CONFIG config)
 {
-    printf("Nombre de mots cle = %d\n", config.nb_mots_cle);
-    printf("Similariter = %d\n", config.similariter);
-    printf("Niveau = %d\n", config.niveau);
-    printf("Nombre de fenetre = %d\n", config.nb_fenetre);
-    printf("Intervale = %f\n", config.intervale);
+    printf("Nombre de mots cle = %d\n", config.Nb_Mots_Cle);
+    printf("Similariter = %d\n", config.Similariter);
+    printf("Niveau = %d\n", config.Nb_Bit_Fort);
+    printf("Nombre de fenetre = %d\n", config.Nb_Fenetre);
+    printf("Intervale = %d\n", config.Intervale);
 }
-//Lis et verifie la validiter de la valeur du nombre de mots cle
-CONFIG Lire_mot_cle(CONFIG config, String *Erreur)
+
+CONFIG Lire_mot_cle( String *Erreur, CONFIG config)
 {
+    // Variable
     int tmp;
+
+    // Verifie si la valeur entrer est valide
     if (!scanf("%d", &tmp))
     {
         strcpy(*Erreur,"Erreur : Pas un nombre");
@@ -45,14 +49,17 @@ CONFIG Lire_mot_cle(CONFIG config, String *Erreur)
     else
     {
         strcpy(*Erreur,"Erreur : NULL");
-        config.nb_mots_cle = tmp;
+        config.Nb_Mots_Cle = tmp;
     }
     return config;
 }
-//Lis et verifie la validiter de la valeur de la similarite
-CONFIG Lire_similariter(CONFIG config, String *Erreur)
+
+CONFIG Lire_similariter( String *Erreur, CONFIG config)
 {
+    // Variable
     int tmp;
+
+    // Verifie si la valeur entrer est valide
     if (!scanf("%d", &tmp))
     {
        strcpy(*Erreur,"Erreur : Pas un nombre");
@@ -69,15 +76,17 @@ CONFIG Lire_similariter(CONFIG config, String *Erreur)
     else
     {
         strcpy(*Erreur,"Erreur : NULL");
-        config.similariter = tmp;
+        config.Similariter = tmp;
     }
     return config;
 }
-//Lis et verifie la validiter de la valeur du niveau
-CONFIG Lire_niveau(CONFIG config, String *Erreur)
+
+CONFIG Lire_nb_bit_fort(String *Erreur, CONFIG config)
 {
+    // Variable
     int tmp;
-    double tmp2;
+
+    // Verifie si la valeur entrer est valide
     if (!scanf("%d", &tmp))
     {
         strcpy(*Erreur,"Erreur : Pas un nombre");
@@ -87,9 +96,28 @@ CONFIG Lire_niveau(CONFIG config, String *Erreur)
     {
         strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
     }
-    else if (tmp >= 256)
+    else if (tmp >= 8)
     {
-        strcpy(*Erreur,"Erreur : Nombre superieur a 256");
+        strcpy(*Erreur,"Erreur : Nombre superieur a 8");
+    }
+    return config;
+}
+
+CONFIG Lire_nb_fenetre(String *Erreur, CONFIG config)
+{
+    // Varaible
+    int tmp;
+    double tmp2;
+
+    // Verifie si la valeur entrer est valide
+    if (!scanf("%d", &tmp))
+    {
+        strcpy(*Erreur,"Erreur : Pas un nombre");
+        viderBuffer();
+    }
+    else if (tmp <= 256)
+    {
+        strcpy(*Erreur,"Erreur : Nombre inferieur a 256");
     }
     else
     {
@@ -97,7 +125,7 @@ CONFIG Lire_niveau(CONFIG config, String *Erreur)
         if (tmp2 == (int)tmp2)
         {
             strcpy(*Erreur,"Erreur : NULL");
-            config.niveau = tmp;
+            config.Nb_Bit_Fort = tmp;
         }
         else
         {
@@ -106,31 +134,14 @@ CONFIG Lire_niveau(CONFIG config, String *Erreur)
     }
     return config;
 }
-//Lis et verifie la validiter de la valeur du nombre de fenetre
-CONFIG Lire_nb_fenetre(CONFIG config, String *Erreur)
+
+CONFIG Lire_intervale(String *Erreur,CONFIG config)
 {
+    // Variable
     int tmp;
+
+    // Verifie si la valeur entrer est valide
     if (!scanf("%d", &tmp))
-    {
-        strcpy(*Erreur,"Erreur : Pas un nombre");
-        viderBuffer();
-    }
-    else if (tmp <= 0)
-    {
-        strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
-    }
-    else
-    {
-       strcpy(*Erreur,"Erreur : NULL");
-        config.nb_fenetre = tmp;
-    }
-    return config;
-}
-//Lis et verifie la validiter de la valeur de l'intervale
-CONFIG Lire_intervale(CONFIG config, String *Erreur)
-{
-    float tmp;
-    if (!scanf("%f", &tmp))
     {
         strcpy(*Erreur,"Erreur : Pas un nombre");
         viderBuffer();
@@ -142,23 +153,25 @@ CONFIG Lire_intervale(CONFIG config, String *Erreur)
     else
     {
        strcpy(*Erreur,"Erreur : NULL");
-        config.intervale = tmp;
+        config.Intervale = tmp;
     }
     return config;
 }
-//Ecrit dans Config.txt les valeur stocker dans la structure CONFIG
-void Ecrire_CONFIG(CONFIG config, String *Erreur)
+
+void Ecrire_CONFIG( String *Erreur, CONFIG config)
 {
+    // Variable
     FILE *fichier = NULL;
 
     fichier = fopen("../Config.txt", "w");
     if (fichier != NULL)
     {
         strcpy(*Erreur,"Erreur : NULL");
-        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f", config.nb_mots_cle, config.similariter, config.niveau, config.nb_fenetre, config.intervale);
+        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", config.Nb_Mots_Cle, config.Similariter, config.Nb_Bit_Fort, config.Nb_Fenetre, config.Intervale);
     }
     else
     {
         strcpy(*Erreur,"Erreur : Fichier introuvable");
     }
+    fclose(fichier);
 }
