@@ -18,7 +18,6 @@ CONFIG Lire_CONFIG(String *Erreur)
         strcpy(*Erreur,"Erreur : Fichier introuvable");
     }
     fclose(fichier);
-
     return config;
 }
 
