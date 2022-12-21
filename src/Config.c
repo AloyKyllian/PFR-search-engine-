@@ -12,7 +12,7 @@ CONFIG Lire_CONFIG(String *Erreur)
     if (fichier != NULL)
     {
         strcpy(*Erreur,"Erreur : NULL");
-        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
+        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", &config.nb_mots_cle, &config.similariter, &config.niveau, &config.nb_fenetre, &config.intervale);
     }
     else
     {
@@ -24,11 +24,11 @@ CONFIG Lire_CONFIG(String *Erreur)
 
 void Afficher_CONFIG(CONFIG config)
 {
-    printf("Nombre de mots cle = %d\n", config.Nb_Mots_Cle);
-    printf("Similariter = %d\n", config.Similariter);
-    printf("Niveau = %d\n", config.Nb_Bit_Fort);
-    printf("Nombre de fenetre = %d\n", config.Nb_Fenetre);
-    printf("Intervale = %d\n", config.Intervale);
+    printf("Nombre de mots cle = %d\n", config.nb_mots_cle);
+    printf("Similariter = %d\n", config.similariter);
+    printf("Niveau = %d\n", config.niveau);
+    printf("Nombre de fenetre = %d\n", config.nb_fenetre);
+    printf("Intervale = %d\n", config.intervale);
 }
 
 CONFIG Lire_mot_cle( String *Erreur, CONFIG config)
@@ -148,6 +148,26 @@ CONFIG Lire_intervale(String *Erreur,CONFIG config)
     }
     else if (tmp <= 0)
     {
+        strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
+    }
+    else
+    {
+       strcpy(*Erreur,"Erreur : NULL");
+        config.nb_fenetre = tmp;
+    }
+    return config;
+}
+//Lis et verifie la validiter de la valeur de l'intervale
+CONFIG Lire_intervale(CONFIG config, String *Erreur)
+{
+    int tmp;
+    if (!scanf("%d", &tmp))
+    {
+        strcpy(*Erreur,"Erreur : Pas un nombre");
+        viderBuffer();
+    }
+    else if (tmp <= 0)
+    {
        strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
     }
     else
@@ -167,7 +187,7 @@ void Ecrire_CONFIG( String *Erreur, CONFIG config)
     if (fichier != NULL)
     {
         strcpy(*Erreur,"Erreur : NULL");
-        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", config.Nb_Mots_Cle, config.Similariter, config.Nb_Bit_Fort, config.Nb_Fenetre, config.Intervale);
+        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", config.nb_mots_cle, config.similariter, config.niveau, config.nb_fenetre, config.intervale);
     }
     else
     {

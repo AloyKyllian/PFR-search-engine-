@@ -6,11 +6,11 @@
 //Tout les parametres necessaires aux configurations .
 typedef struct
 { 
-    int Nb_Mots_Cle;
-    int Similariter;
-    int Nb_Bit_Fort;
-    int Nb_Fenetre;
-    int Intervale;
+    int nb_mots_cle;
+    int similariter;
+    int niveau;
+    int nb_fenetre;
+    int intervale;
 }CONFIG;
 
 //Lis Config.txt et renvoie les parametre dans la structure CONFIG
