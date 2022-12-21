@@ -136,36 +136,22 @@ return verif;
 
 tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
 {
-    //printf("%s ",mot);
-    //tab->tab_mot[0]="teste0";
-    /*for(int i=0;i<tab.index;i++)
-{
-    printf("%s    ",tab.tab_mot[i]);
-    printf("%d\n",tab.tab_app[i]);
 
-}*/
-    //char* tab_mot[nbr_mot];
-    //int tab_app[nbr_mot];
 
-    bool verif;
-    //fscanf("%s",&mot);
-    //printf("\n\n\n\n");
-    for(int i=0;i<nbr_mot;i++)
+    bool verif=false;
+
+    for(int i=0;i<tab.index;i++)
     {
-        //printf(" la ");
-        //printf("%s  ",mot);
-        //printf("%s      ",tab.tab_mot[i]);
+
 
          if(strcmp(mot,tab.tab_mot[i])==0)
         {
-            //printf("kjfns");
             tab.tab_app[i]++;
             verif =true;
-            //printf(" salut ");
         }
     }
 
-    if(verif==false && tab.index <=nbr_mot)
+    if(verif==false)
     {
         strcpy(tab.tab_mot[tab.index],mot);
         tab.tab_app[tab.index]=1;
@@ -175,78 +161,58 @@ tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
     return tab;
 }
 
-void tab_occ(int nbr_mot,int nbr_occ,char* tab_mot[nbr_mot],int tab_app[nbr_mot],char* tab_occ_mot[nbr_occ],int tab_occ_app[nbr_occ])
+tab_total tab_occ(int nbr_occ,tab_total tab,tab_total tab_occ_finale)
 {
     // 2eme partie
+
+        /*for(int i=0;i<nbr_occ;i++)
+{
+    strcpy(tab.tab_mot[i],"b");
+    tab.tab_app[i]=0;
+    printf("%s    ",tab.tab_mot[i]);
+    printf("%d\n",tab.tab_app[i]);
+
+}*/
 
     int max=1;
     int nbr=0;
     int case_occ=0;
     int cpt=0;
-    //char* tab_occ_mot[nbr_occ];
-    //int tab_occ_app[nbr_occ];
+
     while(cpt<nbr_occ)
     {
-    for(int y=0;y<nbr_mot;y++)
+    for(int y=0;y<tab.index;y++)
     {
-        if(tab_occ_app[y] >= max && max!=0)
+        if(tab.tab_app[y] >= max)
         {
-            max=tab_occ_app[y];
+            max=tab.tab_app[y];
             nbr=y;
         }
     }
-    *tab_occ_mot[case_occ]=*tab_mot[nbr];
-    tab_occ_app[case_occ]=max;
-    tab_app[nbr]=0;
+    strcpy(tab_occ_finale.tab_mot[case_occ],tab.tab_mot[nbr]);
+
+    tab_occ_finale.tab_app[case_occ]=max;
+    tab.tab_app[nbr]=0;
+    //printf("mot : %d ",tab_occ_finale.tab_app[case_occ]);
     cpt++;
+    case_occ++;
     max=1;
     }
     //Affichage
+    //printf("%d",case_occ);
 
     for(int x=0;x<nbr_occ;x++)
     {
-        printf("%s",tab_occ_mot[x],": %d",tab_occ_app[x],"   |   ");
+        printf("%s:    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);
     }
 
+    return tab_occ_finale;
 
 }
 
-/*
-void test_avancer()
-{
-        int nbr_mot;
+tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total tab_renvoyer) {
 
-        FILE* fichier = NULL;
-    fichier = fopen("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml", "r");
-    if(fichier==NULL){
-        printf("Erreur lors de l'ouverture d'un fichier");
-        exit(1);
-    }
-
-    char mot_lu[100];
-    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter l'entet du fichier
-    {
-        fscanf(fichier,"%s",mot_lu);
-    }
-
-
-    
-    while(fscanf(fichier,"%s",mot_lu)!=EOF){
-        //printf("Bonsoir 2");
-        // nbr_mot=comptemot(mot_lu);
-        nbr_mot++;
-    }    
-    printf("%d",nbr_mot);
-
-}*/
-
-
-
-int main()
-{
-
-    int nbr_occ=3;
-    bool passe;
+ bool passe;
     char mot_lu[100];
     int nbr_mot;
     FILE* fichier = NULL;
@@ -264,9 +230,6 @@ int main()
     while(fscanf(fichier,"%s",mot_lu)!=EOF){
     nbr_mot++;
     }
-
-    printf("%d \n",nbr_mot);
-    
     
     rewind(fichier);
     
@@ -276,25 +239,11 @@ int main()
     tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
     tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
 
-String test;
-strcpy(test,"salut");
-
     for(int i=0;i<nbr_mot;i++)
 {
     strcpy(tab.tab_mot[i],"");
-    //tab.tab_app[i]=1;
-    //printf("%c    ",tab.tab_mot[i]);
-    //printf("%d\n",tab.tab_app[i]);
 
 }
-    
-    //char* tab_mot[nbr_mot];
-    
-    //int tab_app[nbr_mot];
- 
-    char* tab_occ_mot[nbr_occ];
-   
-    int tab_occ_app[nbr_occ];
 
     char *mot;
  
@@ -303,45 +252,80 @@ strcpy(test,"salut");
         fscanf(fichier,"%s",mot_lu);
     }
 
-
     while(fscanf(fichier,"%s",mot_lu)!=EOF){
-    //printf("%s  ", mot_lu);
     mot = nettoyage(mot_lu);
-    //printf("%s  ", mot);
     passe=filtrage(mot);
-    //printf("%d\n",passe);
     if(passe==true)
     {
         tab=descripteur_texte(nbr_mot,mot,tab);
-        //printf("tab mot 0 : %s    ",tab.tab_mot[0]);
+
     }
     }
 
-    printf("%d",tab.index);
+    tab_total tab_occ_finale;
+    tab_renvoyer.index=0;
+    tab_renvoyer.tab_mot = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_mot));//creation du tableau
+    tab_renvoyer.tab_app = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_app));//creation du tableau
 
-    for(int i=0;i<tab.index;i++)
+
+    for(int i=0;i<nbr_occ;i++)
 {
-    printf("%s    ",tab.tab_mot[i]);
-    printf("%d\n",tab.tab_app[i]);
+    strcpy(tab_renvoyer.tab_mot[i],"");
+    tab_renvoyer.tab_app[i]=0;
+}
+
+
+    tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
+
+
+
 
 }
 
 
-    //Après le while
-    tab_occ(nbr_mot,nbr_occ,&tab.tab_mot,tab.tab_app,tab_occ_mot,tab_occ_app);
 
 
 
-/*
-    char mabite[100]="laaile";
-    char test[100];
-    strcpy(test,&mabite[1]);
-    printf("mot finale : %s \n\r",test);
-*/
-  
- 
 
- //printf("mot finale : %s \n\r",mot);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+tab_total tab;
+    int nbr_occ=6;
+
+tab=descripteur_texte_finale("../texte/Texte_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",nbr_occ,tab);
 
 }
 
