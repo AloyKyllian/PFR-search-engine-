@@ -1,5 +1,12 @@
 #include "../head/indexation_gene.h"
 
+
+
+
+
+
+
+
 void recup_path_img_audio( STR *str, int deb, String path, String *Erreur)
 {
       char commande[500] ;
@@ -35,8 +42,8 @@ if( ptr_fic != NULL)
 	  
 	      /* nouvelle commande appliqu?e ? chaque fichier de la liste */
 	      strcpy(commande, "wc -l ");
+         strcat((*str).receuillefichiers[deb].CHEMIN, (*str).receuillefichiers[deb].nom_fic);
 	      strcat(commande, (*str).receuillefichiers[deb].CHEMIN); 
-	      strcat(commande, (*str).receuillefichiers[deb].nom_fic);
 	      system(commande);
 	     printf("\n==================================\n");
 	 
@@ -91,8 +98,8 @@ if( ptr_fic != NULL)
 	  
 	      /* nouvelle commande appliqu?e ? chaque fichier de la liste */
 	      strcpy(commande, "wc -l ");
+         strcat((*str).receuillefichiers[deb].CHEMIN, (*str).receuillefichiers[deb].nom_fic);
 	      strcat(commande, (*str).receuillefichiers[deb].CHEMIN); 
-	      strcat(commande, (*str).receuillefichiers[deb].nom_fic);
 	      system(commande);
 	     printf("\n==================================\n");
 	 
