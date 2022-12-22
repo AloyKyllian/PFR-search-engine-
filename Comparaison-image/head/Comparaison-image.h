@@ -1,0 +1,6 @@
+#ifndef COMPARAISON_IMAGE_C
+#define COMPARAISON_IMAGE_C
+
+
+
+#endif

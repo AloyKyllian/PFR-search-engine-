@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "../head/Comparaison-image.h"
+#include "../../Descripteur-image/head/Descripteur_image.h"
 
 typedef char String[100];
 typedef struct
