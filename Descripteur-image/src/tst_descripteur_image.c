@@ -6,9 +6,9 @@ void main()
     // Variable
     IMAGE img;
     DESCRIPTEUR_IMAGE descripteur_image;
-    String Erreur;
+    int Erreur;
     String Path = "../DATA_FIL_ROUGE_DEV/TEST_RGB/01.txt";
-    int Nb_Bit_Fort = 8;
+    int Nb_Bit_Fort = 3;
     int total = 0;
 
     printf("\nLecture de la matrice\n");
@@ -28,7 +28,7 @@ void main()
         // Permet d'afficher q'un certain nombre de valeur
         if( (i % (int)(0.1 *pow(2,Nb_Bit_Fort*img.Nb_composante))) == 0)
         {
-            printf("Val n°%d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
+            printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
         }
        
         total = total+descripteur_image.Bilan[i][1];

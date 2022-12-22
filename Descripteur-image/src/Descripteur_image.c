@@ -1,7 +1,7 @@
 #include "../head/Global.h"
 #include "../head/Descripteur_image.h"
 
-IMAGE Lire_image(String *Erreur, String Path)
+IMAGE Lire_image(int *Erreur, String Path)
 {
     // Variable
     IMAGE img;
@@ -12,7 +12,7 @@ IMAGE Lire_image(String *Erreur, String Path)
     fichier = fopen(Path, "r");
     if (fichier != NULL)
     {
-        strcpy(*Erreur, "Erreur : NULL");
+        *Erreur = 0;
 
         fscanf(fichier, "%d %d %d", &img.Nb_Ligne, &img.Nb_Colonne, &img.Nb_composante);
 
@@ -33,17 +33,17 @@ IMAGE Lire_image(String *Erreur, String Path)
         }
         else
         {
-            strcpy(*Erreur, "Erreur : Allocation");
+            *Erreur = 1;
         }
     }
     else
     {
-        strcpy(*Erreur, "Erreur : Fichier introuvable");
+        *Erreur = 7;
     }
     return img;
 }
 
-IMAGE Pre_traitement(String *Erreur, IMAGE img, int Nb_Bit_Fort)
+IMAGE Pre_traitement(int *Erreur, IMAGE img, int Nb_Bit_Fort)
 {
     // Variables
     int **Nv_mat;
@@ -61,7 +61,7 @@ IMAGE Pre_traitement(String *Erreur, IMAGE img, int Nb_Bit_Fort)
     }
     if (Nv_mat != NULL)
     {
-        strcpy(*Erreur, "Erreur : NULL");
+        *Erreur = 0;
 
         // Remplissage de la matrice avec les pixel traiter
         for (int cptligne = 0; cptligne < img.Nb_Ligne; cptligne++)
@@ -97,13 +97,13 @@ IMAGE Pre_traitement(String *Erreur, IMAGE img, int Nb_Bit_Fort)
     }
     else
     {
-        strcpy(*Erreur, "Erreur : Allocation");
+        *Erreur = 1;
     }
 
     return img;
 }
 
-DESCRIPTEUR_IMAGE Creation_Discripteur(String *Erreur, IMAGE img, int Nb_Bit_Fort)
+DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
 {
     // Variable
     DESCRIPTEUR_IMAGE descripteur_image;
@@ -122,7 +122,7 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(String *Erreur, IMAGE img, int Nb_Bit_For
     // Initialisation du tableau du descripteur
     if (descripteur_image.Bilan != NULL)
     {
-        strcpy(*Erreur, "Erreur : NULL");
+        *Erreur = 0;
 
         for (cptligne = 0; cptligne < pow(2, Nb_Bit_Fort * img.Nb_composante); cptligne++)
         {
@@ -150,7 +150,7 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(String *Erreur, IMAGE img, int Nb_Bit_For
     }
     else
     {
-        strcpy(*Erreur, "Erreur : Allocation");
+        *Erreur = 1;
     }
 
     return descripteur_image;

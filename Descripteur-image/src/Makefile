@@ -4,7 +4,7 @@ config : Config.c Global.c tst_config.c
 	gcc -c tst_config.c
 	gcc -o tst_Config.exe Config.o Global.o tst_config.o -lm
 	gcc -o tst_Config.out Config.o Global.o tst_config.o -lm
-tst : Config.c Global.c test.c 
+Descripteur_image :  Descripteur_image.c Global.c tst_descripteur_image.c 
 	gcc -c Global.c 
 	gcc -c Descripteur_image.c
 	gcc -c tst_descripteur_image.c
