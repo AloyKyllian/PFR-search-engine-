@@ -22,6 +22,7 @@ void main()
     printf("1er element = %d\n",img.adr_Matrice[0][0]);
 
     descripteur_image = Creation_Discripteur(&Erreur,img,Nb_Bit_Fort);
+    printf("Nb_ligne = %d\nNb_Colonne = %d\n",descripteur_image.Nb_Ligne,descripteur_image.Nb_Colonne);
     printf("\nAffichage du tableau descripteur\n");
     for(int i = 0; i < pow(2,Nb_Bit_Fort*img.Nb_composante); i++ )
     {

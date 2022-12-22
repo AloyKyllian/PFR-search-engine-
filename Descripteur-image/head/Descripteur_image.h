@@ -26,6 +26,8 @@ typedef struct
 
 typedef struct
 {
+    int Nb_Ligne;
+    int Nb_Colonne;
     String ID;
     String Path;
     int **Bilan;

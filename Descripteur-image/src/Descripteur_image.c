@@ -113,10 +113,12 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
 
     // Allocation memoire du tableau 2D
     strcpy(descripteur_image.Path, img.Path);
-    descripteur_image.Bilan = malloc(pow(2, Nb_Bit_Fort * img.Nb_composante) * sizeof(*descripteur_image.Bilan));
+    descripteur_image.Nb_Ligne = pow(2, Nb_Bit_Fort * img.Nb_composante);
+    descripteur_image.Nb_Colonne = 2;
+    descripteur_image.Bilan = malloc( descripteur_image.Nb_Ligne * sizeof(*descripteur_image.Bilan));
     for (i = 0; i < pow(2, Nb_Bit_Fort * img.Nb_composante); i++)
     {
-        descripteur_image.Bilan[i] = malloc(2 * sizeof(**descripteur_image.Bilan));
+        descripteur_image.Bilan[i] = malloc(descripteur_image.Nb_Colonne * sizeof(**descripteur_image.Bilan));
     }
 
     // Initialisation du tableau du descripteur
@@ -124,9 +126,9 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
     {
         *Erreur = 0;
 
-        for (cptligne = 0; cptligne < pow(2, Nb_Bit_Fort * img.Nb_composante); cptligne++)
+        for (cptligne = 0; cptligne < descripteur_image.Nb_Ligne; cptligne++)
         {
-            for (cptcolonne = 0; cptcolonne < 2; cptcolonne++)
+            for (cptcolonne = 0; cptcolonne < descripteur_image.Nb_Colonne; cptcolonne++)
             {
                 if (cptcolonne == 0)
                 {
