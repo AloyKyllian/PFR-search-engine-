@@ -1,17 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "../head/Comparaison-image.h"
-#include "../../Descripteur-image/head/Descripteur_image.h"
-
-typedef char String[100];
-typedef struct
-{
-    int Nb_Ligne;
-    int Nb_Colonne;
-    String ID;
-    String Path;
-    int **Bilan;
-} DESCRIPTEUR_IMAGE;
 
 void Comparaison_image(DESCRIPTEUR_IMAGE Nv_Des, DESCRIPTEUR_IMAGE Ac_Des, int* Similariter)
 {
