@@ -3,6 +3,7 @@
 void Comparaison_image(DESCRIPTEUR_IMAGE Nv_Des, DESCRIPTEUR_IMAGE Ac_Des, int* Similariter)
 {
     int cptligne;
+    *Similariter = 0;
 
     if(Nv_Des.Nb_Ligne < Ac_Des.Nb_Ligne)
     {
@@ -10,7 +11,7 @@ void Comparaison_image(DESCRIPTEUR_IMAGE Nv_Des, DESCRIPTEUR_IMAGE Ac_Des, int* 
         {
             if(Nv_Des.Bilan[cptligne][1] == Ac_Des.Bilan[cptligne][1])
             {
-                *Similariter++;
+                *Similariter = *Similariter +1;
             }
         }
     }
@@ -20,7 +21,7 @@ void Comparaison_image(DESCRIPTEUR_IMAGE Nv_Des, DESCRIPTEUR_IMAGE Ac_Des, int* 
         {
             if(Nv_Des.Bilan[cptligne][1] == Ac_Des.Bilan[cptligne][1])
             {
-                *Similariter++;
+                *Similariter = *Similariter +1;
             }
         }
     }
