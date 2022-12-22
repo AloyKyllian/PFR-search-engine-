@@ -1,13 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "../head/Erreur.h"
 
-typedef char String[100];
-
-void Afficher_Erreur(int Erreur,char Path[])
+void Afficher_Erreur(int Erreur,char Path[], String* Phrase)
 {
-    String chaine = "";
+    // Variable
     FILE *fichier = NULL;
     int cpt;
+    
+    // Lecture de la ligne corrrecpondant à l'erreur
     fichier = fopen(Path,"r");
     if(fichier == NULL)
     {
@@ -17,17 +18,8 @@ void Afficher_Erreur(int Erreur,char Path[])
     {
         for (int i = 0; i < Erreur; i++)
         {
-           fgets(chaine,100,fichier);
+           fgets(*Phrase,100,fichier);
         }
-        fgets(chaine,100,fichier);
-        printf("%s",chaine);
-        
-        
-
+        fgets(*Phrase,100,fichier);
     }
-}
-
-void main()
-{
-    Afficher_Erreur(2,"../Erreur.txt");
 }
