@@ -17,6 +17,7 @@ CONFIG Lire_CONFIG(String *Erreur)
     {
         strcpy(*Erreur,"Erreur : Fichier introuvable");
     }
+    fclose(fichier);
 
     return config;
 }
@@ -33,6 +34,7 @@ void Afficher_CONFIG(CONFIG config)
 CONFIG Lire_mot_cle(CONFIG config, String *Erreur)
 {
     int tmp;
+    
     if (!scanf("%d", &tmp))
     {
         strcpy(*Erreur,"Erreur : Pas un nombre");
@@ -47,6 +49,7 @@ CONFIG Lire_mot_cle(CONFIG config, String *Erreur)
         strcpy(*Erreur,"Erreur : NULL");
         config.nb_mots_cle = tmp;
     }
+    
     return config;
 }
 //Lis et verifie la validiter de la valeur de la similarite
@@ -161,4 +164,5 @@ void Ecrire_CONFIG(CONFIG config, String *Erreur)
     {
         strcpy(*Erreur,"Erreur : Fichier introuvable");
     }
+    fclose(fichier);
 }
