@@ -14,7 +14,8 @@ void MAE()
     char choixImage;
     char chemin[100];
     char *extension;
-    int i;
+    int nbTentative;
+    int nbFenetre,intervalle;
     switch (etat_courant)
     {
     case Menu_general:
@@ -39,7 +40,7 @@ void MAE()
                 (result) ? printf("Réussi\n\n") : printf("Échoué\n\n");
                 if (result)
                     etat_courant = Menu_Admin;
-                if (i == 3 && result == 0)
+                if (nbTentative == 3 && result == 0)
                 {
                     printf("Souhaitez vous basculer en mode utilisateur ou essayer de se connecter une nouvelle fois ?\n");
                     printf("[1] Mode utilisateur\n[2] nouvelle tentative de connexion\n");
@@ -53,11 +54,11 @@ void MAE()
                         usleep(nbr_microsec);
                         sleep(30);
                         printf("fin 30 sec, Vous pouvez réessayer maintenant\n");
-                        i = 0;
+                        nbTentative= 0;
                     }
                 }
-                i++;
-            } while (i < 4);
+                nbTentative++;
+            } while (nbTentative < 4);
 
             break;
         case Utilisateur:
@@ -109,6 +110,7 @@ void MAE()
     case Menu_Configuration:
         printf("Configuration :\n");
         CONFIG config;
+        int *Erreur;
         config=Lire_CONFIG(*Erreur);
         Afficher_CONFIG(config);
         printf("Si vous voulez changer une valeur, veuillez faire votre choix  : \n");
@@ -414,7 +416,17 @@ void MAE()
                    printf("Ce fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
                    etat_courant=Menu_Utilisateur;}
             else 
+                
                 //recherche comparaison
+                //je prend le nb de fenetre et d'intervalle
+                fopen(chemin,"r");
+                scanf("%d",nbFenetre);
+                scanf("%d",intervalle);
+                fclose(chemin);
+                //appel indexation audio pour creer un descripteur pour le fichier donner par l'utilisateur
+                
+
+
 
             break;
         case Retour:
