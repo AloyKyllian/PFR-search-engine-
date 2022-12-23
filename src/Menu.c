@@ -85,7 +85,7 @@ int MAE()
                 {
                 case Indexation:
                     // Indexation generale avec config.txt a voir avec yasmine
-                    
+
                     break;
                 case Configuration:
                     // Configuration
@@ -108,8 +108,8 @@ int MAE()
             case Menu_Configuration:
                 printf("Configuration :\n");
                 CONFIG config;
-                String *Erreur;
-                config=Lire_CONFIG(*Erreur);
+                String Erreur;
+                config=Lire_CONFIG(&Erreur);
                 Afficher_CONFIG(config);
                 printf("Si vous voulez changer une valeur, veuillez faire votre choix  : \n");
                 printf("[1] Nombre de mots clé\n [2] Similarité\n [3] Niveau \n[4] Nombre de fenetre\n");
@@ -118,28 +118,32 @@ int MAE()
                 switch (choix)
                 {
                 case Nombre_de_mot_cle:
-                    Lire_mot_cle(config,*Erreur);
-                    Ecrire_CONFIG(config,*Erreur);
+                    printf("entrez le nombre de mot clé voulue :\n");
+                    Lire_mot_cle(config,&Erreur);
+                    Ecrire_CONFIG(config,&Erreur);
                     break;
                 case Similarité:
                     // pour changer similarité
-                    config=Lire_similariter(config, *Erreur);
-                    Ecrire_CONFIG(config, *Erreur);
+                    printf("entrez la valeur de similarité voulue :\n");
+                    config=Lire_similariter(config, &Erreur);
+                    Ecrire_CONFIG(config, &Erreur);
                     break;
                 case Niveau:
                     // pour changer niveau
-                    config=Lire_niveau(config, *Erreur);
-                    Ecrire_CONFIG(config, *Erreur);
+                    printf("entrez le niveau voulue :\n");
+                    config=Lire_niveau(config, &Erreur);
+                    Ecrire_CONFIG(config, &Erreur);
                     break;
                 case Nombre_de_fenetre:
-                    // fct pour changer le nombre de fenetre
-                    config=Lire_nb_fenetre(config, *Erreur);
-                    Ecrire_CONFIG(config, *Erreur);
+                    printf("entrez le nombre de fenetre voulue :\n");
+                    config=Lire_nb_fenetre(config, &Erreur);
+                    Ecrire_CONFIG(config, &Erreur);
                     break;
                 case Intervalle_de_temps:
                     // fct pour changer l'intervalle de temps
-                    config=Lire_intervale(config, *Erreur);
-                    Ecrire_CONFIG( config, *Erreur);
+                    printf("entrez l'intervalle de temps voulue' :\n");
+                    config=Lire_intervale(config, &Erreur);
+                    Ecrire_CONFIG( config, &Erreur);
                     break;
                 case Retour:
                     etat_courant = Menu_Admin;
