@@ -1,11 +1,8 @@
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "../head/Menu.h"
 #include "../head/Connexion.h"
 #include "../head/Config.h"
 #include "../head/FichierExist.h"
-void MAE()
+int MAE()
 {
 
     char etat_courant = Menu_general;
@@ -107,10 +104,10 @@ void MAE()
         }
         break;
 
-    case Menu_Configuration:
+    /*case Menu_Configuration:
         printf("Configuration :\n");
         CONFIG config;
-        int *Erreur;
+        String *Erreur;
         config=Lire_CONFIG(*Erreur);
         Afficher_CONFIG(config);
         printf("Si vous voulez changer une valeur, veuillez faire votre choix  : \n");
@@ -172,7 +169,7 @@ void MAE()
             etat_courant = Menu_Configuration;
             break;
         }
-        break;
+        break;*/
 
     case Menu_Visualisation:
         printf("Visualisation des recueils des descripteurs :\n");
@@ -182,13 +179,13 @@ void MAE()
         switch (choix)
         {
         case texte:
-            gedit("../DescripteurTexte.txt");
+            //gedit("../DescripteurTexte.txt");
             break;
         case image:
-            gedit("../DescripteurImage.txt");
+            //gedit("../DescripteurImage.txt");
             break;
         case audio:
-            gedit("../DescripteurAudio.txt");
+            //gedit("../DescripteurAudio.txt");
             break;
         case Retour:
             etat_courant = Menu_Admin;
@@ -419,12 +416,12 @@ void MAE()
                 
                 //recherche comparaison
                 //je prend le nb de fenetre et d'intervalle
-                fopen(chemin,"r");
-                scanf("%d",nbFenetre);
-                scanf("%d",intervalle);
-                fclose(chemin);
+                /*fopen(chemin,"r");
+                scanf("%d",&nbFenetre);
+                scanf("%d",&intervalle);
+                fclose(chemin);*/
                 //appel indexation audio pour creer un descripteur pour le fichier donner par l'utilisateur
-                
+
 
 
 

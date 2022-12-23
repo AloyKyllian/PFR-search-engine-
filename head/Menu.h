@@ -1,17 +1,20 @@
 #ifndef Menu_H_INCLUS    
 #define Menu_H_INCLUS   
+#include "../head/Connexion.h"
+#include "../head/Config.h"
+#include "../head/FichierExist.h"
 
-
+int MAE();
 //Etat :
 //MENUS PRINCIPAUX
 #define Menu_general '1'
 #define Menu_Admin '2'
-#define Menu_Configuration '22'
-#define Menu_Visualisation '23'
-#define Menu_Utilisateur '3'
-#define Menu_texte '31'
-#define Menu_image '32'
-#define Menu_audio '33'
+#define Menu_Configuration '3'
+#define Menu_Visualisation '4'
+#define Menu_Utilisateur '5'
+#define Menu_texte '6'
+#define Menu_image '7'
+#define Menu_audio '8'
 //Menu General
 #define Administrateur '1'
 #define Utilisateur '2'
