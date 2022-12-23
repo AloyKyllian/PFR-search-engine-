@@ -21,7 +21,7 @@ connexion : Login.c Global.c Connexion.c tst_connexion.c
 	gcc -o tst_connexion.out Login.o Connexion.o Global.o tst_connexion.o -lm
 	rm -rf *.o
 
-menu : Menu.c Login.c Global.c Connexion.c main.c Config.c FichierExist.c
+menu : main.c Menu.c Login.c Global.c Connexion.c Config.c FichierExist.c
 	gcc -c Menu.c
 	gcc -c Login.c 
 	gcc -c Connexion.c
@@ -29,9 +29,11 @@ menu : Menu.c Login.c Global.c Connexion.c main.c Config.c FichierExist.c
 	gcc -c Config.c 
 	gcc -c FichierExist.c 
 	gcc -c main.c 
-	gcc -o main.out Menu.o Connexion.o Global.o Login.o Config.o  FichierExist.o -lm
+	gcc -o menu.out main.o Menu.o Connexion.o Global.o Login.o Config.o FichierExist.o -lm
 	rm -rf *.o
-	
+	./menu.out
+
+
 
 clean : 
 	rm -rf *.o
