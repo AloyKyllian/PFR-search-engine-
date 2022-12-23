@@ -5,7 +5,7 @@
 int MAE()
 {
 
-    char etat_courant = Menu_general;
+    static char etat_courant = Menu_general;
     int test,test1;
     char choix;
     char choixImage;
@@ -23,7 +23,7 @@ int MAE()
 
                 switch (choix)
                 {
-
+                    
                     case Administrateur:
                         // Connexion();
                             bool result=false;
@@ -72,7 +72,8 @@ int MAE()
                         break;
                 }
 
-                break;
+                
+            break;
 
             case Menu_Admin:
                 printf("Menu général de l'administrateur\nFonctionnalité :\n");
@@ -84,7 +85,7 @@ int MAE()
                 {
                 case Indexation:
                     // Indexation generale avec config.txt a voir avec yasmine
-
+                    
                     break;
                 case Configuration:
                     // Configuration
@@ -102,9 +103,9 @@ int MAE()
                     etat_courant = Menu_Admin;
                     break;
                 }
-                break;
+            break;
 
-            /*case Menu_Configuration:
+            case Menu_Configuration:
                 printf("Configuration :\n");
                 CONFIG config;
                 String *Erreur;
@@ -169,7 +170,7 @@ int MAE()
                     etat_courant = Menu_Configuration;
                     break;
                 }
-                break;*/
+                break;
 
             case Menu_Visualisation:
                 printf("Visualisation des recueils des descripteurs :\n");
@@ -215,7 +216,7 @@ int MAE()
                     etat_courant = Menu_Visualisation;
                     break;
                 }
-                break;
+            break;
 
             case Menu_Utilisateur:
                 printf("Menu utilisateur :\n");
@@ -245,7 +246,7 @@ int MAE()
                     etat_courant = Menu_Utilisateur;
                     break;
                 }
-                break;
+            break;
 
             case Menu_texte:
                 printf("Recherche fichier texte :\n");
@@ -300,7 +301,7 @@ int MAE()
                     etat_courant = Menu_texte;
                     break;
                 }
-                break;
+            break;
 
             case Menu_image:
                 printf("Recherche fichier image :\n");
@@ -328,13 +329,13 @@ int MAE()
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;
-                                break;
+                            break;
                             case '1':
                                 test=-1;
-                                break;
+                            break;
                             default:
                                 etat_courant=Menu_Utilisateur;
-                                break;
+                            break;
                             }}
                     //verification si le fichier passer est un fichier texte
                     
@@ -347,7 +348,7 @@ int MAE()
                         etat_courant=Menu_Utilisateur;}
                     else 
                         //recherche 
-                        break;
+                    break;
                     case '2':
                         test=VerifExtension(chemin,"bmp");
                         if (test==-1){
@@ -358,22 +359,22 @@ int MAE()
                     default:
                         printf("erreur de choix\n");
                         etat_courant = Menu_image;
-                        break;
+                    break;
                     }
                     break;
                 case Retour:
                     etat_courant = Menu_Utilisateur;
-                    break;
+                break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
                     return 0;
-                    break;
+                break;
                 default:
                     printf("erreur de choix\n");
                     etat_courant = Menu_image;
-                    break;
-                }
                 break;
+                }
+            break;
 
             case Menu_audio:
                 printf("Recherche fichier audio :\n");
@@ -399,13 +400,13 @@ int MAE()
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;
-                                break;
+                            break;
                             case '1':
                                 test=-1;
-                                break;
+                            break;
                             default:
                                 etat_courant=Menu_Utilisateur;
-                                break;
+                            break;
                             }}
                     //verification si le fichier passer est un fichier texte
                     test=VerifExtension(chemin,"txt");
@@ -423,26 +424,25 @@ int MAE()
                         //appel indexation audio pour creer un descripteur pour le fichier donner par l'utilisateur
 
 
-
-
                     break;
                 case Retour:
                     etat_courant = Menu_Utilisateur;
-                    break;
+                break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
                     return 0;
-                    break;
+                break;
                 default:
                     printf("erreur de choix\n");
                     etat_courant = Menu_audio;
-                    break;
-                }
                 break;
-                default:
+                }
+            break;
+
+            default:
                 printf("il y a une erreur, vous allez etre redirigez vers le menu general\n");
                 etat_courant=Menu_general;
-                break;
+            break;
             }
 }
 
