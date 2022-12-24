@@ -6,5 +6,5 @@ int main(){
     do{
     MAE();
     }while(1);
-    
+    return 0;
 }
