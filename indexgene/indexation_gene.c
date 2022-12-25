@@ -1,5 +1,42 @@
 #include "indexation_gene.h"
 
+
+
+
+Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci)
+
+
+
+
+
+void dep_path ( PILE *pourchemin, String type, String *Erreur)
+{
+     ELEMENT elementsupp;
+     FILE *fichier = NULL;
+     if (strcmp(type, "texte")==0)
+           fichier = fopen("../liste_base/liste_base_texte", "w");
+     else if (strcmp(type, "image")==0)
+           fichier = fopen("../liste_base/liste_base_image", "w");
+     else
+           fichier = fopen("../liste_base/liste_base_audio", "w");    
+
+    if (fichier != NULL)
+    {
+          while ( *pourchemin !=NULL)
+            {
+               *pourchemin= dePILE(*pourchemin, &elementsupp);
+               fprintf(fichier, "%d | %s\n",elementsupp.id, elementsupp.CHEMIN );
+            }
+    }
+    else
+    {
+        strcpy(*Erreur,"Erreur : Fichier introuvable");
+    }
+    fclose(fichier); 
+}
+//____________________________________________
+//depiler le chemin de le fichier liste_base_texte ou liste _base_audio ou liste_base_image
+//____________________________________________
 void depiler_path ( PILE *pourchemin, String type, String *Erreur)
 {
      ELEMENT elementsupp;
@@ -23,6 +60,7 @@ void depiler_path ( PILE *pourchemin, String type, String *Erreur)
     {
         strcpy(*Erreur,"Erreur : Fichier introuvable");
     }
+    fclose(fichier); 
 }
 
 void recup_path( PILE *pourchemin, int deb, String path,String type, String *Erreur)
@@ -78,5 +116,5 @@ else
 {
    printf("open error: %s", strerror(errno));
 }
-
+fclose(ptr_fic); 
 }

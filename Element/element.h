@@ -15,6 +15,13 @@ typedef struct
     String CHEMIN;
 }ELEMENT;
 
+typedef struct 
+{
+    descri_audio descripteur;
+    int id;
+}ELEMENT_audio;
+
+
 void affiche_ELEMENT(ELEMENT element);
 void affect_ELEMENT(ELEMENT *elemaffect, ELEMENT e2);
 
