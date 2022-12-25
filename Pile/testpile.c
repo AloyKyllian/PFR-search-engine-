@@ -16,13 +16,12 @@ int main ()
   printf("\tObjectif Test3: empiler element et affichage\n ");
   ELEMENT essaie1;
   essaie1.id=1;
-  strcpy(essaie1.nom_fic,"hello");
   strcpy(essaie1.CHEMIN,"/Users/yasmine/programme1A/PFR/DATA_FIL_ROUGE_DEV/Textes/");
   paux=emPILE(paux, essaie1);
- affichePILE(paux);
+  affichePILE(paux);
 
-printf("\tObjectif Test3: deplier element  et affichage:\n");
-   paux=dePILE(paux, &elemsupp);
+  printf("\tObjectif Test3: deplier element  et affichage:\n");
+  paux=dePILE(paux, &elemsupp);
   affichePILE(paux);
   printf("ELEMENT SUPP:\n");
   affiche_ELEMENT(elemsupp);

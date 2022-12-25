@@ -1,4 +1,4 @@
-Element : element.c
+element : element.c
 	gcc -c element.c
 	
 clean :
