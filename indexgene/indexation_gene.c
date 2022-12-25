@@ -2,7 +2,7 @@
 
 
 
-void recup_path_img_audio( STR *str, int deb, String path, String *Erreur)
+void recup_path_img_audio( int deb, String path, String *Erreur)
 {
       char commande[500] ;
       FILE * ptr_fic;  

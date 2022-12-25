@@ -11,12 +11,12 @@ typedef char String[MAX_CHAINE];
 
 
 
-// typedef struct eELEMENT
-// { 
-//     String CHEMIN;
-//     String nom_fic;
-//     int id;
-// }ELEMENT;
+//  typedef struct eELEMENT
+//   { 
+//      String CHEMIN;
+//      String nom_fic;
+//      int id;
+//   }ELEMENT;
 
 // typedef struct 
 // {
@@ -30,11 +30,17 @@ typedef struct
     int id;
 }struct_audio;
 
-typedef struct 
-{
-    structure 
-    int id;
-}struct_image;
+// typedef struct 
+// {
+//     structure 
+//     int id;
+// }struct_image;
+
+// typedef struct 
+// {
+//     structure 
+//     int id;
+// }struct_texte;
 
 
 void affiche_ELEMENT(ELEMENT element);
