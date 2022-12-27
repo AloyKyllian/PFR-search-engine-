@@ -1,5 +1,5 @@
-#include "../head/Global.h"
-#include "../head/Descripteur_image.h"
+#include "../Config/Global.h"
+#include "Descripteur_image.h"
 
 IMAGE Lire_image(String *Erreur, String Path)
 {
