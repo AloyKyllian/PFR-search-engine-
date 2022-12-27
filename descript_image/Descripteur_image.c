@@ -1,4 +1,3 @@
-#include "../Config/Global.h"
 #include "Descripteur_image.h"
 
 IMAGE Lire_image(String *Erreur, String Path)

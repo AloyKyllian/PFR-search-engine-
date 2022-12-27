@@ -34,5 +34,4 @@ void main()
         total = total+descripteur_image.Bilan[i][1];
     }
     printf("\nTotal de valeur = %d\n",total);
-
 }
