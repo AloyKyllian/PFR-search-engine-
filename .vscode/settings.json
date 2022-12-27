@@ -4,6 +4,7 @@
         "stdio.h": "c",
         "Global.h": "c",
         "HE.C": "cpp",
-        "pile.h": "c"
+        "pile.h": "c",
+        "element.h": "c"
     }
 }

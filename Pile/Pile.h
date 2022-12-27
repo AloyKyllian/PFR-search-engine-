@@ -8,12 +8,20 @@ typedef struct eCellule
     struct eCellule * suiv;
 }Cellule,*PILE;
 
+typedef struct eCellule_audio
+{   ELEMENT_audio element;
+    struct eCellule * suiv;
+}Cellule_audio,*PILE_audio;
 //fonctions
 PILE init_PILE();
+PILE_audio init_PILE_audio();
 void affichePILE(PILE pile);
+void affichePILE_audio(PILE_audio pile);
 int PILE_estVide(PILE pile);
 PILE emPILE(PILE pile, ELEMENT entier);
 PILE dePILE(PILE pile, ELEMENT *elementsupp);
+PILE_audio emPILE_audio(PILE_audio pile, ELEMENT_audio entier);
+PILE_audio dePILE_audio(PILE_audio pile, ELEMENT_audio *elementsupp);
 
 #endif 
 

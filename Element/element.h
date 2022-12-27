@@ -22,7 +22,9 @@ typedef struct
 }ELEMENT_audio;
 
 
+void affect_ELEMENT_audio(ELEMENT_audio *elemaffect, ELEMENT_audio e2);
 void affiche_ELEMENT(ELEMENT element);
 void affect_ELEMENT(ELEMENT *elemaffect, ELEMENT e2);
+void affiche_ELEMENT_audio(ELEMENT_audio element);
 
 #endif
