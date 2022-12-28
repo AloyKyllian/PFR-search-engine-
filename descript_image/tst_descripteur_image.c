@@ -7,7 +7,7 @@ void main()
     IMAGE img;
     DESCRIPTEUR_IMAGE descripteur_image;
     String Erreur;
-    String Path = "../DATA_FIL_ROUGE_DEV/TEST_RGB/01.txt";
+    String Path = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/01.txt";
     int Nb_Bit_Fort = 8;
     int total = 0;
 

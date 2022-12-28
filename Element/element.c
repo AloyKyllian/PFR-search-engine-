@@ -17,6 +17,9 @@ void affiche_ELEMENT_audio(ELEMENT_audio element)
         printf("\r\n");
     }
 }
+void affiche_ELEMENT_image(ELEMENT_image element);
+void affect_ELEMENT_image(ELEMENT_image *elemaffect, ELEMENT_image e2)
+;
 
 void affect_ELEMENT(ELEMENT *elemaffect, ELEMENT e2)
 {

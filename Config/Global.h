@@ -7,7 +7,7 @@
 #include <string.h>
 #include <math.h>
 
-#define MAX_CHAINE 100
+#define MAX_CHAINE 700
 
 typedef char String[MAX_CHAINE];
 
