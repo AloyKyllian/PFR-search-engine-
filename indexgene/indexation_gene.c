@@ -124,14 +124,17 @@ void base_descript_empiler_audio (PILE_audio * dscr_audio)
        PILE pourchemin=init_PILE();
        ELEMENT_audio element_audio;
        lire_chemin (&pourchemin, "audio", &Erreur1);
+       printf("ici ?");
        affichePILE(pourchemin);
        //config = Lire_CONFIG(&Erreur1);
        //config= Lire_nb_fenetre(config,&Erreur); 
       //Lis et verifie la validiter de la valeur de l'intervale
        //config= Lire_intervale(config,&Erreur);
+       printf("ici .. ?");
        while(pourchemin!=NULL)
        {
            //mettre a jour le descripteur a empiler
+           printf("%s",pourchemin->element.CHEMIN);
            element_audio.descripteur=Descripteur_audio( 4096 , 15,pourchemin->element.CHEMIN, element_audio.descripteur) ;
            //mettre a jour le id a empiler
            element_audio.id=pourchemin->element.id;
