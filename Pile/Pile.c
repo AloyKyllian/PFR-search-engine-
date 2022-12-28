@@ -36,8 +36,8 @@ void affichePILE_audio(PILE_audio pile)
            printf("\nAffichage de la pile:\n");
            do
            {
-               affiche_ELEMENT_audio((*temp).element);
-               temp= (*temp).suiv;
+               affiche_ELEMENT_audio(temp->element);
+               temp= temp->suiv;
            }while(temp!=NULL);
        }
 }

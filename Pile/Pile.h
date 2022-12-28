@@ -10,7 +10,7 @@ typedef struct eCellule
 
 typedef struct eCellule_audio
 {   ELEMENT_audio element;
-    struct eCellule * suiv;
+    struct eCellule_audio * suiv;
 }Cellule_audio,*PILE_audio;
 //fonctions
 PILE init_PILE();

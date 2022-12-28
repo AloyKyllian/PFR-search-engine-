@@ -21,15 +21,16 @@ int main()
     strcpy(path,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
     recup_path(&pileaudio_path,deb,path,"audio", &Erreuraudio);
     affichePILE(pileaudio_path);
-    depiler_path ( &pileaudio_path, "audio", &Erreurtexte);
+    depiler_path ( &pileaudio_path, "audio", &Erreuraudio);
     //_________________
     //IMAGE
     //_________________
     strcpy(path,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
-    recup_path(&pileimage_path,deb,path,"", &Erreurimage);
+    recup_path(&pileimage_path,deb,path,"image", &Erreurimage);
     deb= pileimage_path->element.id;
+    affichePILE(pileimage_path);
     strcpy(path,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
-    recup_path(&pileimage_path,deb,path,"", &Erreurimage);
+    recup_path(&pileimage_path,deb,path,"image", &Erreurimage);
     affichePILE(pileimage_path);
     depiler_path ( &pileimage_path, "image", &Erreurimage);
     //_________________
