@@ -4,36 +4,34 @@
 #include "Config.h"
 
 
-/*typedef struct 
-{
-    String *tab_mot;
-    int *tab_app;
-    int index;
-}tab_total;*/
+void rechercheTexte(char *mot,char* chemin){
+    FILE *fp;
+	FILE *grepFic;
+	system("touch ../PFRtestMenu/grepRes.txt");
+	char* grep="grep -rliw ";
+	//char* mot="soleil";
+	//char* chemin=" ./descripteur_texte";
+	char* commande=(char*)malloc(200);
+	char* chaine=(char*)malloc(200);
+	char* motCh=(char*)malloc(20);
+	strcpy(commande,grep);
+	strcat(commande,mot);
+	strcat(commande,chemin);
+	strcat(commande," > ./grepRes.txt");
+	//printf("la commande %s\n", commande);
+	system(commande);
+	free(commande);
 
-void rechercheTexte(String tab[], int nb_mot_cle, char* cheminDesc){
-    int ID;
-    String tabRes[nb_mot_cle][2];
-    String mot;
-    String nb_mot;
-    FILE *fichier =NULL;
-    //ouvrir fichier descripteur
-    fichier=fopen(cheminDesc,"r");
-    
-    while (fscanf(fichier,"%d",&ID)!=EOF)
-    {
-        if(ID<0){
-                for(int i=0;i<nb_mot_cle;i++){
-                    tab[i][0]=ID;
-                    if(strstr(tab[i],fscanf(fichier,"%s",&mot))!=NULL){
-                        tabRes[i][1] = fscanf(fichier, "%s", &nb_mot);
-                    }
-                    else
-                        tabRes[i][1]="0";
-            }
-        }
-        
-    }
+    //resultat finale de la recherche, pour avoir le nom des fichiers 
+	fp=fopen("./grepRes.txt","rt");
+	if(fp!=NULL){
+	    while(!feof(fp)){
+            
+
+	  } 
+	 }
+   	 fclose(fp); 
+	
     
 
 
