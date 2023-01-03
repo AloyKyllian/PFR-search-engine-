@@ -42,6 +42,23 @@ void affichePILE_audio(PILE_audio pile)
        }
 }
 
+void affichePILE_image(PILE_image pile)
+{  
+    int i;
+    PILE_image temp= pile;
+      if(pile==NULL)
+          {printf("VIDE\n\n");}
+       else
+       {
+           printf("\nAffichage de la pile:\n");
+           do
+           {
+               affiche_ELEMENT_image(temp->element);
+               temp= temp->suiv;
+           }while(temp!=NULL);
+       }
+}
+
 //tester si pile vide
 int PILE_estVide(PILE pile)
 {  if (pile==NULL) return 1;
@@ -128,7 +145,7 @@ PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp)
         //on garde lelement supprimé
         affect_ELEMENT_image(elementsupp, pile->element);
         // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
-        PILE_audio aux=pile->suiv;
+        PILE_image aux=pile->suiv;
         free(pile);
         return aux;
     }

@@ -10,5 +10,6 @@
     void recup_path(PILE *pourchemin, int deb, String path, String type, String *Erreur);
     void lire_chemin (PILE *pourchemin, String type, String * erreur);
    PILE_audio base_descript_empiler_audio (PILE_audio dscr,String * erreur);
+   PILE_image base_descript_empiler_image( PILE_image  dscr_image, String * erreur);
 
 #endif

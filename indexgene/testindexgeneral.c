@@ -59,5 +59,8 @@ int main()
     fflush(stdout);
      descripteur_audio=base_descript_empiler_audio (descripteur_audio, &Erreuraudio);
      affichePILE_audio(descripteur_audio);
+     PILE_image pileimage=NULL;
+     pileimage= base_descript_empiler_image( pileimage,  &Erreurimage);
+     affichePILE_image(pileimage);
     return 0;
 }
