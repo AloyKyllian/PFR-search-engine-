@@ -13,6 +13,7 @@ void MAE()
     char choix;
     char choixImage;
     char chemin[100];
+    char *mot;
     char *extension;
     int i;
     switch (etat_courant)
@@ -239,7 +240,9 @@ void MAE()
         switch (choix)
         {
         case Recherche_mots_cle:
-
+            printf("Veuillez saisir le mot que vous voulez chercher\n");
+            scanf("%s",mot);
+            rechercheMot(mot,);//chemin descripteur texte
             break;
         case Recherche_par_comparaison:
             // verification si le fichier existe
@@ -276,7 +279,7 @@ void MAE()
             etat_courant = Menu_Utilisateur;
             break;
         case Quitter:
-            return; //????
+            return 0; 
             break;
         default:
             printf("erreur de choix\n");
@@ -323,18 +326,18 @@ void MAE()
             
             switch (choixImage)
             {
-            case '1' :
-                test=VerifExtension(chemin,"jpg");
+            case '1' ://Image couleur
+                test=VerifExtension(chemin,"txt");
                  if (test==-1){
-                   printf("Ce fichier n'est pas de type image\nVeuiller faire le choix de recherche qui vous correspond\n");
+                   printf("Ce fichier n'est pas de type texte\nVeuiller faire le choix de recherche qui vous correspond\n");
                    etat_courant=Menu_Utilisateur;}
             else 
                 //recherche 
                 break;
-            case '2':
-                test=VerifExtension(chemin,"bmp");
+            case '2'://Image noir et blanc
+                test=VerifExtension(chemin,"txt");
                  if (test==-1){
-                   printf("Ce fichier n'est pas de type image\nVeuiller faire le choix de recherche qui vous correspond\n");
+                   printf("Ce fichier n'est pas de type texte\nVeuiller faire le choix de recherche qui vous correspond\n");
                    etat_courant=Menu_Utilisateur;}
             else 
                 //recherche 
@@ -393,7 +396,7 @@ void MAE()
             //verification si le fichier passer est un fichier texte
             test=VerifExtension(chemin,"txt");
             if (test==-1){
-                   printf("Ce fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
+                   printf("Ce fichier n'est pas de type texte\nVeuiller faire le choix de recherche qui vous correspond\n");
                    etat_courant=Menu_Utilisateur;}
             else 
                 //recherche comparaison
