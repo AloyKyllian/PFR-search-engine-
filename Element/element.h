@@ -24,7 +24,7 @@ typedef struct
 
 typedef struct 
 {
-    DESCRIPTEUR_IMAGE di;
+    DESCRIPTEUR_IMAGE descripteur_image;
     int id;
 }ELEMENT_image;
 

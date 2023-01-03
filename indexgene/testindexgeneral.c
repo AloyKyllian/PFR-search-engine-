@@ -15,7 +15,6 @@ int main()
     strcpy(path,"../DATA_FIL_ROUGE_DEV/Textes/");
     
     recup_path( &piletexte_path,deb,path,"texte", &Erreurtexte);
-printf("%x",piletexte_path);
     fflush(stdout);
     affichePILE(piletexte_path);
     printf("hello");
@@ -56,9 +55,9 @@ printf("%x",piletexte_path);
     //__________________________________
     //stocker descripteur dans une pile
     //__________________________________
-    printf("helololo");
+    printf("helololo\n");
     fflush(stdout);
-     base_descript_empiler_audio (&descripteur_audio, &Erreuraudio);
+     descripteur_audio=base_descript_empiler_audio (descripteur_audio, &Erreuraudio);
      affichePILE_audio(descripteur_audio);
     return 0;
 }
