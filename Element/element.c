@@ -21,18 +21,18 @@ void affiche_ELEMENT_audio(ELEMENT_audio element)
 
 void affiche_ELEMENT_image(ELEMENT_image element)
 {
-//     int total=0;
-// for(int i = 0; i < pow(2,Nb_Bit_Fort*img.Nb_composante); i++ )
-//     {
-//         // Permet d'afficher q'un certain nombre de valeur
-//         if( (i % (int)(0.1 *pow(2,Nb_Bit_Fort*img.Nb_composante))) == 0)
-//         {
-//             printf("Val n°%d = %d Quantity = %d\n",i,element.descripteur_image.Bilan[i][0],element.descripteur_image.Bilan[i][1]);
-//         }
+    int total=0;
+for(int i = 0; i < element.descripteur_image.Nb_Ligne; i++ )
+    {
+        // Permet d'afficher q'un certain nombre de valeur
+        if( (i % (int)(0.1 *element.descripteur_image.Nb_Ligne)) == 0)
+        {
+            printf("Val n°%d = %d Quantity = %d\n",i,element.descripteur_image.Bilan[i][0],element.descripteur_image.Bilan[i][1]);
+        }
        
-//         total = total+element.descripteur_image.Bilan[i][1];
-//     }
-//     printf("\nTotal de valeur = %d\n",total);
+        total = total+element.descripteur_image.Bilan[i][1];
+    }
+    printf("\nTotal de valeur = %d\n",total);
 };
 void affect_ELEMENT_image(ELEMENT_image *elemaffect, ELEMENT_image e2)
 {
