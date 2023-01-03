@@ -78,20 +78,19 @@ return desci;//retour de la structure du descripteur
 
 
 
-/*
-void main(){//exemple d'utilisation
-  descri_audio mabite;
 
-    mabite=Descripteur_audio(2048,32,"../son/jingle_fi.txt",mabite);
+void main(){//exemple d'utilisation
+  descri_audio tableau;
+
+    tableau=Descripteur_audio(2048,32,"../son/jingle_fi.txt",tableau);
     
-    for (unsigned i = 0; i < mabite.size_x; ++i)
+    for (unsigned i = 0; i < tableau.size_x; ++i)
     {
-        for (unsigned j = 0; j < mabite.size_y; ++j)
+        for (unsigned j = 0; j < tableau.size_y; ++j)
         {
-            printf(" |%3d| ",mabite.tab[i][j]);
+            printf(" |%3d| ",tableau.tab[i][j]);
         }
         printf("\r\n");
     }
 
 }
-*/
