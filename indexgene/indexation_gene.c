@@ -230,12 +230,13 @@ PILE_image base_descript_empiler_audio ( PILE_image  dscr_audio, String * erreur
                   fscanf(fichier, "%d | %s\n", &element_image.id ,CHEMIN);
                     
             } 
+            fclose(fichier);
        }
         else
        {
          strcpy(*erreur,"Erreur : Fichier liste base introuvable");
       }
-    fclose(fichier);
+    
     return dscr_audio;
       //       printf("Michel");
       //       printf("%p",pourchemin);

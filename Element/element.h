@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../descript_audio/descript_audio.h"
-#include "../descript_image/Descripteur_image.h"
+#include "../descripteur-image/Descripteur_image.h"
 
 #define MAX_CHAINE 700
 typedef char String[MAX_CHAINE];
