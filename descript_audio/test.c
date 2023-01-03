@@ -18,9 +18,11 @@ void afficherTableau(int **tableau, int nombreDeLignes, int nombreDeColonnes)
 
 int main()
 {
+  int erreur;
   descri_audio tableau;
 
-    tableau=Descripteur_audio(4096,32,"../son/jingle_fi.txt",tableau);
+    tableau=Descripteur_audio(4096,32,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/jingle_fi.txt",tableau,&erreur);
+    printf("%d",erreur);
     
     for (unsigned i = 0; i < tableau.size_x; ++i)
     {
