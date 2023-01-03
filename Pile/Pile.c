@@ -56,7 +56,7 @@ int PILE_estVide(PILE pile)
      if(temp!=NULL)
      {
           affect_ELEMENT(&(temp->element), element);
-         (*temp).suiv=pile;
+         temp->suiv=pile;
          return temp;
      }
     return pile;
@@ -84,9 +84,10 @@ PILE dePILE(PILE pile, ELEMENT *elementsupp)
         //on garde lelement supprimé
         affect_ELEMENT(elementsupp, pile->element);
         // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
-        PILE aux=pile->suiv;
-        free(pile);
-        return aux;
+        PILE aux=pile;
+        pile=pile->suiv;
+        free(aux);
+        return pile;
     }
     //si la pile était vide, on renvoie celle ci
     return pile;

@@ -39,12 +39,17 @@ int main()
      printf("______________________\n recuperer chemin texte dans une pile\n");
      lire_chemin (&piletexte_path, "texte", &Erreurtexte);
      affichePILE(piletexte_path);
+     printf("______________________\n recuperer chemin image dans une pile\n");
+     lire_chemin (&pileimage_path, "image", &Erreurimage);
+     affichePILE(pileimage_path);
      printf("______________________\nrecup chemin audio\n");
-     lire_chemin (&pileaudio_path, "audio", &Erreurtexte);
+     lire_chemin (&pileaudio_path, "audio", &Erreuraudio);
      affichePILE(pileaudio_path);
+     printf("IFGLUYGFLYUGF");
     //__________________________________
     //stocker descripteur dans une pile
     //__________________________________
+    printf("helololo");
     base_descript_empiler_audio (&descripteur_audio);
     affichePILE_audio(descripteur_audio);
     return 0;

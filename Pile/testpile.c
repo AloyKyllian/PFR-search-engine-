@@ -19,12 +19,23 @@ int main ()
   strcpy(essaie1.CHEMIN,"/Users/yasmine/programme1A/PFR/DATA_FIL_ROUGE_DEV/Textes/");
   paux=emPILE(paux, essaie1);
   affichePILE(paux);
+  strcpy(essaie1.CHEMIN,"/Users/yasmine/programme1A/PFR/DATA_FIL_ROUGE_DEV/Textes/hello");
+  paux=emPILE(paux, essaie1);
+  affichePILE(paux);
+  strcpy(essaie1.CHEMIN,"/Users/yasmine/programme1A/PFR/DATA_FIL_ROUGE_DEV/Textes/");
+  paux=emPILE(paux, essaie1);
+  affichePILE(paux);
+  paux=emPILE(paux, essaie1);
+  affichePILE(paux);
 
   printf("\tObjectif Test3: deplier element  et affichage:\n");
-  paux=dePILE(paux, &elemsupp);
-  affichePILE(paux);
-  printf("ELEMENT SUPP:\n");
-  affiche_ELEMENT(elemsupp);
+  while ( paux !=NULL)
+            {
+               printf("\ndepile : \n");
+               paux= dePILE(paux, &elemsupp);
+               printf("ELEMENT SUPP : %d | %s\n",elemsupp.id, elemsupp.CHEMIN );
+               affichePILE(paux);
+            }
 //     paux=dePILE(paux, &elemsupp);
 //     affichePILE(paux);
 //     printf("ELEMENT SUPP:");

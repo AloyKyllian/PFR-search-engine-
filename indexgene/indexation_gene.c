@@ -107,7 +107,6 @@ void lire_chemin (PILE *pourchemin, String type, String * erreur)
                      *pourchemin= emPILE(*pourchemin, element);
                      
               } 
-
     }
     else
     {
@@ -125,7 +124,7 @@ void base_descript_empiler_audio (PILE_audio * dscr_audio)
        ELEMENT_audio element_audio;
        lire_chemin (&pourchemin, "audio", &Erreur1);
        printf("ici ?");
-       affichePILE(pourchemin);
+       //affichePILE(pourchemin);
        //config = Lire_CONFIG(&Erreur1);
        //config= Lire_nb_fenetre(config,&Erreur); 
       //Lis et verifie la validiter de la valeur de l'intervale
