@@ -3,7 +3,7 @@
 
 #include "../Element/element.h"
 #include "../Pile/Pile.h"
-#include "../Config/Config.h"
+#include "../Gestion-Config/Config.h"
 
 
     void depiler_path ( PILE *pourchemin, String type, String *Erreur);

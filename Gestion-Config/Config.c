@@ -1,5 +1,4 @@
-#include "../head/Config.h"
-#include "../head/Config.h"
+#include "Config.h"
 
 CONFIG Lire_CONFIG(int *Erreur)
 {
