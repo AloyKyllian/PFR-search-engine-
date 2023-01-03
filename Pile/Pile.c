@@ -109,4 +109,30 @@ PILE_audio dePILE_audio(PILE_audio pile, ELEMENT_audio *elementsupp)
     //si la pile était vide, on renvoie celle ci
     return pile;
 }        
+PILE_image emPILE_image(PILE_image pile, ELEMENT_image element)
+{
+    PILE_image temp=(PILE_image)malloc(sizeof(Cellule_image));
+     if(temp!=NULL)
+     {
+          affect_ELEMENT_image(&(temp->element), element);
+         temp->suiv=pile;
+         return temp;
+     }
+    return pile;
+};
+PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp)
+{
+        // si la pile n'est pas vide
+    if(pile!=NULL)
+    {
+        //on garde lelement supprimé
+        affect_ELEMENT_image(elementsupp, pile->element);
+        // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
+        PILE_audio aux=pile->suiv;
+        free(pile);
+        return aux;
+    }
+    //si la pile était vide, on renvoie celle ci
+    return pile;
+};
     
