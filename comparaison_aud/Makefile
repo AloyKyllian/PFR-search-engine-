@@ -1,3 +1,3 @@
 comparaison_aud : comparaison_aud.c comparaison_aud.h
-	gcc -o comparaison_aud.exe comparaison_aud.c 
+	gcc -c comparaison_aud.c 
 	gcc -o comparaison_aud.out comparaison_aud.o

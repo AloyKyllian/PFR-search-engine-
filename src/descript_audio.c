@@ -14,7 +14,7 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
         printf("Erreur lors de l'ouverture d'un fichier");
         exit(1);
     }
-    while(fscanf(fichier,"%lf",&val)!=EOF){
+    while(fscanf(fichier,"%d",&val)!=EOF){
         nbr_val++;
     }
     
