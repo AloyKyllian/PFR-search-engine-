@@ -46,11 +46,13 @@ int main()
      lire_chemin (&pileaudio_path, "audio", &Erreuraudio);
      affichePILE(pileaudio_path);
      printf("IFGLUYGFLYUGF");
+     
     //__________________________________
     //stocker descripteur dans une pile
     //__________________________________
     printf("helololo");
-    base_descript_empiler_audio (&descripteur_audio);
-    affichePILE_audio(descripteur_audio);
+    fflush(stdout);
+     base_descript_empiler_audio (&descripteur_audio, &Erreuraudio);
+     affichePILE_audio(descripteur_audio);
     return 0;
 }

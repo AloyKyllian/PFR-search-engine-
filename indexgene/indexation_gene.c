@@ -73,11 +73,13 @@ void depiler_path ( PILE *pourchemin, String type, String *Erreur)
 
     if (fichier != NULL)
     {
-          while ( *pourchemin !=NULL)
+          while ( (*pourchemin)->suiv !=NULL)
             {
                *pourchemin= dePILE(*pourchemin, &elementsupp);
                fprintf(fichier, "%d | %s\n",elementsupp.id, elementsupp.CHEMIN );
             }
+             *pourchemin= dePILE(*pourchemin, &elementsupp);
+               fprintf(fichier, "%d | %s",elementsupp.id, elementsupp.CHEMIN );
     }
     else
     {
@@ -116,30 +118,58 @@ void lire_chemin (PILE *pourchemin, String type, String * erreur)
 }
 
 
-void base_descript_empiler_audio (PILE_audio * dscr_audio)
+void base_descript_empiler_audio ( PILE_audio * dscr_audio, String * erreur)
 {
+      printf("ici ?");
+      FILE *fichier = NULL;
        String Erreur1;
+       char CHEMIN[700];
        //CONFIG config;
-       PILE pourchemin=init_PILE();
        ELEMENT_audio element_audio;
-       lire_chemin (&pourchemin, "audio", &Erreur1);
        printf("ici ?");
-       //affichePILE(pourchemin);
        //config = Lire_CONFIG(&Erreur1);
        //config= Lire_nb_fenetre(config,&Erreur); 
       //Lis et verifie la validiter de la valeur de l'intervale
        //config= Lire_intervale(config,&Erreur);
-       printf("ici .. ?");
-       while(pourchemin!=NULL)
+       printf("ici .. ?\n\n");
+       fflush(stdout);
+      fichier = fopen("../liste_base/liste_base_audio", "r");  
+       if (fichier != NULL)
        {
-           //mettre a jour le descripteur a empiler
-           printf("%s",pourchemin->element.CHEMIN);
-           element_audio.descripteur=Descripteur_audio( 4096 , 15,pourchemin->element.CHEMIN, element_audio.descripteur) ;
-           //mettre a jour le id a empiler
-           element_audio.id=pourchemin->element.id;
-           printf("id : %d , chemin : %s",element_audio.id,pourchemin->element.CHEMIN);
-           //empiler
-           *dscr_audio= emPILE_audio(*dscr_audio, element_audio);
-           pourchemin= pourchemin->suiv;           
-       }    
+            // fscanf(fichier, "%d | %s\n", &element_audio.id ,CHEMIN);
+            // element_audio.descripteur=Descripteur_audio( 4096 , 15,CHEMIN, element_audio.descripteur) ;
+            // affect_ELEMENT_audio(&(*dscr_audio)->element,element_audio);
+            // affiche_ELEMENT_audio((*dscr_audio)->element);
+            // fflush(stdout);
+            // *dscr_audio= emPILE_audio(*dscr_audio, element_audio);
+            while (fscanf(fichier, "%d | %s",&element_audio.id ,CHEMIN) != EOF)
+            {   
+                  printf("%s\n",CHEMIN);
+                  fflush(stdout);
+                  element_audio.descripteur = Descripteur_audio(2048 , 32,CHEMIN, element_audio.descripteur) ;
+                  printf("je suis la");
+                  fflush(stdout);
+                  affect_ELEMENT_audio(&(*dscr_audio)->element,element_audio);
+                  *dscr_audio= emPILE_audio(*dscr_audio, element_audio);    
+                  affiche_ELEMENT_audio((*dscr_audio)->element);
+                    
+            } 
+       }
+        else
+       {
+         strcpy(*erreur,"Erreur : Fichier liste base introuvable");
+      }
+    fclose(fichier);
+      //       printf("Michel");
+      //       printf("%p",pourchemin);
+      //      //mettre a jour le descripteur a empiler
+      //      printf("%s",pourchemin->element.CHEMIN);
+      //      element_audio.descripteur=Descripteur_audio( 4096 , 15,pourchemin->element.CHEMIN, element_audio.descripteur) ;
+      //      //mettre a jour le id a empiler
+      //      element_audio.id=pourchemin->element.id;
+      //      printf("id : %d , chemin : %s",element_audio.id,pourchemin->element.CHEMIN);
+      //      //empiler
+      //      *dscr_audio= emPILE_audio(*dscr_audio, element_audio);
+      //      pourchemin= pourchemin->suiv;           
+       //}    
 }

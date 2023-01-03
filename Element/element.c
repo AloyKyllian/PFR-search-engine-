@@ -16,8 +16,10 @@ void affiche_ELEMENT_audio(ELEMENT_audio element)
         }
         printf("\r\n");
     }
+    fflush(stdout);
 }
-void affiche_ELEMENT_image(ELEMENT_image element);
+void affiche_ELEMENT_image(ELEMENT_image element)
+;
 void affect_ELEMENT_image(ELEMENT_image *elemaffect, ELEMENT_image e2)
 ;
 

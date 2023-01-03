@@ -12,6 +12,7 @@ typedef struct eCellule_audio
 {   ELEMENT_audio element;
     struct eCellule_audio * suiv;
 }Cellule_audio,*PILE_audio;
+
 //fonctions
 PILE init_PILE();
 PILE_audio init_PILE_audio();
