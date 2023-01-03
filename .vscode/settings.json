@@ -6,5 +6,8 @@
         "HE.C": "cpp",
         "pile.h": "c",
         "element.h": "c"
+        "descripteur_texte": "c",
+        "string.h": "c",
+        "descripteur_texte.h": "c"
     }
 }
