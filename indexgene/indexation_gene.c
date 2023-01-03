@@ -39,10 +39,10 @@ void recup_path( PILE *pourchemin, int deb, String path,String type, String *Err
                    while ( !feof(ptr_fic) )
                    {   
                            strcpy(chemin,path);
-                          strcat(chemin, nom_fic);
-                          element.id=deb;
+                           strcat(chemin, nom_fic);
+                           element.id=deb;
                            strcpy(element.CHEMIN,chemin);
-
+                         
                             *pourchemin= emPILE(*pourchemin, element);
 	                   /* nom de fichier suivant */
                           deb++;
@@ -54,6 +54,9 @@ void recup_path( PILE *pourchemin, int deb, String path,String type, String *Err
             {
                   strcpy(*Erreur,"Erreur : Fichier introuvable");
             }
+            affichePILE(*pourchemin);
+            printf("%x",pourchemin);
+            fflush(stdout);
             fclose(ptr_fic); 
 }
 

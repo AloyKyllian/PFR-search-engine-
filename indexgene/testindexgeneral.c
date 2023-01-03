@@ -13,8 +13,14 @@ int main()
     //TEXTE
     //_________________
     strcpy(path,"../DATA_FIL_ROUGE_DEV/Textes/");
+    
     recup_path( &piletexte_path,deb,path,"texte", &Erreurtexte);
-    depiler_path ( &piletexte_path, "texte", &Erreurtexte);
+printf("%x",piletexte_path);
+    fflush(stdout);
+    affichePILE(piletexte_path);
+    printf("hello");
+    fflush(stdout);
+    //depiler_path ( &piletexte_path, "texte", &Erreurtexte);
     //_________________
     //AUDIO
     //_________________
