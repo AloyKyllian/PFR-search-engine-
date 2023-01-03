@@ -1,6 +1,6 @@
 #include "Descripteur_image.h"
 
-IMAGE Lire_image(String *Erreur, String Path)
+IMAGE Lire_image(int *Erreur, String Path)
 {
     // Variable
     IMAGE img;
@@ -11,7 +11,7 @@ IMAGE Lire_image(String *Erreur, String Path)
     fichier = fopen(Path, "r");
     if (fichier != NULL)
     {
-        strcpy(*Erreur, "Erreur : NULL");
+        *Erreur = 0;
 
         fscanf(fichier, "%d %d %d", &img.Nb_Ligne, &img.Nb_Colonne, &img.Nb_composante);
 
@@ -32,17 +32,17 @@ IMAGE Lire_image(String *Erreur, String Path)
         }
         else
         {
-            strcpy(*Erreur, "Erreur : Allocation");
+            *Erreur = 1;
         }
     }
     else
     {
-        strcpy(*Erreur, "Erreur : Fichier introuvable");
+        *Erreur = 7;
     }
     return img;
 }
 
-IMAGE Pre_traitement(String *Erreur, IMAGE img, int Nb_Bit_Fort)
+IMAGE Pre_traitement(int *Erreur, IMAGE img, int Nb_Bit_Fort)
 {
     // Variables
     int **Nv_mat;
@@ -60,7 +60,7 @@ IMAGE Pre_traitement(String *Erreur, IMAGE img, int Nb_Bit_Fort)
     }
     if (Nv_mat != NULL)
     {
-        strcpy(*Erreur, "Erreur : NULL");
+        *Erreur = 0;
 
         // Remplissage de la matrice avec les pixel traiter
         for (int cptligne = 0; cptligne < img.Nb_Ligne; cptligne++)
@@ -96,13 +96,13 @@ IMAGE Pre_traitement(String *Erreur, IMAGE img, int Nb_Bit_Fort)
     }
     else
     {
-        strcpy(*Erreur, "Erreur : Allocation");
+        *Erreur = 1;
     }
 
     return img;
 }
 
-DESCRIPTEUR_IMAGE Creation_Discripteur(String *Erreur, IMAGE img, int Nb_Bit_Fort)
+DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
 {
     // Variable
     DESCRIPTEUR_IMAGE descripteur_image;
@@ -112,20 +112,22 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(String *Erreur, IMAGE img, int Nb_Bit_For
 
     // Allocation memoire du tableau 2D
     strcpy(descripteur_image.Path, img.Path);
-    descripteur_image.Bilan = malloc(pow(2, Nb_Bit_Fort * img.Nb_composante) * sizeof(*descripteur_image.Bilan));
+    descripteur_image.Nb_Ligne = pow(2, Nb_Bit_Fort * img.Nb_composante);
+    descripteur_image.Nb_Colonne = 2;
+    descripteur_image.Bilan = malloc( descripteur_image.Nb_Ligne * sizeof(*descripteur_image.Bilan));
     for (i = 0; i < pow(2, Nb_Bit_Fort * img.Nb_composante); i++)
     {
-        descripteur_image.Bilan[i] = malloc(2 * sizeof(**descripteur_image.Bilan));
+        descripteur_image.Bilan[i] = malloc(descripteur_image.Nb_Colonne * sizeof(**descripteur_image.Bilan));
     }
 
     // Initialisation du tableau du descripteur
     if (descripteur_image.Bilan != NULL)
     {
-        strcpy(*Erreur, "Erreur : NULL");
+        *Erreur = 0;
 
-        for (cptligne = 0; cptligne < pow(2, Nb_Bit_Fort * img.Nb_composante); cptligne++)
+        for (cptligne = 0; cptligne < descripteur_image.Nb_Ligne; cptligne++)
         {
-            for (cptcolonne = 0; cptcolonne < 2; cptcolonne++)
+            for (cptcolonne = 0; cptcolonne < descripteur_image.Nb_Colonne; cptcolonne++)
             {
                 if (cptcolonne == 0)
                 {
@@ -149,7 +151,7 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(String *Erreur, IMAGE img, int Nb_Bit_For
     }
     else
     {
-        strcpy(*Erreur, "Erreur : Allocation");
+        *Erreur = 1;
     }
 
     return descripteur_image;
