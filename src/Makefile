@@ -7,7 +7,6 @@ test_audio2 : descript_audio.c Global.c
 
 
 
-
 test_audio : descripteur_audio.c Global.c
 	gcc -c Global.c 
 	gcc -c descripteur_audio.c 

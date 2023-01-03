@@ -78,7 +78,7 @@ return desci;//retour de la structure du descripteur
 
 
 
-/*
+
 void main(){//exemple d'utilisation
   descri_audio tableau;
 
@@ -94,4 +94,3 @@ void main(){//exemple d'utilisation
     }
 
 }
-*/
