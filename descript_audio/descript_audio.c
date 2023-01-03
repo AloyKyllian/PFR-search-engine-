@@ -1,6 +1,6 @@
 #include "descript_audio.h"
 
-descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci){//demander comment recuperer le chemin et nom du fichier
+descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci,int * erreur){//demander comment recuperer le chemin et nom du fichier
     double pas;
     int nbr_val=0;
     int k;//(nbr_val_fenetre)
@@ -10,9 +10,10 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
 
     //chemin_fichier="../son/jingle_fi.txt";//example de chemin possible
     fichier = fopen(chemin_fichier, "r");//ouvre le fichier ne mode read
-    if(fichier==NULL){              
-        printf("Erreur lors de l'ouverture d'un fichier");
-        exit(1);
+    if(fichier==NULL){    
+        *erreur=1;//regarder ouverture fichier
+        //printf("Erreur lors de l'ouverture d'un fichier");
+        //exit(1);
     }
     while(fscanf(fichier,"%lf",&val)!=EOF){
         nbr_val++;
@@ -23,9 +24,17 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
     desci.size_x=k;
     desci.size_y=intervalle;
     desci.tab = malloc(k * sizeof(*desci.tab));//creation du tableau
+    if(desci.tab!=NULL)
+    {
+        *erreur=2;//erreur malloc
+    }
     for (int i = 0; i <= k; i++)
     {
         desci.tab[i] = malloc(intervalle * sizeof(**desci.tab));
+        if(desci.tab[i]!=NULL)
+        {
+            *erreur=2;//erreur malloc
+        }
     }
 
     for (unsigned i = 0; i < k; ++i)//initialisation du tableau(possibilité de fonction)
