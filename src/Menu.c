@@ -2,18 +2,32 @@
 #include "../head/Connexion.h"
 #include "../head/Config.h"
 #include "../head/FichierExist.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
 int MAE()
 {
 
     static char etat_courant = Menu_general;
-    int test,test1;
+    int test1,test;
     char choix;
     char choixUtilisateur;
+    char choixTexte;
     char choixImage;
+    char choixAudio;
+    char choixTexteComp;
+    char choixImageComp;
+    char choixAudioComp;
     char chemin[100];
     char *extension;
     int nbTentative=1;
     int nbFenetre,intervalle;
+    bool result=false;
+    String erreur;
+    LOGIN testlogin;
+    lesLogins tablogin;
     switch (etat_courant)
     {
             case Menu_general:
@@ -21,19 +35,15 @@ int MAE()
                 printf("Veuillez faire votre choix : \n");
                 printf("[1] Administrateur \n[2] Utilisateur \n[Q] Quitter\n");
                 scanf("%c", &choix);
-
                 switch (choix)
                 {
                     
                     case Administrateur:
                         // Connexion();
-                            bool result=false;
-                            String erreur;
-                            LOGIN test;
-                            lesLogins tablogin;
+                         result=false;  
                          do
-                        {
-                            result = seconnecter(tablogin, test, &erreur);
+                        {   
+                            result = seconnecter(tablogin, testlogin, &erreur);
                             printf("\nConnexion ");
                             (result) ? printf("Réussi\n\n") : printf("Échoué\n\n");
                             if (result){
@@ -228,7 +238,6 @@ int MAE()
                 printf("[1] Recherche fichier texte\n [2] Recherche fichier image\n [3] Recherche fichier audio \n[Q] Déconnexion\n");
                 scanf("%c",&choix);
                 scanf("%c", &choixUtilisateur);
-                printf("choix=%c\n",choixUtilisateur);
                 switch (choixUtilisateur)
                 {
                 case texte:
@@ -258,8 +267,9 @@ int MAE()
                 printf("Recherche fichier texte :\n");
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par mot clé\n [2] Recherche par comparaison de textes\n[R] Retour\n[Q] Quitter\n");
-                scanf("%c", &choix);
-                switch (choix)
+                scanf("%c",&choixUtilisateur);
+                scanf("%c",&choixTexte);
+                switch (choixTexte)
                 {
                 case Recherche_mots_cle:
 
@@ -274,8 +284,9 @@ int MAE()
                         if(test==-1)
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
-                            scanf("%c",&choix);
-                            switch (choix)
+                            scanf("%c",&choixTexte);
+                            scanf("%c",&choixTexteComp);
+                            switch (choixTexteComp)
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;
@@ -314,7 +325,8 @@ int MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par comparaison d'images\n[R] Retour\n[Q] Quitter\n");
                 scanf("%c", &choix);
-                switch (choix)
+                scanf("%c", &choixImage);
+                switch (choixImage)
                 {
                 case Recherche_par_comparaison:
                     printf("Votres image est une :\n[1] Image couleur\n[2] Image noir et blanc\n");
@@ -331,7 +343,8 @@ int MAE()
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
                             scanf("%c",&choix);
-                            switch (choix)
+                            scanf("%c",&choixImageComp);
+                            switch (choixImageComp)
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;
@@ -387,7 +400,8 @@ int MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par comparaison d'audio\n[R] Retour\n[Q] Quitter\n");
                 scanf("%c", &choix);
-                switch (choix)
+                scanf("%c", &choixAudio);
+                switch (choixAudio)
                 {
                 case Recherche_par_comparaison:
                     printf("entrez le chemin de votre fichier\n");
@@ -401,8 +415,8 @@ int MAE()
                         if(test==-1)
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
-                            scanf("%c",&choix);
-                            switch (choix)
+                            scanf("%c",&choixAudioComp);
+                            switch (choixAudioComp)
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;

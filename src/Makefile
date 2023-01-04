@@ -21,15 +21,15 @@ connexion : Login.c Global.c Connexion.c tst_connexion.c
 	gcc -o tst_connexion.out Login.o Connexion.o Global.o tst_connexion.o -lm
 	rm -rf *.o
 
-menu : main.c Menu.c Login.c Global.c Connexion.c Config.c FichierExist.c
-	gcc -c Menu.c
+menu : Global.c Config.c Login.c Connexion.c FichierExist.c Menu.c main.c    
+	gcc -c Global.c
+	gcc -c Config.c 
 	gcc -c Login.c 
 	gcc -c Connexion.c
-	gcc -c Global.c 
-	gcc -c Config.c 
-	gcc -c FichierExist.c 
-	gcc -c main.c 
-	gcc -o menu.out main.o Menu.o Connexion.o Global.o Login.o Config.o FichierExist.o -lm
+	gcc -c FichierExist.c
+	gcc -c Menu.c
+	gcc -c main.c
+	gcc -o menu.out Global.o Config.o Login.o Connexion.o  FichierExist.o Menu.o main.o -lm
 	rm -rf *.o
 	./menu.out
 
