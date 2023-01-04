@@ -246,7 +246,5 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     }
 
 }
-
-
 }
 
