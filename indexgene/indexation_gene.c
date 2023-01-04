@@ -1,6 +1,6 @@
 #include "indexation_gene.h"
 
-void recup_path(PILE *pourchemin, int deb, String path, String type, String *Erreur)
+void recup_path(PILE *pourchemin, int deb, String path, String type, int *Erreur)
 {
       ELEMENT element;
       String nom_fic, chemin;
@@ -51,7 +51,7 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, String *Err
       }
       else
       {
-            strcpy(*Erreur, "Erreur : Fichier introuvable");
+            *Erreur, "Erreur : Fichier introuvable");
       }
       affichePILE(*pourchemin);
       fflush(stdout);
@@ -142,6 +142,53 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, String *erreur)
       }
       return dscr_audio;
 }
+
+void depiler_descripteur_audio(PILE_audio dscr_audio, String *erreur)
+{
+      ELEMENT_audio elementsupp;
+      FILE *fichier = NULL;
+      fichier = fopen("../base_descripteur/base_descripteur_audio", "w");
+
+      if (fichier != NULL)
+      {
+            while (dscr_audio->suiv != NULL)
+            {
+                  dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
+                  //______________________________
+                  // AFFICHAGE ELEMENT DANS FICHIER
+                  //_______________________________
+                  fprintf(fichier, "%d\n", elementsupp.id);
+                  for (unsigned i = 0; i < elementsupp.descripteur.size_x; ++i)
+                  {
+                        for (unsigned j = 0; j < elementsupp.descripteur.size_y; ++j)
+                        {
+                              fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
+                        }
+                        fprintf(fichier, "\r\n");
+                  }
+            }
+            dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
+            //______________________________
+            // AFFICHAGE ELEMENT DANS FICHIER
+            //_______________________________
+            fprintf(fichier, "%d\n", elementsupp.id);
+            for (unsigned i = 0; i < elementsupp.descripteur.size_x; ++i)
+            {
+                  for (unsigned j = 0; j < elementsupp.descripteur.size_y; ++j)
+                  {
+                        fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
+                  }
+                  fprintf(fichier, "\r\n");
+            }
+      }
+      else
+      {
+            strcpy(*erreur, "Erreur : Fichier introuvable");
+      }
+      fclose(fichier);
+}
+
+
 PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur)
 {
 
@@ -160,7 +207,6 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur)
       if (ptr_fic != NULL)
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-            printf("id =%d chemin %s\n", element_temp.id, cheminfichier);
 
             img = Lire_image(&Erreur, cheminfichier);
             img = Pre_traitement(&Erreur, img, config.Nb_Bit_Fort);
@@ -171,12 +217,11 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur)
             while (!feof(ptr_fic))
             {
                   fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-                  printf("id =%d chemin %s\n", element_temp.id, cheminfichier);
-                  
+                                    
                   img = Lire_image(&Erreur, cheminfichier);
                   img = Pre_traitement(&Erreur, img, config.Nb_Bit_Fort);
                   element_temp.descripteur_image = Creation_Discripteur(&Erreur, img, config.Nb_Bit_Fort);
-                  fflush(stdout);
+                  
                   dscr_image = emPILE_image(dscr_image, element_temp);
                   
             }
@@ -235,46 +280,84 @@ void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
       fclose(fichier);
 }
 
-void depiler_descripteur_audio(PILE_audio dscr_audio, String *erreur)
+PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur)
 {
-      ELEMENT_audio elementsupp;
-      FILE *fichier = NULL;
-      fichier = fopen("../base_descripteur/base_descripteur_audio", "w");
 
-      if (fichier != NULL)
+      int Erreur = 0;
+      FILE *ptr_fic = NULL;
+      ELEMENT_texte element_temp;
+      IMAGE img;
+      char CHEMIN[100] = "../liste_base/liste_base_texte";
+      char cheminfichier[200];
+      CONFIG config;
+
+      config = Lire_CONFIG(&Erreur);
+
+      ptr_fic = fopen(CHEMIN, "r");
+
+      if (ptr_fic != NULL)
       {
-            while (dscr_audio->suiv != NULL)
+            fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+
+            //_______________
+            // appel decriteur texte
+
+            //______________
+
+            dscr_texte = emPILE_texte(dscr_texte, element_temp);
+
+            while (!feof(ptr_fic))
             {
-                  dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
-                  // AFFICHAGE ELEMENT DANS FICHIER
-                  fprintf(fichier, "%d\n", elementsupp.id);
-                  for (unsigned i = 0; i < elementsupp.descripteur.size_x; ++i)
-                  {
-                        for (unsigned j = 0; j < elementsupp.descripteur.size_y; ++j)
-                        {
-                              fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
-                        }
-                        fprintf(fichier, "\r\n");
-                  }
+                  fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+                         //_______________
+                         // appel decriteur texte
+
+                          //______________
+
+                  dscr_texte = emPILE_texte(dscr_texte, element_temp);
+                  
             }
-            dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
-            // AFFICHAGE ELEMENT DANS FICHIER
-            fprintf(fichier, "%d\n", elementsupp.id);
-            for (unsigned i = 0; i < elementsupp.descripteur.size_x; ++i)
-            {
-                  for (unsigned j = 0; j < elementsupp.descripteur.size_y; ++j)
-                  {
-                        fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
-                  }
-                  fprintf(fichier, "\r\n");
-            }
+            fclose(ptr_fic);
       }
       else
       {
-            strcpy(*erreur, "Erreur : Fichier introuvable");
+            fprintf(stderr, "ERREUR :  PB avec liste_rep\n");
+      }
+      return dscr_texte;
+}
+
+void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur)
+{
+      ELEMENT_texte elementsupp;
+      FILE *fichier = NULL;
+      fichier = fopen("../base_descripteur/base_descripteur_texte", "w");
+      int total = 0;
+
+      if (fichier != NULL)
+      {
+            while (dscr_texte->suiv != NULL)
+            {
+                  dscr_texte = dePILE_texte(dscr_texte, &elementsupp);
+                  //______________________________
+                  // AFFICHAGE ELEMENT DANS FICHIER
+                  //________________________________
+                  fprintf(fichier, "%d\n", elementsupp.id);
+                  
+            }
+            dscr_texte = dePILE_texte(dscr_texte, &elementsupp);
+            //______________________________
+            // AFFICHAGE ELEMENT DANS FICHIER
+            //________________________________
+            fprintf(fichier, "%d\n", elementsupp.id);
+            
+      }
+      else
+      {
+            *erreur = 1;
       }
       fclose(fichier);
 }
+
 // PILE_image base_descript_empiler_image( PILE_image  dscr_audio, String * erreur)
 // {
 //       printf("ici ?");
