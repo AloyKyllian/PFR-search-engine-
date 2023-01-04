@@ -161,21 +161,24 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur)
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
             printf("id =%d chemin %s\n", element_temp.id, cheminfichier);
-            fflush(stdout);
-            img = Lire_image(&Erreur, CHEMIN);
+
+            img = Lire_image(&Erreur, cheminfichier);
             img = Pre_traitement(&Erreur, img, config.Nb_Bit_Fort);
-            dscr_image->element.descripteur_image = Creation_Discripteur(&Erreur, img, config.Nb_Bit_Fort);
+            element_temp.descripteur_image = Creation_Discripteur(&Erreur, img, config.Nb_Bit_Fort);
+
             dscr_image = emPILE_image(dscr_image, element_temp);
 
             while (!feof(ptr_fic))
             {
+                  fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
                   printf("id =%d chemin %s\n", element_temp.id, cheminfichier);
+                  
                   img = Lire_image(&Erreur, cheminfichier);
                   img = Pre_traitement(&Erreur, img, config.Nb_Bit_Fort);
-                  dscr_image->element.descripteur_image = Creation_Discripteur(&Erreur, img, config.Nb_Bit_Fort);
+                  element_temp.descripteur_image = Creation_Discripteur(&Erreur, img, config.Nb_Bit_Fort);
                   fflush(stdout);
                   dscr_image = emPILE_image(dscr_image, element_temp);
-                  printf("%d \n", dscr_image->element.id);
+                  
             }
             fclose(ptr_fic);
       }
@@ -205,7 +208,7 @@ void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
                   for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
                   {
                         // Permet d'afficher q'un certain nombre de valeur
-                        printf("Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
+                        fprintf(fichier, "Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
 
                         total = total + elementsupp.descripteur_image.Bilan[i][1];
                   }
@@ -219,7 +222,7 @@ void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
             for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
             {
                   // Permet d'afficher q'un certain nombre de valeur
-                  printf("Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
+                  fprintf(fichier, "Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
 
                   total = total + elementsupp.descripteur_image.Bilan[i][1];
             }
