@@ -7,7 +7,7 @@ void affiche_ELEMENT(ELEMENT element)
 
 void affiche_ELEMENT_audio(ELEMENT_audio element)
 {
-      printf("%d \n", element.id);
+      printf("%d\n", element.id);
       for (unsigned i = 0; i < element.descripteur.size_x; ++i)
     {
         for (unsigned j = 0; j < element.descripteur.size_y; ++j)

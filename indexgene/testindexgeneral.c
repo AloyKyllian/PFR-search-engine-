@@ -9,10 +9,38 @@ int main()
      PILE pileaudio_path=init_PILE();
      int deb=0;
     PILE_audio descripteur_audio=NULL;
-    ELEMENT_audio element;
-  descri_audio mabite;
+ 
 
-  descripteur_audio= base_descript_empiler_audio ( descripteur_audio, Erreurtexte);
+    descripteur_audio= base_descript_empiler_audio ( descripteur_audio, &Erreurtexte);
+    depiler_descripteur_audio ( descripteur_audio, &Erreurimage);
+
+    int Erreur=NULL;
+      FILE *ptr_fic = NULL;
+      ELEMENT_image element;
+      int total=0;
+      IMAGE img;
+      char CHEMIN [100] =  "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/63.txt";
+      char cheminfichier [200];
+      CONFIG config;
+      PILE_image pileimage=NULL;
+           img = Lire_image(&Erreur,CHEMIN);
+             img = Pre_traitement(&Erreur,img,config.Nb_Bit_Fort);
+             element.descripteur_image = Creation_Discripteur(&Erreur,img,config.Nb_Bit_Fort);
+            
+    
+    for(int i = 0; i < element.descripteur_image.Nb_Ligne; i++ )
+    {
+        // Permet d'afficher q'un certain nombre de valeur
+        if( (i % (int)(0.1 *element.descripteur_image.Nb_Colonne)) == 0)
+        {
+            printf("Val n°%d = %d Quantity = %d\n",i,element.descripteur_image.Bilan[i][0],element.descripteur_image.Bilan[i][1]);
+        }
+       
+        total = total+element.descripteur_image.Bilan[i][1];
+    }
+    printf("\nTotal de valeur = %d\n",total);
+    // pileimage= base_descript_empiler_image( pileimage,  &Erreurimage);
+     //depiler_descripteur_image(  pileimage, &Erreurimage);
 
 
 /*

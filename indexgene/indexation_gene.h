@@ -9,7 +9,11 @@
     void depiler_path ( PILE *pourchemin, String type, String *Erreur);
     void recup_path(PILE *pourchemin, int deb, String path, String type, String *Erreur);
     void lire_chemin (PILE *pourchemin, String type, String * erreur);
+
    PILE_audio base_descript_empiler_audio (PILE_audio dscr,String * erreur);
+   void depiler_descripteur_audio ( PILE_audio  dscr_audio, String * erreur);
+
    PILE_image base_descript_empiler_image( PILE_image  dscr_image, String * erreur);
+   void depiler_descripteur_image( PILE_image  dscr_image, String * erreur);
 
 #endif
