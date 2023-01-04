@@ -6,6 +6,5 @@ ERREUR 4: Nombre superieur a 0
 ERREUR 5: Nombre superieur a 8
 ERREUR 6: Pas une puissance de 2
 ERREUR 7: Fichier introuvable
-ERREUR 8: La valeur rentree n'es tpas un nombre
 ERREUR 9: Pas un nombre
 ERREUR 10: Nombre superieur a 100
