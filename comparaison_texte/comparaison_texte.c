@@ -15,93 +15,46 @@
 
 
 
-DESCRIPTEUR_TEXTE descripteur_texte_nv(DESCRIPTEUR_TEXTE tab_renv)
+void comparaison(int seuil,int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur)
 {
-    bool passe;
-    char mot_lu[100];
-    int nbr_mot;
+char * mot_lu;
+int id_lu;
+DESCRIPTEUR_TEXTE tab1;
+DESCRIPTEUR_TEXTE tab2;
+
+tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
+
+
     FILE* fichier = NULL;
-    fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
+    fichier = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
         printf("Erreur lors de l'ouverture d'un fichier");
         exit(1);
     }
 
-    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter le début du fichier
+    while(scanf("%d",id_lu)!=EOF)
     {
-        fscanf(fichier,"%s",mot_lu);
-    }
+            tab[j].id=id_lu;
+            for(int i=0;i<nbr_mot;i++)
+            {
+                scanf("%s    |    %d\n",tab2.tab_mot[i], tab2.tab_app[i]);
+            }
 
-    while(fscanf(fichier,"%s",mot_lu)!=EOF)
-    {
-        nbr_mot++;
-    }
-    
-    rewind(fichier);
 
-    DESCRIPTEUR_TEXTE tab;
-    tab.index=0;
-    tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
-    tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
+            verif_seuil=comparaison
+            if(verif_seuil>seuil)
+           tab[j].pourcentage = verif_seuil;
+            j++;
 
-    for(int i=0;i<nbr_mot;i++)
-    {
-        strcpy(tab.tab_mot[i],"");
-    }
 
-    char *mot;
- 
-    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter le début du fichier
-    {
-        fscanf(fichier,"%s",mot_lu);
-    }
 
-    while(fscanf(fichier,"%s",mot_lu)!=EOF)
-    {
-        mot = nettoyage(mot_lu);
-        passe=filtrage(mot);
-        if(passe==true)
-        {
-            tab=descripteur_texte(nbr_mot,mot,tab);
 
-        }
-        return tab;
     }
 
 
 
-}
 
 
-DESCRIPTEUR_TEXTE recup_descripteur(DESCRIPTEUR_TEXTE tab1, chemin)
-{
-    bool passe;
-    char mot_lu[100];
-    int nbr_mot;
-    FILE* fichier = NULL;
-    fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
-    if(fichier==NULL){
-        printf("Erreur lors de l'ouverture d'un fichier");
-        exit(1);
-    }
-
-    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter le début du fichier
-    {
-        fscanf(fichier,"%s",mot_lu);
-    }
-
-    while(fscanf(fichier,"%s",mot_lu)!=EOF)
-    {
-        nbr_mot++;
-    }
-
-
-    return tab1;
-}
-
-
-void comparaison(DESCRIPTEUR_TEXTE tab1,DESCRIPTEUR_TEXTE tab2)
-{
     int comp=0;
     int cpt=0;
     int pourc=0;
