@@ -22,9 +22,10 @@ int main()
       char CHEMIN [100] =  "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/63.txt";
       char cheminfichier [200];
       CONFIG config;
+      config=Lire_CONFIG(&Erreurimage);
       PILE_image pileimage=NULL;
            img = Lire_image(&Erreur,CHEMIN);
-             img = Pre_traitement(&Erreur,img,config.Nb_Bit_Fort);
+             img = Pre_traitement(&Erreur,img,8);
              element.descripteur_image = Creation_Discripteur(&Erreur,img,config.Nb_Bit_Fort);
             
     
