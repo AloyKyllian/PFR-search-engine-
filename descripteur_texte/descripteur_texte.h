@@ -12,12 +12,12 @@ typedef struct
     String *tab_mot;
     int *tab_app;
     int index;
-}tab_total;
+}DESCRIPTEUR_TEXTE;
 
 int comptemot(char* mot_lu);
-tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total tab_renvoyer);
-tab_total tab_occ(int nbr_occ,tab_total tab,tab_total tab_occ_finale);
-tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab);
+DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESCRIPTEUR_TEXTE tab_renvoyer);
+DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE tab_occ_finale);
+DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab);
 bool filtrage(char* mot);
 char *nettoyage(char mot_lu[100]);
 
