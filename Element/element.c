@@ -22,10 +22,11 @@ void affiche_ELEMENT_audio(ELEMENT_audio element)
 void affiche_ELEMENT_image(ELEMENT_image element)
 {
     int total=0;
+    printf("%d\n", element.id);
 for(int i = 0; i < element.descripteur_image.Nb_Ligne; i++ )
     {
         // Permet d'afficher q'un certain nombre de valeur
-        if( (i % (int)(0.1 *element.descripteur_image.Nb_Ligne)) == 0)
+        if( (i % (int)(0.1 *element.descripteur_image.Nb_Colonne)) == 0)
         {
             printf("Val n°%d = %d Quantity = %d\n",i,element.descripteur_image.Bilan[i][0],element.descripteur_image.Bilan[i][1]);
         }

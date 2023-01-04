@@ -151,7 +151,7 @@ PILE_audio base_descript_empiler_audio ( PILE_audio  dscr_audio, String * erreur
 PILE_image base_descript_empiler_image( PILE_image  dscr_image, String * erreur)
 {
 
-      int Erreur;
+      int Erreur=NULL;
       FILE *ptr_fic = NULL;
       ELEMENT_image element_temp;
       IMAGE img;
@@ -159,7 +159,7 @@ PILE_image base_descript_empiler_image( PILE_image  dscr_image, String * erreur)
       char cheminfichier [200];
       CONFIG config;
 
-      config=Lire_CONFIG(erreur);
+      config=Lire_CONFIG(&Erreur);
 
 
       ptr_fic = fopen(CHEMIN, "r");
@@ -167,22 +167,16 @@ PILE_image base_descript_empiler_image( PILE_image  dscr_image, String * erreur)
 
       if( ptr_fic != NULL)
       {
-            fscanf( ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier); 
-            printf("id =%d chemin %s\n",element_temp.id,cheminfichier );
-            fflush(stdout);
-            // img = Lire_image(&Erreur,CHEMIN);
-            //  img = Pre_traitement(&Erreur,img,config.Nb_Bit_Fort);
-            // dscr_image->element.descripteur_image = Creation_Discripteur(&Erreur,img,config.Nb_Bit_Fort);
-            dscr_image=emPILE_image(dscr_image,element_temp);
-             while ( !feof(ptr_fic) )
+            int total=0;
+             while ( fscanf( ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier)!=EOF )
              {
-                  fscanf( ptr_fic, "%d | %s", &element_temp.id, cheminfichier); 
                   printf("id =%d chemin %s\n",element_temp.id,cheminfichier );
-                  //  img = Lire_image(&Erreur,CHEMIN);
+                  //  img = Lire_image(&Erreur,cheminfichier);
                   //  img = Pre_traitement(&Erreur,img,config.Nb_Bit_Fort);
                   //   dscr_image->element.descripteur_image = Creation_Discripteur(&Erreur,img,config.Nb_Bit_Fort);
-                  fflush(stdout);
+                   fflush(stdout);
                     dscr_image=emPILE_image(dscr_image,element_temp);
+                    printf("%d \n",dscr_image->element.id);               
             }
              fclose(ptr_fic);
      }
