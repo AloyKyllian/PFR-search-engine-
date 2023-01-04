@@ -1,4 +1,5 @@
-#include "../head/descripteur_texte.h"
+
+#include "descripteur_texte.h"
 
 
 int comptemot(char* mot_lu)
@@ -114,7 +115,7 @@ return verif;
 }
 
 
-tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
+DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab)
 {
 
     bool verif=false;
@@ -139,7 +140,7 @@ tab_total descripteur_texte( int nbr_mot, char* mot,tab_total tab)
     return tab;
 }
 
-tab_total tab_occ(int nbr_occ,tab_total tab,tab_total tab_occ_finale)
+DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE tab_occ_finale)
 {
 
     int max=1;
@@ -174,7 +175,7 @@ tab_total tab_occ(int nbr_occ,tab_total tab,tab_total tab_occ_finale)
 
 }
 
-tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total tab_renvoyer) {
+DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESCRIPTEUR_TEXTE tab_renvoyer) {
 
     bool passe;
     char mot_lu[100];
@@ -198,7 +199,7 @@ tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total ta
     
     rewind(fichier);
 
-    tab_total tab;
+    DESCRIPTEUR_TEXTE tab;
     tab.index=0;
     tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
     tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
@@ -226,7 +227,7 @@ tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total ta
         }
     }
 
-    tab_total tab_occ_finale;
+    DESCRIPTEUR_TEXTE tab_occ_finale;
     tab_renvoyer.index=0;
     tab_renvoyer.tab_mot = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_mot));//creation du tableau
     tab_renvoyer.tab_app = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_app));//creation du tableau
@@ -239,6 +240,10 @@ tab_total descripteur_texte_finale(char* chemin_fichier,int nbr_occ,tab_total ta
 
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
+
+    /*for(int x=0;x<nbr_occ;x++)
+    {
+        printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
+    }*/
+
 }
-
-

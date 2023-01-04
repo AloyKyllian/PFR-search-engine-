@@ -1,8 +1,8 @@
-#include "../head/descripteur_texte.h"
+#include "descripteur_texte.h"
 
 int main()
 {
-tab_total tab;
+DESCRIPTEUR_TEXTE tab;
     int nbr_occ=20;
 
 //tab=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",nbr_occ,tab);
