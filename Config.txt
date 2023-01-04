@@ -1,0 +1,5 @@
+[1] Nombre de mots clé : 100
+[2] Similarité : 10
+[3] Nombre de bits : 229257232
+[4] Nombre de fenetre : 1
+[5] Intervale de temps : 4096

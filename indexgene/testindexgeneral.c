@@ -70,7 +70,12 @@ int main()
      affichePILE_audio(descripteur_audio);
      PILE_image pileimage=NULL;
      pileimage= base_descript_empiler_image( pileimage,  &Erreurimage);
-     affichePILE_image(pileimage);
+     printf("Verification dans le main que le id est empiler\n");
+     while (pileimage!=NULL)
+     {
+        printf("%d \n",pileimage->element.id);
+        pileimage=pileimage->suiv;
+     }
     return 0;
     */
 }
