@@ -31,7 +31,7 @@ typedef struct
 
 typedef struct 
 {
-    DESCRIPTEUR_TEXTE descripteur_image;
+    DESCRIPTEUR_TEXTE descripteur_texte;
     int id;
 }ELEMENT_texte;
 

@@ -303,7 +303,7 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur)
             // appel decriteur texte
 
             //______________
-
+            element_temp.descripteur_texte=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",config.Nb_Mots_Cle,element_temp.descripteur_texte);     
             dscr_texte = emPILE_texte(dscr_texte, element_temp);
 
             while (!feof(ptr_fic))
@@ -313,7 +313,7 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur)
                          // appel decriteur texte
 
                           //______________
-
+                  element_temp.descripteur_texte=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",config.Nb_Mots_Cle,element_temp.descripteur_texte);     
                   dscr_texte = emPILE_texte(dscr_texte, element_temp);
                   
             }
