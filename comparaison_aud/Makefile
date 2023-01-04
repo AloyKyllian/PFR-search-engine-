@@ -1,3 +1,3 @@
-comparaison_aud : comparaison_aud.c comparaison_aud.h ../descript_audio/descript_audio.c
-	gcc -c comparaison_aud.c 
-	gcc -o comparaison_aud.out comparaison_aud.o ../descript_audio/descript_audio.o
+comparaison_audio : comparaison_audio.c comparaison_audio.h ../descripteur_audio/descripteur_audio.c
+	gcc -c comparaison_audio.c 
+	gcc -o comparaison_audio.out comparaison_audio.o ../descripteur_audio/descripteur_audio.o
