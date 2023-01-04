@@ -165,16 +165,16 @@ DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE ta
         max=1;
     }
 
-    for(int x=0;x<nbr_occ;x++)
+    /*for(int x=0;x<nbr_occ;x++)
     {
         printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final
-    }
+    }*/
 
     return tab_occ_finale;
 
 }
 
-DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESCRIPTEUR_TEXTE tab_renvoyer) {
+DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESCRIPTEUR_TEXTE tab_renvoyer) {                   ///CA C'est LE MAIN QUI FAIT TOUT
 
     bool passe;
     char mot_lu[100];
@@ -240,10 +240,10 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
 
-    /*for(int x=0;x<nbr_occ;x++)
+    for(int x=0;x<nbr_occ;x++)
     {
-        printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
-    }*/
+        printf("%s    |    %d\n",tab_renvoyer.tab_mot[x],tab_renvoyer.tab_app[x]);          //ET LA J'AFFICHE      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
+    }
 
 }
 
