@@ -11,6 +11,6 @@ typedef struct
     int **tab;
 } descri_audio;
 
-descri_audio Descripteur_audio(int fenetre, int intervalle, char *chemin_fichier, descri_audio desci);
+descri_audio Descripteur_audio(int fenetre, int intervalle, char *chemin_fichier, descri_audio desci,int *erreur);
 
 #endif

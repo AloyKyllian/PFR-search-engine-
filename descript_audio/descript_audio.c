@@ -19,10 +19,15 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
         nbr_val++;
     }
     
-    k=(nbr_val/fenetre)+1;//calcul du nombre de fenetre
+ 
+
+
+    k=(nbr_val/fenetre);//calcul du nombre de fenetre
 
     desci.size_x=k;
     desci.size_y=intervalle;
+
+
     desci.tab = malloc(k * sizeof(*desci.tab));//creation du tableau
     if(desci.tab!=NULL)
     {
@@ -37,6 +42,7 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
         }
     }
 
+
     for (unsigned i = 0; i < k; ++i)//initialisation du tableau(possibilité de fonction)
     {
         for (unsigned j = 0; j < intervalle; ++j)
@@ -48,6 +54,9 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
     pas=2./intervalle;
     rewind(fichier);//permet de revenir au debut du fichier
 
+
+
+
     for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
     {
         if(cpt==fenetre)//passer de fenetre en fenetre
@@ -56,21 +65,9 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
             k++;
         }
 
-        if(nbr_val<fenetre)//verifier si on est au dans les derniere valeurs pour creer une fenetre bonus
-        {
-            for(m=0;-1+m*pas<1;m++)//comptage des valeurs
-            {                 
-                if(val>=pas*m-1 && val<pas*(m+1)-1)
-                {
-                    if(val<1&&val>-1&&m<intervalle)
-                        desci.tab[k+1][m]++;
-                }
-            }
-           
-        }
-
         for(m=0;m<intervalle;m++)
         {
+               
             if((val>=(pas*m-1)) && (val<(pas*(m+1)-1)))
             {
                 if(val<1&&val>-1&&m<intervalle)
@@ -78,10 +75,10 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
             }
                
         }
-        nbr_val--;
     }
     fclose(fichier);//fermeture du fichier
 
+ 
 return desci;//retour de la structure du descripteur
 }
 

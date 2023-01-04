@@ -47,7 +47,21 @@ void comparaison(int val_lu,descri_audio descripteur_comparé,int *ligne,int *co
 
 
 
-void comparaison_audio(int fenetre,int intervalle,descri_audio descri,char* chemin_descripteur_audio){
+void comparaison_audio(int fenetre,int intervalle,char* chemin_descripteur_compare,char* chemin_descripteur_audio){
+
+
+int erreur;
+
+descri_audio descri;
+
+
+    descri=Descripteur_audio(2048,32,"../descripteur_a_compare.txt",descri,&erreur);
+
+//descri = Descripteur_audio(fenetre,intervalle,chemin_descripteur_compare,descri,&erreur);
+
+
+
+
 
     int nbr_val;
     int val_lu;
@@ -115,6 +129,32 @@ comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, 
 void main (){
 
 
+
+printf("hello");
+
+int erreur;
+
+//descri_audio mabite;
+
+
+//mabite=Descripteur_audio(2048,32,"../descripteur_a_compare.txt",mabite,&erreur);
+
+
+/*
+    for (unsigned i = 0; i < mabite.size_x; ++i)
+    {
+        for (unsigned j = 0; j < mabite.size_y; ++j)
+        {
+            printf(" |%3d| ",mabite.tab[i][j]);
+        }
+        printf("\r\n");
+    }
+
+*/
+comparaison_audio(2048,32,"../descripteur_a_comparé.txt","../descripteur_texte_type.txt");
+
+/*
+
     descri_audio descri;
     descri.size_x=2;
     descri.size_y=32;
@@ -135,5 +175,7 @@ void main (){
             }
 
 comparaison_audio(2048,32,descri,"f");
+
+*/
 
 }
