@@ -8,6 +8,7 @@ int MAE()
     static char etat_courant = Menu_general;
     int test,test1;
     char choix;
+    char choixUtilisateur;
     char choixImage;
     char chemin[100];
     char *extension;
@@ -57,7 +58,6 @@ int MAE()
                             }
                             nbTentative++;
                         } while (nbTentative < 4 && result==false);
-
                         break;
                 case Utilisateur:
                         etat_courant = Menu_Utilisateur;
@@ -84,8 +84,8 @@ int MAE()
                 switch (choix)
                 {
                 case Indexation:
-                    // Indexation generale avec config.txt a voir avec yasmine
-
+                    // Indexation generale 
+                    
                     break;
                 case Configuration:
                     // Configuration
@@ -216,7 +216,7 @@ int MAE()
                     }
                     break;
                 default:
-                    printf("erreur de choix\n");
+                    printf("erreur de choix menu\n");
                     etat_courant = Menu_Visualisation;
                     break;
                 }
@@ -226,8 +226,10 @@ int MAE()
                 printf("Menu utilisateur :\n");
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche fichier texte\n [2] Recherche fichier image\n [3] Recherche fichier audio \n[Q] Déconnexion\n");
-                scanf("%c", &choix);
-                switch (choix)
+                scanf("%c",&choix);
+                scanf("%c", &choixUtilisateur);
+                printf("choix=%c\n",choixUtilisateur);
+                switch (choixUtilisateur)
                 {
                 case texte:
                     etat_courant = Menu_texte;
@@ -246,7 +248,7 @@ int MAE()
                     return 0;
                     break;
                 default:
-                    printf("erreur de choix\n");
+                    printf("erreur de choix menu utilisateur\n");
                     etat_courant = Menu_Utilisateur;
                     break;
                 }
