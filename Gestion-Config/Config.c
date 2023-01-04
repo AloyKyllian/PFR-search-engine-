@@ -1,5 +1,5 @@
-#include "../head/Config.h"
-#include "../head/Config.h"
+#include "Config.h"
+const char PATH_CONFIG[] = "Config.txt";
 
 CONFIG Lire_CONFIG(int *Erreur)
 {
@@ -8,7 +8,7 @@ CONFIG Lire_CONFIG(int *Erreur)
     FILE *fichier = NULL;
 
     // Lie le fichier .txt et enregistre les valuer dans la structure CONFIG
-    fichier = fopen("../Config.txt", "r");
+    fichier = fopen(PATH_CONFIG, "r");
     if (fichier != NULL)
     {
         *Erreur = 0;
@@ -168,7 +168,7 @@ void Ecrire_CONFIG(int *Erreur, CONFIG config)
     // Variable
     FILE *fichier = NULL;
 
-    fichier = fopen("../Config.txt", "w");
+    fichier = fopen(PATH_CONFIG, "w");
     if (fichier != NULL)
     {
         *Erreur = 0;
