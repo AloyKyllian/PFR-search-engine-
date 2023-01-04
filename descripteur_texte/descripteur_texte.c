@@ -165,11 +165,11 @@ DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE ta
         max=1;
     }
 
-    for(int x=0;x<nbr_occ;x++)
+   /* for(int x=0;x<nbr_occ;x++)
     {
         printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final
     }
-
+*/
     return tab_occ_finale;
 
 }
@@ -239,12 +239,22 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
 
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
-
+    return tab_renvoyer;
     /*for(int x=0;x<nbr_occ;x++)
     {
         printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
     }*/
 
+}
+
+int main()
+{
+    DESCRIPTEUR_TEXTE tab_aff;
+    tab_aff=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",10,tab_aff);     //10 = nbr_occ c'est le nombre de mot-clé à afficher
+    for(int x=0;x<10;x++)
+    {
+        printf("%s    |    %d\n",tab_aff.tab_mot[x],tab_aff.tab_app[x]);          //On affiche le tableau final     
+    }
 }
 
 
