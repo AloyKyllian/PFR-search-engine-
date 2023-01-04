@@ -9,6 +9,15 @@ int main()
      PILE pileaudio_path=init_PILE();
      int deb=0;
     PILE_audio descripteur_audio=NULL;
+    ELEMENT_audio element;
+  descri_audio mabite;
+
+  descripteur_audio= base_descript_empiler_audio ( descripteur_audio, Erreurtexte);
+
+
+/*
+
+
     //_________________
     //TEXTE
     //_________________
@@ -63,4 +72,5 @@ int main()
      pileimage= base_descript_empiler_image( pileimage,  &Erreurimage);
      affichePILE_image(pileimage);
     return 0;
+    */
 }

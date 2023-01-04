@@ -77,12 +77,12 @@ return desci;//retour de la structure du descripteur
 }
 
 
-
 /*
+
 void main(){//exemple d'utilisation
   descri_audio mabite;
 
-    mabite=Descripteur_audio(2048,32,"../son/jingle_fi.txt",mabite);
+    mabite=Descripteur_audio(2048,32,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.txt",mabite);
     
     for (unsigned i = 0; i < mabite.size_x; ++i)
     {

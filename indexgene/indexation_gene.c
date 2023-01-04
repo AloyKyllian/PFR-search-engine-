@@ -131,13 +131,13 @@ PILE_audio base_descript_empiler_audio ( PILE_audio  dscr_audio, String * erreur
       {
             fscanf( ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier); 
             printf("id =%d chemin %s",element_temp.id,cheminfichier );
-            //element_temp.descripteur=Descripteur_audio(4096, 30, cheminfichier, element_temp.descripteur);
+            element_temp.descripteur=Descripteur_audio(4096, 30, cheminfichier, element_temp.descripteur);
             dscr_audio=emPILE_audio(dscr_audio,element_temp);
              while ( !feof(ptr_fic) )
              {
                   fscanf( ptr_fic, "%d | %s", &element_temp.id, cheminfichier); 
                   printf("id =%d chemin %s",element_temp.id,cheminfichier );
-                  //element_temp.descripteur=Descripteur_audio(4096, 30, cheminfichier, element_temp.descripteur);
+                  element_temp.descripteur=Descripteur_audio(4096, 30, cheminfichier, element_temp.descripteur);
                   dscr_audio=emPILE_audio(dscr_audio,element_temp);
             }
              fclose(ptr_fic);
@@ -171,7 +171,7 @@ PILE_image base_descript_empiler_image( PILE_image  dscr_image, String * erreur)
             printf("id =%d chemin %s\n",element_temp.id,cheminfichier );
             fflush(stdout);
             // img = Lire_image(&Erreur,CHEMIN);
-            //  img = Pre_traitement(&Erreur,img,config.Nb_Bit_Fort);
+            // img = Pre_traitement(&Erreur,img,config.Nb_Bit_Fort);
             // dscr_image->element.descripteur_image = Creation_Discripteur(&Erreur,img,config.Nb_Bit_Fort);
             dscr_image=emPILE_image(dscr_image,element_temp);
              while ( !feof(ptr_fic) )
