@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "indexation_gene.h": "c",
+        "config.h": "c",
+        "element.h": "c",
+        "descripteur_image.h": "c"
+    }
+}

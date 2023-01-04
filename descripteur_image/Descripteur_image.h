@@ -1,7 +1,7 @@
 #ifndef DESCRIPTEUR_IMAGE_H
 #define DESCRIPTEUR_IMAGE_H
 
-#include "../Config/Global.h"
+#include "Global.h"
 
 /*
 Exemple pour cree un descripteur :

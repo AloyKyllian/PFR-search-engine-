@@ -3,7 +3,7 @@
 
 #include "../Element/element.h"
 #include "../Pile/Pile.h"
-#include "../Config/Config.h"
+#include "../Gestion-Config/Config.h"
 
 
     void depiler_path ( PILE *pourchemin, String type, String *Erreur);
@@ -13,7 +13,7 @@
    PILE_audio base_descript_empiler_audio (PILE_audio dscr,String * erreur);
    void depiler_descripteur_audio ( PILE_audio  dscr_audio, String * erreur);
 
-   PILE_image base_descript_empiler_image( PILE_image  dscr_image, String * erreur);
-   void depiler_descripteur_image( PILE_image  dscr_image, String * erreur);
+   PILE_image base_descript_empiler_image( PILE_image  dscr_image, int * erreur);
+   void depiler_descripteur_image( PILE_image  dscr_image, int * erreur);
 
 #endif
