@@ -28,6 +28,11 @@ typedef struct
     int id;
 }ELEMENT_image;
 
+typedef struct 
+{
+    tab descripteur_image;
+    int id;
+}ELEMENT_image;
 
 void affect_ELEMENT_image(ELEMENT_image *elemaffect, ELEMENT_image e2);
 void affiche_ELEMENT_image(ELEMENT_image element);
