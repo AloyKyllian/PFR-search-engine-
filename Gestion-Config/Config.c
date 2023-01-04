@@ -12,7 +12,7 @@ CONFIG Lire_CONFIG(int *Erreur)
     if (fichier != NULL)
     {
         *Erreur = 0;
-        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
+        fscanf(fichier, "[1] Nombre de mots-clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de valeurs dans une fenêtre : %d\n[5] Intervale de valeurs : %d", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
     }
     else
     {
@@ -130,7 +130,7 @@ CONFIG Lire_nb_fenetre(int *Erreur, CONFIG config)
         if (tmp2 == (int)tmp2)
         {
             *Erreur = 0;
-            config.Nb_Bit_Fort = tmp;
+            config.Nb_Fenetre = tmp;
         }
         else
         {
@@ -168,11 +168,12 @@ void Ecrire_CONFIG(int *Erreur, CONFIG config)
     // Variable
     FILE *fichier = NULL;
 
+    // Ecrit dans config.txt
     fichier = fopen(PATH_CONFIG, "w");
     if (fichier != NULL)
     {
         *Erreur = 0;
-        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", config.Nb_Mots_Cle, config.Similariter, config.Nb_Bit_Fort, config.Nb_Fenetre, config.Intervale);
+        fprintf(fichier, "[1] Nombre de mots-clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de valeurs dans une fenêtre : %d\n[5] Intervale de valeurs : %d", config.Nb_Mots_Cle, config.Similariter, config.Nb_Bit_Fort, config.Nb_Fenetre, config.Intervale);
     }
     else
     {
