@@ -3,7 +3,7 @@
 int main()
 {
     char path[100];
-    String Erreurtexte, Erreuraudio;
+    int Erreurtexte, Erreuraudio;
     int Erreurimage;
     PILE piletexte_path = init_PILE();
     PILE pileimage_path = init_PILE();
@@ -26,18 +26,13 @@ int main()
     img = Pre_traitement(&Erreurimage, img,  config.Nb_Bit_Fort);
     element.descripteur_image = Creation_Discripteur(&Erreurimage, img, config.Nb_Bit_Fort);
 
-    for (int i = 0; i < element.descripteur_image.Nb_Ligne; i++)
-    {
-        // Permet d'afficher q'un certain nombre de valeur
-        printf("Val n %d = %d Quantity = %d\n", i, element.descripteur_image.Bilan[i][0], element.descripteur_image.Bilan[i][1]);
-
-        total = total + element.descripteur_image.Bilan[i][1];
-    }
-    printf("\nTotal de valeur = %d\n", total);
     pileimage= base_descript_empiler_image( pileimage,  &Erreurimage);
     depiler_descripteur_image(  pileimage, &Erreurimage);
 
-    /*
+    PILE_texte piletexte = NULL;
+    piletexte= base_descript_empiler_texte( piletexte,  &Erreurimage);
+    depiler_descripteur_texte(  piletexte, &Erreurimage);
+    
 
 
         //_________________
@@ -86,18 +81,7 @@ int main()
         //__________________________________
         //stocker descripteur dans une pile
         //__________________________________
-        printf("helololo\n");
-        fflush(stdout);
-         descripteur_audio=base_descript_empiler_audio (descripteur_audio, &Erreuraudio);
-         affichePILE_audio(descripteur_audio);
-         PILE_image pileimage=NULL;
-         pileimage= base_descript_empiler_image( pileimage,  &Erreurimage);
-         printf("Verification dans le main que le id est empiler\n");
-         while (pileimage!=NULL)
-         {
-            printf("%d \n",pileimage->element.id);
-            pileimage=pileimage->suiv;
-         }
+        
         return 0;
-        */
+        
 }

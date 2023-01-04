@@ -136,7 +136,7 @@ PILE_image emPILE_image(PILE_image pile, ELEMENT_image element)
          return temp;
      }
     return pile;
-};
+}
 PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp)
 {
         // si la pile n'est pas vide
@@ -151,5 +151,46 @@ PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp)
     }
     //si la pile était vide, on renvoie celle ci
     return pile;
-};
-    
+}
+
+void affichePILE_texte(PILE_texte pile)
+{
+    int i;
+    PILE_texte temp= pile;
+      if(pile==NULL)
+          {printf("VIDE\n\n");}
+       else
+       {
+           printf("\nAffichage de la pile:\n");
+           do
+           {
+                printf("%d",temp->element.id);
+               temp= temp->suiv;
+           }while(temp!=NULL);
+       }
+}
+PILE_texte emPILE_texte(PILE_texte pile, ELEMENT_texte element)
+{
+    PILE_texte temp=(PILE_texte)malloc(sizeof(Cellule_texte));
+     if(temp!=NULL)
+     {
+          affect_ELEMENT_texte(&(temp->element), element);
+         temp->suiv=pile;
+         return temp;
+     }
+    return pile;
+}
+PILE_texte dePILE_texte(PILE_texte pile, ELEMENT_texte *elementsupp)
+{
+    if(pile!=NULL)
+    {
+        //on garde lelement supprimé
+        affect_ELEMENT_texte(elementsupp, pile->element);
+        // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
+        PILE_texte aux=pile->suiv;
+        free(pile);
+        return aux;
+    }
+    //si la pile était vide, on renvoie celle ci
+    return pile;
+}

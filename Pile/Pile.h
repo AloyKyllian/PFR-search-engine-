@@ -18,6 +18,10 @@ typedef struct eCellule_image
     struct eCellule_image * suiv;
 }Cellule_image,*PILE_image;
 
+typedef struct eCellule_texte
+{   ELEMENT_texte element;
+    struct eCellule_texte * suiv;
+}Cellule_texte,*PILE_texte;
 //fonctions
 
 
@@ -36,6 +40,11 @@ PILE_audio dePILE_audio(PILE_audio pile, ELEMENT_audio *elementsupp);
 void affichePILE_image(PILE_image pile);
 PILE_image emPILE_image(PILE_image pile, ELEMENT_image element);
 PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp);
+
+void affichePILE_texte(PILE_texte pile);
+PILE_texte emPILE_texte(PILE_texte pile, ELEMENT_texte element);
+PILE_texte dePILE_texte(PILE_texte pile, ELEMENT_texte *elementsupp);
+
 
 #endif 
 

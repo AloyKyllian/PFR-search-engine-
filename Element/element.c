@@ -49,3 +49,9 @@ void affect_ELEMENT_audio(ELEMENT_audio *elemaffect, ELEMENT_audio e2)
 {
     *elemaffect=e2;
 }
+
+
+void affect_ELEMENT_texte(ELEMENT_texte *elemaffect, ELEMENT_texte e2)
+{
+    *elemaffect=e2;
+}
