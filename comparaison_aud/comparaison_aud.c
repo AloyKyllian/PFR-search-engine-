@@ -5,10 +5,10 @@
 #include "../descript_audio/descript_audio.h"
 
 
-void comparaison(int val_lu,descri_audio descripteur_comparé,int *ligne,int *colonne,int intervalle,descri_audio descri,float fenetre){
+float comparaison(int val_lu,descri_audio descripteur_comparé,int *ligne,int *colonne,int intervalle,descri_audio descri,float fenetre){
 
     int id=val_lu;
-    float pourcentage;
+    float pourcentage,max=0;
     descripteur_comparé.size_x=*ligne;
     descripteur_comparé.size_y=intervalle;
     descri_audio descripteur_intervale;
@@ -34,35 +34,34 @@ void comparaison(int val_lu,descri_audio descripteur_comparé,int *ligne,int *co
         }
         pourcentage=comparateur/(fenetre*4.)*100;
         pourcentage=100-pourcentage;
-        printf("\n pourcentage : %f   \n",pourcentage);
+        if(pourcentage>max){
+            max=pourcentage;
+        }
+        //printf("\n pourcentage : %f   \n",pourcentage);
     }
-
+    printf("\n max : %f   \n",max);
     *ligne=0;
     *colonne=0;
 
-
+    return max;
 
 }
 
 
 
 
-void comparaison_audio(int fenetre,int intervalle,char* chemin_descripteur_compare,char* chemin_descripteur_audio){
-
+float* comparaison_audio(int fenetre,int intervalle,char* chemin_descripteur_compare,char* chemin_descripteur_audio){
 
 int erreur;
 
 descri_audio descri;
 
 
-    descri=Descripteur_audio(2048,32,"../descripteur_a_compare.txt",descri,&erreur);
+   // descri=Descripteur_audio(config.Nb_Fenetre,config.Intervale,"../descripteur_a_compare.txt",descri,&erreur);
 
-//descri = Descripteur_audio(fenetre,intervalle,chemin_descripteur_compare,descri,&erreur);
+descri = Descripteur_audio(fenetre,intervalle,chemin_descripteur_compare,descri,&erreur);
 
-
-
-
-
+    float tab[100];//changer le nombre de fichier indexer
     int nbr_val;
     int val_lu;
     FILE* fichier = NULL;
@@ -88,7 +87,7 @@ descri_audio descri;
     }
 
 
-
+    int i=0;
 
 
     while(fin!=EOF)
@@ -96,7 +95,8 @@ descri_audio descri;
         fin=fscanf(fichier,"%d",&val_lu);
         if(val_lu<0 && val_lu!=-1)
         {
-           comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, fenetre);
+           tab[i]=comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, fenetre);
+           i++;
         }
            
 
@@ -118,7 +118,7 @@ fclose(fichier);
     descripteur_compare.size_y=intervalle;
 
 
-comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, fenetre);
+tab[i]=comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, fenetre);
 
 }
 
@@ -128,16 +128,18 @@ comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, 
 
 void main (){
 
+float tab[100];
 
 
 printf("hello");
+fflush(stdout);
 
 int erreur;
 
-//descri_audio mabite;
+descri_audio mabite;
 
 
-//mabite=Descripteur_audio(2048,32,"../descripteur_a_compare.txt",mabite,&erreur);
+mabite=Descripteur_audio(2048,32,"../descripteur_a_compare.txt",mabite,&erreur);
 
 
 /*
@@ -151,7 +153,9 @@ int erreur;
     }
 
 */
-comparaison_audio(2048,32,"../descripteur_a_comparé.txt","../descripteur_texte_type.txt");
+
+
+&tab = comparaison_audio(2048,32,"../descripteur_a_compare.txt","../descripteur_texte_type.txt");
 
 /*
 
