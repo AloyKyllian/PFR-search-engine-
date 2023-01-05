@@ -90,9 +90,9 @@ bool filtrage(char* mot)
     String tab_p[100];
     int cpt=0;
     FILE* fichierBanni = NULL;
-    fichierBanni = fopen("../MotBanni.txt", "r");
+    fichierBanni = fopen("../descripteur_texte/MotBanni.txt", "r");
     if(fichierBanni==NULL){
-        printf("Erreur fichier");               //Vérification ouverture du fichier
+        printf("Erreur fichier 666666666");               //Vérification ouverture du fichier
         exit(1);
     }
 
@@ -166,10 +166,11 @@ DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE ta
         max=1;
     }
 
-    for(int x=0;x<nbr_occ;x++)
-    {
-        printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final
-    }
+//_________________________________________
+   // for(int x=0;x<nbr_occ;x++)
+   // {
+     //   printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final
+    //}
 
     return tab_occ_finale;
 

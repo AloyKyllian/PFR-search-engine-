@@ -16,4 +16,4 @@ generale : ../Gestion-Config/Config.c ../Gestion-Config/Global.c ../Element/elem
 	gcc -c ../Pile/Pile.c
 	gcc -c indexation_gene.c
 	gcc -c testindexgeneral.c
-	gcc -Wall -o inde.out Config.o element.o Pile.o Global.o Descripteur_image.o descript_audio.o indexation_gene.o testindexgeneral.o -lm
+	gcc -Wall -o inde.out Config.o element.o Pile.o Global.o descripteur_texte.o Descripteur_image.o descript_audio.o indexation_gene.o testindexgeneral.o -lm
