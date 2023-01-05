@@ -73,6 +73,7 @@ void MAE()
                             }
                             nbTentative++;
                         } while (nbTentative < 4 && result==false);
+
                         break;
                 case Utilisateur:
                         etat_courant = Menu_Utilisateur;
@@ -100,8 +101,8 @@ void MAE()
                 switch (choixAdmin)
                 {
                 case Indexation:
-                    // Indexation generale 
-                    
+                    // Indexation generale avec config.txt a voir avec yasmine
+
                     break;
                 case Configuration:
                     // Configuration
@@ -236,7 +237,7 @@ void MAE()
                     }
                     break;
                 default:
-                    printf("erreur de choix menu\n");
+                    printf("erreur de choix\n");
                     etat_courant = Menu_Visualisation;
                     break;
                 }

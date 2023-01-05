@@ -3,38 +3,31 @@
 
 #include "../head/Global.h"
 
-//Tout les parametres necessaires aux configurations .
+//Tout les parametre necessaire son donner dans cette structure.
 typedef struct
 { 
-    int Nb_Mots_Cle;
-    int Similariter;
-    int Nb_Bit_Fort;
-    int Nb_Fenetre;
-    int Intervale;
+    int nb_mots_cle;
+    int similariter;
+    int niveau;
+    int nb_fenetre;
+    float intervale;
 }CONFIG;
 
 //Lis Config.txt et renvoie les parametre dans la structure CONFIG
-CONFIG Lire_CONFIG(int*);
-
+CONFIG Lire_CONFIG(String*);
 //Affiche toute les valeur des parametres de configration
 void Afficher_CONFIG(CONFIG);
-
 //Lis et verifie la validiter de la valeur du nombre de mots cle
-CONFIG Lire_mot_cle(int*, CONFIG);
-
+CONFIG Lire_mot_cle(CONFIG,String*);
 //Lis et verifie la validiter de la valeur de la similarite
-CONFIG Lire_similariter(int*, CONFIG);
-
+CONFIG Lire_similariter(CONFIG,String*);
 //Lis et verifie la validiter de la valeur du niveau
-CONFIG Lire_nb_bit_fort(int*, CONFIG);
-
+CONFIG Lire_niveau(CONFIG,String*);
 //Lis et verifie la validiter de la valeur du nombre de fenetre
-CONFIG Lire_nb_fenetre(int*, CONFIG);
-
+CONFIG Lire_nb_fenetre(CONFIG,String*);
 //Lis et verifie la validiter de la valeur de l'intervale
-CONFIG Lire_intervale(int*, CONFIG);
-
+CONFIG Lire_intervale(CONFIG,String*);
 //Ecrit dans Config.txt les valeur stocker dans la structure CONFIG
-void Ecrire_CONFIG(int*, CONFIG);
+void Ecrire_CONFIG(CONFIG,String*);
 
 #endif
