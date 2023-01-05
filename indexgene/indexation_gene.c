@@ -264,18 +264,15 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur, CO
       if (ptr_fic != NULL)
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-
-            //element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte);  
+            element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte); 
            
-            //dscr_texte = emPILE_texte(dscr_texte, element_temp);
+            dscr_texte = emPILE_texte(dscr_texte, element_temp);
 
             while (!feof(ptr_fic))
             {
                   fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-                      
-                  //element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte);  
-                  
-                  //dscr_texte = emPILE_texte(dscr_texte, element_temp);
+                  element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte);  
+                  dscr_texte = emPILE_texte(dscr_texte, element_temp);
                   
             }
             
@@ -303,10 +300,9 @@ void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur,CONFIG conf
                   // AFFICHAGE ELEMENT DANS FICHIER
                   //________________________________
                   fprintf(fichier, "%d\n", elementsupp.id);
-                  for(int x=0;x<10;x++)
-                   {
-                        fprintf(fichier,"%s    |    %d\n",elementsupp.descripteur_texte.tab_mot[x],elementsupp.descripteur_texte.tab_app[x]);         
-                   }
+
+                  //affichage descripteur
+                  
                   
                   
             }
@@ -314,11 +310,8 @@ void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur,CONFIG conf
             //______________________________
             // AFFICHAGE ELEMENT DANS FICHIER
             //________________________________
-            fprintf(fichier, "%d\n", elementsupp.id);                            
-             for(int x=0;x<10;x++)
-            {
-                   fprintf(fichier,"%s    |    %d\n",elementsupp.descripteur_texte.tab_mot[x],elementsupp.descripteur_texte.tab_app[x]);         
-              }
+            fprintf(fichier, "%d\n", elementsupp.id);                           
+            // affichage descripteur
             
       }
       else
