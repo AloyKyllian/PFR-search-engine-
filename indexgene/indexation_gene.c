@@ -1,6 +1,6 @@
 #include "indexation_gene.h"
 
-void recup_path(PILE *pourchemin, int deb, String path, String type, int *Erreur)
+void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur)
 {
       ELEMENT element;
       String nom_fic, chemin;
@@ -51,7 +51,7 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *Erreur
       }
       else
       {
-            *Erreur, "Erreur : Fichier introuvable");
+             *erreur = 1;
       }
       affichePILE(*pourchemin);
       fflush(stdout);
@@ -61,7 +61,7 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *Erreur
 //____________________________________________
 // depiler le chemin de le fichier liste_base_texte ou liste _base_audio ou liste_base_image
 //____________________________________________
-void depiler_path(PILE *pourchemin, String type, String *Erreur)
+void depiler_path(PILE *pourchemin, String type, int *erreur)
 {
       ELEMENT elementsupp;
       FILE *fichier = NULL;
@@ -84,39 +84,12 @@ void depiler_path(PILE *pourchemin, String type, String *Erreur)
       }
       else
       {
-            strcpy(*Erreur, "Erreur : Fichier introuvable");
+             *erreur = 1;
       }
       fclose(fichier);
 }
 
-void lire_chemin(PILE *pourchemin, String type, String *erreur)
-{
-      FILE *fichier = NULL;
-      ELEMENT element;
-      if (strcmp(type, "texte") == 0)
-            fichier = fopen("../liste_base/liste_base_texte", "r");
-      else if (strcmp(type, "image") == 0)
-            fichier = fopen("../liste_base/liste_base_image", "r");
-      else
-            fichier = fopen("../liste_base/liste_base_audio", "r");
-      if (fichier != NULL)
-      {
-            fscanf(fichier, "%d | %s\n", &element.id, element.CHEMIN);
-            *pourchemin = emPILE(*pourchemin, element);
-            while (!feof(fichier))
-            {
-                  fscanf(fichier, "%d | %s\n", &element.id, element.CHEMIN);
-                  *pourchemin = emPILE(*pourchemin, element);
-            }
-      }
-      else
-      {
-            strcpy(*erreur, "Erreur : Fichier liste base introuvable");
-      }
-      fclose(fichier);
-}
-
-PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, String *erreur)
+PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur)
 {
       FILE *ptr_fic = NULL;
       ELEMENT_audio element_temp;
@@ -138,12 +111,12 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, String *erreur)
       }
       else
       {
-            fprintf(stderr, "ERREUR :  PB avec liste_rep\n");
+             *erreur = 1;
       }
       return dscr_audio;
 }
 
-void depiler_descripteur_audio(PILE_audio dscr_audio, String *erreur)
+void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur)
 {
       ELEMENT_audio elementsupp;
       FILE *fichier = NULL;
@@ -183,7 +156,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, String *erreur)
       }
       else
       {
-            strcpy(*erreur, "Erreur : Fichier introuvable");
+             *erreur = 1;
       }
       fclose(fichier);
 }
@@ -229,7 +202,7 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur)
       }
       else
       {
-            fprintf(stderr, "ERREUR :  PB avec liste_rep\n");
+             *erreur = 1;
       }
       return dscr_image;
 }
@@ -264,6 +237,7 @@ void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
             // AFFICHAGE ELEMENT DANS FICHIER
             //________________________________
             fprintf(fichier, "%d\n", elementsupp.id);
+            
             for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
             {
                   // Permet d'afficher q'un certain nombre de valeur
@@ -298,14 +272,16 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur)
       if (ptr_fic != NULL)
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-
+            printf("%d | %s\n",element_temp.id, cheminfichier);
             //_______________
             // appel decriteur texte
 
             //______________
-            element_temp.descripteur_texte=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",config.Nb_Mots_Cle,element_temp.descripteur_texte);     
+            element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte); 
+            fflush(stdout);  
             dscr_texte = emPILE_texte(dscr_texte, element_temp);
-
+            printf("hello");
+            fflush(stdout);
             while (!feof(ptr_fic))
             {
                   fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
@@ -313,7 +289,7 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur)
                          // appel decriteur texte
 
                           //______________
-                  element_temp.descripteur_texte=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",config.Nb_Mots_Cle,element_temp.descripteur_texte);     
+                  element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte);     
                   dscr_texte = emPILE_texte(dscr_texte, element_temp);
                   
             }
@@ -321,7 +297,7 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur)
       }
       else
       {
-            fprintf(stderr, "ERREUR :  PB avec liste_rep\n");
+            *erreur = 1;
       }
       return dscr_texte;
 }
@@ -332,6 +308,9 @@ void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur)
       FILE *fichier = NULL;
       fichier = fopen("../base_descripteur/base_descripteur_texte", "w");
       int total = 0;
+      CONFIG config;
+
+      config = Lire_CONFIG(erreur);
 
       if (fichier != NULL)
       {
@@ -342,13 +321,22 @@ void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur)
                   // AFFICHAGE ELEMENT DANS FICHIER
                   //________________________________
                   fprintf(fichier, "%d\n", elementsupp.id);
+                  for(int x=0;x<10;x++)
+                   {
+                        fprintf(fichier,"%s    |    %d\n",elementsupp.descripteur_texte.tab_mot[x],elementsupp.descripteur_texte.tab_app[x]);         
+                   }
+                  
                   
             }
             dscr_texte = dePILE_texte(dscr_texte, &elementsupp);
             //______________________________
             // AFFICHAGE ELEMENT DANS FICHIER
             //________________________________
-            fprintf(fichier, "%d\n", elementsupp.id);
+            fprintf(fichier, "%d\n", elementsupp.id);                            
+             for(int x=0;x<10;x++)
+            {
+                   fprintf(fichier,"%s    |    %d\n",elementsupp.descripteur_texte.tab_mot[x],elementsupp.descripteur_texte.tab_app[x]);         
+              }
             
       }
       else

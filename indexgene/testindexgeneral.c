@@ -30,11 +30,13 @@ int main()
     depiler_descripteur_image(  pileimage, &Erreurimage);
 
     PILE_texte piletexte = NULL;
-    piletexte= base_descript_empiler_texte( piletexte,  &Erreurimage);
-    depiler_descripteur_texte(  piletexte, &Erreurimage);
+    // ELEMENT_texte element_temp;
+    // element_temp.descripteur_texte=descripteur_texte_finale("../DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml",config.Nb_Mots_Cle,element_temp.descripteur_texte); 
+    // piletexte= base_descript_empiler_texte( piletexte,  &Erreurimage);
+    //depiler_descripteur_texte(  piletexte, &Erreurimage);
     
 
-
+    
         //_________________
         //TEXTE
         //_________________
@@ -42,7 +44,7 @@ int main()
 
         recup_path( &piletexte_path,deb,path,"texte", &Erreurtexte);
         fflush(stdout);
-        affichePILE(piletexte_path);
+        
         printf("hello");
         fflush(stdout);
         //depiler_path ( &piletexte_path, "texte", &Erreurtexte);
@@ -67,15 +69,15 @@ int main()
         //_________________
         //lire chemin test
         //_________________
-         printf("______________________\n recuperer chemin texte dans une pile\n");
-         lire_chemin (&piletexte_path, "texte", &Erreurtexte);
-         affichePILE(piletexte_path);
-         printf("______________________\n recuperer chemin image dans une pile\n");
-         lire_chemin (&pileimage_path, "image", &Erreurimage);
-         affichePILE(pileimage_path);
-         printf("______________________\nrecup chemin audio\n");
-         lire_chemin (&pileaudio_path, "audio", &Erreuraudio);
-         affichePILE(pileaudio_path);
+        //  printf("______________________\n recuperer chemin texte dans une pile\n");
+        //  lire_chemin (&piletexte_path, "texte", &Erreurtexte);
+        //  affichePILE(piletexte_path);
+        //  printf("______________________\n recuperer chemin image dans une pile\n");
+        //  lire_chemin (&pileimage_path, "image", &Erreurimage);
+        //  affichePILE(pileimage_path);
+        //  printf("______________________\nrecup chemin audio\n");
+        //  lire_chemin (&pileaudio_path, "audio", &Erreuraudio);
+        //  affichePILE(pileaudio_path);
          printf("IFGLUYGFLYUGF");
 
         //__________________________________
