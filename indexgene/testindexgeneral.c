@@ -9,32 +9,6 @@ int main()
     PILE pileimage_path = init_PILE();
     PILE pileaudio_path = init_PILE();
     int deb = 0;
-    PILE_audio descripteur_audio = NULL;
-
-    descripteur_audio = base_descript_empiler_audio(descripteur_audio, &Erreuraudio);
-    depiler_descripteur_audio(descripteur_audio, &Erreuraudio);
-
-    FILE *ptr_fic = NULL;
-    ELEMENT_image element;
-    int total = 0;
-    IMAGE img;
-    char CHEMIN[100] = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/63.txt";
-    CONFIG config;
-    config = Lire_CONFIG(&Erreurimage);
-    PILE_image pileimage = NULL;
-    img = Lire_image(&Erreurimage, CHEMIN);
-    img = Pre_traitement(&Erreurimage, img,  config.Nb_Bit_Fort);
-    element.descripteur_image = Creation_Discripteur(&Erreurimage, img, config.Nb_Bit_Fort);
-
-    pileimage= base_descript_empiler_image( pileimage,  &Erreurimage);
-    depiler_descripteur_image(  pileimage, &Erreurimage);
-
-    PILE_texte piletexte = NULL;
-    // ELEMENT_texte element_temp;
-    // element_temp.descripteur_texte=descripteur_texte_finale("../DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml",config.Nb_Mots_Cle,element_temp.descripteur_texte); 
-    // piletexte= base_descript_empiler_texte( piletexte,  &Erreurimage);
-    //depiler_descripteur_texte(  piletexte, &Erreurimage);
-    
 
     
         //_________________
@@ -43,11 +17,7 @@ int main()
         strcpy(path,"../DATA_FIL_ROUGE_DEV/Textes/");
 
         recup_path( &piletexte_path,deb,path,"texte", &Erreurtexte);
-        fflush(stdout);
-        
-        printf("hello");
-        fflush(stdout);
-        //depiler_path ( &piletexte_path, "texte", &Erreurtexte);
+        depiler_path ( &piletexte_path, "texte", &Erreurtexte);
         //_________________
         //AUDIO
         //_________________
@@ -78,11 +48,25 @@ int main()
         //  printf("______________________\nrecup chemin audio\n");
         //  lire_chemin (&pileaudio_path, "audio", &Erreuraudio);
         //  affichePILE(pileaudio_path);
-         printf("IFGLUYGFLYUGF");
+       
 
         //__________________________________
         //stocker descripteur dans une pile
         //__________________________________
+            CONFIG config;
+    config = Lire_CONFIG(&Erreurimage);
+
+    PILE_audio descripteur_audio = NULL;
+    descripteur_audio = base_descript_empiler_audio(descripteur_audio, &Erreuraudio,config);
+    depiler_descripteur_audio(descripteur_audio, &Erreuraudio);
+
+    PILE_image pileimage = NULL;
+    pileimage= base_descript_empiler_image( pileimage,  &Erreurimage,config);
+    depiler_descripteur_image(  pileimage, &Erreurimage);
+
+    PILE_texte piletexte = NULL;
+    piletexte= base_descript_empiler_texte( piletexte,  &Erreurimage,config);
+    depiler_descripteur_texte(  piletexte, &Erreurimage,config);
         
         return 0;
         
