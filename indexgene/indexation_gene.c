@@ -267,7 +267,7 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur, CO
 
             //element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte);  
            
-            dscr_texte = emPILE_texte(dscr_texte, element_temp);
+            //dscr_texte = emPILE_texte(dscr_texte, element_temp);
 
             while (!feof(ptr_fic))
             {
@@ -275,7 +275,7 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur, CO
                       
                   //element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte);  
                   
-                  dscr_texte = emPILE_texte(dscr_texte, element_temp);
+                  //dscr_texte = emPILE_texte(dscr_texte, element_temp);
                   
             }
             
@@ -294,7 +294,6 @@ void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur,CONFIG conf
       FILE *fichier = NULL;
       fichier = fopen("../base_descripteur/base_descripteur_texte", "w");
       int total = 0;
-
       if (fichier != NULL)
       {
             while (dscr_texte->suiv != NULL)
