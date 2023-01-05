@@ -7,13 +7,18 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
-int MAE()
+void MAE()
 {
 
     static char etat_courant = Menu_general;
     int test1,test;
     char choix;
     char choixUtilisateur;
+    char choixAdmin;
+    char choixConnexion;
+    char choixDeconnexion;
+    char choixConfig;
+    char choixVisualisation;
     char choixTexte;
     char choixImage;
     char choixAudio;
@@ -53,10 +58,10 @@ int MAE()
                             {
                                 printf("Souhaitez vous basculer en mode utilisateur ou essayer de se connecter une nouvelle fois ?\n");
                                 printf("[1] Mode utilisateur\n[2] nouvelle tentative de connexion\n");
-                                scanf("%c", &choix);
-                                if (choix == '1')
+                                scanf("%c", &choixConnexion);
+                                if (choixConnexion == '1')
                                     etat_courant = Menu_Utilisateur;
-                                if (choix == '2')
+                                if (choixConnexion == '2')
                                 {
                                     int nbr_microsec = 0;
                                     printf("Vous devez attendre 30 seconde pour réessayer\n");
@@ -74,7 +79,7 @@ int MAE()
                         break;
                     case Quitter :
                         printf("vous avez quitté le programme\n");
-                        return 0;
+                        return ;
                         break;
                 default:
                         printf("erreur de choix\n");
@@ -89,9 +94,10 @@ int MAE()
                 printf("Menu général de l'administrateur\nFonctionnalité :\n");
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Indexation\n [2] Configuration\n [3] Visualisation des recueils des descripteurs\n[4] Retour en mode utilisateur\n");
-                scanf("%c", &choix);
+                
+                scanf("%c",&choixAdmin);
 
-                switch (choix)
+                switch (choixAdmin)
                 {
                 case Indexation:
                     // Indexation generale 
@@ -125,7 +131,8 @@ int MAE()
                 printf("[1] Nombre de mots clé\n [2] Similarité\n [3] Niveau \n[4] Nombre de fenetre\n");
                 printf("[5] Intervalle de temps\n [R] Retour\n[Q] Déconnexion\n");
                 scanf("%c", &choix);
-                switch (choix)
+                scanf("%c",&choixConfig);
+                switch (choixConfig)
                 {
                 case Nombre_de_mot_cle:
                     printf("entrez le nombre de mot clé voulue :\n");
@@ -159,19 +166,20 @@ int MAE()
                     etat_courant = Menu_Admin;
                     break;
                 case Deconnexion:
-                    choix = '3';
-                    while (choix != '1' || choix != '2')
+                    choixDeconnexion = '3';
+                    while (choixDeconnexion != '1' || choixDeconnexion != '2')
                     {
-                        printf("vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non ");
-                        scanf("%c", &choix);
-                        switch (choix)
+                        printf("vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non\n");
+                        scanf("%c",&choix);
+                        scanf("%c", &choixDeconnexion);
+                        switch (choixDeconnexion)
                         {
                         case '1':
                             etat_courant = Menu_Utilisateur;
                             break;
                         case '2':
                             printf("vous avez quitté le programme\n");
-                            return 0;
+                            return ;
                             break;
                         default:
                         printf("mauvais choix\n");
@@ -191,6 +199,7 @@ int MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Texte\n [2] Image\n [3] Audio \n[R] Retour\n[Q] Déconnexion\n");
                 scanf("%c", &choix);
+                scanf("%c",& choixVisualisation);
                 switch (choix)
                 {
                 case texte:
@@ -213,11 +222,12 @@ int MAE()
                         switch (choix)
                         {
                         case '1':
+                            scanf("%c",&choix);
                             etat_courant = Menu_Utilisateur;
                             break;
                         case '2':
                             printf("vous avez quitté le programme\n");
-                            return 0;
+                            return ;
                             break;
                         default:
                         printf("mauvais choix\n");
@@ -254,7 +264,7 @@ int MAE()
                     break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return;
                     break;
                 default:
                     printf("erreur de choix menu utilisateur\n");
@@ -311,7 +321,7 @@ int MAE()
                     break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return ;
                     break;
                 default:
                     printf("erreur de choix\n");
@@ -386,7 +396,7 @@ int MAE()
                 break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return ;
                 break;
                 default:
                     printf("erreur de choix\n");
@@ -450,7 +460,7 @@ int MAE()
                 break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return ;
                 break;
                 default:
                     printf("erreur de choix\n");

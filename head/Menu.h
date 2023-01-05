@@ -4,7 +4,7 @@
 #include "../head/Config.h"
 #include "../head/FichierExist.h"
 
-int MAE();
+void MAE();
 //Etat :
 //MENUS PRINCIPAUX
 /*typedef enum MenuPrincipale{
