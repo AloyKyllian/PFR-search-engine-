@@ -1,4 +1,3 @@
-#include "Global.h"
 #include "Descripteur_image.h"
 
 IMAGE Lire_image(int *Erreur, char Path[])
@@ -157,4 +156,24 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
     }
 
     return descripteur_image;
+}
+
+DESCRIPTEUR_IMAGE Pack_Descripteur_image(int *Erreur, char Path[],int Nb_Bits_Fort)
+{
+    // Variable
+    IMAGE img;
+    DESCRIPTEUR_IMAGE di;
+
+    // Lis un image et verifie si tout est ok
+    img = Lire_image(Erreur,Path);
+    if(Erreur == 0)
+    {
+        // Fait le pretraitement et verifie si tout est ok
+        img = Pre_traitement(Erreur,img,Nb_Bits_Fort);
+        if(Erreur == 0)
+        {
+            di = Creation_Discripteur(Erreur,img,Nb_Bits_Fort);
+        }
+    }
+    return di;
 }
