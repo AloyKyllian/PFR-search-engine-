@@ -5,7 +5,7 @@
 
 
 void rechercheTexte(char *mot,char* chemin){
-    FFILE *fp;
+    FILE *fp;
     fp = fopen("des.txt", "rt");
 	char* ID=(char*)malloc(100);
 	char* chaine=(char*)malloc(100);
