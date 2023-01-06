@@ -1,5 +1,4 @@
 #include "../head/Config.h"
-#include "../head/Config.h"
 
 //Lis Config.txt et renvoie les parametre dans la structure CONFIG
 CONFIG Lire_CONFIG(String *Erreur)

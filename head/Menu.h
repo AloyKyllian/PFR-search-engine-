@@ -4,13 +4,9 @@
 #include "../head/Config.h"
 #include "../head/FichierExist.h"
 
-int MAE();
+void MAE();
 //Etat :
 //MENUS PRINCIPAUX
-/*typedef enum MenuPrincipale{
-    Menu_general , Menu_Admin ,Menu_Configuration, Menu_Visualisation ,Menu_Utilisateur,  Menu_texte, Menu_image,Menu_audio
-};*/
-
 #define Menu_general '1'
 #define Menu_Admin '2'
 #define Menu_Configuration '3'
@@ -54,6 +50,6 @@ int MAE();
 #define Recherche_nom_couleur '1'
 
 //Menu recherche audio
-#define Recherche_comparaison_audio '1'*/
+#define Recherche_comparaison_audio '1'
 
 #endif

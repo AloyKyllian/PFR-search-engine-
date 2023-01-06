@@ -2,14 +2,29 @@
 #include "../head/Connexion.h"
 #include "../head/Config.h"
 #include "../head/FichierExist.h"
-int MAE()
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
+void MAE()
 {
 
     static char etat_courant = Menu_general;
-    int test,test1;
+    int test1,test;
     char choix;
     char choixUtilisateur;
+    char choixAdmin;
+    char choixConnexion;
+    char choixDeconnexion;
+    char choixConfig;
+    char choixVisualisation;
+    char choixTexte;
     char choixImage;
+    char choixAudio;
+    char choixTexteComp;
+    char choixImageComp;
+    char choixAudioComp;
     char chemin[100];
     char *extension;
     int nbTentative=1;
@@ -27,19 +42,15 @@ int MAE()
                 printf("Veuillez faire votre choix : \n");
                 printf("[1] Administrateur \n[2] Utilisateur \n[Q] Quitter\n");
                 scanf("%c", &choix);
-
                 switch (choix)
                 {
                     
                     case Administrateur:
                         // Connexion();
-                            bool result=false;
-                            String erreur;
-                            LOGIN test;
-                            lesLogins tablogin;
+                         result=false;  
                          do
-                        {
-                            result = seconnecter(tablogin, test, &erreur);
+                        {   
+                            result = seconnecter(tablogin, testlogin, &erreur);
                             printf("\nConnexion ");
                             (result) ? printf("Réussi\n\n") : printf("Échoué\n\n");
                             if (result){
@@ -49,10 +60,10 @@ int MAE()
                             {
                                 printf("Souhaitez vous basculer en mode utilisateur ou essayer de se connecter une nouvelle fois ?\n");
                                 printf("[1] Mode utilisateur\n[2] nouvelle tentative de connexion\n");
-                                scanf("%c", &choix);
-                                if (choix == '1')
+                                scanf("%c", &choixConnexion);
+                                if (choixConnexion == '1')
                                     etat_courant = Menu_Utilisateur;
-                                if (choix == '2')
+                                if (choixConnexion == '2')
                                 {
                                     int nbr_microsec = 0;
                                     printf("Vous devez attendre 30 seconde pour réessayer\n");
@@ -64,13 +75,14 @@ int MAE()
                             }
                             nbTentative++;
                         } while (nbTentative < 4 && result==false);
+
                         break;
                 case Utilisateur:
                         etat_courant = Menu_Utilisateur;
                         break;
                     case Quitter :
                         printf("vous avez quitté le programme\n");
-                        return 0;
+                        return ;
                         break;
                 default:
                         //GestionErreur(11);
@@ -85,13 +97,14 @@ int MAE()
                 printf("Menu général de l'administrateur\nFonctionnalité :\n");
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Indexation\n [2] Configuration\n [3] Visualisation des recueils des descripteurs\n[4] Retour en mode utilisateur\n");
-                scanf("%c", &choix);
+                
+                scanf("%c",&choixAdmin);
 
-                switch (choix)
+                switch (choixAdmin)
                 {
                 case Indexation:
                     // Indexation generale 
-                    //si ya une erreur j'arrete tt
+                    
                     break;
                 case Configuration:
                     // Configuration
@@ -121,7 +134,8 @@ int MAE()
                 printf("[1] Nombre de mots clé\n [2] Similarité\n [3] Niveau \n[4] Nombre de fenetre\n");
                 printf("[5] Intervalle de temps\n [R] Retour\n[Q] Déconnexion\n");
                 scanf("%c", &choix);
-                switch (choix)
+                scanf("%c",&choixConfig);
+                switch (choixConfig)
                 {
                 case Nombre_de_mot_cle:
                     printf("entrez le nombre de mot clé voulue :\n");
@@ -155,19 +169,20 @@ int MAE()
                     etat_courant = Menu_Admin;
                     break;
                 case Deconnexion:
-                    choix = '3';
-                    while (choix != '1' || choix != '2')
+                    choixDeconnexion = '3';
+                    while (choixDeconnexion != '1' || choixDeconnexion != '2')
                     {
-                        printf("vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non ");
-                        scanf("%c", &choix);
-                        switch (choix)
+                        printf("vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non\n");
+                        scanf("%c",&choix);
+                        scanf("%c", &choixDeconnexion);
+                        switch (choixDeconnexion)
                         {
                         case '1':
                             etat_courant = Menu_Utilisateur;
                             break;
                         case '2':
                             printf("vous avez quitté le programme\n");
-                            return 0;
+                            return ;
                             break;
                         default:
                         printf("mauvais choix\n");
@@ -187,6 +202,7 @@ int MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Texte\n [2] Image\n [3] Audio \n[R] Retour\n[Q] Déconnexion\n");
                 scanf("%c", &choix);
+                scanf("%c",& choixVisualisation);
                 switch (choix)
                 {
                 case texte:
@@ -209,11 +225,12 @@ int MAE()
                         switch (choix)
                         {
                         case '1':
+                            scanf("%c",&choix);
                             etat_courant = Menu_Utilisateur;
                             break;
                         case '2':
                             printf("vous avez quitté le programme\n");
-                            return 0;
+                            return ;
                             break;
                         default:
                         printf("mauvais choix\n");
@@ -222,7 +239,7 @@ int MAE()
                     }
                     break;
                 default:
-                    printf("erreur de choix menu\n");
+                    printf("erreur de choix\n");
                     etat_courant = Menu_Visualisation;
                     break;
                 }
@@ -234,7 +251,6 @@ int MAE()
                 printf("[1] Recherche fichier texte\n [2] Recherche fichier image\n [3] Recherche fichier audio \n[Q] Déconnexion\n");
                 scanf("%c",&choix);
                 scanf("%c", &choixUtilisateur);
-                printf("choix=%c\n",choixUtilisateur);
                 switch (choixUtilisateur)
                 {
                 case texte:
@@ -251,7 +267,7 @@ int MAE()
                     break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return;
                     break;
                 default:
                     printf("erreur de choix menu utilisateur\n");
@@ -264,8 +280,9 @@ int MAE()
                 printf("Recherche fichier texte :\n");
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par mot clé\n [2] Recherche par comparaison de textes\n[R] Retour\n[Q] Quitter\n");
-                scanf("%c", &choix);
-                switch (choix)
+                scanf("%c",&choixUtilisateur);
+                scanf("%c",&choixTexte);
+                switch (choixTexte)
                 {
                 case Recherche_mots_cle:
 
@@ -280,8 +297,9 @@ int MAE()
                         if(test==-1)
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
-                            scanf("%c",&choix);
-                            switch (choix)
+                            scanf("%c",&choixTexte);
+                            scanf("%c",&choixTexteComp);
+                            switch (choixTexteComp)
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;
@@ -306,7 +324,7 @@ int MAE()
                     break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return ;
                     break;
                 default:
                     printf("erreur de choix\n");
@@ -320,7 +338,8 @@ int MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par comparaison d'images\n[R] Retour\n[Q] Quitter\n");
                 scanf("%c", &choix);
-                switch (choix)
+                scanf("%c", &choixImage);
+                switch (choixImage)
                 {
                 case Recherche_par_comparaison:
                     printf("Votres image est une :\n[1] Image couleur\n[2] Image noir et blanc\n");
@@ -337,7 +356,8 @@ int MAE()
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
                             scanf("%c",&choix);
-                            switch (choix)
+                            scanf("%c",&choixImageComp);
+                            switch (choixImageComp)
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;
@@ -379,7 +399,7 @@ int MAE()
                 break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return ;
                 break;
                 default:
                     printf("erreur de choix\n");
@@ -393,7 +413,8 @@ int MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par comparaison d'audio\n[R] Retour\n[Q] Quitter\n");
                 scanf("%c", &choix);
-                switch (choix)
+                scanf("%c", &choixAudio);
+                switch (choixAudio)
                 {
                 case Recherche_par_comparaison:
                     printf("entrez le chemin de votre fichier\n");
@@ -407,8 +428,8 @@ int MAE()
                         if(test==-1)
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
-                            scanf("%c",&choix);
-                            switch (choix)
+                            scanf("%c",&choixAudioComp);
+                            switch (choixAudioComp)
                             {
                             case '2':
                                 etat_courant=Menu_Utilisateur;
@@ -442,7 +463,7 @@ int MAE()
                 break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    return 0;
+                    return ;
                 break;
                 default:
                     printf("erreur de choix\n");
