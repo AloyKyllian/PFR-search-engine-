@@ -1,7 +1,3 @@
-<<<<<<<< HEAD:descripteur_image/tst_descripteur_image.c
-#include "../Config/Global.h"
-========
->>>>>>>> descripteur_image:Descripteur-image/tst_descripteur_image.c
 #include "Descripteur_image.h"
 
 void main()
@@ -9,18 +5,9 @@ void main()
     // Variable
     IMAGE img;
     DESCRIPTEUR_IMAGE descripteur_image;
-<<<<<<<< HEAD:descripteur_image/tst_descripteur_image.c
-    String Erreur;
-    String Path = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/01.txt";
-    int Nb_Bit_Fort = 8;
-    //int Erreur;
-    //String Path = "../DATA_FIL_ROUGE_DEV/TEST_RGB/01.txt";
-    //int Nb_Bit_Fort = 3;
-========
     int Erreur;
     char Path[] = "DATA_FIL_ROUGE_DEV/TEST_RGB/01.txt";
     int Nb_Bit_Fort = 2;
->>>>>>>> descripteur_image:Descripteur-image/tst_descripteur_image.c
     int total = 0;
 
     printf("\nLecture de la matrice\n");

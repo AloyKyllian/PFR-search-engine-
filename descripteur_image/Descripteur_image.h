@@ -1,13 +1,9 @@
 #ifndef DESCRIPTEUR_IMAGE_H
 #define DESCRIPTEUR_IMAGE_H
 
-<<<<<<<< HEAD:descripteur_image/Descripteur_image.h
-#include "Global.h"
-========
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
->>>>>>>> descripteur_image:Descripteur-image/Descripteur_image.h
 
 /*
 Exemple pour cree un descripteur :
