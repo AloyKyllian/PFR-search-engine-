@@ -32,10 +32,10 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur
 
       if (ptr_fic != NULL)
       {
-            if (strcmp(type, "texte") == 0)                 
-                    fscanf( ptr_fic, "%*s %*s");      /* SAUTER LA PREMIERE LIGNE CONSTITUEE DE 2 CHAINES total xxxx */
-    
-           fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", nom_fic);  /* %*s INGNORE LA CHAINE LUE */
+            if (strcmp(type, "texte") == 0)
+                  fscanf(ptr_fic, "%*s %*s"); /* SAUTER LA PREMIERE LIGNE CONSTITUEE DE 2 CHAINES total xxxx */
+
+            fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", nom_fic); /* %*s INGNORE LA CHAINE LUE */
             while (!feof(ptr_fic))
             {
                   strcpy(chemin, path);
@@ -51,7 +51,7 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur
       }
       else
       {
-             *erreur = 1;
+            *erreur = 1;
       }
       fclose(ptr_fic);
 }
@@ -82,12 +82,12 @@ void depiler_path(PILE *pourchemin, String type, int *erreur)
       }
       else
       {
-             *erreur = 1;
+            *erreur = 1;
       }
       fclose(fichier);
 }
 
-PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur,CONFIG config)
+PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, CONFIG config)
 {
       FILE *ptr_fic = NULL;
       ELEMENT_audio element_temp;
@@ -109,7 +109,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur,CONFIG
       }
       else
       {
-             *erreur = 1;
+            *erreur = 1;
       }
       return dscr_audio;
 }
@@ -154,19 +154,17 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur)
       }
       else
       {
-             *erreur = 1;
+            *erreur = 1;
       }
       fclose(fichier);
 }
 
-
-PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur,CONFIG config)
+PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, CONFIG config)
 {
 
       int Erreur = 0;
       FILE *ptr_fic = NULL;
       ELEMENT_image element_temp;
-      IMAGE img;
       char CHEMIN[100] = "../liste_base/liste_base_image";
       char cheminfichier[200];
 
@@ -176,28 +174,31 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur,CONFIG
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
 
-            img = Lire_image(&Erreur, cheminfichier);
-            img = Pre_traitement(&Erreur, img, config.Nb_Bit_Fort);
-            element_temp.descripteur_image = Creation_Discripteur(&Erreur, img, config.Nb_Bit_Fort);
+            element_temp.descripteur_image = Pack_Descripteur_image(&Erreur, cheminfichier, config.Nb_Bit_Fort);
+            if (Erreur != 0)
+            {
+                  //
+            }
 
             dscr_image = emPILE_image(dscr_image, element_temp);
 
             while (!feof(ptr_fic))
             {
                   fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-                                    
-                  img = Lire_image(&Erreur, cheminfichier);
-                  img = Pre_traitement(&Erreur, img, config.Nb_Bit_Fort);
-                  element_temp.descripteur_image = Creation_Discripteur(&Erreur, img, config.Nb_Bit_Fort);
-                  
+
+                  element_temp.descripteur_image = Pack_Descripteur_image(&Erreur, cheminfichier, config.Nb_Bit_Fort);
+                  if (Erreur != 0)
+                  {
+                        // Afficer Erreur
+                  }
+
                   dscr_image = emPILE_image(dscr_image, element_temp);
-                  
             }
             fclose(ptr_fic);
       }
       else
       {
-             *erreur = 1;
+            *erreur = 1;
       }
       return dscr_image;
 }
@@ -232,7 +233,7 @@ void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
             // AFFICHAGE ELEMENT DANS FICHIER
             //________________________________
             fprintf(fichier, "%d\n", elementsupp.id);
-            
+
             for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
             {
                   // Permet d'afficher q'un certain nombre de valeur
@@ -249,7 +250,7 @@ void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
       fclose(fichier);
 }
 
-PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur, CONFIG config)
+PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFIG config)
 {
 
       int Erreur = 0;
@@ -264,28 +265,26 @@ PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur, CO
       if (ptr_fic != NULL)
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-            element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte); 
-           
+            element_temp.descripteur_texte = descripteur_texte_finale(cheminfichier, config.Nb_Mots_Cle, element_temp.descripteur_texte);
+
             dscr_texte = emPILE_texte(dscr_texte, element_temp);
 
             while (!feof(ptr_fic))
             {
                   fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-                  element_temp.descripteur_texte=descripteur_texte_finale(cheminfichier,config.Nb_Mots_Cle,element_temp.descripteur_texte);  
+                  element_temp.descripteur_texte = descripteur_texte_finale(cheminfichier, config.Nb_Mots_Cle, element_temp.descripteur_texte);
                   dscr_texte = emPILE_texte(dscr_texte, element_temp);
-                  
             }
-            
       }
       else
       {
-             *erreur = 1;
+            *erreur = 1;
       }
       fclose(ptr_fic);
       return dscr_texte;
 }
 
-void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur,CONFIG config)
+void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config)
 {
       ELEMENT_texte elementsupp;
       FILE *fichier = NULL;
@@ -301,18 +300,14 @@ void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur,CONFIG conf
                   //________________________________
                   fprintf(fichier, "%d\n", elementsupp.id);
 
-                  //affichage descripteur
-                  
-                  
-                  
+                  // affichage descripteur
             }
             dscr_texte = dePILE_texte(dscr_texte, &elementsupp);
             //______________________________
             // AFFICHAGE ELEMENT DANS FICHIER
             //________________________________
-            fprintf(fichier, "%d\n", elementsupp.id);                           
+            fprintf(fichier, "%d\n", elementsupp.id);
             // affichage descripteur
-            
       }
       else
       {
