@@ -43,13 +43,20 @@ void MAE();
 
 //Menu recherche texte
 #define Recherche_mots_cle '1'
-#define Recherche_par_comparaison '2'
+#define Recherche_par_comparaison_Texte '2'
 #define Retour 'R'
 
 //Menu recherche image
-#define Recherche_nom_couleur '1'
+#define Recherche_comparaison_Image '1'
 
 //Menu recherche audio
-#define Recherche_comparaison_audio '1'
+#define Recherche_comparaison_Audio '1'
+
+//
+#define oui '1'
+#define non '2'
+
+#define AutreFichier '1'
+
 
 #endif
