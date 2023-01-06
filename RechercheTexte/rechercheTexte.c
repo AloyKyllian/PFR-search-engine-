@@ -5,40 +5,33 @@
 
 
 void rechercheTexte(char *mot,char* chemin){
-    FILE *fp;
-	FILE *grepFic;
-	system("touch ../PFRtestMenu/grepRes.txt");
-	char* grep="grep -rliw ";
-	//char* mot="soleil";
-	//char* chemin=" ./descripteur_texte";
-	char* commande=(char*)malloc(200);
-	char* chaine=(char*)malloc(200);
-	char* motCh=(char*)malloc(20);
-	strcpy(commande,grep);
-	strcat(commande,mot);
-	strcat(commande,chemin);
-	strcat(commande," > ./grepRes.txt");
-	//printf("la commande %s\n", commande);
-	system(commande);
-	free(commande);
+    FFILE *fp;
+    fp = fopen("des.txt", "rt");
+	char* ID=(char*)malloc(100);
+	char* chaine=(char*)malloc(100);
+	char* res=(char*)malloc(100);
 
-    //resultat finale de la recherche, pour avoir le nom des fichiers 
-	fp=fopen("./grepRes.txt","rt");
-	if(fp!=NULL){
-	    while(!feof(fp)){
-            
-
-	  } 
-	 }
-   	 fclose(fp); 
-	
-    
-
+	if (fp != NULL){ 
+		while(fscanf(fp,"%s",chaine)!=EOF){
+			//printf("lecture chaine =%s\n",chaine);
+			
+			res=strpbrk(chaine,"-");
+			//printf("res=%s\n",res); 
+	    		if(res!=NULL){
+	    			//printf("res de if=%s\n",res);
+	    			strcpy(ID,res);
+	    			//printf("ID=%s\n",ID);
+	    		}
+	    		//printf("test ID=%s\n",ID);
+		    	if (strstr(chaine,mot) !=NULL){
+		    		printf("chaine= %s et titre=%s\n",chaine,ID);}
+		    	}
+		    	}
+	else{
+    		printf("Impossible d'ouvrir le fichier\n");}
+	fclose(fp);
 
 }
-
-
-
 
 
 void main (){
