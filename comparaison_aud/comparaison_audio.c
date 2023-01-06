@@ -51,11 +51,12 @@ float comparaison(int val_lu,descri_audio descripteur_comparé,int *ligne,int *c
 tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chemin_descripteur_compare,char* chemin_descripteur_audio){
 
     int erreur;
-
+    int id;
     descri_audio descri;
 
     descri = Descripteur_audio(fenetre,intervalle,chemin_descripteur_compare,descri,&erreur);
     float verif_seuil;
+    float max=0;
     tab_similaire *tab = malloc(100 * sizeof(tab_similaire));
     if (tab == NULL)
     {
@@ -79,10 +80,10 @@ tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chem
 
     int fin;
     descri_audio descripteur_compare;
-    descripteur_compare.tab = malloc(10000 * sizeof(*descripteur_compare.tab));//creation du tableau
-    for (int i = 0; i <= 10000; i++)
+    descripteur_compare.tab = malloc(10*sizeof(*descripteur_compare.tab));//creation du tableau
+    for (int i = 0; i < 10; i++)
     {
-        descripteur_compare.tab[i] = malloc(intervalle * sizeof(**descripteur_compare.tab));
+        descripteur_compare.tab[i] = malloc( intervalle * sizeof(descripteur_compare.tab));
     }
 
 
@@ -91,7 +92,9 @@ tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chem
 
     while(fin!=EOF)
     {
+        
         fin=fscanf(fichier,"%d",&val_lu);
+        printf(" %d ",val_lu);
         if(val_lu<0 && val_lu!=-1)
         {
         tab[i].id=val_lu+1;
@@ -104,16 +107,28 @@ tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chem
 
         if(val_lu>=0)
         {
+            //printf("%d",ligne);
             descripteur_compare.tab[ligne][colonne]=val_lu;
             colonne++;
             if(colonne==intervalle)
             {
                 colonne=0;
                 ligne++;
+                printf("\n%d  ",ligne);
+                descripteur_compare.tab = realloc(descripteur_compare.tab, ligne+1*10 * sizeof(*descripteur_compare.tab));
+                for (int y = ligne*10; y < ligne+1*10; y++)
+                {
+                    descripteur_compare.tab[y] = malloc(intervalle * sizeof(descripteur_compare.tab));
+                }
+               // descripteur_compare.tab=descripteur_temp.tab;
             }
         }
     }
     fclose(fichier);
+
+
+
+
     descripteur_compare.ligne=ligne;
     descripteur_compare.colonne=intervalle;
         tab[i].id=tab[i-1].id-1;
@@ -121,5 +136,30 @@ tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chem
         if(verif_seuil>seuil)
             tab[i].pourcentage=verif_seuil;
         
-    return tab;
+    tab_similaire *tab_finale = malloc(100 * sizeof(tab_similaire));
+
+    int idx;
+    //printf("%d\t",i);
+    for(int y=0;y<=i;y++)
+    {
+        max=0;
+        for(int l=0;l<=i;l++)
+        {
+            if(tab[l].pourcentage>max)
+            {
+                max=tab[l].pourcentage;
+                id=tab[l].id;
+                idx=l;
+            }
+        }
+
+        tab[idx].pourcentage=0;
+        tab[idx].id=0;
+
+        tab_finale[y].pourcentage=max;
+        tab_finale[y].id=id;
+    }
+
+
+    return tab_finale;
 }
