@@ -13,18 +13,6 @@ void MAE()
     static char etat_courant = Menu_general;
     int test1,test;
     char choix[100];
-    char choixUtilisateur;
-    char choixAdmin;
-    char choixConnexion;
-    char choixDeconnexion;
-    char choixConfig;
-    char choixVisualisation;
-    char choixTexte;
-    char choixImage;
-    char choixAudio;
-    char choixTexteComp;
-    char choixImageComp;
-    char choixAudioComp;
     char chemin[100];
     char *extension;
     int nbTentative=1;
