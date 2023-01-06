@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../head/Erreur.h"
+#include "Erreur.h"
 
 void Afficher_Erreur(int Erreur,char Path[], String* Phrase)
 {
