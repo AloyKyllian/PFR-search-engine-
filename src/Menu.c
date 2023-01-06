@@ -14,6 +14,12 @@ int MAE()
     char *extension;
     int nbTentative=1;
     int nbFenetre,intervalle;
+    int erreur;
+    //lire config si ya une erreur 
+    //voir si un nv fichier
+    //indexation
+    //4 erreurs index gene, image,audio,texte
+    //verifier les erreurs de tt les phases
     switch (etat_courant)
     {
             case Menu_general:
@@ -67,7 +73,7 @@ int MAE()
                         return 0;
                         break;
                 default:
-                        printf("erreur de choix\n");
+                        //GestionErreur(11);
                         etat_courant = Menu_general;
                         break;
                 }
@@ -85,7 +91,7 @@ int MAE()
                 {
                 case Indexation:
                     // Indexation generale 
-                    
+                    //si ya une erreur j'arrete tt
                     break;
                 case Configuration:
                     // Configuration
@@ -99,7 +105,7 @@ int MAE()
                     etat_courant = Menu_Utilisateur;
                     break;
                 default:
-                    printf("erreur de choix\n");
+                    //GestionErreur(11);
                     etat_courant = Menu_Admin;
                     break;
                 }
@@ -221,7 +227,7 @@ int MAE()
                     break;
                 }
             break;
-
+//affichier_erreur(num erreur,char a printé)
             case Menu_Utilisateur:
                 printf("Menu utilisateur :\n");
                 printf("Veuillez faire votre choix  : \n");
