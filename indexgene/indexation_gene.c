@@ -45,13 +45,13 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur
 
                   *pourchemin = emPILE(*pourchemin, element);
                   /* nom de fichier suivant */
-                  deb++;
+                  deb--;
                   fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", nom_fic);
             }
       }
       else
       {
-            *erreur = 1;
+            *erreur = 7;
       }
       fclose(ptr_fic);
 }
@@ -82,7 +82,7 @@ void depiler_path(PILE *pourchemin, String type, int *erreur)
       }
       else
       {
-            *erreur = 1;
+            *erreur = 7;
       }
       fclose(fichier);
 }
@@ -109,7 +109,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, CONFI
       }
       else
       {
-            *erreur = 1;
+            *erreur = 7;
       }
       return dscr_audio;
 }
@@ -154,15 +154,13 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur)
       }
       else
       {
-            *erreur = 1;
+            *erreur = 7;
       }
       fclose(fichier);
 }
 
-PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, CONFIG config)
+PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur,int *erreur_image, CONFIG config)
 {
-
-      int Erreur = 0;
       FILE *ptr_fic = NULL;
       ELEMENT_image element_temp;
       char CHEMIN[100] = "../liste_base/liste_base_image";
@@ -174,51 +172,65 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, CONFI
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
 
-            element_temp.descripteur_image = Pack_Descripteur_image(&Erreur, cheminfichier, config.Nb_Bit_Fort);
-            if (Erreur != 0)
+            element_temp.descripteur_image = Pack_Descripteur_image(erreur_image, cheminfichier, config.Nb_Bit_Fort);
+            if (*erreur_image == 0)
             {
-                  //
-            }
-
-            dscr_image = emPILE_image(dscr_image, element_temp);
-
-            while (!feof(ptr_fic))
-            {
-                  fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-
-                  element_temp.descripteur_image = Pack_Descripteur_image(&Erreur, cheminfichier, config.Nb_Bit_Fort);
-                  if (Erreur != 0)
-                  {
-                        // Afficer Erreur
-                  }
-
                   dscr_image = emPILE_image(dscr_image, element_temp);
+                  while (!feof(ptr_fic))
+                  {
+                        fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+
+                        element_temp.descripteur_image = Pack_Descripteur_image(*erreur_image, cheminfichier, config.Nb_Bit_Fort);
+                        if (*erreur_image == 0)
+                        {
+                              dscr_image = emPILE_image(dscr_image, element_temp);
+                        }
+                        else
+                              break;
+                  }
             }
+
             fclose(ptr_fic);
       }
       else
       {
-            *erreur = 1;
+            *erreur = 7;
       }
       return dscr_image;
 }
 
-void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
+void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *erreur)
 {
       ELEMENT_image elementsupp;
       FILE *fichier = NULL;
       fichier = fopen("../base_descripteur/base_descripteur_image", "w");
       int total = 0;
-
-      if (fichier != NULL)
+      if (erreur_image != 0)
       {
-            while (dscr_image->suiv != NULL)
+            if (fichier != NULL)
             {
+                  while (dscr_image->suiv != NULL)
+                  {
+                        dscr_image = dePILE_image(dscr_image, &elementsupp);
+                        //______________________________
+                        // AFFICHAGE ELEMENT DANS FICHIER
+                        //________________________________
+                        fprintf(fichier, "%d\n", elementsupp.id);
+                        for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
+                        {
+                              // Permet d'afficher q'un certain nombre de valeur
+                              fprintf(fichier, "Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
+
+                              total = total + elementsupp.descripteur_image.Bilan[i][1];
+                        }
+                        fprintf(fichier, "\nTotal de valeur = %d\n", total);
+                  }
                   dscr_image = dePILE_image(dscr_image, &elementsupp);
                   //______________________________
                   // AFFICHAGE ELEMENT DANS FICHIER
                   //________________________________
                   fprintf(fichier, "%d\n", elementsupp.id);
+
                   for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
                   {
                         // Permet d'afficher q'un certain nombre de valeur
@@ -228,25 +240,12 @@ void depiler_descripteur_image(PILE_image dscr_image, int *erreur)
                   }
                   fprintf(fichier, "\nTotal de valeur = %d\n", total);
             }
-            dscr_image = dePILE_image(dscr_image, &elementsupp);
-            //______________________________
-            // AFFICHAGE ELEMENT DANS FICHIER
-            //________________________________
-            fprintf(fichier, "%d\n", elementsupp.id);
-
-            for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
+            else
             {
-                  // Permet d'afficher q'un certain nombre de valeur
-                  fprintf(fichier, "Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
-
-                  total = total + elementsupp.descripteur_image.Bilan[i][1];
+                  *erreur = 7;
             }
-            fprintf(fichier, "\nTotal de valeur = %d\n", total);
       }
-      else
-      {
-            *erreur = 1;
-      }
+
       fclose(fichier);
 }
 
@@ -278,7 +277,7 @@ PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFI
       }
       else
       {
-            *erreur = 1;
+            *erreur = 7;
       }
       fclose(ptr_fic);
       return dscr_texte;
@@ -311,11 +310,41 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
       }
       else
       {
-            *erreur = 1;
+            *erreur = 7;
       }
       fclose(fichier);
 }
 
+void recuperer_path_tous_fichiers(int *Erreurtexte, int * Erreuraudio, int *Erreurimage)
+{
+      PILE piletexte_path = init_PILE();
+      PILE pileimage_path = init_PILE();
+    PILE pileaudio_path = init_PILE();
+    int deb = 0;
+      String path;
+    
+        //_________________
+        //TEXTE
+        //_________________
+        strcpy(path,"../DATA_FIL_ROUGE_DEV/Textes/");
+        recup_path( &piletexte_path,deb,path,"texte", Erreurtexte);
+        depiler_path ( &piletexte_path, "texte", Erreurtexte);
+        //_________________
+        //AUDIO
+        //_________________
+        strcpy(path,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
+        recup_path(&pileaudio_path,deb,path,"audio", Erreuraudio);
+        depiler_path ( &pileaudio_path, "audio", Erreuraudio);
+        //_________________
+        //IMAGE
+        //_________________
+        strcpy(path,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
+        recup_path(&pileimage_path,deb,path,"image", Erreurimage);
+        deb= pileimage_path->element.id;
+        strcpy(path,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
+        recup_path(&pileimage_path,deb,path,"image", Erreurimage);
+        depiler_path ( &pileimage_path, "image", Erreurimage);
+}
 // PILE_image base_descript_empiler_image( PILE_image  dscr_audio, String * erreur)
 // {
 //       printf("ici ?");

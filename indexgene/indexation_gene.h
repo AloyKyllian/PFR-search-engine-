@@ -13,8 +13,8 @@
    PILE_audio base_descript_empiler_audio (PILE_audio dscr,int * erreur, CONFIG config);
    void depiler_descripteur_audio ( PILE_audio  dscr_audio, int * erreur);
 
-   PILE_image base_descript_empiler_image( PILE_image  dscr_image, int * erreur, CONFIG config);
-   void depiler_descripteur_image( PILE_image  dscr_image, int * erreur);
+   PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur,int *erreur_image, CONFIG config);
+   void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *erreur);
 
    PILE_texte base_descript_empiler_texte( PILE_texte  dscr_texte, int * erreur, CONFIG config);
    void depiler_descripteur_texte( PILE_texte  dscr_texte, int * erreur, CONFIG config);
