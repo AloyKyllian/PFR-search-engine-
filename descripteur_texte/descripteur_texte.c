@@ -83,7 +83,7 @@ char *nettoyage(char mot_lu[100])
 
 }
 
-bool filtrage(char* mot)
+bool filtrage(char* mot,int* Erreur)
 {
     char mot_Banni[100];
     String tab_p[100];
@@ -91,7 +91,8 @@ bool filtrage(char* mot)
     FILE* fichierBanni = NULL;
     fichierBanni = fopen("../MotBanni.txt", "r");
     if(fichierBanni==NULL){
-        printf("Erreur fichier");               //Vérification ouverture du fichier
+        //printf("Erreur fichier");               //Vérification ouverture du fichier
+        Erreur = 7;
         exit(1);
     }
 
@@ -114,10 +115,40 @@ return verif;
 }
 
 
-DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab)
+DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab,int* Erreur)
 {
 
     bool verif=false;
+    char mot_NonBanni[100];
+    String tab_p[100];
+    int cpt=0;
+    FILE* fichierNonBanni = NULL;
+    fichierNonBanni = fopen("../MotNonBanni.txt", "r");
+    if(fichierNonBanni==NULL){
+        //printf("Erreur fichier NonBanni");               //Vérification ouverture du fichier
+        Erreur=7;
+        exit(1);
+    }
+
+    while(fscanf(fichierNonBanni,"%s",mot_NonBanni)!=EOF)                       
+    {       
+        strcpy(tab_p[cpt],mot_NonBanni);
+        cpt++;
+    }
+    
+    bool verif=false;
+
+    for(int i=0;i<100;i++)
+    {
+    if(strcmp(mot,tab_p[i])==0)                                 // Si le mot en entrée est présent dans les mots Non bannis on le garde 
+        verif=true;
+    }
+    if(verif==true)
+    {
+        fputs(mot,fichierNonBanni);
+    }
+
+fclose(fichierNonBanni);
 
     for(int i=0;i<tab.index;i++)
     {
@@ -174,7 +205,7 @@ DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE ta
 
 }
 
-DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESCRIPTEUR_TEXTE tab_renvoyer) {
+DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESCRIPTEUR_TEXTE tab_renvoyer,int*Erreur) {
 
     bool passe;
     char mot_lu[100];
@@ -182,7 +213,8 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     FILE* fichier = NULL;
     fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
-        printf("Erreur lors de l'ouverture d'un fichier");
+        //printf("Erreur lors de l'ouverture d'un fichier");
+        Erreur=7;
         exit(1);
     }
 
@@ -218,10 +250,10 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     while(fscanf(fichier,"%s",mot_lu)!=EOF)
     {
         mot = nettoyage(mot_lu);
-        passe=filtrage(mot);
+        passe=filtrage(mot,Erreur);
         if(passe==true)
         {
-            tab=descripteur_texte(nbr_mot,mot,tab);
+            tab=descripteur_texte(nbr_mot,mot,tab,Erreur);
 
         }
     }
@@ -250,7 +282,8 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
 int main()
 {
     DESCRIPTEUR_TEXTE tab_aff;
-    tab_aff=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",10,tab_aff);     //10 = nbr_occ c'est le nombre de mot-clé à afficher
+    int* Erreur;
+    tab_aff=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",10,tab_aff,Erreur);     //10 = nbr_occ c'est le nombre de mot-clé à afficher
     for(int x=0;x<10;x++)
     {
         printf("%s    |    %d\n",tab_aff.tab_mot[x],tab_aff.tab_app[x]);          //On affiche le tableau final     
