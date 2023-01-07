@@ -92,7 +92,7 @@ bool filtrage(char* mot,int* Erreur)
     fichierBanni = fopen("../MotBanni.txt", "r");
     if(fichierBanni==NULL){
         //printf("Erreur fichier");               //Vérification ouverture du fichier
-        Erreur = 7;
+        *Erreur = 7;
         exit(1);
     }
 
@@ -115,7 +115,7 @@ return verif;
 }
 
 
-DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab,int* Erreur)
+DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab,int* Erreur,String id)
 {
 
     bool verif=false;
@@ -123,10 +123,11 @@ DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE ta
     String tab_p[100];
     int cpt=0;
     FILE* fichierNonBanni = NULL;
-    fichierNonBanni = fopen("../MotNonBanni.txt", "r");
+    fichierNonBanni = fopen("../MotNonBanni.txt", "a");
     if(fichierNonBanni==NULL){
-        //printf("Erreur fichier NonBanni");               //Vérification ouverture du fichier
-        Erreur=7;
+        printf("Erreur fichier NonBanni");               //Vérification ouverture du fichier
+
+        *Erreur=7;
         exit(1);
     }
 
@@ -135,18 +136,33 @@ DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE ta
         strcpy(tab_p[cpt],mot_NonBanni);
         cpt++;
     }
-    
-    bool verif=false;
+
+    //qsort(tab_p,100,(sizeof(String)),1);
+    bool verifFichier=false;
 
     for(int i=0;i<100;i++)
     {
-    if(strcmp(mot,tab_p[i])==0)                                 // Si le mot en entrée est présent dans les mots Non bannis on le garde 
-        verif=true;
+    if(strcmp(mot,tab_p[i]))                                 // Si le mot en entrée n'est pas présent dans les mots Non bannis on le garde 
+        verifFichier=true;
     }
-    if(verif==true)
+    if(verifFichier==false)
     {
+        fputc(' ',fichierNonBanni);
         fputs(mot,fichierNonBanni);
+        fputs(" : ",fichierNonBanni);
+        fputs(id,fichierNonBanni);
+        fputs(",",fichierNonBanni);
+        fputs("\n",fichierNonBanni);
+
     }
+    /*else
+    {
+         while(fscanf(fichierNonBanni,"%s",mot_NonBanni)!=EOF)                       
+    {       
+        strcpy(tab_p[cpt],mot_NonBanni);
+        cpt++;
+    }
+    }*/
 
 fclose(fichierNonBanni);
 
@@ -214,7 +230,7 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
         //printf("Erreur lors de l'ouverture d'un fichier");
-        Erreur=7;
+        *Erreur=7;
         exit(1);
     }
 
@@ -253,7 +269,7 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
         passe=filtrage(mot,Erreur);
         if(passe==true)
         {
-            tab=descripteur_texte(nbr_mot,mot,tab,Erreur);
+            tab=descripteur_texte(nbr_mot,mot,tab,Erreur,"4");
 
         }
     }
