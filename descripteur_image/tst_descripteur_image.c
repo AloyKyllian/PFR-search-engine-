@@ -1,5 +1,4 @@
-#include "../head/Global.h"
-#include "../head/Descripteur_image.h"
+#include "Descripteur_image.h"
 
 void main()
 {
@@ -7,8 +6,8 @@ void main()
     IMAGE img;
     DESCRIPTEUR_IMAGE descripteur_image;
     int Erreur;
-    String Path = "../DATA_FIL_ROUGE_DEV/TEST_RGB/01.txt";
-    int Nb_Bit_Fort = 3;
+    char Path[] = "DATA_FIL_ROUGE_DEV/TEST_RGB/01.txt";
+    int Nb_Bit_Fort = 2;
     int total = 0;
 
     printf("\nLecture de la matrice\n");
@@ -27,10 +26,22 @@ void main()
     for(int i = 0; i < pow(2,Nb_Bit_Fort*img.Nb_composante); i++ )
     {
         // Permet d'afficher q'un certain nombre de valeur
-        if( (i % (int)(0.1 *pow(2,Nb_Bit_Fort*img.Nb_composante))) == 0)
-        {
-            printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
-        }
+        printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
+       
+        total = total+descripteur_image.Bilan[i][1];
+    }
+    printf("\nTotal de valeur = %d\n",total);
+    total = 0;
+
+    Erreur = 0;
+    DESCRIPTEUR_IMAGE di;
+    printf("\nTest du Pack\n");
+    di = Pack_Descripteur_image(&Erreur,Path,Nb_Bit_Fort);
+    printf("\nAffichage du tableau descripteur du pack\n");
+    for(int i = 0; i < pow(2,Nb_Bit_Fort*img.Nb_composante); i++ )
+    {
+        // Permet d'afficher q'un certain nombre de valeur
+        printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
        
         total = total+descripteur_image.Bilan[i][1];
     }

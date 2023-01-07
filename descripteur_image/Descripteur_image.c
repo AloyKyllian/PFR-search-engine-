@@ -1,21 +1,21 @@
-#include "../head/Global.h"
-#include "../head/Descripteur_image.h"
+#include "Descripteur_image.h"
 
-IMAGE Lire_image(int *Erreur, String Path)
+IMAGE Lire_image(int *Erreur, char Path[])
 {
     // Variable
     IMAGE img;
     FILE *fichier = NULL;
 
-    // Ouvre le .txt et copy la matrice
-    strcpy(img.Path, Path);
+    // Ouvre le .txt
     fichier = fopen(Path, "r");
     if (fichier != NULL)
     {
         *Erreur = 0;
 
+        // Recupere le nb de ligne, de collone et de composante de la matrice image
         fscanf(fichier, "%d %d %d", &img.Nb_Ligne, &img.Nb_Colonne, &img.Nb_composante);
 
+        // Allocation mémoire du tableau 2D
         img.adr_Matrice = malloc(img.Nb_Ligne * img.Nb_composante * sizeof(*img.adr_Matrice));
         for (int i = 0; i < img.Nb_Ligne * img.Nb_composante; i++)
         {
@@ -23,6 +23,7 @@ IMAGE Lire_image(int *Erreur, String Path)
         }
         if (img.adr_Matrice != NULL)
         {
+            // Copy la matrice dans un tableau dynamique
             for (int cptligne = 0; cptligne < img.Nb_Ligne * img.Nb_composante; cptligne++)
             {
                 for (int cptcolonne = 0; cptcolonne < img.Nb_Colonne; cptcolonne++)
@@ -112,7 +113,6 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
     int cptcolonne;
 
     // Allocation memoire du tableau 2D
-    strcpy(descripteur_image.Path, img.Path);
     descripteur_image.Nb_Ligne = pow(2, Nb_Bit_Fort * img.Nb_composante);
     descripteur_image.Nb_Colonne = 2;
     descripteur_image.Bilan = malloc( descripteur_image.Nb_Ligne * sizeof(*descripteur_image.Bilan));
@@ -140,7 +140,6 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
                 }
             }
         }
-
         // Remplissage du tableau en comptant le nombre de valeur
         for (cptligne = 0; cptligne < img.Nb_Ligne; cptligne++)
         {
@@ -156,4 +155,24 @@ DESCRIPTEUR_IMAGE Creation_Discripteur(int *Erreur, IMAGE img, int Nb_Bit_Fort)
     }
 
     return descripteur_image;
+}
+
+DESCRIPTEUR_IMAGE Pack_Descripteur_image(int *Erreur, char Path[],int Nb_Bits_Fort)
+{
+    // Variable
+    IMAGE img;
+    DESCRIPTEUR_IMAGE di;
+
+    // Lis un image et verifie si tout est ok
+    img = Lire_image(Erreur,Path);
+    if(*Erreur == 0)
+    {
+        // Fait le pretraitement et verifie si tout est ok
+        img = Pre_traitement(Erreur,img,Nb_Bits_Fort);
+        if(*Erreur == 0)
+        {
+            di = Creation_Discripteur(Erreur,img,Nb_Bits_Fort);
+        }
+    }
+    return di;
 }
