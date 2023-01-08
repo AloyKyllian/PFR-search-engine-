@@ -9,7 +9,7 @@ typedef struct
     int pourcentage;
 } tab_similaire;
 
-tab_similaire* Comparaison_descripteur_image(int *Erreur, char PathRecueil[], char PathNvImg[], int Nb_Bits_Fort);
+tab_similaire* Comparaison_descripteur_image(int *Erreur, char PathRecueil[], char PathNvImg[], int Nb_Bits_Fort, int *Nb_des);
 
 
 #endif
