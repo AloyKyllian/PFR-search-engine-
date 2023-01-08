@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "../descript_audio/descript_audio.h"
+#include "../descripteur_audio/descripteur_audio.h"
 #include "../descripteur_image/Descripteur_image.h"
 #include "../descripteur_texte/descripteur_texte.h"
 
