@@ -11,6 +11,6 @@ void main()
     printf("Test de comparaison de 1 image a %d autres", Nb_ligne);
     for (int i = 0; i < Nb_ligne; i++)
     {
-        printf("\nId: %d Pourcentage: %d", Tab[i].id, Tab[i].pourcentage);
+        printf("\nId: %d Pourcentage: %f", Tab[i].id, Tab[i].pourcentage);
     }
 }

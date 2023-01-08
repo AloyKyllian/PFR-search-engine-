@@ -25,25 +25,43 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
                 *Erreur = 0;
                 int cptval;
                 int cpt_des = 0;
-                int TotalPourcentage;
-                int PourcentageDiff[descripteur_image.Nb_Ligne];
+                int max;
+                float TotalPourcentage;
+                
 
                 // Lecture du recueil de descripteur image
                 fscanf(fichier, "%d", &debut);
                 while (debut <= 0)
                 {
                     TotalPourcentage = 0;
+                    float PourcentageDiff[descripteur_image.Nb_Ligne];
                     for (cptval = 0; cptval < descripteur_image.Nb_Ligne; cptval++)
                     {
                         fscanf(fichier, "%d %d", &val,&val);
 
+                        max = (descripteur_image.Bilan[cptval][1] >= val) ? descripteur_image.Bilan[cptval][1] : val;
+
                         // Calcul du % de difference (entre 0 et 100)
-                        PourcentageDiff[cptval] = abs((descripteur_image.Bilan[cptval][1] - val) / fmax(descripteur_image.Bilan[cptval][1], val)) * 100;
+                        if(max == 0)
+                        {
+                            PourcentageDiff[cptval] = 0;
+                        }
+                        else
+                        {
+                            PourcentageDiff[cptval] = (float)(descripteur_image.Bilan[cptval][1] - val) / max*100;
+                            if(PourcentageDiff[cptval] < 0)
+                            {
+                                PourcentageDiff[cptval] = -PourcentageDiff[cptval];
+                            }
+                            
+                        }
                         TotalPourcentage = TotalPourcentage + PourcentageDiff[cptval];
                     }
                     // Affectation des id et de la moyenne des Pourcentages
                     Tab[cpt_des].id = cpt_des;
-                    Tab[cpt_des].pourcentage = 100 - (TotalPourcentage / cptval);
+                    TotalPourcentage = 100.0 - (TotalPourcentage / cptval);
+                    
+                    Tab[cpt_des].pourcentage = TotalPourcentage;
                     cpt_des++;
 
                     // Verification s'il y a un autre descripteur
@@ -63,8 +81,8 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
                     {
                         if (Tab[i].pourcentage < Tab[j].pourcentage)
                         {
-                            int tmpid = Tab[i].id;
-                            int tmppour = Tab[i].pourcentage;
+                            float tmpid = Tab[i].id;
+                            float tmppour = Tab[i].pourcentage;
                             Tab[i].id = Tab[j].id;
                             Tab[i].pourcentage = Tab[j].pourcentage;
                             Tab[j].id = tmpid;
