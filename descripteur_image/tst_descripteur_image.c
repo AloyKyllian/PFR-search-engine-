@@ -22,15 +22,12 @@ void main()
 
     descripteur_image = Creation_Discripteur(&Erreur,img,Nb_Bit_Fort);
     printf("Nb_ligne = %d\nNb_Colonne = %d\n",descripteur_image.Nb_Ligne,descripteur_image.Nb_Colonne);
+
     printf("\nAffichage du tableau descripteur\n");
     for(int i = 0; i < pow(2,Nb_Bit_Fort*img.Nb_composante); i++ )
     {
-        // Permet d'afficher q'un certain nombre de valeur
-        if( (i % (int)(0.1 *descripteur_image.Nb_Ligne)) == 0)
-        {
-            printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
-        }
-       
+
+        printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
         total = total+descripteur_image.Bilan[i][1];
     }
     printf("\nTotal de valeur = %d\n",total);
@@ -39,15 +36,11 @@ void main()
     DESCRIPTEUR_IMAGE di;
     printf("\nTest du Pack\n");
     di = Pack_Descripteur_image(&Erreur,Path,Nb_Bit_Fort);
+    
      printf("\nAffichage du tableau descripteur du pack\n");
     for(int i = 0; i < pow(2,Nb_Bit_Fort*img.Nb_composante); i++ )
     {
-        // Permet d'afficher q'un certain nombre de valeur
-        if( (i % (int)(0.1 *descripteur_image.Nb_Ligne)) == 0)
-        {
-            printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);
-        }
-       
+        printf("Val n %d = %d Quantity = %d\n",i,descripteur_image.Bilan[i][0],descripteur_image.Bilan[i][1]);  
         total = total+descripteur_image.Bilan[i][1];
     }
     printf("\nTotal de valeur = %d\n",total);

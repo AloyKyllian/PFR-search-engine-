@@ -166,11 +166,11 @@ DESCRIPTEUR_IMAGE Pack_Descripteur_image(int *Erreur, char Path[],int Nb_Bits_Fo
 
     // Lis un image et verifie si tout est ok
     img = Lire_image(Erreur,Path);
-    if(Erreur == 0)
+    if(*Erreur == 0)
     {
         // Fait le pretraitement et verifie si tout est ok
         img = Pre_traitement(Erreur,img,Nb_Bits_Fort);
-        if(Erreur == 0)
+        if(*Erreur == 0)
         {
             di = Creation_Discripteur(Erreur,img,Nb_Bits_Fort);
         }

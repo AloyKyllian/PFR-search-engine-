@@ -1,5 +1,8 @@
-Descripteur_image :  Descripteur_image.c tst_descripteur_image.c 
-	gcc -c Descripteur_image.c
-	gcc -c tst_descripteur_image.c
-	gcc -o tst_descripteur_image.exe Descripteur_image.o tst_descripteur_image.o -lm
-	gcc -o tst_descripteur_image.out Descripteur_image.o tst_descripteur_image.o -lm
+Descripteur_image.o :  Descripteur_image.c  Descripteur_image.h
+	gcc -c -o Descripteur_image.o Descripteur_image.c
+
+tst_descripteur_image.o : tst_descripteur_image.c Descripteur_image.h
+	gcc -c -o tst_descripteur_image.o tst_descripteur_image.c
+
+tst_descripteur_image : tst_descripteur_image.o Descripteur_image.out
+	gcc -o tst_descripteur_image.exe tst_descripteur_image.o Descripteur_image.o
