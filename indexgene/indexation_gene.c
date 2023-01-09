@@ -96,10 +96,9 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       ptr_fic = fopen(CHEMIN, "r");
       if (ptr_fic != NULL)
       {
-            fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+            fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier); 
             element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio);
-            printf("ERREUR AUDIO - %d\n",*erreur_audio);
-            fflush(stdout);
+
             if (*erreur_audio == 0)
             {
                   dscr_audio = emPILE_audio(dscr_audio, element_temp);
@@ -138,7 +137,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
-                        fprintf(fichier, "%d\n", elementsupp.id);
+                        fprintf(fichier, "%d %d\n", elementsupp.id,elementsupp.descripteur.ligne);
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
                               for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
@@ -152,7 +151,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                   //______________________________
                   // AFFICHAGE ELEMENT DANS FICHIER
                   //_______________________________
-                  fprintf(fichier, "%d\n", elementsupp.id);
+                  fprintf(fichier, "%d %d\n", elementsupp.id,elementsupp.descripteur.ligne);
                   for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                   {
                         for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)

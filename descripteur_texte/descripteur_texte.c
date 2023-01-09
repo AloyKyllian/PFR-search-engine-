@@ -6,7 +6,7 @@ int comptemot(char* mot_lu)
 {
     int nbr_mot=0;
     char* mot;
-    while(mot_lu!="<texte>")
+    while(strcmp(mot_lu,"<texte>"))
     {
         
     

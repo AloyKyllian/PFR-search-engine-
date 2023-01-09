@@ -16,6 +16,8 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
         //exit(1);
     }
 
+
+
     while(fscanf(fichier,"%lf",&val)!=EOF){//compte le nombre de valeur présente dans le fichier txt
         nbr_val++;
     }
@@ -24,17 +26,15 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
 
     desci.ligne=k;//donne le nombre de ligne du descripteur 
     desci.colonne=intervalle;//donne le nombre de colonne du descripteur 
-    desci.tab = malloc(k * sizeof(*desci.tab));//creation des lignes du tableau
+    desci.tab = (int**) malloc(k * sizeof(*desci.tab));//creation des lignes du tableau
     if(desci.tab==NULL)
     {
         *erreur=1;//erreur malloc
-        printf("INDEXATION AUDIO");
-        fflush(stdout);
     }
     
-    for (int i = 0; i <= k; i++)//creation des colonne du tableau
+    for (int i = 0; i < k; i++)//creation des colonne du tableau
     {
-        desci.tab[i] = malloc(intervalle * sizeof(**desci.tab));
+        desci.tab[i] = (int*) malloc(intervalle * sizeof(**desci.tab));
         if(desci.tab[i]==NULL)
         {
             *erreur=1;//erreur malloc
@@ -54,12 +54,12 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
 
     for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
     {
-        if(cpt==fenetre)//passer de fenetre en fenetre
+        if(cpt==fenetre && k<desci.ligne-1)//passer de fenetre en fenetre
         {
             cpt=0;
             k++;
         }
-
+    
         for(m=0;m<intervalle;m++)//change d'intervalle
         {
             if((val>=(pas*m-1)) && (val<(pas*(m+1)-1)))
@@ -73,3 +73,4 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
 
 return desci;//retour de la structure du descripteur
 }
+
