@@ -22,9 +22,14 @@ int id_lu;
 DESCRIPTEUR_TEXTE tab1;
 DESCRIPTEUR_TEXTE tab2;
 
+
+
 tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 
-
+    int comp=0;
+    int cpt=0;
+    int pourc=0;
+    int j=0;
     FILE* fichier = NULL;
     fichier = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
@@ -34,37 +39,20 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 
     while(scanf("%d",id_lu)!=EOF)
     {
-            tab[j].id=id_lu;
-            for(int i=0;i<nbr_mot;i++)
-            {
-                scanf("%s    |    %d\n",tab2.tab_mot[i], tab2.tab_app[i]);
-            }
-
-
-            verif_seuil=comparaison
-            if(verif_seuil>seuil)
-           tab[j].pourcentage = verif_seuil;
-            j++;
-
-
-
-
-    }
-
-
-
-
-
-    int comp=0;
-    int cpt=0;
-    int pourc=0;
-    for(int i =0;i<nbr_mot; i++)
-    {
-        for(int j=0;j<nbr_mot;j++)
+        tab[j].id=id_lu;
+        for(int i=0;i<nbr_mot;i++)
         {
-            if(strcmp(tab1.tab_mot[i],tab2.tab_mot[j]))
+            scanf("%s    |    %d\n",tab2.tab_mot[i], tab2.tab_app[i]);
+        }
+        j++;
+    }
+    for(int v =0;v<nbr_mot; v++)
+    {
+        for(int y=0;y<nbr_mot;y++)
+        {
+            if(strcmp(tab1.tab_mot[v],tab2.tab_mot[y]))
             {
-                comp = abs(tab1.tab_app[i]-tab2.tab_app[j]);
+                comp = abs(tab1.tab_app[v]-tab2.tab_app[y]);
                 if(0<comp<3)
                 {
                     cpt++;
@@ -73,6 +61,17 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
         }
     } 
     pourc= cpt/nbr_mot *100;
-    printf("Similarité : %d %", pourc);
+    printf("Similarité : %d pourcent", pourc);
+
+
+
+           /* verif_seuil=comparaison
+            if(verif_seuil>seuil)
+           tab[j].pourcentage = verif_seuil;
+            j++;*/
+
+
+
+
 
 }
