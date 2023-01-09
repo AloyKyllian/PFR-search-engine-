@@ -38,18 +38,21 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
     tab_similaire tab[100];
     fichier = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
-        printf("Erreur lors de l'ouverture d'un fichier");
+        printf("Erreur lors de l'ouverture d'un fichier test");
         exit(1);
     }
+    printf("A");
 
     while(scanf("%d",id_lu)!=EOF)
     {
+         printf("LA1");
         tab[j].id=id_lu;
         for(int i=0;i<nbr_mot;i++)
         {
             scanf("%s    |    %d\n",tab2.tab_mot[i], tab2.tab_app[i]);
         }
         j++;
+        printf("LA");
     }
     for(int v =0;v<nbr_mot; v++)
     {
@@ -66,7 +69,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
         }
     } 
     tab->pourcentage= cpt/nbr_mot *100;
-    printf("Similarité : %d pourcent", pourc);
+    printf("Similarité : %f pourcent", tab->pourcentage);
 
 
 
@@ -79,5 +82,5 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 
 int main()
 {
-    comparaison(10,"../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml","./comparaison_texte/test.txt");
+    comparaison(10,"../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml","../comparaison_texte/test.txt");
 }
