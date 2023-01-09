@@ -1,12 +1,8 @@
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "../head/Config.h"
-
+#include "./rechercheTexte.h"
 
 void rechercheTexte(char *mot, char *chemin){
     FILE *fp;
-   
+	//String tabRes[][]=(String)malloc(int size)
 	char* ID=(char*)malloc(5);
 	char* chaine=(char*)malloc(100);
 	char* motS=(char*)malloc(27);
@@ -27,15 +23,4 @@ void rechercheTexte(char *mot, char *chemin){
 	else{
     		printf("Impossible d'ouvrir le fichier\n");}
 	fclose(fp);
-
-}
-
-void main(){
-	char *mot=(char*)malloc(26);
-	char *chemin="des.txt";
-	printf("test recherche par mot clé\n");
-	chemin="des.txt";
-	printf("Veuillez entrer le mot que vous souhaitez recherché\n");
-	scanf("%s",mot);
-	rechercheTexte(mot,chemin);
 }
