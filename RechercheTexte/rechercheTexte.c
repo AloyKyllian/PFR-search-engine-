@@ -1,30 +1,28 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Config.h"
+#include "../head/Config.h"
 
 
-void rechercheTexte(char *mot,char* chemin){
+void rechercheTexte(char *mot){
     FILE *fp;
-    fp = fopen("des.txt", "rt");
-	char* ID=(char*)malloc(100);
+   
+	char* ID=(char*)malloc(5);
 	char* chaine=(char*)malloc(100);
 	char* res=(char*)malloc(100);
+	fp = fopen("des.txt", "rt");
 
 	if (fp != NULL){ 
 		while(fscanf(fp,"%s",chaine)!=EOF){
 			//printf("lecture chaine =%s\n",chaine);
-			
-			res=strpbrk(chaine,"-");
-			//printf("res=%s\n",res); 
-	    		if(res!=NULL){
-	    			//printf("res de if=%s\n",res);
-	    			strcpy(ID,res);
-	    			//printf("ID=%s\n",ID);
+				if(chaine[0]=='-'){
+	    			strcpy(ID,chaine);
+	    			printf("ID=%s\n",ID);
 	    		}
 	    		//printf("test ID=%s\n",ID);
 		    	if (strstr(chaine,mot) !=NULL){
 		    		printf("chaine= %s et titre=%s\n",chaine,ID);}
+					//mettre le resultat dans un tableau dynamique
 		    	}
 		    	}
 	else{
@@ -33,9 +31,12 @@ void rechercheTexte(char *mot,char* chemin){
 
 }
 
-
-void main (){
-
-printf("hello world");
-
+void main(){
+	char *mot=(char*)malloc(26);
+	char *chemin="des.txt";
+	printf("test recherche par mot clé\n");
+	//chemin="des.txt";
+	printf("Veuillez entrer le mot que vous souhaitez recherché\n");
+	scanf("%s",mot);
+	rechercheTexte(mot);
 }
