@@ -4,23 +4,22 @@
 #include "../head/Config.h"
 
 
-void rechercheTexte(char *mot){
+void rechercheTexte(char *mot, char *chemin){
     FILE *fp;
    
 	char* ID=(char*)malloc(5);
 	char* chaine=(char*)malloc(100);
-	char* res=(char*)malloc(100);
-	fp = fopen("des.txt", "rt");
-
+	char* motS=(char*)malloc(27);
+	strcpy(motS,mot);
+	strcat(motS,"|");
+	fp = fopen(chemin, "rt");
 	if (fp != NULL){ 
 		while(fscanf(fp,"%s",chaine)!=EOF){
-			//printf("lecture chaine =%s\n",chaine);
 				if(chaine[0]=='-'){
 	    			strcpy(ID,chaine);
-	    			printf("ID=%s\n",ID);
+	    			//printf("ID=%s\n",ID);
 	    		}
-	    		//printf("test ID=%s\n",ID);
-		    	if (strstr(chaine,mot) !=NULL){
+		    	if (strstr(chaine,motS) !=NULL){
 		    		printf("chaine= %s et titre=%s\n",chaine,ID);}
 					//mettre le resultat dans un tableau dynamique
 		    	}
@@ -35,8 +34,8 @@ void main(){
 	char *mot=(char*)malloc(26);
 	char *chemin="des.txt";
 	printf("test recherche par mot clé\n");
-	//chemin="des.txt";
+	chemin="des.txt";
 	printf("Veuillez entrer le mot que vous souhaitez recherché\n");
 	scanf("%s",mot);
-	rechercheTexte(mot);
+	rechercheTexte(mot,chemin);
 }
