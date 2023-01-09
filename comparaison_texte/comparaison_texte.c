@@ -19,7 +19,7 @@ typedef struct
     float pourcentage;
 } tab_similaire;
 
-void comparaison(int seuil,int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur)
+void comparaison(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur)
 {
 char * mot_lu;
 int id_lu;
@@ -79,5 +79,5 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 
 int main()
 {
-    comparaison()
+    comparaison(10,"../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml","./comparaison_texte/test.txt");
 }
