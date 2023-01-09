@@ -35,7 +35,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
     int pourc=0;
     int j=0;
     FILE* fichier = NULL;
-    tab_similaire tab[100];
+    tab_similaire tab[nbr_mot];
     fichier = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
         printf("Erreur lors de l'ouverture d'un fichier test");
