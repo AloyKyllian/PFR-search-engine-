@@ -311,8 +311,11 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
                   // AFFICHAGE ELEMENT DANS FICHIER
                   //________________________________
                   fprintf(fichier, "%d\n", elementsupp.id);
-
-                  // affichage descripteur
+// affichage descripteur
+                      for (int x = 0; x < config.Nb_Mots_Cle; x++)
+                        {
+                              fprintf(fichier,"%s    |    %d\n", elementsupp.descripteur_texte.tab_mot[x], elementsupp.descripteur_texte.tab_app[x]);
+                        }
             }
             dscr_texte = dePILE_texte(dscr_texte, &elementsupp);
             //______________________________
@@ -320,6 +323,10 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
             //________________________________
             fprintf(fichier, "%d\n", elementsupp.id);
             // affichage descripteur
+                  for (int x = 0; x < config.Nb_Mots_Cle; x++)
+                        {
+                              fprintf(fichier,"%s    |    %d\n", elementsupp.descripteur_texte.tab_mot[x], elementsupp.descripteur_texte.tab_app[x]);
+                        }
       }
       else
       {

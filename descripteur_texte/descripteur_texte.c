@@ -180,7 +180,7 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
 
     bool passe;
     char mot_lu[100];
-    int nbr_mot;
+    int nbr_mot=0;
     FILE* fichier = NULL;
     fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
@@ -197,7 +197,7 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     {
         nbr_mot++;
     }
-    
+
     rewind(fichier);
 
     DESCRIPTEUR_TEXTE tab;
@@ -205,13 +205,18 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
     tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
 
+
     for(int i=0;i<nbr_mot;i++)
     {
+
         strcpy(tab.tab_mot[i],"");
+        tab.tab_app[i]=0;
     }
 
     char *mot;
- 
+
+
+
     while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter le début du fichier
     {
         fscanf(fichier,"%s",mot_lu);
@@ -228,7 +233,6 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
         }
     }
 
-    DESCRIPTEUR_TEXTE tab_occ_finale;
     tab_renvoyer.index=0;
     tab_renvoyer.tab_mot = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_mot));//creation du tableau
     tab_renvoyer.tab_app = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_app));//creation du tableau
@@ -242,9 +246,11 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
 
-    /*for(int x=0;x<nbr_occ;x++)
-    {
-        printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
-    }*/
+    // for(int x=0;x<nbr_occ;x++)
+    // {
+    //     printf("%s    |    %d\n",tab_renvoyer.tab_mot[x],tab_renvoyer.tab_app[x]);          //On affiche le tableau final     
+    //     fflush(stdout);
+    // }
 
+    return tab_renvoyer;
 }
