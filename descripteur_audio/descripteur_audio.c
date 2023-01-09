@@ -28,6 +28,8 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
     if(desci.tab!=NULL)
     {
         *erreur=1;//erreur malloc
+        printf("INDEXATION AUDIO");
+        fflush(stdout);
     }
     
     for (int i = 0; i <= k; i++)//creation des colonne du tableau

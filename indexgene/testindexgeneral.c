@@ -16,12 +16,12 @@ int main()
      config = Lire_CONFIG(&Erreurimage);
 
      PILE_audio descripteur_audio = NULL;
-     //descripteur_audio = base_descript_empiler_audio(descripteur_audio, &Erreur,&Erreuraudio, config);
-     //depiler_descripteur_audio(descripteur_audio, &Erreur,Erreurtexte);
+     descripteur_audio = base_descript_empiler_audio(descripteur_audio, &Erreur,&Erreuraudio, config);
+     depiler_descripteur_audio(descripteur_audio, &Erreur,Erreurtexte);
 
-    PILE_image pileimage = NULL;
-    pileimage = base_descript_empiler_image( pileimage, &Erreur, &Erreurimage,  config);
-    depiler_descripteur_image(pileimage, Erreurimage, &Erreur);
+    // PILE_image pileimage = NULL;
+    // pileimage = base_descript_empiler_image( pileimage, &Erreur, &Erreurimage,  config);
+    // depiler_descripteur_image(pileimage, Erreurimage, &Erreur);
 
 //     ELEMENT_texte element_temp;
 //     // printf("HELLO AVANT TEXTE");

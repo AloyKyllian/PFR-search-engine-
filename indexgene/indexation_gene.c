@@ -45,7 +45,7 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur
 
                   *pourchemin = emPILE(*pourchemin, element);
                   /* nom de fichier suivant */
-                  deb--;
+                  deb++;
                   fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", nom_fic);
             }
       }
@@ -75,10 +75,10 @@ void depiler_path(PILE *pourchemin, String type, int *erreur)
             while ((*pourchemin)->suiv != NULL)
             {
                   *pourchemin = dePILE(*pourchemin, &elementsupp);
-                  fprintf(fichier, "%d |%s\n", elementsupp.id, elementsupp.CHEMIN);
+                  fprintf(fichier, "-%d |%s\n", elementsupp.id, elementsupp.CHEMIN);
             }
             *pourchemin = dePILE(*pourchemin, &elementsupp);
-            fprintf(fichier, "%d | %s", elementsupp.id, elementsupp.CHEMIN);
+            fprintf(fichier, "-%d | %s", elementsupp.id, elementsupp.CHEMIN);
       }
       else
       {
@@ -98,6 +98,8 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
             element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio);
+            printf("ERREUR AUDIO - %d\n",*erreur_audio);
+            fflush(stdout);
             if (*erreur_audio == 0)
             {
                   dscr_audio = emPILE_audio(dscr_audio, element_temp);
@@ -351,7 +353,7 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       //_________________
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
-      deb = (pileimage_path->element.id) -1;
+      deb = (pileimage_path->element.id) +1;
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
       depiler_path(&pileimage_path, "image", Erreurimage);
