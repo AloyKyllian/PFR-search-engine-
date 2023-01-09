@@ -24,22 +24,22 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
 
     desci.ligne=k;//donne le nombre de ligne du descripteur 
     desci.colonne=intervalle;//donne le nombre de colonne du descripteur 
-    desci.tab =  malloc(k * sizeof(*desci.tab));//creation des lignes du tableau
+    desci.tab = (int**) malloc(k+2 * sizeof(*desci.tab));//creation des lignes du tableau
     if(desci.tab!=NULL)
     {
         *erreur=1;//erreur malloc
     }
     
-    for (int i = 0; i < k; i++)//creation des colonne du tableau
+    for (int i = 0; i <= k+2; i++)//creation des colonne du tableau
     {
-        desci.tab[i] = malloc(intervalle * sizeof(**desci.tab));
+        desci.tab[i] = (int*) malloc(intervalle * sizeof(**desci.tab));
         if(desci.tab[i]!=NULL)
         {
             *erreur=1;//erreur malloc
         }
     }
 
-    for (unsigned i = 0; i < k; ++i)//initialisation du tableau(possibilité de fonction)
+    for (unsigned i = 0; i <= k+2; ++i)//initialisation du tableau(possibilité de fonction)
     {
         for (unsigned j = 0; j < intervalle; ++j)
         {
