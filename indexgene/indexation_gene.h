@@ -21,4 +21,6 @@
 
    void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreurimage);
 
+    int getligne(char*,int*);
+
 #endif

@@ -1,6 +1,6 @@
 #include "descripteur_audio.h"
 
-descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci,int * erreur){//demander comment recuperer le chemin et nom du fichier
+descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci,int * erreur,int ligne){//demander comment recuperer le chemin et nom du fichier
     double pas;//difference entre 2 intervalles
     int nbr_val=0;//nombre de valeur dans un fichier texte
     int k;//(nbr_val_fenetre)
@@ -18,11 +18,12 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
 
 
 
-    while(fscanf(fichier,"%lf",&val)!=EOF){//compte le nombre de valeur présente dans le fichier txt
-        nbr_val++;
-    }
+    // while(fscanf(fichier,"%lf",&val)!=EOF){//compte le nombre de valeur présente dans le fichier txt
+    //     nbr_val++;
+    // }
     
-    k=(nbr_val/fenetre);//calcul du nombre de fenetre
+    // k=(nbr_val/fenetre);//calcul du nombre de fenetre
+    k=ligne/fenetre;//calcul du nombre de fenetre
 
     desci.ligne=k;//donne le nombre de ligne du descripteur 
     desci.colonne=intervalle;//donne le nombre de colonne du descripteur 
@@ -50,7 +51,7 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
     }
     k=0;
     pas=2./intervalle;
-    rewind(fichier);//permet de revenir au debut du fichier
+    //rewind(fichier);//permet de revenir au debut du fichier
 
     for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
     {
