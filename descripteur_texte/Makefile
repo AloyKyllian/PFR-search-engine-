@@ -13,6 +13,6 @@ Descripteur_texte : Config.c Global.c descripteur_texte.c test_descipteur_texte.
 	gcc -c Global.c 
 	gcc -c comparaison_texte.c
 	gcc -c test_descipteur_texte.c
-	gcc -o comparaison_texte.exe comparaison_texte.c descripteur_texte.o -lm
+	gcc -o comparaison_texte.exe descripteur_texte.c comparaison_texte.o -lm
 	rm -rf *.o
-	./descripteur_texte.exe
+	./comparaison_texte.exe
