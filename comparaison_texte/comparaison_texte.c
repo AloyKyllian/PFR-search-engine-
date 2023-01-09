@@ -13,7 +13,11 @@
 
 // 
 
-
+typedef struct
+{
+    int id;
+    float pourcentage;
+} tab_similaire;
 
 void comparaison(int seuil,int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur)
 {
@@ -31,6 +35,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
     int pourc=0;
     int j=0;
     FILE* fichier = NULL;
+    tab_similaire tab[100];
     fichier = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
         printf("Erreur lors de l'ouverture d'un fichier");
@@ -60,7 +65,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
             }
         }
     } 
-    pourc= cpt/nbr_mot *100;
+    tab->pourcentage= cpt/nbr_mot *100;
     printf("Similarité : %d pourcent", pourc);
 
 
@@ -70,8 +75,9 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
            tab[j].pourcentage = verif_seuil;
             j++;*/
 
+}
 
-
-
-
+int main()
+{
+    comparaison()
 }
