@@ -21,7 +21,7 @@ int main()
 
     PILE_image pileimage = NULL;
     pileimage = base_descript_empiler_image( pileimage, &Erreur, &Erreurimage,  config);
-    //depiler_descripteur_image(pileimage, Erreurimage, &Erreur);
+    depiler_descripteur_image(pileimage, Erreurimage, &Erreur);
 
 //     ELEMENT_texte element_temp;
 //     // printf("HELLO AVANT TEXTE");

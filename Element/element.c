@@ -25,11 +25,7 @@ void affiche_ELEMENT_image(ELEMENT_image element)
     printf("%d\n", element.id);
     for (int i = 0; i < element.descripteur_image.Nb_Ligne; i++)
     {
-        // Permet d'afficher q'un certain nombre de valeur
-        if ((i % (int)(0.1 * element.descripteur_image.Nb_Colonne)) == 0)
-        {
-            printf("Val n°%d = %d Quantity = %d\n", i, element.descripteur_image.Bilan[i][0], element.descripteur_image.Bilan[i][1]);
-        }
+        printf("Val n°%d = %d Quantity = %d\n", i, element.descripteur_image.Bilan[i][0], element.descripteur_image.Bilan[i][1]);
 
         total = total + element.descripteur_image.Bilan[i][1];
     }
