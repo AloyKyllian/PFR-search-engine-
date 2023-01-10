@@ -146,6 +146,11 @@ PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp)
         affect_ELEMENT_image(elementsupp, pile->element);
         // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
         PILE_image aux=pile->suiv;
+        for(int i = 0; i < pile->element.descripteur_image.Nb_Ligne; i++)
+        {
+            free(pile->element.descripteur_image.Bilan[i]);
+        }
+        //free(pile->element.descripteur_image.Bilan);
         free(pile);
         return aux;
     }

@@ -1,6 +1,12 @@
 #ifndef indexation_gene_h
 #define indexation_gene_h
 
+//
+// AUTEUR :
+//          YASMINE ALLAL
+// DERNIERE VERSION :
+//    12/01/2023
+
 #include "../Element/element.h"
 #include "../Pile/Pile.h"
 #include "../Gestion-Config/Config.h"
@@ -21,6 +27,6 @@
 
    void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreurimage);
 
-    int getligne(char*,int*);
-
+   int getligne(char*,int*);
+   void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
 #endif

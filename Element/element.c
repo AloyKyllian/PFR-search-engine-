@@ -30,11 +30,11 @@ void affiche_ELEMENT_image(ELEMENT_image element)
         total = total + element.descripteur_image.Bilan[i][1];
     }
     printf("\nTotal de valeur = %d\n", total);
-};
+}
 void affect_ELEMENT_image(ELEMENT_image *elemaffect, ELEMENT_image e2)
 {
     *elemaffect = e2;
-};
+}
 
 void affect_ELEMENT(ELEMENT *elemaffect, ELEMENT e2)
 {
