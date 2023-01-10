@@ -1,9 +1,10 @@
-Global.o : ../Gestion-Config/Global.c
-	gcc -c ../Gestion-Config/Global.c
+
 
 inde : Global.o Config.o element.o descripteur_texte.o descripteur_audio.o Descripteur_image.o pile.o indexation_gene.o testindexgeneral.o
 	gcc -o inde.out Global.o Config.o element.o Pile.o descripteur_texte.o Descripteur_image.o descripteur_audio.o indexation_gene.o testindexgeneral.o -lm
-
+	
+Global.o : ../Gestion-Config/Global.c
+	gcc -c ../Gestion-Config/Global.c
 
 
 Config.o : ../Gestion-Config/Config.c

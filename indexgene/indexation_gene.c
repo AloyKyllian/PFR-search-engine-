@@ -150,23 +150,57 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
 
                   while (dscr_audio != NULL)
                   {
-                        printf("test 8 \n");
-                        fflush(stdout);
+                        for (unsigned i = 0; i < dscr_audio->element.descripteur.ligne; ++i)
+                        {
+                              for (unsigned j = 0; j < dscr_audio->element.descripteur.colonne; ++j)
+                              {
+
+                                    printf("%d  ",i);
+                                    printf(" %d =",j);
+                                    printf(" %d \n",dscr_audio->element.descripteur.tab[i][j]);
+                                    fflush(stdout);
+                                    //fprintf(fichier, " |%3d| ", dscr_audio->element.descripteur.tab[i][j]);
+                              }
+                        }
                         dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
+
+
+                                  for (unsigned i = 542; i < 546; ++i)
+    {
+            for (unsigned j = 0; j < 32; ++j)
+            {
+
+                printf("descripteur : %d  ",i);
+                printf(" %d =",j);
+                printf(" %d \n",dscr_audio->element.descripteur.tab[i][j]);
+                fflush(stdout);
+                //fprintf(fichier, " |%3d| ", dscr_audio->element.descripteur.tab[i][j]);
+            }
+    }
+
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
+                                                  printf("test 86 \n");
+                        fflush(stdout);
                         fprintf(fichier, "%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
-                        printf("test 8 \n");
+                        printf("nbr ligne : %d \n",elementsupp.descripteur.colonne);
                         fflush(stdout);
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
                               for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
                               {
+
+                                    printf("%d  ",i);
+                                    printf(" %d =",j);
+                                    printf(" %d \n",elementsupp.descripteur.tab[i][j]);
+                                    fflush(stdout);
                                     fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
                               }
                               fprintf(fichier, "\r\n");
                         }
+                        printf("test 86 \n");
+                        fflush(stdout);
                   }
             }
             else
@@ -423,6 +457,9 @@ void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio
       printf("test 2165 \n");
             fflush(stdout);
       depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
+
+                                          printf("test audio \n");
+            fflush(stdout);
                   printf("test ? \n");
             fflush(stdout);
 
