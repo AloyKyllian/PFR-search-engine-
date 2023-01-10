@@ -1,0 +1,36 @@
+-03
+prot├®ines    |    3
+comportement    |    3
+thomas    |    3
+fr├®d├®ric    |    3
+n├®matomorphes    |    3
+h├┤te    |    3
+┬¡    |    2
+parasites    |    2
+chercheur    |    2
+chez    |    2
+
+-04
+prot├®ines    |    3
+comportement    |    3
+thomas    |    3
+fr├®d├®ric    |    3
+n├®matomorphes    |    3
+h├┤te    |    3
+┬¡    |    2
+parasites    |    2
+chercheur    |    2
+chez    |    2
+
+
+-05
+prot├®ines    |    3
+comportement    |    3
+thomas    |    3
+fr├®d├®ric    |    3
+n├®matomorphes    |    3
+h├┤te    |    3
+┬¡    |    2
+parasites    |    2
+chercheur    |    2
+chez    |    2

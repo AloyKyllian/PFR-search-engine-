@@ -1,4 +1,4 @@
-#include "./descripteur_texte.h"
+#include "descripteur_texte.h"
 
 
 int comptemot(char* mot_lu)
@@ -295,7 +295,7 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
 
 }
 
-int main()
+/*int main()
 {
     DESCRIPTEUR_TEXTE tab_aff;
     int* Erreur;
@@ -304,6 +304,6 @@ int main()
     {
         printf("%s    |    %d\n",tab_aff.tab_mot[x],tab_aff.tab_app[x]);          //On affiche le tableau final     
     }
-}
+}*/
 
 
