@@ -104,8 +104,11 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
             ligne = getligne(cheminfichier, erreur);
+            printf("ca fonctionne ? \n");
+            fflush(stdout);
             element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
-
+            printf("ca fonctionne ? \n");
+            fflush(stdout);
             if (*erreur_audio == 0)
             {
                   dscr_audio = emPILE_audio(dscr_audio, element_temp);
@@ -121,6 +124,8 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                         }
                   }
             }
+                        printf("ca fonctionne ? \n");
+            fflush(stdout);
             fclose(ptr_fic);
       }
       else
@@ -142,13 +147,18 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
       {
             if (fichier != NULL)
             {
+
                   while (dscr_audio != NULL)
                   {
+                        printf("test 8 \n");
+                        fflush(stdout);
                         dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
                         fprintf(fichier, "%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
+                        printf("test 8 \n");
+                        fflush(stdout);
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
                               for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
@@ -410,7 +420,11 @@ void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio
       fflush(stdout);
       PILE_audio descripteur_audio = NULL;
       descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
+      printf("test 2165 \n");
+            fflush(stdout);
       depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
+                  printf("test ? \n");
+            fflush(stdout);
 
       PILE_texte piletexte = NULL;
       piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);
