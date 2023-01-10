@@ -91,8 +91,8 @@ bool filtrage(char* mot,int* Erreur)
     FILE* fichierBanni = NULL;
     fichierBanni = fopen("../MotBanni.txt", "r");
     if(fichierBanni==NULL){
-        //printf("Erreur fichier");               //Vérification ouverture du fichier
-        *Erreur = 7;
+       
+        *Erreur = 7; //printf("Erreur fichier");               //Vérification ouverture du fichier
         exit(1);
     }
 
@@ -125,7 +125,7 @@ DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE ta
     FILE* fichierNonBanni = NULL;
     fichierNonBanni = fopen("../MotNonBanni.txt", "a");
     if(fichierNonBanni==NULL){
-        printf("Erreur fichier NonBanni");               //Vérification ouverture du fichier
+       // printf("Erreur fichier NonBanni");               //Vérification ouverture du fichier
 
         *Erreur=7;
         exit(1);
