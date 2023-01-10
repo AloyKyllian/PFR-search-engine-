@@ -128,12 +128,22 @@ PILE_audio dePILE_audio(PILE_audio pile, ELEMENT_audio *elementsupp)
         affect_ELEMENT_audio(elementsupp, pile->element);
         // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
         PILE_audio aux = pile->suiv;
-        for (int i = 0; i < pile->element.descripteur.ligne + 3; i++) // creation des colonne du tableau
+                          printf("test 9 \n");
+            fflush(stdout);
+        for (int i = 0; i < pile->element.descripteur.ligne + 1; i++) // creation des colonne du tableau
         {
+                              printf("test 3 \n");
+            fflush(stdout);
             free(pile->element.descripteur.tab[i]);
         }
+                          printf("test 5 \n");
+            fflush(stdout);
         free(pile->element.descripteur.tab);
+                          printf("test 8 \n");
+            fflush(stdout);
         free(pile);
+                printf("test 10 \n");
+            fflush(stdout);
         return aux;
     }
     // si la pile était vide, on renvoie celle ci
