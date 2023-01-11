@@ -2,12 +2,12 @@
 jeux|20
 olympiques|15
 natation|10
-médaille|7
-soleil|35
+bonjour|7
+soleil|5
 jaune|12
 ciel|9
 bleu|5
-enfant|35
+enfant|5
 plage|12
 parents|5
 -02
@@ -18,7 +18,7 @@ match|15
 pere|12
 coupe|10
 soleil|10
-ciel|9
+bon|9
 monde|7
 bleu|5
 soeur|5
