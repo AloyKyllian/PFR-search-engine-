@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "../head/Global.h"
+#include "../Global/Global.h"
 
 //Tout les parametre necessaire son donner dans cette structure.
 typedef struct

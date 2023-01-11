@@ -1,7 +1,7 @@
-#include "../head/Menu.h"
-#include "../head/Connexion.h"
-#include "../head/Config.h"
-#include "../head/FichierExist.h"
+#include "../Menu/Menu.h"
+#include "../Connexion/Connexion.h"
+#include "../Config/Config.h"
+#include "../Menu/FichierExist.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>

@@ -1,8 +1,8 @@
 #ifndef Menu_H_INCLUS    
 #define Menu_H_INCLUS   
-#include "../head/Connexion.h"
-#include "../head/Config.h"
-#include "../head/FichierExist.h"
+#include "../Connexion/Connexion.h"
+#include "../Config/Config.h"
+#include "../Menu/FichierExist.h"
 
 void MAE();
 //Etat :
