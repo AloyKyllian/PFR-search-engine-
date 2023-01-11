@@ -1,6 +1,6 @@
 #include "descripteur_audio.h"
 
-descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,int * erreur){//demander comment recuperer le chemin et nom du fichier
+descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_fichier,int * erreur, int ligne){//demander comment recuperer le chemin et nom du fichier
     double pas;//difference entre 2 intervalles
     int nbr_val=0;//nombre de valeur dans un fichier texte
     int k;//(nbr_val_fenetre)
@@ -12,59 +12,41 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,i
     fichier = fopen(chemin_fichier, "r");//ouvre le fichier ne mode read
     if(fichier==NULL){    
         *erreur=7;//regarder ouverture fichier
-        //printf("Erreur lors de l'ouverture d'un fichier");
-        //exit(1);
-    }
-
-    while(fscanf(fichier,"%lf",&val)!=EOF){//compte le nombre de valeur présente dans le fichier txt
-        nbr_val++;
     }
     
-    k=(nbr_val/fenetre);//calcul du nombre de fenetre
-    descri_audio desci;
-    printf(" |%3d| ",k);
-    printf(" |%3d| ",intervalle);
-    desci.ligne=k+1;//donne le nombre de ligne du descripteur 
-    desci.colonne=intervalle;//donne le nombre de colonne du descripteur 
+    k=(ligne/nb_val_fenetre);//calcul du nombre de fenetre
+    descri_audio descipteur_audio;
+    descipteur_audio.ligne=k+1;//donne le nombre de ligne du descripteur 
+    descipteur_audio.colonne=intervalle;//donne le nombre de colonne du descripteur 
 
-
-    desci.tab = malloc(desci.ligne * sizeof(*desci.tab));
-    for (int i = 0; i < desci.ligne; i++)
+    descipteur_audio.tab = malloc(descipteur_audio.ligne * sizeof(*descipteur_audio.tab));
+    if (descipteur_audio.tab == NULL)
     {
-        desci.tab[i] = malloc(desci.colonne * sizeof(**desci.tab));
+        *erreur = 1;
     }
-
-    for (int i = 0; i < desci.ligne-17; ++i)
+    for (int i = 0; i < descipteur_audio.ligne; i++)
     {
-        for (int j = 0; j < desci.colonne; ++j)
+        descipteur_audio.tab[i] = malloc(descipteur_audio.colonne * sizeof(**descipteur_audio.tab));
+        if (descipteur_audio.tab[i] == NULL)
         {
-            //printf(" |%3d| ",desci.tab[i][j]);
+            *erreur = 1;
         }
-        printf("\r\n");
     }
 
-    /*desci.tab = (int**) malloc((k+1) * sizeof(*desci.tab));//creation des lignes du tableau
-    if(desci.tab!=NULL)
+    for (int i = 0; i < descipteur_audio.ligne; ++i)
     {
-        *erreur=1;//erreur malloc
-    }
-    
-    for (int i = 0; i < (k+1); i++)//creation des colonne du tableau
-    {
-        desci.tab[i] = (int*) malloc(intervalle * sizeof(**desci.tab));
-        if(desci.tab[i]!=NULL)
+        for (int j = 0; j < descipteur_audio.colonne; ++j)
         {
-            *erreur=1;//erreur malloc
+            descipteur_audio.tab[i][j]=0;
         }
-    }*/
+    }
 
     k=0;
     pas=2./intervalle;
-    rewind(fichier);//permet de revenir au debut du fichier
 
     for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
     {
-        if(cpt==fenetre)//passer de fenetre en fenetre
+        if(cpt==nb_val_fenetre)//passer de fenetre en fenetre
         {
             cpt=0;
             k++;
@@ -75,11 +57,11 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,i
             if((val>=(pas*m-1)) && (val<(pas*(m+1)-1)))
             {
                 if(val<1&&val>-1&&m<intervalle)
-                    desci.tab[k][m]++;
+                    descipteur_audio.tab[k][m]++;
             }
         }
     }
     fclose(fichier);//fermeture du fichier
 
-return desci;//retour de la structure du descripteur
+return descipteur_audio;//retour de la structure du descripteur
 }
