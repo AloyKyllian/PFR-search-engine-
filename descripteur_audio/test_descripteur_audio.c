@@ -2,11 +2,14 @@
 
 int main()
 {
-  int erreur;
-  descri_audio tableau;
+    int erreur;
+    descri_audio tableau;
+    int config_fenetre=2048;
+    int config_intervalle=32;
+    int ligne=40944;
+    char chemin[100]="../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/jingle_fi.txt";
 
-    tableau=Descripteur_audio(2048,32,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/jingle_fi.txt",&erreur,40944);
-    //printf("%d",erreur);
+    tableau=Descripteur_audio(config_fenetre,config_intervalle,chemin,&erreur,ligne);
     
     for (unsigned i = 0; i < tableau.ligne; ++i)
     {
