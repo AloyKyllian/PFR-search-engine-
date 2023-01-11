@@ -145,8 +145,6 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
 
                   while (dscr_audio->suiv != NULL)
                   {
-
-
                         printf("\t cpt : %d \t",cpt);
                         cpt++;
                         dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
