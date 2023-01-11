@@ -8,3 +8,7 @@ ERREUR 6: Pas une puissance de 2
 ERREUR 7: Fichier introuvable
 ERREUR 9: Pas un nombre
 ERREUR 10: Nombre superieur a 100
+ERREUR 11: Choix menu
+ERREUR 12: Mauvais identifiant
+ERREUR 13: Mauvaise extension de fichier
+ERREUR 14: Redirection vers le menu general
