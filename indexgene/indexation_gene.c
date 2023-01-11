@@ -104,11 +104,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
             ligne = getligne(cheminfichier, erreur);
-            printf("ca fonctionne ? \n");
-            fflush(stdout);
             element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
-            printf("ca fonctionne ? \n");
-            fflush(stdout);
             if (*erreur_audio == 0)
             {
                   dscr_audio = emPILE_audio(dscr_audio, element_temp);
@@ -124,8 +120,6 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                         }
                   }
             }
-                        printf("ca fonctionne ? \n");
-            fflush(stdout);
             fclose(ptr_fic);
       }
       else
@@ -142,64 +136,40 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
 {
       ELEMENT_audio elementsupp;
       FILE *fichier = NULL;
+      int cpt=0;
       fichier = fopen("../base_descripteur/base_descripteur_audio", "w");
       if (erreur_audio == 0)
       {
             if (fichier != NULL)
             {
 
-                  while (dscr_audio != NULL)
+                  while (dscr_audio->suiv != NULL)
                   {
-                        for (unsigned i = 0; i < dscr_audio->element.descripteur.ligne; ++i)
-                        {
-                              for (unsigned j = 0; j < dscr_audio->element.descripteur.colonne; ++j)
-                              {
 
-                                    printf("%d  ",i);
-                                    printf(" %d =",j);
-                                    printf(" %d \n",dscr_audio->element.descripteur.tab[i][j]);
-                                    fflush(stdout);
-                                    //fprintf(fichier, " |%3d| ", dscr_audio->element.descripteur.tab[i][j]);
-                              }
-                        }
+
+                        printf("\t cpt : %d \t",cpt);
+                        cpt++;
                         dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
-
-
-                                  for (unsigned i = 542; i < 546; ++i)
-    {
-            for (unsigned j = 0; j < 32; ++j)
-            {
-
-                printf("descripteur : %d  ",i);
-                printf(" %d =",j);
-                printf(" %d \n",dscr_audio->element.descripteur.tab[i][j]);
-                fflush(stdout);
-                //fprintf(fichier, " |%3d| ", dscr_audio->element.descripteur.tab[i][j]);
-            }
-    }
-
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
-                                                  printf("test 86 \n");
+
+                        printf("test apres depile \n");
                         fflush(stdout);
                         fprintf(fichier, "%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
-                        printf("nbr ligne : %d \n",elementsupp.descripteur.colonne);
-                        fflush(stdout);
+
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
                               for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
                               {
-
-                                    printf("%d  ",i);
-                                    printf(" %d =",j);
-                                    printf(" %d \n",elementsupp.descripteur.tab[i][j]);
-                                    fflush(stdout);
-                                    fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
+                                    fprintf(fichier, " %3d ", elementsupp.descripteur.tab[i][j]);
                               }
                               fprintf(fichier, "\r\n");
                         }
-                        printf("test 86 \n");
+
+
+
+                        printf("test apres fprintf \n");
                         fflush(stdout);
                   }
             }
@@ -209,6 +179,12 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
             }
       }
       fclose(fichier);
+      /*for (int i = 0; i < elementsupp.descripteur.ligne + 1; i++) // creation des colonne du tableau
+      {
+            free(elementsupp.descripteur.tab[i]);
+      }
+      free(elementsupp.descripteur.tab);*/
+
 }
 
 //____________________________________________
@@ -450,18 +426,11 @@ void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
 
-      printf("APRES IMAGE ET AVANT AUDIO \n");
-      fflush(stdout);
+
       PILE_audio descripteur_audio = NULL;
       descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
-      printf("test 2165 \n");
-            fflush(stdout);
-      depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
 
-                                          printf("test audio \n");
-            fflush(stdout);
-                  printf("test ? \n");
-            fflush(stdout);
+      depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
 
       PILE_texte piletexte = NULL;
       piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);

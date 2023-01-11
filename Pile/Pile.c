@@ -125,48 +125,21 @@ PILE_audio dePILE_audio(PILE_audio pile, ELEMENT_audio *elementsupp)
     if (pile != NULL)
     {
 
-            for (unsigned i = 542; i < 546; ++i)
-    {
-            for (unsigned j = 0; j < 32; ++j)
-            {
-
-                printf("%d  ",i);
-                printf(" %d =",j);
-                printf(" %d \n",pile->element.descripteur.tab[i][j]);
-                fflush(stdout);
-                //fprintf(fichier, " |%3d| ", dscr_audio->element.descripteur.tab[i][j]);
-            }
-    }
-
         // on garde lelement supprimé
-                                            printf("pile : %d \n",pile->element.descripteur.tab[0][0]);
-                                    fflush(stdout);
+        printf("pile : %d \n",pile->element.id);              
+        fflush(stdout);
         affect_ELEMENT_audio(elementsupp, pile->element);
-                                            printf("elemnt : %d \n",elementsupp->descripteur.tab[0][0]);
-                                    fflush(stdout);
+        printf("elemnt : %d \n",elementsupp->descripteur.tab[5][0]);
+        fflush(stdout);
         // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
         PILE_audio aux = pile->suiv;
-        for (int i = 0; i < pile->element.descripteur.ligne + 1; i++) // creation des colonne du tableau
+        /*for (int i = 0; i < pile->element.descripteur.ligne + 1; i++) // creation des colonne du tableau
         {
             free(pile->element.descripteur.tab[i]);
         }
-        free(pile->element.descripteur.tab);
+        free(pile->element.descripteur.tab);*/
         free(pile);
 
-         printf("elemnt : %d \n",aux->element.descripteur.tab[0][0]);
-fflush(stdout);
-          for (unsigned i = 542; i < 546; ++i)
-    {
-            for (unsigned j = 0; j < 32; ++j)
-            {
-
-                printf("%d  ",i);
-                printf(" %d =",j);
-                printf(" %d \n",aux->element.descripteur.tab[i][j]);
-                fflush(stdout);
-                //fprintf(fichier, " |%3d| ", dscr_audio->element.descripteur.tab[i][j]);
-            }
-    }
         return aux;
     }
     // si la pile était vide, on renvoie celle ci
@@ -181,8 +154,6 @@ PILE_image emPILE_image(PILE_image pile, ELEMENT_image element)
         temp->suiv = pile;
         return temp;
     }
-                                    printf("test audio \n");
-            fflush(stdout);
     return pile;
 }
 PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp)
@@ -190,14 +161,11 @@ PILE_image dePILE_image(PILE_image pile, ELEMENT_image *elementsupp)
     // si la pile n'est pas vide
     if (pile != NULL)
     {
-                                printf("test audio \n");
-            fflush(stdout);
+
         // on garde lelement supprimé
         affect_ELEMENT_image(elementsupp, pile->element);
         // si on doit depiler une ou plusieurs cellules, on créé une nouvelle pile "aux" qui va pointer vers la cellule suivate de la pile et apres on doit free la pile
         PILE_image aux = pile->suiv;
-                        printf("test audio \n");
-            fflush(stdout);
         for (int i = 0; i < pile->element.descripteur_image.Nb_Ligne; i++)
         {
             free(pile->element.descripteur_image.Bilan[i]);

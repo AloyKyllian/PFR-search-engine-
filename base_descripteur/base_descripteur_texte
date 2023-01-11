@@ -38,10 +38,10 @@ plus    |    7
 mot    |    4
 étude    |    4
 beau    |    3
-fait    |    3
 4    |    3
 10    |    3
 11    |    3
+été    |    3
 -4
 à    |    12
 jean-christophe    |    5
@@ -118,7 +118,7 @@ festival    |    3
 expositions    |    2
 première    |    2
 allé    |    2
-irak    |    2
+américains    |    2
 -11
 à    |    21
 patrimoine    |    7
@@ -299,11 +299,11 @@ télévision    |    2
 à    |    13
 ­    |    9
 3d    |    9
-être    |    5
 données    |    5
 virtuelle    |    5
 réalité    |    5
 archéologiques    |    5
+être    |    4
 avec    |    4
 peut    |    4
 -28
@@ -338,7 +338,7 @@ grand    |    8
 tournoi    |    8
 andre    |    8
 plus    |    7
-open    |    6
+match    |    6
 -31
 à    |    14
 pas    |    6
@@ -387,10 +387,10 @@ sam    |    4
 à    |    11
 pas    |    7
 k    |    6
-plus    |    6
 été    |    6
 équipe    |    6
 ne    |    5
+plus    |    5
 traineau    |    4
 stéphane    |    4
 depuis    |    4
@@ -496,9 +496,9 @@ rko    |    4
 -45
 à    |    7
 théâtre    |    6
-être    |    5
 scène    |    5
 acoustique    |    5
+être    |    4
 salle    |    4
 acoustiques    |    4
 bois    |    3
@@ -508,13 +508,13 @@ s    |    3
 à    |    14
 pas    |    7
 ne    |    5
-2    |    4
 groupe    |    4
 turin    |    4
 stade    |    4
 puel    |    4
 claude    |    4
 lille    |    4
+pourtant    |    3
 -47
 pas    |    19
 ne    |    11
@@ -694,6 +694,7 @@ ans    |    5
 -63
 à    |    27
 girodet    |    12
+    |    10
 pas    |    6
 louvre    |    6
 plus    |    5
@@ -701,7 +702,6 @@ toile    |    5
 ne    |    5
 david    |    5
 été    |    4
-­    |    4
 -64
 à    |    19
 virus    |    12
@@ -721,31 +721,31 @@ football    |    11
 plus    |    8
 matches    |    7
 prix    |    7
+    |    7
 britannique    |    6
 entre    |    5
-stades    |    5
 -66
 à    |    13
-1    |    6
-2    |    5
+21    |    4
+10    |    3
 but    |    3
 face    |    3
-5    |    3
+5e    |    3
+1    |    3
 journée    |    3
 septembre    |    3
 devant    |    2
-strasbourg    |    2
 -67
 à    |    30
 france    |    12
 avec    |    12
+    |    11
 ted    |    9
 américain    |    8
 pas    |    7
 paris    |    6
 ne    |    6
 tout    |    5
-français    |    5
 -68
 à    |    13
 points    |    5
@@ -777,8 +777,8 @@ plus    |    3
 test    |    3
 hôpital    |    3
 mort    |    3
+    |    2
 4    |    2
-être    |    2
 -71
 katché    |    6
 jazz    |    5
@@ -789,18 +789,18 @@ avec    |    4
 star    |    4
 manu    |    4
 disque    |    3
-part    |    2
+    |    3
 -72
 à    |    17
+    |    10
 pas    |    7
-1    |    5
 entraîneur    |    4
 tête    |    4
 journée    |    4
-0    |    4
-2    |    3
+21    |    3
 place    |    3
 victoire    |    3
+troisième    |    3
 -73
 à    |    12
 tour    |    5
@@ -820,20 +820,20 @@ région    |    7
 m2    |    4
 ­    |    4
 président    |    4
-entre    |    3
 000    |    3
 musée    |    3
+établissement    |    3
 -75
 à    |    26
 stade    |    24
 france    |    15
+    |    13
 000    |    11
 pas    |    9
 lille    |    9
 ­    |    8
 ne    |    8
 club    |    8
-rugby    |    8
 -76
 film    |    4
 à    |    4
@@ -919,6 +919,6 @@ avoir    |    2
 faut    |    2
 desk    |    2
 visualiser    |    2
+    |    2
 monde    |    1
 ventre    |    1
-    |    0
