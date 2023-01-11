@@ -285,7 +285,7 @@ PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFI
       return dscr_texte;
 }
 
-//____________________________________________
+//____________________________________________test
 // DEPILE LES DESCRIPTEURS AUDIO DANS LE FICHIER BASE_DESCRIPTEUR
 //____________________________________________
 void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config)
