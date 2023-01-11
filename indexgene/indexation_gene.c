@@ -475,9 +475,9 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
             while (!feof(fichier))
             {
                   fscanf(fichier, "%s\n", recupchemin);
-                  fprintf(fichier2,"%d | %s\n",id, recupchemin);
-                        printf("%d | %s",id, recupchemin);
-                  id--;
+                  // fprintf(fichier2,"%d | %s\n",id, recupchemin);
+                  //       printf("%d | %s",id, recupchemin);
+                  // id--;
             }
             fclose(fichier2);
       }
