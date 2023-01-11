@@ -188,10 +188,11 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
         exit(1);
     }
 
-    while(mot_lu[0]!='<' || mot_lu[1]!='t' || mot_lu[2]!='e')//permet de sauter le début du fichier
+ do
     {
         fscanf(fichier,"%s",mot_lu);
     }
+       while(mot_lu[0]=='<' && mot_lu[1]=='t' && mot_lu[2]=='e');//permet de sauter le début du fichier
 
     while(fscanf(fichier,"%s",mot_lu)!=EOF)
     {

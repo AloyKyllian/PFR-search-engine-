@@ -94,6 +94,7 @@ void depiler_path(PILE *pourchemin, char *path, int *erreur)
 //____________________________________________
 PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *erreur_audio, CONFIG config)
 {
+      int id;
       int ligne;
       FILE *ptr_fic = NULL;
       ELEMENT_audio element_temp;
@@ -102,7 +103,9 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       ptr_fic = fopen(CHEMIN, "r");
       if (ptr_fic != NULL)
       {
+
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+            id=element_temp.id;
             ligne = getligne(cheminfichier, erreur);
             element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
 
@@ -113,12 +116,17 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                   while (!feof(ptr_fic))
                   {
                         fscanf(ptr_fic, "%d | %s", &element_temp.id, cheminfichier);
-                        ligne = getligne(cheminfichier, erreur);
-                        element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
-                        if (*erreur_audio == 0)
+                        if(id!=element_temp.id)//a revoir mais ca fonctionne 
                         {
-                              dscr_audio = emPILE_audio(dscr_audio, element_temp);
+                              ligne = getligne(cheminfichier, erreur);
+                              element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
+                              if (*erreur_audio == 0)
+                              {
+                                    dscr_audio = emPILE_audio(dscr_audio, element_temp);
+                              }
+                              id=element_temp.id;
                         }
+
                   }
             }
             fclose(ptr_fic);
@@ -144,6 +152,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
             {
                   while (dscr_audio != NULL)
                   {
+
                         dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
@@ -153,10 +162,16 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                         {
                               for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
                               {
-                                    fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
+                                    fprintf(fichier, " %d ", elementsupp.descripteur.tab[i][j]);
                               }
                               fprintf(fichier, "\r\n");
                         }
+
+                        for (int i = 0; i < elementsupp.descripteur.ligne; i++) // creation des colonne du tableau
+                        {
+                              free(elementsupp.descripteur.tab[i]);
+                        }
+                        free(elementsupp.descripteur.tab);
                   }
             }
             else
@@ -237,6 +252,14 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
                               total = total + elementsupp.descripteur_image.Bilan[i][1];
                         }
                         fprintf(fichier, "\nTotal de valeur = %d\n", total);
+
+                        for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
+                        {
+                              free(elementsupp.descripteur_image.Bilan[i]);
+                        }
+                        free(elementsupp.descripteur_image.Bilan);
+
+
                   }
             }
             else
@@ -308,6 +331,9 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
                   {
                         fprintf(fichier, "%s    |    %d\n", elementsupp.descripteur_texte.tab_mot[x], elementsupp.descripteur_texte.tab_app[x]);
                   }
+
+                  free(elementsupp.descripteur_texte.tab_mot);
+                  free(elementsupp.descripteur_texte.tab_app);
             }
       }
       else
@@ -347,7 +373,7 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       depiler_path(&pileaudio_path, "../liste_base/liste_base_audio", Erreuraudio);
 
       strcpy(commande, "cp ../liste_base/liste_base_audio ../OLD_liste_base/liste_base_old_audio");
-      printf("COMMANDE : %s",commande);
+      printf("COMMANDE : %s\n",commande);
       system(commande);
 
       //_________________
@@ -360,7 +386,7 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
       depiler_path(&pileimage_path, "../liste_base/liste_base_image", Erreurimage);
       strcpy(commande, "cp ../liste_base/liste_base_image ../OLD_liste_base/liste_base_old_image");
-      printf("COMMANDE : %s",commande);
+      printf("COMMANDE : %s\n",commande);
       system(commande);
 }
 //
