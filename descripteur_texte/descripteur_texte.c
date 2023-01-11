@@ -250,7 +250,8 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     tab.index=0;
     tab.tab_mot = malloc(nbr_mot * sizeof(*tab.tab_mot));//creation du tableau
     tab.tab_app = malloc(nbr_mot * sizeof(*tab.tab_app));//creation du tableau
-
+    if(tab.tab_mot!=NULL && tab.tab_app!=NULL)
+    {
     for(int i=0;i<nbr_mot;i++)
     {
         strcpy(tab.tab_mot[i],"");
@@ -292,7 +293,11 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     {
         printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
     }*/
-
+    }
+    else
+    {
+        *Erreur = 1;
+    }
 }
 
 int main()
