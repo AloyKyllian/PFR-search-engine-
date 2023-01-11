@@ -1,18 +1,5 @@
 #include "../descripteur_texte/descripteur_texte.h"
 
-
-// Récupérer chemin en entré
-
-// Descripteur texte nouveau fichier
-
-//Je regard les mots du premeir tableau
-
-
-//Je regarde s'il existe dans le deuxième et je soustrais
-
-
-// 
-
 typedef struct
 {
     int id;
@@ -77,6 +64,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
     else
     {
         *Erreur=1;                      //Erreur Allocation
+        exit(1);
     }
 }
 
