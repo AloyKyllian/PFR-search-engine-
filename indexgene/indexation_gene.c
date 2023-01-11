@@ -437,7 +437,7 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
 {
       // recupere chemin des nouveaux fichiers
       // erreur modifier
-
+      String recupchemin;
       String commande;
       strcpy(commande, "ls -l  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB | grep \".txt\" > fic_temp");
       system(commande);
@@ -448,36 +448,46 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
       strcpy(commande, "cut -d ' ' -f 12 fic_temp > fic");
       system(commande);
 
-      // printf("avant \n");
-      // strcpy(commande, "cat fic");
-      // system(commande);
-
       inverser_fichier(Erreur);
 
-      // printf("apres avant\n");
-      // strcpy(commande, "cat fic");
-      // system(commande);
-      // printf("apresinverser \n");
-
-      strcpy(commande, "cut -d '/' -f 5  ../liste_base/liste_base_image > ListeDejaIndexeTemp");
+      strcpy(commande, "cut -d '/' -f 5  ../liste_base/liste_base_image > traitement/ListeDejaIndexeTemp");
       system(commande);
 
-      strcpy(commande, "diff ListeDejaIndexeTemp fic > diff");
+      strcpy(commande, "diff traitement/ListeDejaIndexeTemp fic | grep \".txt\" > traitement/diff");
       system(commande);
+      strcpy(commande, "cut -d ' ' -f 2 traitement/diff > traitement/fichieraindexe");
+      system(commande);
+      FILE *fichier2;
+      int id = 0;
+      fichier2 = fopen("../liste_base/liste_base_image", "wr+");
+      if (fichier2 != NULL)
+      {
+            fscanf(fichier2, "%d", &id);
+      }
+      else
+      {
+            *Erreur = 7;
+      }
       FILE *fichier = NULL;
-      fichier = fopen("diff", "r");
+      fichier = fopen("traitement/fichieraindexe", "r");
       if (fichier != NULL)
       {
-            if (!feof(fichier))
+            while (!feof(fichier))
             {
-                  printf("Aucune mise à jour a effectué\n");
+                  fscanf(fichier, "%s\n", recupchemin);
+                  fprintf(fichier2,"%d | %s\n",id, recupchemin);
+                        printf("%d | %s",id, recupchemin);
+                  id--;
             }
-            else
-            {
-                  printf("else");
-            }
-            fclose(fichier);
+            fclose(fichier2);
       }
+      else
+      {
+            *Erreur = 7;
+      }
+      fclose(fichier);
+
+
 }
 
 void inverser_fichier(int *erreur)
