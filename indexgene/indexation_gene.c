@@ -447,17 +447,42 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
 
       strcpy(commande, "cut -d ' ' -f 12 fic_temp > fic");
       system(commande);
+
+      // printf("avant \n");
+      // strcpy(commande, "cat fic");
+      // system(commande);
+
       inverser_fichier(Erreur);
+
+      // printf("apres avant\n");
+      // strcpy(commande, "cat fic");
+      // system(commande);
+      // printf("apresinverser \n");
 
       strcpy(commande, "cut -d '/' -f 5  ../liste_base/liste_base_image > ListeDejaIndexeTemp");
       system(commande);
 
+      strcpy(commande, "diff ListeDejaIndexeTemp fic > diff");
+      system(commande);
+      FILE *fichier = NULL;
+      fichier = fopen("diff", "r");
+      if (fichier != NULL)
+      {
+            if (!feof(fichier))
+            {
+                  printf("Aucune mise à jour a effectué\n");
+            }
+            else
+            {
+                  printf("else");
+            }
+            fclose(fichier);
+      }
 }
-
 
 void inverser_fichier(int *erreur)
 {
-      PILE pourchemin=init_PILE();
+      PILE pourchemin = init_PILE();
       empiler_fichier(&pourchemin, erreur);
       depiler_fichier(pourchemin, erreur);
 }
@@ -467,9 +492,10 @@ void depiler_fichier(PILE pourchemin, int *erreur)
       FILE *fichier = NULL;
       ELEMENT elementsupp;
       fichier = fopen("fic", "w");
+
       if (fichier != NULL)
       {
-            while (pourchemin!= NULL )
+            while (pourchemin != NULL)
             {
                   pourchemin = dePILE(pourchemin, &elementsupp);
                   fprintf(fichier, "%s\n", elementsupp.CHEMIN);
@@ -479,6 +505,7 @@ void depiler_fichier(PILE pourchemin, int *erreur)
       {
             *erreur = 7;
       }
+      fclose(fichier);
 }
 void empiler_fichier(PILE *pourchemin, int *erreur)
 {
@@ -487,11 +514,9 @@ void empiler_fichier(PILE *pourchemin, int *erreur)
       fichier = fopen("fic", "r");
       if (fichier != NULL)
       {
-            fscanf(fichier, "%s", element.CHEMIN);
-            *pourchemin = emPILE(*pourchemin, element);
             while (!feof(fichier))
             {
-                  fscanf(fichier, "%s", element.CHEMIN);
+                  fscanf(fichier, "%s\n", element.CHEMIN);
                   *pourchemin = emPILE(*pourchemin, element);
             }
       }
