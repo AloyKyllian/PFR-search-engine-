@@ -21,6 +21,14 @@
 
    void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreurimage);
 
+   void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
+   void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
+
     int getligne(char*,int*);
+    void copieNewToOld ();
+
+    void inverser_fichier ( int * erreur);
+    void depiler_fichier ( PILE pourchemin,int * erreur);
+    void empiler_fichier ( PILE *pourchemin,int * erreur);
 
 #endif

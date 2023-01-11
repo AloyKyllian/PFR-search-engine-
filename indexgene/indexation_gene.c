@@ -26,15 +26,10 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur
       else // recuperer chemin pour fichier .txt audio et image
             strcat(commande, " | grep \".txt\" > fic_temp");
 
-      printf("execution de %s\n", commande);
-      fflush(stdout);
-
       /*---------------------------------------------------------------------*/
       /* AFFICHAGE DU CONTENU DU FICHIER CREE LORS DE LA PRECEDENTE COMMANDE */
       /*---------------------------------------------------------------------*/
       system(commande);
-      system("cat fic_temp");
-      printf("---------------------------------\n");
 
       /* ouverture du fichier temporaire fic_temp*/
       ptr_fic = fopen("fic_temp", "r");
@@ -105,7 +100,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       {
 
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-            id=element_temp.id;
+            id = element_temp.id;
             ligne = getligne(cheminfichier, erreur);
             element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
 
@@ -116,7 +111,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                   while (!feof(ptr_fic))
                   {
                         fscanf(ptr_fic, "%d | %s", &element_temp.id, cheminfichier);
-                        if(id!=element_temp.id)//a revoir mais ca fonctionne 
+                        if (id != element_temp.id) // a revoir mais ca fonctionne
                         {
                               ligne = getligne(cheminfichier, erreur);
                               element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
@@ -124,9 +119,8 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                               {
                                     dscr_audio = emPILE_audio(dscr_audio, element_temp);
                               }
-                              id=element_temp.id;
+                              id = element_temp.id;
                         }
-
                   }
             }
             fclose(ptr_fic);
@@ -202,7 +196,7 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
             if (*erreur_image == 0)
             {
                   dscr_image = emPILE_image(dscr_image, element_temp);
-                  
+
                   while (!feof(ptr_fic))
                   {
                         fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
@@ -243,7 +237,7 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //________________________________
-                        fprintf(fichier, "\n%d\n", elementsupp.id);
+                        fprintf(fichier, "%d\n", elementsupp.id);
                         for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
                         {
                               // Permet d'afficher q'un certain nombre de valeur
@@ -258,8 +252,6 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
                               free(elementsupp.descripteur_image.Bilan[i]);
                         }
                         free(elementsupp.descripteur_image.Bilan);
-
-
                   }
             }
             else
@@ -351,7 +343,6 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       PILE piletexte_path = init_PILE();
       PILE pileimage_path = init_PILE();
       PILE pileaudio_path = init_PILE();
-      String commande;
       String path;
       int deb = 0;
       //_________________
@@ -361,20 +352,12 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       recup_path(&piletexte_path, deb, path, "texte", Erreurtexte);
       depiler_path(&piletexte_path, "../liste_base/liste_base_texte", Erreurtexte);
 
-      strcpy(commande, "cp ../liste_base/liste_base_texte ../OLD_liste_base/liste_base_old_texte");
-      printf("COMMANDE : %s\n",commande);
-      system(commande);
-
       //_________________
       // AUDIO
       //_________________
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
       recup_path(&pileaudio_path, deb, path, "audio", Erreuraudio);
       depiler_path(&pileaudio_path, "../liste_base/liste_base_audio", Erreuraudio);
-
-      strcpy(commande, "cp ../liste_base/liste_base_audio ../OLD_liste_base/liste_base_old_audio");
-      printf("COMMANDE : %s\n",commande);
-      system(commande);
 
       //_________________
       // IMAGE
@@ -385,13 +368,9 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
       depiler_path(&pileimage_path, "../liste_base/liste_base_image", Erreurimage);
-      strcpy(commande, "cp ../liste_base/liste_base_image ../OLD_liste_base/liste_base_old_image");
-      printf("COMMANDE : %s\n",commande);
-      system(commande);
 }
-//
+
 // Recuperer le nombre de ligne dans un fichier __ utlise dans le descripteur audio
-//
 int getligne(char *path, int *erreur)
 {
 
@@ -423,28 +402,106 @@ int getligne(char *path, int *erreur)
       return ligne;
 }
 
+void copieNewToOld()
+{
+      String commande;
+      strcpy(commande, "cp ../liste_base/liste_base_texte ../OLD_liste_base/liste_base_old_texte");
+      system(commande);
+      strcpy(commande, "cp ../liste_base/liste_base_image ../OLD_liste_base/liste_base_old_image");
+      system(commande);
+      strcpy(commande, "cp ../liste_base/liste_base_audio ../OLD_liste_base/liste_base_old_audio");
+      system(commande);
+}
+
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
-
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
+      // copieNewToOld();
 
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
 
-      printf("APRES IMAGE ET AVANT AUDIO \n");
-      fflush(stdout);
-      PILE_audio descripteur_audio = NULL;
-      descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
-      depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
+      // printf("APRES IMAGE ET AVANT AUDIO \n");
+      // fflush(stdout);
+      // PILE_audio descripteur_audio = NULL;
+      // descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
+      // depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
 
-      PILE_texte piletexte = NULL;
-      piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);
-      depiler_descripteur_texte(piletexte, Erreurtexte, config);
+      // PILE_texte piletexte = NULL;
+      // piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);
+      // depiler_descripteur_texte(piletexte, Erreurtexte, config);
 }
 
 void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
+      // recupere chemin des nouveaux fichiers
+      // erreur modifier
+
+      String commande;
+      strcpy(commande, "ls -l  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB | grep \".txt\" > fic_temp");
+      system(commande);
+
+      strcpy(commande, "ls -l  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB | grep \".txt\" >> fic_temp");
+      system(commande);
+
+      strcpy(commande, "cut -d ' ' -f 12 fic_temp > fic");
+      system(commande);
+      inverser_fichier(Erreur);
+
+      strcpy(commande, "cut -d '/' -f 5  ../liste_base/liste_base_image > ListeDejaIndexeTemp");
+      system(commande);
 
 }
 
+
+void inverser_fichier(int *erreur)
+{
+      PILE pourchemin=init_PILE();
+      empiler_fichier(&pourchemin, erreur);
+      depiler_fichier(pourchemin, erreur);
+}
+
+void depiler_fichier(PILE pourchemin, int *erreur)
+{
+      FILE *fichier = NULL;
+      ELEMENT elementsupp;
+      fichier = fopen("fic", "w");
+      if (fichier != NULL)
+      {
+            while (pourchemin!= NULL )
+            {
+                  pourchemin = dePILE(pourchemin, &elementsupp);
+                  fprintf(fichier, "%s\n", elementsupp.CHEMIN);
+            }
+      }
+      else
+      {
+            *erreur = 7;
+      }
+}
+void empiler_fichier(PILE *pourchemin, int *erreur)
+{
+      FILE *fichier = NULL;
+      ELEMENT element;
+      fichier = fopen("fic", "r");
+      if (fichier != NULL)
+      {
+            fscanf(fichier, "%s", element.CHEMIN);
+            *pourchemin = emPILE(*pourchemin, element);
+            while (!feof(fichier))
+            {
+                  fscanf(fichier, "%s", element.CHEMIN);
+                  *pourchemin = emPILE(*pourchemin, element);
+            }
+      }
+      else
+      {
+            *erreur = 7;
+      }
+      fclose(fichier);
+}
+
+// audio
+
+// texte
