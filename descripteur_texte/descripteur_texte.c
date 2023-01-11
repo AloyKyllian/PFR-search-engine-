@@ -125,9 +125,9 @@ DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE ta
     FILE* fichierNonBanni = NULL;
     fichierNonBanni = fopen("../MotNonBanni.txt", "a");
     if(fichierNonBanni==NULL){
-       // printf("Erreur fichier NonBanni");               //Vérification ouverture du fichier
+                                        //Vérification ouverture du fichier
 
-        *Erreur=7;
+        *Erreur=7;                         //Erreur Ouverture fichier NonBanni
         exit(1);
     }
 
@@ -228,9 +228,9 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     int nbr_mot;
     FILE* fichier = NULL;
     fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
-    if(fichier==NULL){
-        //printf("Erreur lors de l'ouverture d'un fichier");
-        *Erreur=7;
+    if(fichier==NULL)
+    {
+        *Erreur=7;                          //Erreur ouverture
         exit(1);
     }
 
@@ -241,7 +241,7 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
 
     while(fscanf(fichier,"%s",mot_lu)!=EOF)
     {
-        nbr_mot++;
+        nbr_mot++;                                      //Compte le nombre de mot du texte
     }
     
     rewind(fichier);
@@ -271,7 +271,6 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
         if(passe==true)
         {
             tab=descripteur_texte(nbr_mot,mot,tab,Erreur,"4");
-
         }
     }
 
@@ -289,14 +288,11 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
     return tab_renvoyer;
-    /*for(int x=0;x<nbr_occ;x++)
-    {
-        printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
-    }*/
     }
     else
     {
         *Erreur = 1;
+        exit(1);
     }
 }
 
