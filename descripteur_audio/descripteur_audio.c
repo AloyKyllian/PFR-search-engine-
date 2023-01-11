@@ -1,6 +1,6 @@
 #include "descripteur_audio.h"
 
-descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,descri_audio desci,int * erreur){//demander comment recuperer le chemin et nom du fichier
+descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,int * erreur){//demander comment recuperer le chemin et nom du fichier
     double pas;//difference entre 2 intervalles
     int nbr_val=0;//nombre de valeur dans un fichier texte
     int k;//(nbr_val_fenetre)
@@ -21,7 +21,7 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
     }
     
     k=(nbr_val/fenetre);//calcul du nombre de fenetre
-
+    descri_audio desci;
     printf(" |%3d| ",k);
     printf(" |%3d| ",intervalle);
     desci.ligne=k+1;//donne le nombre de ligne du descripteur 
@@ -34,11 +34,11 @@ descri_audio Descripteur_audio(int fenetre,int intervalle,char *chemin_fichier,d
         desci.tab[i] = malloc(desci.colonne * sizeof(**desci.tab));
     }
 
-    for (unsigned i = 0; i < desci.ligne-17; ++i)
+    for (int i = 0; i < desci.ligne-17; ++i)
     {
-        for (unsigned j = 0; j < desci.colonne; ++j)
+        for (int j = 0; j < desci.colonne; ++j)
         {
-            printf(" |%3d| ",desci.tab[i][j]);
+            //printf(" |%3d| ",desci.tab[i][j]);
         }
         printf("\r\n");
     }

@@ -5,7 +5,7 @@ int main()
   int erreur;
   descri_audio tableau;
 
-    tableau=Descripteur_audio(2048,32,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/jingle_fi.txt",tableau,&erreur);
+    tableau=Descripteur_audio(2048,32,"../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/jingle_fi.txt",&erreur);
     //printf("%d",erreur);
     
   /*  for (unsigned i = 0; i < tableau.ligne; ++i)
