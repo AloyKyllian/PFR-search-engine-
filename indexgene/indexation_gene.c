@@ -1,5 +1,14 @@
+//
+// AUTEUR :
+//          YASMINE ALLAL
+// DERNIERE VERSION :
+//    12/01/2023
+
 #include "indexation_gene.h"
 
+//____________________________________________
+// Recupere le chemin des fichiers dans DATA dans une pile
+//____________________________________________
 void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur)
 {
       ELEMENT element;
@@ -59,26 +68,19 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur
 //____________________________________________
 // depiler le chemin de le fichier liste_base_texte ou liste _base_audio ou liste_base_image
 //____________________________________________
-void depiler_path(PILE *pourchemin, String type, int *erreur)
+void depiler_path(PILE *pourchemin, char *path, int *erreur)
 {
       ELEMENT elementsupp;
       FILE *fichier = NULL;
-      if (strcmp(type, "texte") == 0)
-            fichier = fopen("../liste_base/liste_base_texte", "w");
-      else if (strcmp(type, "image") == 0)
-            fichier = fopen("../liste_base/liste_base_image", "w");
-      else
-            fichier = fopen("../liste_base/liste_base_audio", "w");
+      fichier = fopen(path, "w");
 
       if (fichier != NULL)
       {
-            while ((*pourchemin)->suiv != NULL)
+            while ((*pourchemin) != NULL)
             {
                   *pourchemin = dePILE(*pourchemin, &elementsupp);
                   fprintf(fichier, "-%d |%s\n", elementsupp.id, elementsupp.CHEMIN);
             }
-            *pourchemin = dePILE(*pourchemin, &elementsupp);
-            fprintf(fichier, "-%d | %s", elementsupp.id, elementsupp.CHEMIN);
       }
       else
       {
@@ -87,6 +89,9 @@ void depiler_path(PILE *pourchemin, String type, int *erreur)
       fclose(fichier);
 }
 
+//____________________________________________
+// EMPILE LEs DESCRIPTEUR AUDIO AVEC leur ID DANS UNE PILE
+//____________________________________________
 PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *erreur_audio, CONFIG config)
 {
       int ligne;
@@ -98,8 +103,8 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       if (ptr_fic != NULL)
       {
             fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-            ligne = getligne(cheminfichier,erreur);
-            element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio,ligne);
+            ligne = getligne(cheminfichier, erreur);
+            element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
 
             if (*erreur_audio == 0)
             {
@@ -108,8 +113,8 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                   while (!feof(ptr_fic))
                   {
                         fscanf(ptr_fic, "%d | %s", &element_temp.id, cheminfichier);
-                        ligne = getligne(cheminfichier,erreur);
-                        element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio,ligne);
+                        ligne = getligne(cheminfichier, erreur);
+                        element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
                         if (*erreur_audio == 0)
                         {
                               dscr_audio = emPILE_audio(dscr_audio, element_temp);
@@ -125,6 +130,9 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       return dscr_audio;
 }
 
+//____________________________________________
+// DEPILE LES DESCRIPTEURS AUDIO DANS LE FICHIER BASE_DESCRIPTEUR
+//____________________________________________
 void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_audio)
 {
       ELEMENT_audio elementsupp;
@@ -134,7 +142,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
       {
             if (fichier != NULL)
             {
-                  while (dscr_audio->suiv != NULL)
+                  while (dscr_audio != NULL)
                   {
                         dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
                         //______________________________
@@ -150,19 +158,6 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                               fprintf(fichier, "\r\n");
                         }
                   }
-                  dscr_audio = dePILE_audio(dscr_audio, &elementsupp);
-                  //______________________________
-                  // AFFICHAGE ELEMENT DANS FICHIER
-                  //_______________________________
-                  fprintf(fichier, "%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
-                  for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
-                  {
-                        for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
-                        {
-                              fprintf(fichier, " |%3d| ", elementsupp.descripteur.tab[i][j]);
-                        }
-                        fprintf(fichier, "\r\n");
-                  }
             }
             else
             {
@@ -172,6 +167,9 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
       fclose(fichier);
 }
 
+//____________________________________________
+// EMPILE LEs DESCRIPTEUR AUDIO AVEC leur ID DANS UNE PILE
+//____________________________________________
 PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *erreur_image, CONFIG config)
 {
       FILE *ptr_fic = NULL;
@@ -189,14 +187,11 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
             if (*erreur_image == 0)
             {
                   dscr_image = emPILE_image(dscr_image, element_temp);
+                  
                   while (!feof(ptr_fic))
                   {
                         fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
-
                         element_temp.descripteur_image = Pack_Descripteur_image(erreur_image, cheminfichier, config.Nb_Bit_Fort);
-                        fflush(stdout);
-                        printf("ERREUR IMAGR%d", *erreur_image);
-                        fflush(stdout);
                         if (*erreur_image == 0)
                         {
                               dscr_image = emPILE_image(dscr_image, element_temp);
@@ -211,10 +206,12 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
             *erreur = 7;
       }
       fclose(ptr_fic);
-      affichePILE_image(dscr_image);
       return dscr_image;
 }
 
+//____________________________________________
+// DEPILE LES DESCRIPTEURS AUDIO DANS LE FICHIER BASE_DESCRIPTEUR
+//____________________________________________
 void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *erreur)
 {
       ELEMENT_image elementsupp;
@@ -225,13 +222,13 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
       {
             if (fichier != NULL)
             {
-                  while (dscr_image->suiv != NULL)
+                  while (dscr_image != NULL)
                   {
                         dscr_image = dePILE_image(dscr_image, &elementsupp);
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //________________________________
-                        fprintf(fichier, "%d\n", elementsupp.id);
+                        fprintf(fichier, "\n%d\n", elementsupp.id);
                         for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
                         {
                               // Permet d'afficher q'un certain nombre de valeur
@@ -241,20 +238,6 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
                         }
                         fprintf(fichier, "\nTotal de valeur = %d\n", total);
                   }
-                  dscr_image = dePILE_image(dscr_image, &elementsupp);
-                  //______________________________
-                  // AFFICHAGE ELEMENT DANS FICHIER
-                  //________________________________
-                  fprintf(fichier, "%d\n", elementsupp.id);
-
-                  for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
-                  {
-                        // Permet d'afficher q'un certain nombre de valeur
-                        fprintf(fichier, "Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
-
-                        total = total + elementsupp.descripteur_image.Bilan[i][1];
-                  }
-                  fprintf(fichier, "\nTotal de valeur = %d\n", total);
             }
             else
             {
@@ -265,6 +248,9 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
       fclose(fichier);
 }
 
+//____________________________________________
+// EMPILE LEs DESCRIPTEUR AUDIO AVEC leur ID DANS UNE PILE
+//____________________________________________
 PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFIG config)
 {
 
@@ -299,6 +285,9 @@ PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFI
       return dscr_texte;
 }
 
+//____________________________________________
+// DEPILE LES DESCRIPTEURS AUDIO DANS LE FICHIER BASE_DESCRIPTEUR
+//____________________________________________
 void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config)
 {
       ELEMENT_texte elementsupp;
@@ -307,7 +296,7 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
       int total = 0;
       if (fichier != NULL)
       {
-            while (dscr_texte->suiv != NULL)
+            while (dscr_texte != NULL)
             {
                   dscr_texte = dePILE_texte(dscr_texte, &elementsupp);
                   //______________________________
@@ -320,16 +309,6 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
                         fprintf(fichier, "%s    |    %d\n", elementsupp.descripteur_texte.tab_mot[x], elementsupp.descripteur_texte.tab_app[x]);
                   }
             }
-            dscr_texte = dePILE_texte(dscr_texte, &elementsupp);
-            //______________________________
-            // AFFICHAGE ELEMENT DANS FICHIER
-            //________________________________
-            fprintf(fichier, "%d\n", elementsupp.id);
-            // affichage descripteur
-            for (int x = 0; x < config.Nb_Mots_Cle; x++)
-            {
-                  fprintf(fichier, "%s    |    %d\n", elementsupp.descripteur_texte.tab_mot[x], elementsupp.descripteur_texte.tab_app[x]);
-            }
       }
       else
       {
@@ -338,11 +317,15 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
       fclose(fichier);
 }
 
+//____________________________________________
+// Recupere le chemin de tous les fichiers audio, image, texte et le depile dans les fichiers liste_base_audio/image/texte
+//____________________________________________
 void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreurimage)
 {
       PILE piletexte_path = init_PILE();
       PILE pileimage_path = init_PILE();
       PILE pileaudio_path = init_PILE();
+      String commande;
       String path;
       int deb = 0;
       //_________________
@@ -350,13 +333,23 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       //_________________
       strcpy(path, "../DATA_FIL_ROUGE_DEV/Textes/");
       recup_path(&piletexte_path, deb, path, "texte", Erreurtexte);
-      depiler_path(&piletexte_path, "texte", Erreurtexte);
+      depiler_path(&piletexte_path, "../liste_base/liste_base_texte", Erreurtexte);
+
+      strcpy(commande, "cp ../liste_base/liste_base_texte ../OLD_liste_base/liste_base_old_texte");
+      printf("COMMANDE : %s\n",commande);
+      system(commande);
+
       //_________________
       // AUDIO
       //_________________
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
       recup_path(&pileaudio_path, deb, path, "audio", Erreuraudio);
-      depiler_path(&pileaudio_path, "audio", Erreuraudio);
+      depiler_path(&pileaudio_path, "../liste_base/liste_base_audio", Erreuraudio);
+
+      strcpy(commande, "cp ../liste_base/liste_base_audio ../OLD_liste_base/liste_base_old_audio");
+      printf("COMMANDE : %s",commande);
+      system(commande);
+
       //_________________
       // IMAGE
       //_________________
@@ -365,12 +358,16 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       deb = (pileimage_path->element.id) + 1;
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
-      depiler_path(&pileimage_path, "image", Erreurimage);
+      depiler_path(&pileimage_path, "../liste_base/liste_base_image", Erreurimage);
+      strcpy(commande, "cp ../liste_base/liste_base_image ../OLD_liste_base/liste_base_old_image");
+      printf("COMMANDE : %s",commande);
+      system(commande);
 }
-
-
-
-int getligne(char* path,int* erreur){
+//
+// Recuperer le nombre de ligne dans un fichier __ utlise dans le descripteur audio
+//
+int getligne(char *path, int *erreur)
+{
 
       char commande[500];
       int ligne;
@@ -380,15 +377,16 @@ int getligne(char* path,int* erreur){
       strcat(commande, " > getligne_temp");
       system(commande);
 
-      FILE* fichier = NULL;
-      fichier = fopen("getligne_temp", "r");                           //Ouverture du texte à traiter
-      if(fichier==NULL){
-            //printf("Erreur lors de l'ouverture d'un fichier");
-            //exit(1);
-            *erreur=7;
+      FILE *fichier = NULL;
+      fichier = fopen("getligne_temp", "r"); // Ouverture du texte à traiter
+      if (fichier == NULL)
+      {
+            // printf("Erreur lors de l'ouverture d'un fichier");
+            // exit(1);
+            *erreur = 7;
       }
 
-      fscanf(fichier,"%d",&ligne);
+      fscanf(fichier, "%d", &ligne);
 
       fclose(fichier);
 
@@ -398,3 +396,29 @@ int getligne(char* path,int* erreur){
 
       return ligne;
 }
+
+void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
+{
+
+      recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
+
+      PILE_image pileimage = NULL;
+      pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
+      depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
+
+      printf("APRES IMAGE ET AVANT AUDIO \n");
+      fflush(stdout);
+      PILE_audio descripteur_audio = NULL;
+      descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
+      depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
+
+      PILE_texte piletexte = NULL;
+      piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);
+      depiler_descripteur_texte(piletexte, Erreurtexte, config);
+}
+
+void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
+{
+
+}
+
