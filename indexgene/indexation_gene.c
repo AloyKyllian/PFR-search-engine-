@@ -18,7 +18,7 @@ void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur
       /*------------------------------------------------------*/
       /* RECUPERATION DU CONTENU DU REPERTOIRE  CHEMIN        */
       /*------------------------------------------------------*/
-      strcpy(commande, "ls -l ");
+      strcpy(commande, "ls -ltu ");
       strcat(commande, path);
 
       if (strcmp(type, "texte") == 0) // recuperer chemin pour fichier texte
@@ -439,16 +439,16 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
       // erreur modifier
       String recupchemin;
       String commande;
-      strcpy(commande, "ls -l  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB | grep \".txt\" > fic_temp");
+      strcpy(commande, "ls -ltu  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB | grep \".txt\" > fic_temp");
       system(commande);
 
-      strcpy(commande, "ls -l  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB | grep \".txt\" >> fic_temp");
-      system(commande);
-
-      strcpy(commande, "cut -d ' ' -f 12 fic_temp > fic");
+      strcpy(commande, "ls -ltu  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB | grep \".txt\" >> fic_temp");
       system(commande);
 
       inverser_fichier(Erreur);
+
+      strcpy(commande, "cut -d ' ' -f 12 fic_temp > fic");
+      system(commande);
 
       strcpy(commande, "cut -d '/' -f 5  ../liste_base/liste_base_image > traitement/ListeDejaIndexeTemp");
       system(commande);
