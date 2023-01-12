@@ -19,8 +19,11 @@ void MAE()
     LOGIN testlogin;
     lesLogins tablogin;
     int erreurLOic;
-    //lire config si ya une erreur
 
+    
+    //lire config si ya une erreur
+    CONFIG Lire_CONFIG(int *Erreur);
+    
     //voir si un nv fichier
 
     //indexation
