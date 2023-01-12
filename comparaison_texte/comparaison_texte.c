@@ -33,6 +33,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
         }
         while(fscanf(fichierD,"%d",&id_lu)!=EOF)
         {
+            cpt=0;
             tab[j].id=id_lu;                                        //Récupération de l'ID
             for(int i=0;i<nbr_mot;i++)
             {
