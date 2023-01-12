@@ -6,22 +6,20 @@ int FichierExist(char chemin[100])
  
 	if (fichier == NULL)
 	{
-    	
-        return -1;
-
+        return -1;//passer erreur en parametre et le rendre erreur =??
 	}
 	else
 	{
-    	printf("Le fichier existe et on le referme aussitôt");
+    	//printf("Le fichier existe et on le referme aussitôt");
     	fclose(fichier);
-        return 1;
+        return 1;//passer erreur en parametre et le rendre erreur =??
 	}
 }
 
 int VerifExtension(char chemin[100],char extension[4]){
     extension=strstr(chemin,"xml");
             if (extension==NULL)
-                return -1;
+                return -1;//meme chose
             else
-                 return 1;
+                 return 1;//meme chose
 }

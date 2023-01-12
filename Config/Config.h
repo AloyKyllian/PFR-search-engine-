@@ -14,20 +14,20 @@ typedef struct
 }CONFIG;
 
 //Lis Config.txt et renvoie les parametre dans la structure CONFIG
-CONFIG Lire_CONFIG(String*);
+CONFIG Lire_CONFIG(int*);
 //Affiche toute les valeur des parametres de configration
 void Afficher_CONFIG(CONFIG);
 //Lis et verifie la validiter de la valeur du nombre de mots cle
-CONFIG Lire_mot_cle(CONFIG,String*);
+CONFIG Lire_mot_cle(CONFIG,int*);
 //Lis et verifie la validiter de la valeur de la similarite
-CONFIG Lire_similariter(CONFIG,String*);
+CONFIG Lire_similariter(CONFIG,int*);
 //Lis et verifie la validiter de la valeur du niveau
-CONFIG Lire_niveau(CONFIG,String*);
+CONFIG Lire_niveau(CONFIG,int*);
 //Lis et verifie la validiter de la valeur du nombre de fenetre
-CONFIG Lire_nb_fenetre(CONFIG,String*);
+CONFIG Lire_nb_fenetre(CONFIG,int*);
 //Lis et verifie la validiter de la valeur de l'intervale
-CONFIG Lire_intervale(CONFIG,String*);
+CONFIG Lire_intervale(CONFIG,int*);
 //Ecrit dans Config.txt les valeur stocker dans la structure CONFIG
-void Ecrire_CONFIG(CONFIG,String*);
+void Ecrire_CONFIG(CONFIG,int*);
 
 #endif

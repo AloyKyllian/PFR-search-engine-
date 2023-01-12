@@ -1,5 +1,4 @@
-#include "../head/Connexion.h"
-#include "../head/Login.h"
+#include "../Connexion/Connexion.h"
 
 bool seconnecter (lesLogins tablogin, LOGIN newlogin, String *erreur  )
 {   int i ;

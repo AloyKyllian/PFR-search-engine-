@@ -1,15 +1,12 @@
-#include "../Menu/Menu.h"
-#include "../Connexion/Connexion.h"
-#include "../Config/Config.h"
-#include "../Menu/FichierExist.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include "../Menu/Menu.h"
+
 void MAE()
 {
-
     static char etat_courant = Menu_general;
     int test1,test;
     char choix[100];
@@ -78,6 +75,7 @@ void MAE()
                         break;
                     case Quitter :
                         printf("vous avez quitté le programme\n");
+                        exit( EXIT_SUCCESS ); 
                         break;
                 default:
                         printf("erreur de choix\n");
@@ -103,12 +101,11 @@ void MAE()
 
                     //si ya une erreur j'arrete tt
                     break;
-                case Configuration:
-                    // Configuration
+                case Configuration :
                     etat_courant = Menu_Configuration;
                     break;
                 case Visualisation:
-                    // visualisation
+                    // visualisation des descripteurs
                     etat_courant = Menu_Visualisation;
                     break;
                 case Retour_Utilisateur:
@@ -124,14 +121,13 @@ void MAE()
             case Menu_Configuration:
                 printf("Configuration :\n");
                 CONFIG config;
-                String Erreur;
+                int Erreur;
                 config=Lire_CONFIG(&Erreur);
                 Afficher_CONFIG(config);
                 printf("Si vous voulez changer une valeur, veuillez faire votre choix  : \n");
                 printf("[1] Nombre de mots clé\n [2] Similarité\n [3] Niveau \n[4] Nombre de fenetre\n");
                 printf("[5] Intervalle de temps\n [R] Retour\n[Q] Déconnexion\n");
                 scanf("%s", choix);
-                //scanf("%c",&choixConfig);
                 switch (choix[0])
                 {
                 case Nombre_de_mot_cle:
@@ -166,29 +162,29 @@ void MAE()
                     etat_courant = Menu_Admin;
                     break;
                 case Deconnexion:
-                    choix[0] = "3";
-                    while (strcmp(&choix[0],"1")!=0 || strcmp(&choix[0],"2")!=0)
+                    while (strcmp(&choix[0],"1")!=0)
                     {
                         printf("vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non\n");
                         scanf("%s",choix);
-                        //scanf("%c", &choixDeconnexion);
                         switch (choix[0])
                         {
                         case oui:
+                            strcpy(choix,"1");
                             etat_courant = Menu_Utilisateur;
                             break;
                         case non:
-                            printf("vous avez quitté le programme\n");
-                            EXIT_SUCCESS;
+                            printf("Vous avez quitté le programme\n");
+                            exit( EXIT_SUCCESS ); 
                             break;
                         default:
-                        printf("mauvais choix\n");
+                        printf("Mauvais choix, vous allez etre rediriger au menu configuration\n");
+                        etat_courant=Menu_Configuration;
                         break;
                         }
                     }
                     break;
                 default:
-                    printf("erreur de choix\n");
+                    printf("Erreur de choix\n");
                     etat_courant = Menu_Configuration;
                     break;
                 }
@@ -214,16 +210,25 @@ void MAE()
                 case Retour:
                     etat_courant = Menu_Admin;
                 case Deconnexion:
-                    choix[0] = "3";
-                    while (strcmp(&choix[0],"1")!=0 || strcmp(&choix[0],"2")!=0)
+                    while (strcmp(&choix[0],"1")!=0)
                     {
-                        printf("vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non ");
-                        scanf("%s", choix);
-                        if(strcmp(&choix[0],"1")==0)
+                        printf("Vous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non\n");
+                        scanf("%s",choix);
+                        switch (choix[0])
+                        {
+                        case oui:
+                            strcpy(choix,"1");
                             etat_courant = Menu_Utilisateur;
-                        if(strcmp(&choix[0],"2")==0)
-                            printf("vous avez quitté le programme\n");
-                        else printf("mauvais choix");
+                            break;
+                        case non:
+                            printf("Vous avez quitté le programme\n");
+                            exit( EXIT_SUCCESS ); 
+                            break;
+                        default:
+                        printf("Mauvais choix, vous allez etre rediriger vers le menu visualisation\n");
+                        etat_courant=Menu_Visualisation;
+                        break;
+                        }
                     }
                     break;
                 default:
@@ -238,7 +243,6 @@ void MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche fichier texte\n [2] Recherche fichier image\n [3] Recherche fichier audio \n[Q] Déconnexion\n");
                 scanf("%s",choix);
-                //scanf("%c", &choixUtilisateur);
                 switch (choix[0])
                 {
                 case texte:
@@ -254,8 +258,8 @@ void MAE()
                     etat_courant = Menu_general;
                     break;
                 case Quitter:
-                    printf("vous avez quitté le programme\n");
-                    EXIT_SUCCESS;
+                    printf("Vous avez quitté le programme\n");
+                    exit( EXIT_SUCCESS ); 
                     break;
                 default:
                     printf("erreur de choix menu utilisateur\n");
@@ -269,7 +273,6 @@ void MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par mot clé\n [2] Recherche par comparaison de textes\n[R] Retour\n[Q] Quitter\n");
                 scanf("%s",choix);
-                //scanf("%c",&choixTexte);
                 switch (choix[0])
                 {
                 case Recherche_mots_cle:
@@ -279,14 +282,13 @@ void MAE()
                     // verification si le fichier existe
                     test=-1;
                     while(test==-1){
-                        printf("entrez le chemin de votre fichier\n");
+                        printf("Entrez le chemin de votre fichier\n");
                         scanf("%s", chemin);
                         test=FichierExist(chemin);
                         if(test==-1)
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
                             scanf("%s",choix);
-                            //scanf("%c",&choixTexteComp);
                             switch (choix[0])
                             {
                             case Utilisateur:
@@ -312,7 +314,7 @@ void MAE()
                     break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    EXIT_SUCCESS;
+                    exit( EXIT_SUCCESS ); 
                     break;
                 default:
                     printf("erreur de choix\n");
@@ -326,12 +328,9 @@ void MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par comparaison d'images\n[R] Retour\n[Q] Quitter\n");
                 scanf("%s", choix);
-                //scanf("%c", &choixImage);
                 switch (choix[0]){
                     case Recherche_comparaison_Image:
-                        //printf("Votres image est une :\n[1] Image couleur\n[2] Image noir et blanc\n");
-                        //scanf("%s",choix);
-                        printf("entrez le chemin de votre fichier\n");
+                        printf("Entrez le chemin de votre fichier\n");
                         scanf("%s", chemin);
                         // verification si le fichier existe
                         test=-1;
@@ -343,7 +342,6 @@ void MAE()
                                 printf("Le fichier n'existe pas");
                                 printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
                                 scanf("%s",choix);
-                                //scanf("%c",&choixImageComp);
                                 switch (choix[0])
                                 {
                                 case Utilisateur:
@@ -356,13 +354,20 @@ void MAE()
                                     etat_courant=Menu_Utilisateur;
                                 break;
                                 }}}
+                        //verification si le fichier passer est un fichier texte
+                        test=VerifExtension(chemin,"txt");
+                        if (test==-1){
+                            printf("Ce fichier n'est pas de type texte\nVeuiller mettre un fichier texte\n");
+                            etat_courant=Menu_texte;}
+                        else 
+                            //recherche 
                         break;
                         case Retour:
                             etat_courant = Menu_Utilisateur;
                         break;
                         case Quitter:
                             printf("vous avez quitté le programme\n");
-                            EXIT_SUCCESS;
+                            exit( EXIT_SUCCESS ); 
                         break;
                         default:
                             printf("erreur de choix\n");
@@ -375,7 +380,6 @@ void MAE()
                 printf("Veuillez faire votre choix  : \n");
                 printf("[1] Recherche par comparaison d'audio\n[R] Retour\n[Q] Quitter\n");
                 scanf("%s", choix);
-                //scanf("%c", &choixAudio);
                 switch (choix[0])
                 {
                 case Recherche_comparaison_Audio:
@@ -425,7 +429,7 @@ void MAE()
                 break;
                 case Quitter:
                     printf("vous avez quitté le programme\n");
-                    EXIT_SUCCESS;
+                    exit( EXIT_SUCCESS ); 
                 break;
                 default:
                     printf("erreur de choix\n");

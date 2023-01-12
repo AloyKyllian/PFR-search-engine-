@@ -1,4 +1,4 @@
-#include "../head/Global.h"
+#include "../Global/Global.h"
 
 void viderBuffer()
 {
