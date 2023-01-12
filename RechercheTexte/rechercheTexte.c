@@ -1,6 +1,6 @@
 #include "./rechercheTexte.h"
 
-void rechercheTexte(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *erreur){
+void rechercheTexte(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *erreur,int nombre_mot_cle){
     FILE *fp;
 	FILE *fres;
 	//char* tabRes[100][2];
@@ -79,10 +79,11 @@ void rechercheTexte(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *e
 	if(fres!=NULL){
 		while(fscanf(fres,"%d %d",&ID,&nb_occu)!=EOF){
 			//printf("test : ID=%d, nb=%d\n",ID,nb_occu);
-			//stocker le resultat dans un tableau
-			tabResultat[l].id=ID;
-			tabResultat[l].nb_occurence=nb_occu;
-			l++;
+			//stocker le resultat dans un tableau si le nombre d'occurence est plus grand que le seuil qu'on a pris dans le config
+			if(nb_occu>=nombre_mot_cle){
+				tabResultat[l].id=ID;
+				tabResultat[l].nb_occurence=nb_occu;
+				l++;}
 		}
 	}
 	else{
