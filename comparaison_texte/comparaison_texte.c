@@ -39,8 +39,6 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
             for(int i=0;i<nbr_mot;i++)
             {
                 fscanf(fichierD,"%s    |    %d",tab2.tab_mot[i],&tab2.tab_app[i]);      //Remplir un tableau avec les mots et leur nombre d'apparition présent dans les descripteurs
-                printf("%s    |    ",tab2.tab_mot[i]);
-                printf("%d\n",tab2.tab_app[i]);
         
             }
             j++;
@@ -50,6 +48,8 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
                 {   
                     if(strcmp(tab1.tab_mot[v],tab2.tab_mot[y])==0)                      //Comparaison des deux tableaux pour trouver les mots en commun
                     {
+                        printf("%s    |    ",tab2.tab_mot[y]);
+                        printf("%d\n",tab2.tab_app[y]);
                         comp = abs(tab1.tab_app[v]-tab2.tab_app[y]);                    //Valeur absolue entre le nombre d'apparition de chaque tableau pour le meme mot
                         if(0<comp<3)
                         {
@@ -77,6 +77,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
                         }
                     }
                 }
+                return tab;
     }
     else
     {
@@ -88,5 +89,5 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 int main()
 {
     int* Erreur;
-    comparaison(10,"../Textes/03-Des_chercheurs_parviennent_à_régénérer.xml","michel.txt",Erreur);
+    comparaison(10,"../Textes/03-Mimer_un_signal_nerveux_pour.xml","michel.txt",Erreur);
 }

@@ -8,11 +8,8 @@ config : Config.c Global.c tst_config.c
 	./tst_Config.out
 
 
-Descripteur_texte : Config.c Global.c descripteur_texte.c test_descipteur_texte.c descripteur_texte.h
-	gcc -c Config.c 
-	gcc -c Global.c 
+Descripteur_texte : descripteur_texte.c descripteur_texte.h comparaison_texte.c
 	gcc -c comparaison_texte.c
-	gcc -c test_descipteur_texte.c
 	gcc -o comparaison_texte.exe descripteur_texte.c comparaison_texte.o -lm
 	rm -rf *.o
 	./comparaison_texte.exe
