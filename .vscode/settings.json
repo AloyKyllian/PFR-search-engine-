@@ -1,10 +1,14 @@
 {
     "files.associations": {
+<<<<<<< HEAD
         "config.h": "c",
         "stdio.h": "c",
         "Global.h": "c",
         "stdint.h": "c",
         "connexion.h": "c",
         "login.h": "c"
+=======
+        "descripteur_image.h": "c"
+>>>>>>> Comparaison-image
     }
 }
