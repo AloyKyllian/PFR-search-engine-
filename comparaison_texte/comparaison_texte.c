@@ -6,7 +6,7 @@ typedef struct
     float pourcentage;
 } tab_similaire;
 
-tab_similaire* comparaison(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur)
+tab_similaire* comparaison(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur,int seuil)
 {
 char * mot_lu;
 int id_lu;    
@@ -14,6 +14,7 @@ int comp=0;
 float cpt=0;
 int pourc=0;
 int j=0;
+float pourc=0;
 DESCRIPTEUR_TEXTE tab1;
 DESCRIPTEUR_TEXTE tab2;
 String temp;
@@ -60,9 +61,14 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
                         }
                     }
                  }
-            }     
+            } 
+            pourc=cpt/nbr_mot *100; 
+            if(pourc > seuil)
+            {
             tab->pourcentage= cpt/nbr_mot *100;                                     // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
             printf("Similarite : %f pourcent", tab->pourcentage);
+            }   
+            
         }
         fclose(fichierD);
         for (int c = 0; c < cpt_sort; c++)
@@ -93,5 +99,5 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 int main()
 {
     int* Erreur;
-    comparaison(10,"../Textes/03-Mimer_un_signal_nerveux_pour.xml","michel.txt",Erreur);
+    comparaison(10,"../Textes/03-Mimer_un_signal_nerveux_pour.xml","michel.txt",Erreur,0);
 }
