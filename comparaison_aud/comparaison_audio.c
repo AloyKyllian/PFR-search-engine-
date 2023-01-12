@@ -3,11 +3,11 @@
 #include "comparaison_audio.h"
 
 
-float comparaison(int val_lu,descri_audio descripteur_comparé,int *ligne,int *colonne,int intervalle,descri_audio descri,float fenetre){
+float comparaison(int val_lu,descri_audio descripteur_comparé,int ligne,int intervalle,descri_audio descri,float fenetre){
 
 
     float pourcentage,max=0;
-    descripteur_comparé.ligne=*ligne;
+    descripteur_comparé.ligne=ligne;
     descripteur_comparé.colonne=intervalle;
     descri_audio descripteur_intervale;
     descripteur_intervale.tab = malloc(descri.ligne * sizeof(*descripteur_intervale.tab));//creation du tableau
@@ -26,20 +26,16 @@ float comparaison(int val_lu,descri_audio descripteur_comparé,int *ligne,int *c
                         comparateur+=descripteur_comparé.tab[i+intnbr][j]-descri.tab[i][j];
                     else
                         comparateur+=descri.tab[i][j]-descripteur_comparé.tab[i+intnbr][j];
-                    //printf("%d   ",comparateur);
                 }
-                //printf("\r\n");
         }
         pourcentage=comparateur/(fenetre*4.)*100;
         pourcentage=100-pourcentage;
         if(pourcentage>max){
             max=pourcentage;
         }
-        //printf("\n pourcentage : %f   \n",pourcentage);
     }
-    printf("\n max : %f   \n",max);
-    *ligne=0;
-    *colonne=0;
+    printf("max : %f \n",max);
+
 
     return max;
 
@@ -53,11 +49,16 @@ tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chem
     int erreur;
     int id;
     descri_audio descri;
+    int ligne=2048;
 
-    descri = Descripteur_audio(fenetre,intervalle,chemin_descripteur_compare,descri,&erreur);
+    //getligne ici
+
+
+    descri = Descripteur_audio(fenetre,intervalle,chemin_descripteur_compare,&erreur,ligne);
+
     float verif_seuil;
     float max=0;
-    tab_similaire *tab = malloc(100 * sizeof(tab_similaire));
+    tab_similaire *tab = malloc(ligne * sizeof(tab_similaire));
     if (tab == NULL)
     {
         return NULL;
@@ -67,83 +68,59 @@ tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chem
     FILE* fichier = NULL;
     fichier = fopen("../descrripteur_texte_type.txt", "r");
     if(fichier==NULL){
-        printf("Erreur lors de l'ouverture d'un fichier");
-        exit(1);
+        erreur=7;
+
     }
-    int lig=0;
-    int col=0;
-    int bonneval=0;
 
-
-    int ligne=0;
-    int colonne=0;
-
-    int fin;
-    descri_audio descripteur_compare;
-    descripteur_compare.tab = malloc(10*sizeof(*descripteur_compare.tab));//creation du tableau
-    for (int i = 0; i < 10; i++)
-    {
-        descripteur_compare.tab[i] = malloc( intervalle * sizeof(descripteur_compare.tab));
-    }
+    int nbr_ligne;
 
 
     int i=0;
 
+    descri_audio descripteur_compare;
 
-    while(fin!=EOF)
+    while(fscanf(fichier,"%d %d",&tab[i].id,&nbr_ligne)!=EOF)
     {
-        
-        fin=fscanf(fichier,"%d",&val_lu);
-        printf(" %d ",val_lu);
-        if(val_lu<0 && val_lu!=-1)
-        {
-        tab[i].id=val_lu+1;
-        verif_seuil=comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, fenetre);
-        if(verif_seuil>seuil)
-            tab[i].pourcentage=verif_seuil;
         i++;
-        }
-        
-
-        if(val_lu>=0)
+        descripteur_compare.tab = malloc(nbr_ligne*sizeof(*descripteur_compare.tab));//creation du tableau
+        for (int i = 0; i < nbr_ligne; i++)
         {
-            //printf("%d",ligne);
-            descripteur_compare.tab[ligne][colonne]=val_lu;
-            colonne++;
-            if(colonne==intervalle)
+            descripteur_compare.tab[i] = malloc( intervalle * sizeof(descripteur_compare.tab));
+        }
+
+        for(int lig=0;lig<nbr_ligne;lig++)
+        {
+            for(int col=0;col<intervalle;col++)
             {
-                colonne=0;
-                ligne++;
-                printf("\n%d  ",ligne);
-                descripteur_compare.tab = realloc(descripteur_compare.tab, ligne+1*10 * sizeof(*descripteur_compare.tab));
-                for (int y = ligne*10; y < ligne+1*10; y++)
-                {
-                    descripteur_compare.tab[y] = malloc(intervalle * sizeof(descripteur_compare.tab));
-                }
-               // descripteur_compare.tab=descripteur_temp.tab;
+                fscanf(fichier,"%d",&descripteur_compare.tab[lig][col]);
             }
         }
+
+        verif_seuil=comparaison( val_lu, descripteur_compare, nbr_ligne, intervalle, descri, fenetre);
+        if(verif_seuil>seuil)
+            tab[i].pourcentage=verif_seuil;
     }
     fclose(fichier);
 
 
-
-
-    descripteur_compare.ligne=ligne;
-    descripteur_compare.colonne=intervalle;
-        tab[i].id=tab[i-1].id-1;
-        verif_seuil=comparaison( val_lu, descripteur_compare, &ligne, &colonne, intervalle, descri, fenetre);
-        if(verif_seuil>seuil)
-            tab[i].pourcentage=verif_seuil;
         
-    tab_similaire *tab_finale = malloc(100 * sizeof(tab_similaire));
+    tab_similaire *tab_finale = malloc(i * sizeof(tab_similaire));
 
+    for(int y=0;y<i;y++){
+        tab_finale[y].id=0;
+        tab_finale[y].pourcentage=0;
+    }
+
+
+/* trie a voir !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     int idx;
-    //printf("%d\t",i);
-    for(int y=0;y<=i;y++)
+
+    printf(" i = %d   \n",i);
+
+    for(int y=0;y<i;y++)
     {
         max=0;
-        for(int l=0;l<=i;l++)
+        for(int l=0;l<i;l++)
         {
             if(tab[l].pourcentage>max)
             {
@@ -159,6 +136,8 @@ tab_similaire* comparaison_audio(int seuil,int fenetre,int intervalle,char* chem
         tab_finale[y].pourcentage=max;
         tab_finale[y].id=id;
     }
+*/
+
 
 
     return tab_finale;

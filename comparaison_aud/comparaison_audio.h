@@ -13,7 +13,7 @@ typedef struct
     float pourcentage;
 } tab_similaire;
 
-float comparaison(int val_lu, descri_audio descripteur_comparé, int *ligne, int *colonne, int intervalle, descri_audio descri, float fenetre);
+float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int intervalle, descri_audio descri, float fenetre);
 
 tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *chemin_descripteur_compare, char *chemin_descripteur_audio);
 

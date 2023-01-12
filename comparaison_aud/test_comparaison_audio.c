@@ -17,7 +17,8 @@ int erreur;
 tab = comparaison_audio(config_seuil,config_fenetre,config_intervale,"../descripteur_a_compare.txt","../descripteur_texte_type.txt");
 
 //affichage
-for (unsigned j = 0; tab[j].pourcentage>=config_seuil && tab[j].pourcentage<=100  ; j++)
+
+for (unsigned int j = 0; tab[j].pourcentage>=config_seuil && tab[j].pourcentage<=100  ; j++)
 {
     printf(" %f         %i\n ", tab[j].pourcentage,tab[j].id);
 }
