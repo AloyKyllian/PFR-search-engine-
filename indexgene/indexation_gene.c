@@ -99,7 +99,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       if (ptr_fic != NULL)
       {
 
-            fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+            fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
             id = element_temp.id;
             ligne = getligne(cheminfichier, erreur);
             element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
@@ -110,7 +110,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
 
                   while (!feof(ptr_fic))
                   {
-                        fscanf(ptr_fic, "%d | %s", &element_temp.id, cheminfichier);
+                        fscanf(ptr_fic, "-%d | %s", &element_temp.id, cheminfichier);
                         if (id != element_temp.id) // a revoir mais ca fonctionne
                         {
                               ligne = getligne(cheminfichier, erreur);
@@ -151,7 +151,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
-                        fprintf(fichier, "%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
+                        fprintf(fichier, "-%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
                               for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
@@ -183,14 +183,14 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
 {
       FILE *ptr_fic = NULL;
       ELEMENT_image element_temp;
-      char CHEMIN[100] = "../liste_base/liste_base_image";
+      char CHEMIN[100] = "../liste_base/liste_base_image/NB";
       char cheminfichier[200];
 
       ptr_fic = fopen(CHEMIN, "r");
 
       if (ptr_fic != NULL)
       {
-            fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+            fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
 
             element_temp.descripteur_image = Pack_Descripteur_image(erreur_image, cheminfichier, config.Nb_Bit_Fort);
             if (*erreur_image == 0)
@@ -199,7 +199,7 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
 
                   while (!feof(ptr_fic))
                   {
-                        fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+                        fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
                         element_temp.descripteur_image = Pack_Descripteur_image(erreur_image, cheminfichier, config.Nb_Bit_Fort);
                         if (*erreur_image == 0)
                         {
@@ -215,6 +215,38 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
             *erreur = 7;
       }
       fclose(ptr_fic);
+
+      strcpy(CHEMIN, "../liste_base/liste_base_image/RGB");
+      FILE *fichier = NULL;
+      fichier = fopen(CHEMIN, "r");
+
+      if (fichier != NULL)
+      {
+            fscanf(fichier, "-%d | %s\n", &element_temp.id, cheminfichier);
+
+            element_temp.descripteur_image = Pack_Descripteur_image(erreur_image, cheminfichier, config.Nb_Bit_Fort);
+            if (*erreur_image == 0)
+            {
+                  dscr_image = emPILE_image(dscr_image, element_temp);
+
+                  while (!feof(fichier))
+                  {
+                        fscanf(fichier, "-%d | %s\n", &element_temp.id, cheminfichier);
+                        element_temp.descripteur_image = Pack_Descripteur_image(erreur_image, cheminfichier, config.Nb_Bit_Fort);
+                        if (*erreur_image == 0)
+                        {
+                              dscr_image = emPILE_image(dscr_image, element_temp);
+                        }
+                        else
+                              break;
+                  }
+            }
+      }
+      else
+      {
+            *erreur = 7;
+      }
+      fclose(fichier);
       return dscr_image;
 }
 
@@ -237,16 +269,14 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //________________________________
-                        fprintf(fichier, "%d\n", elementsupp.id);
+                        fprintf(fichier, "-%d\n", elementsupp.id);
                         for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
                         {
                               // Permet d'afficher q'un certain nombre de valeur
-                              fprintf(fichier, "Val n %d = %d Quantity = %d\n", i, elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
+                              fprintf(fichier, "%d %d\n", elementsupp.descripteur_image.Bilan[i][0], elementsupp.descripteur_image.Bilan[i][1]);
 
                               total = total + elementsupp.descripteur_image.Bilan[i][1];
                         }
-                        fprintf(fichier, "\nTotal de valeur = %d\n", total);
-
                         for (int i = 0; i < elementsupp.descripteur_image.Nb_Ligne; i++)
                         {
                               free(elementsupp.descripteur_image.Bilan[i]);
@@ -280,14 +310,14 @@ PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFI
 
       if (ptr_fic != NULL)
       {
-            fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+            fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
             element_temp.descripteur_texte = descripteur_texte_finale(cheminfichier, config.Nb_Mots_Cle, element_temp.descripteur_texte);
 
             dscr_texte = emPILE_texte(dscr_texte, element_temp);
 
             while (!feof(ptr_fic))
             {
-                  fscanf(ptr_fic, "%d | %s\n", &element_temp.id, cheminfichier);
+                  fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
                   element_temp.descripteur_texte = descripteur_texte_finale(cheminfichier, config.Nb_Mots_Cle, element_temp.descripteur_texte);
                   dscr_texte = emPILE_texte(dscr_texte, element_temp);
             }
@@ -317,7 +347,7 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
                   //______________________________
                   // AFFICHAGE ELEMENT DANS FICHIER
                   //________________________________
-                  fprintf(fichier, "%d\n", elementsupp.id);
+                  fprintf(fichier, "-%d\n", elementsupp.id);
                   // affichage descripteur
                   for (int x = 0; x < config.Nb_Mots_Cle; x++)
                   {
@@ -365,9 +395,10 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
       deb = (pileimage_path->element.id) + 1;
+      depiler_path(&pileimage_path, "../liste_base/liste_base_image/RGB", Erreurimage);
       strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
-      depiler_path(&pileimage_path, "../liste_base/liste_base_image", Erreurimage);
+      depiler_path(&pileimage_path, "../liste_base/liste_base_image/NB", Erreurimage);
 }
 
 // Recuperer le nombre de ligne dans un fichier __ utlise dans le descripteur audio
@@ -416,7 +447,6 @@ void copieNewToOld()
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
-      // copieNewToOld();
 
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
@@ -435,59 +465,152 @@ void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio
 
 void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
-      // recupere chemin des nouveaux fichiers
-      // erreur modifier
+
       String recupchemin;
       String commande;
-      strcpy(commande, "ls -ltu  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB | grep \".txt\" > fic_temp");
+
+      strcpy(commande, "ls -ltur  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/*.txt > traitement/fic_temp");
       system(commande);
 
-      strcpy(commande, "ls -ltu  ../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB | grep \".txt\" >> fic_temp");
+      strcpy(commande, "cut -d '/' -f 5 traitement/fic_temp > traitement/fic");
       system(commande);
 
-      inverser_fichier(Erreur);
-
-      strcpy(commande, "cut -d ' ' -f 12 fic_temp > fic");
+      strcpy(commande, "cut -d '/' -f 5  ../liste_base/liste_base_image/RGB > traitement/ListeDejaIndexeTemp");
       system(commande);
 
-      strcpy(commande, "cut -d '/' -f 5  ../liste_base/liste_base_image > traitement/ListeDejaIndexeTemp");
+      strcpy(commande, "diff traitement/ListeDejaIndexeTemp traitement/fic  > traitement/diff");
       system(commande);
 
-      strcpy(commande, "diff traitement/ListeDejaIndexeTemp fic | grep \".txt\" > traitement/diff");
-      system(commande);
-      strcpy(commande, "cut -d ' ' -f 2 traitement/diff > traitement/fichieraindexe");
-      system(commande);
-      FILE *fichier2;
-      int id = 0;
-      fichier2 = fopen("../liste_base/liste_base_image", "wr+");
-      if (fichier2 != NULL)
+      // strcpy(commande, "sed '1d' traitement/diff > traitement/fichieraindexe");
+      // system(commande);
+
+      // strcpy(commande, "cut -d ' ' -f 2 traitement/fichieraindexe > traitement/diff");
+      // system(commande);
+      FILE *fichier_first = NULL;
+      PILE cheminnewfile = init_PILE();
+      ELEMENT element_temp;
+      String val;
+      printf("AVANT empiler");
+      fflush(stdout);
+      fichier_first = fopen("traitement/diff", "r");
+      if (fichier_first != NULL)
       {
-            fscanf(fichier2, "%d", &id);
+            if (feof(fichier_first))
+                  printf("AUCUN FICHIER NA ETE AJOUTER/SUPPRIMER");
+            while (!feof(fichier_first))
+            {
+                  fscanf(fichier_first, "%s", val);
+                  if (strstr("> ", val))
+                  {
+                        fscanf(fichier_first, "%s", val);
+                        printf("%s   FIN", val);
+                        ajoutfichier(config,val, Erreur);
+                        //  appeler fonction ajout d'un fichier
+                  }
+                  if (strstr("< ", val))
+                  {
+                        fscanf(fichier_first, "%s", val);
+                        printf("%s   FIN", val);
+                        // appeler fonction pour supprimer
+                  }
+            }
       }
       else
       {
             *Erreur = 7;
       }
+      fclose(fichier_first);
+}
+
+void ajoutfichier(CONFIG config, String chemin, int *Erreur)
+{
+
+      // ajout fichier dans liste_base
+      int id = recupererDernierID(Erreur);
+
       FILE *fichier = NULL;
-      fichier = fopen("traitement/fichieraindexe", "r");
+
+      fichier = fopen("traitement/fic", "w");
+      ELEMENT elementsupp;
+
       if (fichier != NULL)
       {
-            while (!feof(fichier))
-            {
-                  fscanf(fichier, "%s\n", recupchemin);
-                  // fprintf(fichier2,"%d | %s\n",id, recupchemin);
-                  //       printf("%d | %s",id, recupchemin);
-                  // id--;
-            }
-            fclose(fichier2);
+            fprintf(fichier, "-%d |../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/%s\n", id, chemin);
       }
+
       else
       {
             *Erreur = 7;
       }
       fclose(fichier);
 
+      String commande;
 
+      strcpy(commande, "cat traitement/fic >> ../liste_base/liste_base_image/RGB");
+      system(commande);
+      //__________________________________
+      // ajout descripteur dans la base
+      //__________________________________
+      DESCRIPTEUR_IMAGE descripteur_image;
+      int total;
+      descripteur_image = Pack_Descripteur_image(Erreur, chemin, config.Nb_Bit_Fort);
+
+      FILE *fichier2 = NULL;
+
+      fichier2 = fopen("traitement/fic", "w");
+      if (fichier2 != NULL)
+      {
+            for (int i = 0; i < descripteur_image.Nb_Ligne; i++)
+            {
+                  // Permet d'afficher q'un certain nombre de valeur
+                  fprintf(fichier2, "%d %d\n", descripteur_image.Bilan[i][0], descripteur_image.Bilan[i][1]);
+
+                  total = total + descripteur_image.Bilan[i][1];
+            }
+            for (int i = 0; i < descripteur_image.Nb_Ligne; i++)
+            {
+                  free(descripteur_image.Bilan[i]);
+            }
+            free(descripteur_image.Bilan);
+      }
+      fclose(fichier2);
+      strcpy(commande, "cat traitement/fic >> ../base_descripteur/base_descripteur_image");
+      system(commande);
+}
+
+int recupererDernierID(int *Erreur)
+{
+      FILE *fichier2;
+      int id1 = 0;
+      fichier2 = fopen("../liste_base/liste_base_image/NB", "r");
+      if (fichier2 != NULL)
+      {
+            fscanf(fichier2, "-%d", &id1);
+      }
+      else
+      {
+            *Erreur = 7;
+      }
+      fclose(fichier2);
+
+      FILE *fichier3;
+      int id2 = 0;
+      fichier3 = fopen("../liste_base/liste_base_image/RGB", "r");
+      if (fichier2 != NULL)
+      {
+            fscanf(fichier3, "-%d", &id2);
+      }
+      else
+      {
+            *Erreur = 7;
+      }
+      fclose(fichier3);
+      int id;
+      id = id1 + 1;
+      if (id2 > id1)
+            id = id2 + 1;
+
+      return id;
 }
 
 void inverser_fichier(int *erreur)
@@ -540,3 +663,12 @@ void empiler_fichier(PILE *pourchemin, int *erreur)
 // audio
 
 // texte
+// strcpy(commande, "cut -d ' ' -f 2 traitement/fic > traitement/fic_temp");
+// system(commande);
+
+// strcpy(commande, "sed '1d' traitement/fic_temp > traitement/fic");
+// system(commande);
+// strcpy(commande, "rm -rf traitement/file_image/*.txt");
+// system(commande);
+
+// inverser_fichier(Erreur);
