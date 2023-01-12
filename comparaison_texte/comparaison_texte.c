@@ -25,6 +25,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
     {
         FILE* fichierD = NULL;
         tab_similaire tab[nbr_mot];
+        int cpt_sort = 0;
         fichierD = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
         if(fichierD==NULL)
         {
@@ -61,6 +62,21 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
             printf("Similarite : %f pourcent", tab->pourcentage);
         }
         fclose(fichierD);
+        for (int c = 0; c < cpt_sort; c++)
+                {
+                    for (int d = 0; d < cpt_sort; d++)
+                    {
+                        if (tab[c].pourcentage < tab[d].pourcentage)
+                        {
+                            float tmpid = tab[c].id;
+                            float tmppour = tab[c].pourcentage;
+                            tab[c].id = tab[d].id;
+                            tab[c].pourcentage = tab[d].pourcentage;
+                            tab[d].id = tmpid;
+                            tab[d].pourcentage = tmppour;
+                        }
+                    }
+                }
     }
     else
     {
@@ -72,5 +88,5 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 int main()
 {
     int* Erreur;
-    comparaison(10,"../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml","michel.txt",Erreur);
+    comparaison(10,"../Textes/03-Des_chercheurs_parviennent_à_régénérer.xml","michel.txt",Erreur);
 }
