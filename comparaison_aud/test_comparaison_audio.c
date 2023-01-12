@@ -23,5 +23,8 @@ for (unsigned int j = 0; tab[j].pourcentage>=config_seuil && tab[j].pourcentage<
     printf(" %f         %i\n ", tab[j].pourcentage,tab[j].id);
 }
 
+    free(tab);
+
+
 
 }
