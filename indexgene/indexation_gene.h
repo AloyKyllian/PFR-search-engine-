@@ -18,19 +18,18 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
 PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFIG config);
 void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config);
 
+void indexation_audio(CONFIG config, int *Erreur, int *Erreur_audio);
+void indexation_texte(CONFIG config, int *Erreur, int *Erreur_texte);
+void indexation_image(CONFIG config, int *Erreur, int *Erreur_image);
+
 void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreurimage);
 
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
-void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
+void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
 
-int getligne(char *, int *);
-void copieNewToOld();
+void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
 
-void ajoutfichier(CONFIG config, String chemin, int *Erreur);
-int recupererDernierID(int *Erreur);
-
-void inverser_fichier(int *erreur);
-void depiler_fichier(PILE pourchemin, int *erreur);
-void empiler_fichier(PILE *pourchemin, int *erreur);
+void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur);
+int recupererDernierID(String type, int *Erreur);
 
 #endif

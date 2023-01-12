@@ -10,9 +10,12 @@ int main()
     config = Lire_CONFIG(&Erreurimage);
 
     // recuperer_path_tous_fichiers(&Erreurtexte, &Erreuraudio, &Erreurimage);
-    indexation_generale_ferme(config, &Erreurimage, &Erreuraudio, &Erreurtexte, &Erreur);
+    //indexation_generale_ferme(config, &Erreurimage, &Erreuraudio, &Erreurtexte, &Erreur);
 
-    //indexation_generale_ouverte(config, &Erreurimage, &Erreuraudio, &Erreurtexte, &Erreur);
+    //indexation_ouverte(config,type,Erreurimage,Erreuraudio,Erreurtexte,Erreur);
+
+    indexation(config, &Erreurimage, &Erreuraudio, &Erreurtexte, &Erreur);
+
 
     return 0;
 }

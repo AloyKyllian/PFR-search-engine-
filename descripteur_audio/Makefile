@@ -1,8 +1,11 @@
-Descripteur_image.o :  Descripteur_image.c  Descripteur_image.h
-	gcc -c -o Descripteur_image.o Descripteur_image.c
+descripteur_audio : descripteur_audio.o test_descripteur_audio.o
+	gcc -o test_descripteur_audio.out descripteur_audio.o test_descripteur_audio.o
 
-tst_descripteur_image.o : tst_descripteur_image.c Descripteur_image.h
-	gcc -c -o tst_descripteur_image.o tst_descripteur_image.c
+descripteur_audio.o : descripteur_audio.c 
+	gcc -c descripteur_audio.c 
 
-tst_descripteur_image : tst_descripteur_image.o Descripteur_image.out
-	gcc -o tst_descripteur_image.exe tst_descripteur_image.o Descripteur_image.o
+test_descripteur_audio.o : test_descripteur_audio.c
+	gcc -c test_descripteur_audio.c
+
+clean :
+	rm -rf *.o
