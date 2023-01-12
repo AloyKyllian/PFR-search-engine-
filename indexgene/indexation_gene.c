@@ -495,8 +495,9 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
       fichier_first = fopen("traitement/diff", "r");
       if (fichier_first != NULL)
       {
-            if (feof(fichier_first))
+            if (fscanf(fichier_first, "%s",val)==EOF)
                   printf("AUCUN FICHIER NA ETE AJOUTER/SUPPRIMER");
+                  fflush(stdout);
             while (!feof(fichier_first))
             {
                   fscanf(fichier_first, "%s", val);
@@ -504,6 +505,7 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
                   {
                         fscanf(fichier_first, "%s", val);
                         printf("%s   FIN", val);
+                        fflush(stdout);
                         ajoutfichier(config,val, Erreur);
                         //  appeler fonction ajout d'un fichier
                   }
@@ -511,6 +513,7 @@ void indexation_generale_ouverte(CONFIG config, int *Erreurimage, int *Erreuraud
                   {
                         fscanf(fichier_first, "%s", val);
                         printf("%s   FIN", val);
+                        fflush(stdout);
                         // appeler fonction pour supprimer
                   }
             }
@@ -527,7 +530,8 @@ void ajoutfichier(CONFIG config, String chemin, int *Erreur)
 
       // ajout fichier dans liste_base
       int id = recupererDernierID(Erreur);
-
+      printf("apres recuperation ID");
+      fflush(stdout);
       FILE *fichier = NULL;
 
       fichier = fopen("traitement/fic", "w");
