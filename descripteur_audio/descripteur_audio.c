@@ -1,19 +1,15 @@
 #include "descripteur_audio.h"
 
-descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_fichier,int * erreur, int ligne){//demander comment recuperer le chemin et nom du fichier
-    double pas;//difference entre 2 intervalles
+descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_fichier,int * erreur){//demander comment recuperer le chemin et nom du fichier
+    double pas = 2./intervalle;;//difference entre 2 intervalles
     int nbr_val=0;//nombre de valeur dans un fichier texte
     int k;//(nbr_val_fenetre)
     int m;//nombre d'intervalle
     double val;//valeur lu dans le fichier
     FILE* fichier = NULL;//pointeur de fichier pour utiliser les fonction associé
 
-    //chemin_fichier="../son/jingle_fi.txt";//example de chemin possible
-    fichier = fopen(chemin_fichier, "r");//ouvre le fichier ne mode read
-    if(fichier==NULL){    
-        *erreur=7;//regarder ouverture fichier
-    }
-    
+    int ligne;
+    ligne=getligne(chemin_fichier,erreur);
     k=(ligne/nb_val_fenetre);//calcul du nombre de fenetre
     descri_audio descipteur_audio;
     descipteur_audio.ligne=k+1;//donne le nombre de ligne du descripteur 
@@ -41,9 +37,13 @@ descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_
         }
     }
 
-    k=0;
-    pas=2./intervalle;
+    fichier = fopen(chemin_fichier, "r");//ouvre le fichier ne mode read
+    if(fichier==NULL){    
+        *erreur=7;//regarder ouverture fichier
+    }
 
+    k=0;
+    
     for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
     {
         if(cpt==nb_val_fenetre)//passer de fenetre en fenetre
@@ -64,4 +64,35 @@ descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_
     fclose(fichier);//fermeture du fichier
 
 return descipteur_audio;//retour de la structure du descripteur
+}
+
+int getligne(char *path, int *erreur)
+{
+
+      char commande[500];
+      int ligne;
+
+      strcpy(commande, "wc -l ");
+      strcat(commande, path);
+      strcat(commande, " > getligne_temp");
+      system(commande);
+
+      FILE *fichier = NULL;
+      fichier = fopen("getligne_temp", "r"); // Ouverture du texte à traiter
+      if (fichier == NULL)
+      {
+            // printf("Erreur lors de l'ouverture d'un fichier");
+            // exit(1);
+            *erreur = 7;
+      }
+
+      fscanf(fichier, "%d", &ligne);
+
+      fclose(fichier);
+
+      strcpy(commande, "rm ");
+      strcat(commande, "getligne_temp");
+      system(commande);
+
+      return ligne;
 }
