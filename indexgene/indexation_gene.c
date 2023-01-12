@@ -101,8 +101,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
 
             fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
             id = element_temp.id;
-            ligne = getligne(cheminfichier, erreur);
-            element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
+            element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, erreur_audio);
 
             if (*erreur_audio == 0)
             {
@@ -113,8 +112,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                         fscanf(ptr_fic, "-%d | %s", &element_temp.id, cheminfichier);
                         if (id != element_temp.id) // a revoir mais ca fonctionne
                         {
-                              ligne = getligne(cheminfichier, erreur);
-                              element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, element_temp.descripteur, erreur_audio, ligne);
+                              element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, erreur_audio);
                               if (*erreur_audio == 0)
                               {
                                     dscr_audio = emPILE_audio(dscr_audio, element_temp);
