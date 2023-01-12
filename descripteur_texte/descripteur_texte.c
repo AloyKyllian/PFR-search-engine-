@@ -115,57 +115,13 @@ return verif;
 }
 
 
-DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab,int* Erreur,String id)
+DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE tab,int* Erreur)
 {
 
     bool verif=false;
     char mot_NonBanni[100];
     String tab_p[100];
     int cpt=0;
-    FILE* fichierNonBanni = NULL;
-    fichierNonBanni = fopen("../MotNonBanni.txt", "a");
-    if(fichierNonBanni==NULL){
-                                        //Vérification ouverture du fichier
-
-        *Erreur=7;                         //Erreur Ouverture fichier NonBanni
-        exit(1);
-    }
-
-    while(fscanf(fichierNonBanni,"%s",mot_NonBanni)!=EOF)                       
-    {       
-        strcpy(tab_p[cpt],mot_NonBanni);
-        cpt++;
-    }
-
-    //qsort(tab_p,100,(sizeof(String)),1);
-    bool verifFichier=false;
-
-    for(int i=0;i<100;i++)
-    {
-    if(strcmp(mot,tab_p[i]))                                 // Si le mot en entrée n'est pas présent dans les mots Non bannis on le garde 
-        verifFichier=true;
-    }
-    if(verifFichier==false)
-    {
-        fputc(' ',fichierNonBanni);
-        fputs(mot,fichierNonBanni);
-        fputs(" : ",fichierNonBanni);
-        fputs(id,fichierNonBanni);
-        fputs(",",fichierNonBanni);
-        fputs("\n",fichierNonBanni);
-
-    }
-    /*else
-    {
-         while(fscanf(fichierNonBanni,"%s",mot_NonBanni)!=EOF)                       
-    {       
-        strcpy(tab_p[cpt],mot_NonBanni);
-        cpt++;
-    }
-    }*/
-
-fclose(fichierNonBanni);
-
     for(int i=0;i<tab.index;i++)
     {
 
@@ -230,6 +186,7 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL)
     {
+        printf("Marche PO");
         *Erreur=7;                          //Erreur ouverture
         exit(1);
     }
@@ -273,12 +230,11 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
             tab=descripteur_texte(nbr_mot,mot,tab,Erreur,"4");
         }
     }
-
-    DESCRIPTEUR_TEXTE tab_occ_finale;
     tab_renvoyer.index=0;
     tab_renvoyer.tab_mot = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_mot));//creation du tableau
     tab_renvoyer.tab_app = malloc(nbr_occ * sizeof(*tab_renvoyer.tab_app));//creation du tableau
-
+    if(tab_renvoyer.tab_mot != NULL && tab_renvoyer.tab_app != NULL)
+    {
     for(int i=0;i<nbr_occ;i++)
     {
         strcpy(tab_renvoyer.tab_mot[i],"");                     // Initialise le tableau
@@ -294,13 +250,20 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
         *Erreur = 1;
         exit(1);
     }
+    }
+    else
+    {
+        *Erreur = 1;
+        exit(1);
+    }
 }
 
 int main()
 {
     DESCRIPTEUR_TEXTE tab_aff;
     int* Erreur;
-    tab_aff=descripteur_texte_finale("../texte/Textes_UTF8/03-Mimer_un_signal_nerveux_pour_utf8.xml",10,tab_aff,Erreur);     //10 = nbr_occ c'est le nombre de mot-clé à afficher
+
+    tab_aff=descripteur_texte_finale("../Textes/03-Mimer_un_signal_nerveux_pour.xml",10,tab_aff,Erreur);     //10 = nbr_occ c'est le nombre de mot-clé à afficher
     for(int x=0;x<10;x++)
     {
         printf("%s    |    %d\n",tab_aff.tab_mot[x],tab_aff.tab_app[x]);          //On affiche le tableau final     
