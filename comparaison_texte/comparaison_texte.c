@@ -6,7 +6,7 @@ typedef struct
     float pourcentage;
 } tab_similaire;
 
-void comparaison(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur)
+tab_similaire* comparaison(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur)
 {
 char * mot_lu;
 int id_lu;    
@@ -17,14 +17,17 @@ int j=0;
 DESCRIPTEUR_TEXTE tab1;
 DESCRIPTEUR_TEXTE tab2;
 String temp;
+tab_similaire *tab=NULL;
 tab2.tab_mot = malloc(nbr_mot * sizeof(*tab2.tab_mot));//creation du tableau
 tab2.tab_app = malloc(nbr_mot * sizeof(*tab2.tab_app));//creation du tableau
 tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 
+    tab = (tab_similaire *)malloc(nbr_mot * sizeof(tab_similaire));
     if(tab2.tab_mot !=NULL && tab2.tab_app != NULL)
     {
         FILE* fichierD = NULL;
-        tab_similaire tab[nbr_mot];
+       
+        
         int cpt_sort = 0;
         fichierD = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
         if(fichierD==NULL)
@@ -77,13 +80,14 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
                         }
                     }
                 }
-                return tab;
+                
     }
     else
     {
         *Erreur=1;                      //Erreur Allocation
         exit(1);
     }
+    return tab;
 }
 
 int main()
