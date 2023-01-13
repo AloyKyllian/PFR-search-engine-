@@ -107,6 +107,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                   printf("-%d | %s\n", element_temp.id, cheminfichier);
                   fflush(stdout);
                   element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, erreur_audio);
+                  printf("EMPILE : NOMBRE DE LIGNE : %d\n",element_temp.descripteur.ligne);
                   if (*erreur_audio == 0)
                   {
                         dscr_audio = emPILE_audio(dscr_audio, element_temp);
@@ -144,6 +145,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
+                        printf("DEPILE : NOMBRE DE LIGNE : %d\n",elementsupp.descripteur.ligne);
                         fprintf(fichier, "-%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
@@ -479,6 +481,8 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                               fscanf(fichier_first, "%s", val);
                               printf("%s   FIN", val);
                               fflush(stdout);
+                              printf("AVANT AJOUT FICHIER: \ttype: %s val: %s\n",type,val);
+                              fflush(stdout);
                               ajoutfichier(config, type, val, Erreur);
                               //  appeler fonction ajout d'un fichier
                         }
@@ -600,7 +604,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   fprintf(fichier2, "-%d\n", id);
                   for (int x = 0; x < config.Nb_Mots_Cle; x++)
                   {
-                        fprintf(fichier, "%s    |    %d\n", descripteur_texte.tab_mot[x], descripteur_texte.tab_app[x]);
+                        fprintf(fichier, "\n%s    |    %d", descripteur_texte.tab_mot[x], descripteur_texte.tab_app[x]);
                   }
 
                   free(descripteur_texte.tab_mot);
