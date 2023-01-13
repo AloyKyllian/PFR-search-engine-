@@ -35,7 +35,7 @@ LOGIN saisir_login();
 //___________________________________________
 
 // importe id et mdp du fichier texte a la structure
-void lire_fichier_login (lesLogins tablogin, String * erreur);
+void lire_fichier_login (lesLogins tablogin, int * erreur);
 
 
 

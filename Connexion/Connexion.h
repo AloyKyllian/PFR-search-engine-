@@ -5,7 +5,8 @@
 #include "../Global/Global.h"
 
 // verifier li login boolean true or false 
-bool seconnecter (lesLogins tablogin, LOGIN newlogin, String *erreur);
+bool seconnecter (lesLogins tablogin, LOGIN newlogin, int *erreur);
+
 
 
 #endif

@@ -1,8 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-#include <math.h>
 #include "../Menu/Menu.h"
 
 void MAE()
@@ -11,16 +6,18 @@ void MAE()
     int test1,test;
     char choix[100];
     char chemin[100];
+    char cheminDescripteurTxt[200];
     char *extension;
     int nbTentative=1;
     int nbFenetre,intervalle;
     bool result=false;
-    String erreur;
+    //String erreur;
     LOGIN testlogin;
     lesLogins tablogin;
-    int erreurLOic;
-
-    
+    int erreur;
+    char motCle[25];
+    tab_Res *tabResultatTexte=malloc(100*sizeof(tab_Res));
+    int nombreElemetTab;
     //lire config si ya une erreur
     CONFIG Lire_CONFIG(int *Erreur);
     
@@ -279,7 +276,10 @@ void MAE()
                 switch (choix[0])
                 {
                 case Recherche_mots_cle:
-
+                    printf("Entrer votre mot clé\n");
+                    scanf("%s",motCle);
+                    rechercheMot(motCle,cheminDescripteurTxt,tabResultatTexte,&nombreElemetTab,&erreur);
+                    //LireResultat(tabResultatTexte,nombreElemetTab);
                     break;
                 case Recherche_par_comparaison_Texte:
                     // verification si le fichier existe
@@ -310,7 +310,7 @@ void MAE()
                         printf("Ce fichier n'est pas de type texte\nVeuiller mettre un fichier texte\n");
                         etat_courant=Menu_texte;}
                     else 
-                        //recherche 
+                        
                     break;
                 case Retour:
                     etat_courant = Menu_Utilisateur;

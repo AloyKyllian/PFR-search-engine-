@@ -11,8 +11,12 @@ int main(){
 	printf("Veuillez entrer le mot que vous souhaitez recherché\n");
 	scanf("%s",mot);
 	rechercheTexte(mot,chemin,tabResultat,&l,&erreur);
+	if(erreur==7){
+		printf("/n");
+	}
+	else{
 	for(int k=0;k<l;k++){
 		printf("ID=%d, nb=%d\n",tabResultat[k].id,tabResultat[k].nb_occurence);
-	}
+	}}
     return 0;
 }

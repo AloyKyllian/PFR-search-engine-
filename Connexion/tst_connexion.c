@@ -1,5 +1,4 @@
-#include "../head/Connexion.h"
-#include "../head/Login.h"
+#include "../Connexion/Connexion.h"
 
 int main()
 {

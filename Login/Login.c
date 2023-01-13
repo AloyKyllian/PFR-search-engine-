@@ -32,18 +32,20 @@ LOGIN saisir_login()
 }
 
 // importe id et mdp du fichier texte a la structure
-void lire_fichier_login (lesLogins tablogin, String * erreur)
+void lire_fichier_login (lesLogins tablogin, int *erreur)
 {   
     FILE *fichier = NULL;
     fichier = fopen("../Login.txt", "r");
     if (fichier != NULL)
     {
-        strcpy(*erreur,"Erreur : NULL");
+        //strcpy(*erreur,"Erreur : NULL");
+        *erreur=0;
         fscanf(fichier, "[0] id : %s\nmdp : %s\n[1] id : %s\nmdp : %s\n[2] id : %s\nmdp : %s\n[3] id : %s\nmdp : %s\n[4] id : %s\nmdp : %s\n",tablogin[0].id,(tablogin[0].mdp),(tablogin[1].id),(tablogin[1].mdp),(tablogin[2].id),(tablogin[2].mdp),(tablogin[3].id),(tablogin[3].mdp),(tablogin[4].id),(tablogin[4].mdp) );
     }
     else
     {
-        strcpy(*erreur,"Erreur : Fichier login introuvable");
+        //strcpy(*erreur,"Erreur : Fichier login introuvable");
+        *erreur=7;
     }
     fclose(fichier); 
 }

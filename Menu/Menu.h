@@ -3,6 +3,7 @@
 #include "../Connexion/Connexion.h"
 #include "../Config/Config.h"
 #include "../Menu/FichierExist.h"
+#include "../RechercheMot/rechercheMot.h"
 
 void MAE();
 //Etat :
