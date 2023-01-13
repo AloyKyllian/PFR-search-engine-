@@ -1,5 +1,5 @@
-menu : Global.o Config.o Login.o Connexion.o FichierExist.o RechercheMot.o Menu.o main.o
-	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o RechercheMot.o Menu.o main.o -lm
+menu : Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o Menu.o main.o
+	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o Menu.o main.o -lm
 
 Global.o : ../Global/Global.c ../Global/Global.h 
 	gcc -c ../Global/Global.c
@@ -16,11 +16,11 @@ Connexion.o : ../Connexion/Connexion.c ../Connexion/Connexion.h
 FichierExist.o : ../Menu/FichierExist.c ../Menu/FichierExist.h 
 	gcc -c ../Menu/FichierExist.c
 
-RechercheMot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h
-	gcc -c ../RechercheMot/rechercheMot.c
+rechercheMot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h
+	gcc -Wall ../RechercheMot/rechercheMot.c
 
 Menu.o : ../Menu/Menu.c ../Menu/Menu.h 
-	gcc -c ../Menu/Menu.c
+	gcc -Wall ../Menu/Menu.c
 
 main.o : ../Menu/main.c
 	gcc -c ../Menu/main.c

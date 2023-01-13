@@ -1,4 +1,6 @@
 #include "../Menu/Menu.h"
+#include "../Menu/FichierExist.h"
+#include "../RechercheMot/rechercheMot.h"
 
 void MAE()
 {
@@ -288,7 +290,7 @@ void MAE()
                         printf("Entrez le chemin de votre fichier\n");
                         scanf("%s", chemin);
                         test=FichierExist(chemin);
-                        if(test==-1)
+                        if(test==-1){
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
                             scanf("%s",choix);
@@ -303,7 +305,7 @@ void MAE()
                             default:
                                 etat_courant=Menu_Utilisateur;
                                 break;
-                            }}
+                            }}}
                     //verification si le fichier passer est un fichier texte
                     test=VerifExtension(chemin,"xml");
                     if (test==-1){
@@ -394,7 +396,7 @@ void MAE()
                         printf("entrez le chemin de votre fichier\n");
                         scanf("%s", chemin);
                         test=FichierExist(chemin);
-                        if(test==-1)
+                        if(test==-1){
                             printf("Le fichier n'existe pas");
                             printf("Veuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
                             scanf("%s",choix);
@@ -409,7 +411,7 @@ void MAE()
                             default:
                                 etat_courant=Menu_Utilisateur;
                             break;
-                            }}
+                            }}}
                     //verification si le fichier passer est un fichier texte
                     test=VerifExtension(chemin,"txt");
                     if (test==-1){
