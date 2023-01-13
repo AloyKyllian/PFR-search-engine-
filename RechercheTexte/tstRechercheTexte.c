@@ -9,7 +9,7 @@ int main(){
 	chemin="des.txt";
 	printf("Veuillez entrer le mot que vous souhaitez recherché\n");
 	scanf("%s",mot);
-	rechercheTexte(mot,chemin,tabResultat,&l,&erreur,nombre_mot_cle);
+	rechercheTexte(mot,chemin,tabResultat,&l,&erreur);
 	for(int k=0;k<l;k++){
 		printf("ID=%d, nb=%d\n",tabResultat[k].id,tabResultat[k].nb_occurence);
 	}
