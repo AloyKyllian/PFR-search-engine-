@@ -1,0 +1,37 @@
+-00
+jeux 20
+olympiques 15
+natation 10
+médaille 7
+soleil 35
+jaune 12
+ciel 9
+bleu 5
+enfant 35
+plage 12
+parents 5
+-01
+mere 35
+supporteur 35
+football 20
+match 15
+pere 12
+coupe 10
+soleil 10
+ciel 9
+monde 7
+bleu 5
+soeur 5
+frere 4
+-02
+mere 35
+supporteur 35
+football 20
+match 15
+pere 12
+coupe 10
+ciel 9
+monde 7
+bleu 5
+soeur 5
+frere 4
