@@ -10,11 +10,13 @@ CONFIG Lire_CONFIG(int *Erreur)
     if (fichier != NULL)
     {
         //strcpy(*Erreur,"Erreur : NULL");
+        *Erreur=0;
         fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f", &config.nb_mots_cle, &config.similariter, &config.niveau, &config.nb_fenetre, &config.intervale);
     }
     else
     {
         //strcpy(*Erreur,"Erreur : Fichier introuvable");
+        *Erreur=7;
     }
     fclose(fichier);
 
@@ -37,6 +39,7 @@ CONFIG Lire_mot_cle(CONFIG config, int *Erreur)
     if (!scanf("%d", &tmp))
     {
         //strcpy(*Erreur,"Erreur : Pas un nombre");
+        *Erreur=9;
         viderBuffer();
     }
     else if (tmp <= 0)
@@ -46,6 +49,7 @@ CONFIG Lire_mot_cle(CONFIG config, int *Erreur)
     else
     {
         //strcpy(*Erreur,"Erreur : NULL");
+        *Erreur=0;
         config.nb_mots_cle = tmp;
     }
     
@@ -58,19 +62,23 @@ CONFIG Lire_similariter(CONFIG config, int *Erreur)
     if (!scanf("%d", &tmp))
     {
        //strcpy(*Erreur,"Erreur : Pas un nombre");
+       *Erreur=9;
         viderBuffer();
     }
     else if (tmp <= 0)
     {
        //strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
+       *Erreur=2;
     }
     else if (tmp >= 100)
     {
        //strcpy(*Erreur,"Erreur : Nombre superieur a 0");
+       *Erreur=4;
     }
     else
     {
         //strcpy(*Erreur,"Erreur : NULL");
+        *Erreur=0;
         config.similariter = tmp;
     }
     return config;
@@ -83,15 +91,18 @@ CONFIG Lire_niveau(CONFIG config, int *Erreur)
     if (!scanf("%d", &tmp))
     {
         //strcpy(*Erreur,"Erreur : Pas un nombre");
+        *Erreur=9;
         viderBuffer();
     }
     else if (tmp <= 0)
     {
         //strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
+        *Erreur=2;
     }
     else if (tmp >= 256)
     {
         //strcpy(*Erreur,"Erreur : Nombre superieur a 256");
+        *Erreur=3;
     }
     else
     {
@@ -99,11 +110,13 @@ CONFIG Lire_niveau(CONFIG config, int *Erreur)
         if (tmp2 == (int)tmp2)
         {
             //strcpy(*Erreur,"Erreur : NULL");
+            *Erreur=0;
             config.niveau = tmp;
         }
         else
         {
            //strcpy(*Erreur,"Erreur : Pas une puissance de 2");
+           *Erreur=6;
         }
     }
     return config;
@@ -115,15 +128,18 @@ CONFIG Lire_nb_fenetre(CONFIG config, int *Erreur)
     if (!scanf("%d", &tmp))
     {
         //strcpy(*Erreur,"Erreur : Pas un nombre");
+        *Erreur=9;
         viderBuffer();
     }
     else if (tmp <= 0)
     {
         //strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
+        *Erreur=2;
     }
     else
     {
        //strcpy(*Erreur,"Erreur : NULL");
+       *Erreur=0;
         config.nb_fenetre = tmp;
     }
     return config;
@@ -135,15 +151,18 @@ CONFIG Lire_intervale(CONFIG config, int *Erreur)
     if (!scanf("%f", &tmp))
     {
         //strcpy(*Erreur,"Erreur : Pas un nombre");
+        *Erreur=9;
         viderBuffer();
     }
     else if (tmp <= 0)
     {
        //strcpy(*Erreur,"Erreur : Nombre inferieur a 0");
+       *Erreur=2;
     }
     else
     {
        //strcpy(*Erreur,"Erreur : NULL");
+       *Erreur=0;
         config.intervale = tmp;
     }
     return config;
@@ -157,11 +176,13 @@ void Ecrire_CONFIG(CONFIG config, int *Erreur)
     if (fichier != NULL)
     {
         //strcpy(*Erreur,"Erreur : NULL");
+        *Erreur=0;
         fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Niveau : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %f", config.nb_mots_cle, config.similariter, config.niveau, config.nb_fenetre, config.intervale);
     }
     else
     {
         //strcpy(*Erreur,"Erreur : Fichier introuvable");
+        *Erreur=7;
     }
     fclose(fichier);
 }
