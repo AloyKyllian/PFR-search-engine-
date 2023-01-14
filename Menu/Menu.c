@@ -5,6 +5,7 @@
 void MAE()
 {
     static char etat_courant = Menu_general;
+    CONFIG config;
     int test1,test;
     char choix[100];
     char chemin[100];
@@ -17,18 +18,17 @@ void MAE()
     LOGIN testlogin;
     lesLogins tablogin;
     int erreur;
+    int erreurConfig, erreurTexte,erreurImage,erreurAudio;
     char motCle[25];
     tab_Res *tabResultatTexte=malloc(100*sizeof(tab_Res));
     int nombreElemetTab;
     //lire config si ya une erreur
-    CONFIG Lire_CONFIG(int *Erreur);
-    
+    config=Lire_CONFIG(&erreurConfig);
+    if(erreurConfig==0){
     //voir si un nv fichier
-
     //indexation
-
     //4 erreurs index gene, image,audio,texte
-
+    
     //verifier les erreurs de tt les phases
     switch (etat_courant)
     {
@@ -122,7 +122,7 @@ void MAE()
 
             case Menu_Configuration:
                 printf("Configuration :\n");
-                CONFIG config;
+                //CONFIG config;
                 int Erreur;
                 config=Lire_CONFIG(&Erreur);
                 Afficher_CONFIG(config);
@@ -448,4 +448,4 @@ void MAE()
                 etat_courant=Menu_general;
             break;
             }
-}
+}}
