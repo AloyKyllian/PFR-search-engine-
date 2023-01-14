@@ -40,11 +40,10 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
     int erreur;
     int id;
     descri_audio descri;
-    int ligne = 2048;
 
     // getligne ici
 
-    descri = Descripteur_audio(fenetre, intervalle, chemin_descripteur_compare, &erreur, ligne);
+    descri = Descripteur_audio(fenetre, intervalle, chemin_descripteur_compare, &erreur);
 
     float verif_seuil;
     float max = 0;
