@@ -591,6 +591,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             }
             fclose(fichier2);
             strcpy(commande, "cat traitement/fic >> ../base_descripteur/base_descripteur_image");
+            system(commande);
       }
 
       if (strcmp(type, "texte") == 0)
@@ -614,6 +615,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             }
             fclose(fichier2);
             strcpy(commande, "cat traitement/fic >> ../base_descripteur/base_descripteur_texte");
+            system(commande);
       }
 
       if (strcmp(type, "audio") == 0)
@@ -677,7 +679,7 @@ int recupererDernierID(String type, int *Erreur)
             }
             fclose(fichier2);
             id_finale= id[0]+id[1];
-            return id_finale;
+            return id_finale +2;
       }
 
       if (strcmp(type, "texte") == 0)
@@ -696,7 +698,7 @@ int recupererDernierID(String type, int *Erreur)
             }
             fclose(fichier3);
 
-            return id_finale ;
+            return id_finale +1 ;
       }
 
       if (strcmp(type, "audio") == 0)
@@ -705,19 +707,19 @@ int recupererDernierID(String type, int *Erreur)
             strcpy(commande,"wc -l ../liste_base/liste_base_audio > traitement/id");
             system(commande);
             fichier3 = fopen("traitement/id", "r");
-            if (fichier2 != NULL)
+            if (fichier3 != NULL)
             {
-                  fscanf(fichier3, "%d ", &id_finale);
+                  fscanf(fichier3, "%d %*s", &id_finale);
+                  fflush(stdout);
             }
             else
             {
                   *Erreur = 7;
             }
             fclose(fichier3);
-
-            return id_finale ;
+            return id_finale +1;
       }
-      return id_finale ;
+      return id_finale +1 ;
 }
 
 void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
