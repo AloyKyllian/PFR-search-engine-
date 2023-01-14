@@ -24,7 +24,7 @@ tab2.tab_app = malloc(nbr_mot * sizeof(*tab2.tab_app));//creation du tableau
 tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
 
     tab = (tab_similaire *)malloc(nbr_mot * sizeof(tab_similaire));
-    if(tab2.tab_mot !=NULL && tab2.tab_app != NULL)
+    if(tab2.tab_mot !=NULL && tab2.tab_app != NULL && tab != NULL)              //Vérification allocation malloc
     {
         FILE* fichierD = NULL;
        
@@ -78,7 +78,7 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
                         if (tab[c].pourcentage < tab[d].pourcentage)
                         {
                             float tmpid = tab[c].id;
-                            float tmppour = tab[c].pourcentage;
+                            float tmppour = tab[c].pourcentage;                     // Classement des pourcentages dans l'ordre drécroissants
                             tab[c].id = tab[d].id;
                             tab[c].pourcentage = tab[d].pourcentage;
                             tab[d].id = tmpid;
