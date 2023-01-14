@@ -65,8 +65,8 @@ tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
             pourc=cpt/nbr_mot *100; 
             if(pourc > seuil)
             {
-            tab->pourcentage= cpt/nbr_mot *100;                                     // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
-            printf("Similarite : %f pourcent", tab->pourcentage);
+            tab[j].pourcentage= cpt/nbr_mot *100;                                     // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
+            printf("Similarite : %f pourcent", tab[j].pourcentage);
             }   
             
         }
