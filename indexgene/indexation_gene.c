@@ -108,6 +108,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                   fflush(stdout);
                   element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, erreur_audio);
                   printf("EMPILE : NOMBRE DE LIGNE : %d\n",element_temp.descripteur.ligne);
+                  fflush(stdout);
                   if (*erreur_audio == 0)
                   {
                         dscr_audio = emPILE_audio(dscr_audio, element_temp);
@@ -115,6 +116,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                   id = element_temp.id;
 
                   printf("fin du while\n");
+                  fflush(stdout);
             }
 
             fclose(ptr_fic);
@@ -479,7 +481,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("> ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              printf("%s   FIN", val);
+                              printf("%s   FIN\n", val);
                               fflush(stdout);
                               printf("AVANT AJOUT FICHIER: \ttype: %s val: %s\n",type,val);
                               fflush(stdout);
@@ -489,7 +491,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("< ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              printf("%s   FIN", val);
+                              printf("%s   FIN\n",val);
                               fflush(stdout);
                               // appeler fonction pour supprimer
                         }
@@ -543,7 +545,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
       if (fichier != NULL)
       {
-            fprintf(fichier, "-%d |%s\n", id, temp);
+            fprintf(fichier, "\n-%d |%s", id, temp);
       }
 
       else
@@ -651,49 +653,42 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 int recupererDernierID(String type, int *Erreur)
 {
       FILE *fichier2;
-      int id1 = 0;
+      int id[2];
+      int id_finale =0;
+      String commande;
 
       if (strcmp(type, "rgb") == 0 || strcmp(type, "nb") == 0)
       {
-            fichier2 = fopen("../liste_base/liste_base_image/NB", "r");
+            strcpy(commande,"wc -l ../liste_base/liste_base_image/RGB > traitement/id");
+            system(commande);
+            strcpy(commande,"wc -l ../liste_base/liste_base_image/NB >> traitement/id");
+            system(commande);           
+            fichier2 = fopen("traitement/id", "r");
             if (fichier2 != NULL)
-            {
-                  fscanf(fichier2, "-%d", &id1);
+            {     
+                  for (int i=0 ; i<2;i++)
+                        {
+                            fscanf(fichier2, "%d %*s", &(id[i]));  
+                        } 
             }
             else
             {
                   *Erreur = 7;
             }
             fclose(fichier2);
-
-            FILE *fichier3;
-            int id2 = 0;
-            fichier3 = fopen("../liste_base/liste_base_image/RGB", "r");
-            if (fichier2 != NULL)
-            {
-                  fscanf(fichier3, "-%d", &id2);
-            }
-            else
-            {
-                  *Erreur = 7;
-            }
-            fclose(fichier3);
-            int id;
-            id = id1 + 1;
-            if (id2 > id1)
-                  id = id2 + 1;
-
-            return id;
+            id_finale= id[0]+id[1];
+            return id_finale;
       }
 
       if (strcmp(type, "texte") == 0)
       {
             FILE *fichier3;
-            int id2 = 0;
-            fichier3 = fopen("../liste_base/liste_base_texte", "r");
+            strcpy(commande,"wc -l ../liste_base/liste_base_texte > traitement/id");
+            system(commande);
+            fichier3 = fopen("traitement/id", "r");
             if (fichier2 != NULL)
             {
-                  fscanf(fichier3, "-%d", &id2);
+                  fscanf(fichier3, "%d ", &id_finale);
             }
             else
             {
@@ -701,17 +696,18 @@ int recupererDernierID(String type, int *Erreur)
             }
             fclose(fichier3);
 
-            return id2 + 1;
+            return id_finale ;
       }
 
       if (strcmp(type, "audio") == 0)
       {
             FILE *fichier3;
-            int id2 = 0;
-            fichier3 = fopen("../liste_base/liste_base_audio", "r");
+            strcpy(commande,"wc -l ../liste_base/liste_base_audio > traitement/id");
+            system(commande);
+            fichier3 = fopen("traitement/id", "r");
             if (fichier2 != NULL)
             {
-                  fscanf(fichier3, "-%d", &id2);
+                  fscanf(fichier3, "%d ", &id_finale);
             }
             else
             {
@@ -719,8 +715,9 @@ int recupererDernierID(String type, int *Erreur)
             }
             fclose(fichier3);
 
-            return id2 + 1;
+            return id_finale ;
       }
+      return id_finale ;
 }
 
 void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
