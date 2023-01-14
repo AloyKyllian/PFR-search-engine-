@@ -1,6 +1,6 @@
 #include "../Menu/Menu.h"
 #include "../Menu/FichierExist.h"
-#include "../RechercheMot/rechercheMot.h"
+#include "/home/youss/PFR/PFR/RechercheMot/rechercheMot.h"
 
 void MAE()
 {

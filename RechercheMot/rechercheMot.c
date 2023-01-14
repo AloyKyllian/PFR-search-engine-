@@ -1,6 +1,6 @@
 #include "./rechercheMot.h"
 
-void rechercheTexte(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *erreur){
+void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *erreur){
     FILE *fp;
 	FILE *fres;
 	system("touch ../fichierRes.txt");

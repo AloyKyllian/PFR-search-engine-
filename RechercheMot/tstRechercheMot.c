@@ -10,7 +10,7 @@ int main(){
 	chemin="des.txt";
 	printf("Veuillez entrer le mot que vous souhaitez recherché\n");
 	scanf("%s",mot);
-	rechercheTexte(mot,chemin,tabResultat,&l,&erreur);
+	rechercheMot(mot,chemin,tabResultat,&l,&erreur);
 	if(erreur==7){
 		printf("/n");
 	}

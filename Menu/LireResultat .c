@@ -13,6 +13,7 @@ void LireResultat(tabRes *tabResultat, int nbElement){
     //for(int k=0;k<nbElement;k++){
 	//	printf("ID=%d, nb=%d\n",tabResultat[k].id,tabResultat[k].pourcentage);
 	//}
+
     printf("fct lire resultat\n");
 
 
