@@ -443,18 +443,18 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 
       strcpy(commande, "ls -ltur ");
       strcat(commande, cheminDATA);
-      strcat(commande, "> traitement/fic_temp");
+      strcat(commande, "> ../traitement/fic_temp");
       system(commande);
 
-      strcpy(commande, "cut -d '/' -f 5 traitement/fic_temp > traitement/fic");
+      strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
       system(commande);
 
       strcpy(commande, "cut -d '/' -f 5 ");
       strcat(commande, cheminliste);
-      strcat(commande, " > traitement/ListeDejaIndexeTemp");
+      strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
       system(commande);
 
-      strcpy(commande, "diff traitement/ListeDejaIndexeTemp traitement/fic  > traitement/diff");
+      strcpy(commande, "diff ../traitement/ListeDejaIndexeTemp ../traitement/fic  > ../traitement/diff");
       system(commande);
 
       FILE *fichier_first = NULL;
@@ -462,7 +462,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       ELEMENT element_temp;
       String val;
 
-      fichier_first = fopen("traitement/diff", "r");
+      fichier_first = fopen("../traitement/diff", "r");
       if (fichier_first != NULL)
       {
             if (fscanf(fichier_first, "%s", val) == EOF)
@@ -535,7 +535,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
       FILE *fichier = NULL;
       String temp;
 
-      fichier = fopen("traitement/fic", "w");
+      fichier = fopen("../traitement/fic", "w");
       ELEMENT elementsupp;
 
       // temp contient le chemin du fichier obtenue en concatenant le path et son titre
@@ -555,7 +555,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
       String commande;
 
-      strcpy(commande, "cat traitement/fic >> ");
+      strcpy(commande, "cat ../traitement/fic >> ");
       strcat(commande, cheminliste);
       system(commande);
       //__________________________________
@@ -572,7 +572,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             FILE *fichier2 = NULL;
             printf("\n\tID FANS AJOUT FICHIER : %d\n", id);
 
-            fichier2 = fopen("traitement/fic", "w");
+            fichier2 = fopen("../traitement/fic", "w");
             if (fichier2 != NULL)
             {
 
@@ -597,7 +597,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   free(descripteur_image.Bilan);
             }
             fclose(fichier2);
-            strcpy(commande, "cat traitement/fic >> ../base_descripteur/base_descripteur_image");
+            strcpy(commande, "cat ../traitement/fic >> ../base_descripteur/base_descripteur_image");
             system(commande);
       }
 
@@ -609,7 +609,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichier = NULL;
 
-            fichier = fopen("traitement/fic", "w");
+            fichier = fopen("../traitement/fic", "w");
             if (fichier != NULL)
             {
                   if (first == true)
@@ -629,7 +629,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   free(descripteur_texte.tab_app);
             }
             fclose(fichier);
-            strcpy(commande, "cat traitement/fic >> ../base_descripteur/base_descripteur_texte");
+            strcpy(commande, "cat ../traitement/fic >> ../base_descripteur/base_descripteur_texte");
             system(commande);
       }
 
@@ -642,7 +642,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichieraudio = NULL;
 
-            fichieraudio = fopen("traitement/fic", "w");
+            fichieraudio = fopen("../traitement/fic", "w");
             if (fichieraudio != NULL)
             {
 
@@ -665,7 +665,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             }
             free(descripteur.tab);
 
-            strcpy(commande, "cat traitement/fic >> ../base_descripteur/base_descripteur_audio");
+            strcpy(commande, "cat ../traitement/fic >> ../base_descripteur/base_descripteur_audio");
             system(commande);
       }
 }
@@ -1181,15 +1181,15 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       {
             *Erreur = 7;
       }
-      // strcpy(commande, "rm traitement/diff");
+      // strcpy(commande, "rm ../traitement/diff");
       // system(commande);
-      // strcpy(commande, "rm traitement/fic_temp");
+      // strcpy(commande, "rm ../traitement/fic_temp");
       // system(commande);
-      // strcpy(commande, "rm traitement/ListeDejaIndexeTemp");
+      // strcpy(commande, "rm ../traitement/ListeDejaIndexeTemp");
       // system(commande);
-      // strcpy(commande, "rm traitement/fic");
+      // strcpy(commande, "rm ../traitement/fic");
       // system(commande);
-      // strcpy(commande, "rm traitement/fichieraindexe");
+      // strcpy(commande, "rm ../traitement/fichieraindexe");
       // system(commande);
 }
 
