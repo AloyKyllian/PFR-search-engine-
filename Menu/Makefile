@@ -1,11 +1,11 @@
 menu : Global.o Config.o Login.o Connexion.o FichierExist.o Mot.o Menu.o tst_menu.o
 	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o Menu.o tst_menu.o -lm
 
-Global.o : ../Global/Global.c ../Global/Global.h 
-	gcc -c ../Global/Global.c
+Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
+	gcc -c ../Gestion-Config/Global.c
 
-Config.o : ../Config/Config.c ../Config/Config.h 
-	gcc -c ../Config/Config.c
+Config.o : ../Gestion-Config/Config.c ../Gestion-Config/Config.h 
+	gcc -c ../Gestion-Config/Config.c
 
 Login.o : ../Login/Login.c ../Login/Login.h 
 	gcc -c ../Login/Login.c

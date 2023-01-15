@@ -31,7 +31,7 @@ void Afficher_CONFIG(CONFIG config)
     printf("Intervale = %d\n", config.Intervale);
 }
 
-CONFIG Lire_mot_cle(int *Erreur, CONFIG config)
+CONFIG Lire_mot_cle(CONFIG config,int *Erreur)
 {
     // Variable
     int tmp;
@@ -54,7 +54,7 @@ CONFIG Lire_mot_cle(int *Erreur, CONFIG config)
     return config;
 }
 
-CONFIG Lire_similariter(int *Erreur, CONFIG config)
+CONFIG Lire_similariter(CONFIG config,int *Erreur)
 {
     // Variable
     int tmp;
@@ -81,7 +81,7 @@ CONFIG Lire_similariter(int *Erreur, CONFIG config)
     return config;
 }
 
-CONFIG Lire_nb_bit_fort(int *Erreur, CONFIG config)
+CONFIG Lire_nb_bit_fort(CONFIG config,int *Erreur)
 {
     // Variable
     int tmp;
@@ -108,7 +108,7 @@ CONFIG Lire_nb_bit_fort(int *Erreur, CONFIG config)
     return config;
 }
 
-CONFIG Lire_nb_fenetre(int *Erreur, CONFIG config)
+CONFIG Lire_nb_fenetre(CONFIG config,int *Erreur)
 {
     // Varaible
     int tmp;
@@ -140,7 +140,7 @@ CONFIG Lire_nb_fenetre(int *Erreur, CONFIG config)
     return config;
 }
 
-CONFIG Lire_intervale(int *Erreur,CONFIG config)
+CONFIG Lire_intervale(CONFIG config, int *Erreur)
 {
     // Variable
     int tmp;
@@ -163,7 +163,7 @@ CONFIG Lire_intervale(int *Erreur,CONFIG config)
     return config;
 }
 
-void Ecrire_CONFIG(int *Erreur, CONFIG config)
+void Ecrire_CONFIG(CONFIG config,int *Erreur)
 {
     // Variable
     FILE *fichier = NULL;

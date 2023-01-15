@@ -1,7 +1,7 @@
 #ifndef Menu_H_INCLUS    
 #define Menu_H_INCLUS   
 #include "../Connexion/Connexion.h"
-#include "../Config/Config.h"
+#include "../Gestion-Config/Config.h"
 
 
 void MAE();

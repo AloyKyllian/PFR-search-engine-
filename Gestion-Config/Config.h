@@ -20,21 +20,21 @@ CONFIG Lire_CONFIG(int*);
 void Afficher_CONFIG(CONFIG);
 
 //Lis et verifie la validiter de la valeur du nombre de mots cle
-CONFIG Lire_mot_cle(int*, CONFIG);
+CONFIG Lire_mot_cle(CONFIG , int*);
 
 //Lis et verifie la validiter de la valeur de la similarite
-CONFIG Lire_similariter(int*, CONFIG);
+CONFIG Lire_similariter(CONFIG , int*);
 
 //Lis et verifie la validiter de la valeur du niveau
-CONFIG Lire_nb_bit_fort(int*, CONFIG);
+CONFIG Lire_nb_bit_fort(CONFIG , int*);
 
 //Lis et verifie la validiter de la valeur du nombre de fenetre
-CONFIG Lire_nb_fenetre(int*, CONFIG);
+CONFIG Lire_nb_fenetre(CONFIG , int*);
 
 //Lis et verifie la validiter de la valeur de l'intervale
-CONFIG Lire_intervale(int*, CONFIG);
+CONFIG Lire_intervale(CONFIG , int*);
 
 //Ecrit dans Config.txt les valeur stocker dans la structure CONFIG
-void Ecrire_CONFIG(int*, CONFIG);
+void Ecrire_CONFIG(CONFIG , int*);
 
 #endif

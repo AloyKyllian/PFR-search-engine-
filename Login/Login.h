@@ -2,7 +2,7 @@
 #define LOGIN_H
 
 #define MAXPW 32
-#include "../Global/Global.h"
+#include "../Gestion-Config/Global.h"
 #include <unistd.h>
 // structure login :
 //                    - ID

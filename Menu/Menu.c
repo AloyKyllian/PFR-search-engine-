@@ -1,6 +1,6 @@
 #include "../Menu/Menu.h"
 #include "../Menu/FichierExist.h"
-#include "/home/youss/PFR/PFR/RechercheMot/rechercheMot.h"
+#include "../RechercheMot/rechercheMot.h"
 
 void MAE()
 {
@@ -146,7 +146,7 @@ void MAE()
                 case Niveau:
                     // pour changer niveau
                     printf("entrez le niveau voulue :\n");
-                    config=Lire_niveau(config, &Erreur);
+                    config=Lire_nb_bit_fort(config, &Erreur);
                     Ecrire_CONFIG(config, &Erreur);
                     break;
                 case Nombre_de_fenetre:

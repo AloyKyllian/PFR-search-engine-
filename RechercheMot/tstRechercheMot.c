@@ -1,4 +1,4 @@
-#include "./rechercheMot.h"
+#include "rechercheMot.h"
 
 int main(){
 	char *mot=(char*)malloc(26);

@@ -1,6 +1,6 @@
 #ifndef RECHERCHEMOT_H
 #define RECHERCHEMOT_H
-#include "../Global/Global.h"
+#include "../Gestion-Config/Global.h"
 
 typedef struct{
     int id;

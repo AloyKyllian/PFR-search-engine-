@@ -1,4 +1,4 @@
-#include "./rechercheMot.h"
+#include "rechercheMot.h"
 
 void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *erreur){
     FILE *fp;
