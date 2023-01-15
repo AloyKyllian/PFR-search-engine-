@@ -107,7 +107,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
                   printf("-%d | %s\n", element_temp.id, cheminfichier);
                   fflush(stdout);
                   element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, erreur_audio);
-                  printf("EMPILE : NOMBRE DE LIGNE : %d\n",element_temp.descripteur.ligne);
+                  printf("EMPILE : NOMBRE DE LIGNE : %d\n", element_temp.descripteur.ligne);
                   fflush(stdout);
                   if (*erreur_audio == 0)
                   {
@@ -147,7 +147,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                         //______________________________
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
-                        printf("DEPILE : NOMBRE DE LIGNE : %d\n",elementsupp.descripteur.ligne);
+                        printf("DEPILE : NOMBRE DE LIGNE : %d\n", elementsupp.descripteur.ligne);
                         fprintf(fichier, "-%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
@@ -483,7 +483,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                               fscanf(fichier_first, "%s", val);
                               printf("%s   FIN\n", val);
                               fflush(stdout);
-                              printf("AVANT AJOUT FICHIER: \ttype: %s val: %s\n",type,val);
+                              printf("AVANT AJOUT FICHIER: \ttype: %s val: %s\n", type, val);
                               fflush(stdout);
                               ajoutfichier(config, type, val, Erreur);
                               //  appeler fonction ajout d'un fichier
@@ -491,9 +491,9 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("< ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              printf("%s   FIN\n",val);
+                              printf("%s   FIN\n", val);
                               fflush(stdout);
-                              Supprimer_Descripteur(Erreur,val,type);
+                              Supprimer_Descripteur(Erreur, val, type);
                               // appeler fonction pour supprimer
                         }
                   }
@@ -655,326 +655,338 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
 void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
 {
-    FILE *fichier = NULL;
+      FILE *fichier = NULL;
 
-    if (strcmp("texte", type_fichier) == 0)
-    {
-        fichier = fopen("../liste_base/liste_base_texte", "r");
-    }
-    else if (strcmp("audio", type_fichier) == 0)
-    {
-        fichier = fopen("../liste_base/liste_base_audio", "r");
-    }
-    else if (strcmp("nb", type_fichier) == 0)
-    {
-        fichier = fopen("../liste_base/liste_base_image/NB", "r");
-    }
-    else if (strcmp("rgb", type_fichier) == 0)
-    {
-        fichier = fopen("../liste_base/liste_base_image/RGB", "r");
-    }
+      if (strcmp("texte", type_fichier) == 0)
+      {
+            fichier = fopen("../liste_base/liste_base_texte", "r");
+      }
+      else if (strcmp("audio", type_fichier) == 0)
+      {
+            fichier = fopen("../liste_base/liste_base_audio", "r");
+      }
+      else if (strcmp("nb", type_fichier) == 0)
+      {
+            fichier = fopen("../liste_base/liste_base_image/NB", "r");
+      }
+      else if (strcmp("rgb", type_fichier) == 0)
+      {
+            fichier = fopen("../liste_base/liste_base_image/RGB", "r");
+      }
 
-    if (fichier != NULL)
-    {
-        int tmp;
-        int id;
-        char path[1000];
+      if (fichier != NULL)
+      {
+            int tmp;
+            int id;
+            char path[1000];
 
-        FILE *nvfile = NULL;
-        nvfile = fopen("../liste_base/tmp.txt", "w");
-        if (nvfile != NULL)
-        {
-            while (fscanf(fichier, "%d %s", &tmp, &path) != EOF)
+            FILE *nvfile = NULL;
+            nvfile = fopen("../liste_base/tmp.txt", "w");
+            if (nvfile != NULL)
             {
-                if (strstr(path, Nom_Fichier) != NULL)
-                {
-                    id = tmp;
-                }
-                else
-                {
-                    fprintf(nvfile, "%d %s\n", tmp, path);
-                }
-            }
-            fclose(nvfile);
-            fclose(fichier);
-            nvfile = NULL;
-            fichier = NULL;
-
-            if (strcmp("texte", type_fichier) == 0)
-            {
-                remove("../liste_base/liste_base_texte");
-                rename("../liste_base/tmp.txt", "../liste_base/liste_base_texte");
-
-                fichier = fopen("../base_descripteur/base_descripteur_texte", "r");
-                nvfile = fopen("../base_descripteur/tmp.txt", "w");
-                if (fichier != NULL && nvfile != NULL)
-                {
-                    int tmp1;
-
-                    char mot_lue[20];
-                    char idc[10000];
-
-                    sprintf(idc, "%d", id);
-
-                    while (fscanf(fichier, "%s", &mot_lue) != EOF)
-                    {
-                        if (strcmp(idc, mot_lue) != 0)
+                  while (fscanf(fichier, "%d %s", &tmp, &path) != EOF)
+                  {
+                        if (strstr(path, Nom_Fichier) != NULL)
                         {
-                            fprintf(nvfile, "%s\n", mot_lue);
-                            int alt = 0;
-                            while (fscanf(fichier, "%s", &mot_lue) != EOF && atoi(mot_lue) >= 0)
-                            {
-                                if (alt == 0)
-                                {
-                                    alt++;
-                                    fprintf(nvfile, "%s\t", mot_lue);
-                                }
-                                else if (alt == 1)
-                                {
-                                    alt++;
-                                    fprintf(nvfile, "%s\t", mot_lue);
-                                }
-                                else
-                                {
-                                    alt = 0;
-                                    fprintf(nvfile, "%s\n", mot_lue);
-                                }
-                            }
-                            fseek(fichier, -strlen(mot_lue), SEEK_CUR);
+                              id = tmp;
                         }
                         else
                         {
-                            while (fscanf(fichier, "%s", &mot_lue) != EOF && atoi(mot_lue) >= 0)
-                                ;
-                            fseek(fichier, -strlen(mot_lue), SEEK_CUR);
+                              fprintf(nvfile, "%d %s", tmp, path);
                         }
-                    }
-                    fclose(fichier);
-                    fclose(nvfile);
-                    remove("../base_descripteur/base_descripteur_texte");
-                    rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_texte");
-                }
-                else
-                {
-                    *Erreur = 7;
-                }
-            }
-            else if (strcmp("audio", type_fichier) == 0)
-            {
-                remove("../liste_base/liste_base_audio");
-                rename("../liste_base/tmp.txt", "../liste_base/liste_base_audio");
+                  }
+                  fclose(nvfile);
+                  fclose(fichier);
+                  nvfile = NULL;
+                  fichier = NULL;
 
-                fichier = fopen("../base_descripteur/base_descripteur_audio", "r");
-                nvfile = fopen("../base_descripteur/tmp.txt", "w");
-                if (fichier != NULL && nvfile != NULL)
-                {
+                  if (strcmp("texte", type_fichier) == 0)
+                  {
+                        remove("../liste_base/liste_base_texte");
+                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_texte");
 
-                    int tmp1;
-
-                    while (fscanf(fichier, "%d", &tmp) != EOF)
-                    {
-                        if (id != tmp)
+                        fichier = fopen("../base_descripteur/base_descripteur_texte", "r");
+                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        if (fichier != NULL && nvfile != NULL)
                         {
-                            fprintf(nvfile, "%d ", tmp);
-                            fscanf(fichier, "%d", &tmp);
-                            fprintf(nvfile, "%d", tmp);
-                            int alt = 0;
-                            while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                            {
-                                if (alt == 0)
-                                {
-                                    alt++;
-                                    fprintf(nvfile, "\n%d ", tmp);
-                                }
-                                else if (alt < 32)
-                                {
-                                    alt++;
-                                    fprintf(nvfile, "%d ", tmp);
-                                    if (alt == 32)
+                              int tmp1;
+
+                              char mot_lue[20];
+                              char idc[10000];
+
+                              sprintf(idc, "%d", id);
+
+                              while (fscanf(fichier, "%s", &mot_lue) != EOF)
+                              {
+                                    if (strcmp(idc, mot_lue) != 0)
                                     {
-                                        alt = 0;
+                                          fprintf(nvfile, "%s\n", mot_lue);
+                                          int alt = 0;
+                                          while (fscanf(fichier, "%s", &mot_lue) != EOF && atoi(mot_lue) >= 0)
+                                          {
+                                                if (alt == 0)
+                                                {
+                                                      alt++;
+                                                      fprintf(nvfile, "%s\t", mot_lue);
+                                                }
+                                                else if (alt == 1)
+                                                {
+                                                      alt++;
+                                                      fprintf(nvfile, "%s\t", mot_lue);
+                                                }
+                                                else
+                                                {
+                                                      alt = 0;
+                                                      fprintf(nvfile, "%s\n", mot_lue);
+                                                }
+                                          }
+                                          fseek(fichier, -strlen(mot_lue), SEEK_CUR);
                                     }
-                                }
-                            }
-                            char number[10000];
-                            sprintf(number, "%d", tmp);
-                            fseek(fichier, -strlen(number), SEEK_CUR);
+                                    else
+                                    {
+                                          while (fscanf(fichier, "%s", &mot_lue) != EOF && atoi(mot_lue) >= 0)
+                                                ;
+                                          fseek(fichier, -strlen(mot_lue), SEEK_CUR);
+                                    }
+                              }
+                              fclose(fichier);
+                              fclose(nvfile);
+                              remove("../base_descripteur/base_descripteur_texte");
+                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_texte");
                         }
                         else
                         {
-                            while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                ;
-                            char number[10000];
-                            sprintf(number, "%d", tmp);
-                            fseek(fichier, -strlen(number), SEEK_CUR);
+                              *Erreur = 7;
                         }
-                    }
-                    fclose(fichier);
-                    fclose(nvfile);
-                    remove("../base_descripteur/base_descripteur_audio");
-                    rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_audio");
-                }
-                else
-                {
-                    *Erreur = 7;
-                }
+                  }
+                  else if (strcmp("audio", type_fichier) == 0)
+                  {
+                        remove("../liste_base/liste_base_audio");
+                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_audio");
+
+                        fichier = fopen("../base_descripteur/base_descripteur_audio", "r");
+                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        if (fichier != NULL && nvfile != NULL)
+                        {
+
+                              int tmp1;
+                              int uneseulefois = 0;
+
+                              while (fscanf(fichier, "%d", &tmp) != EOF)
+                              {
+                                    if (id != tmp)
+                                    {
+                                          if (uneseulefois == 0)
+                                          {
+                                                fprintf(nvfile, "%d ", tmp);
+                                                fscanf(fichier, "%d", &tmp);
+                                                fprintf(nvfile, "%d", tmp);
+                                                uneseulefois++;
+                                          }
+                                          else
+                                          {
+                                                fprintf(nvfile, "\n%d ", tmp);
+                                                fscanf(fichier, "%d", &tmp);
+                                                fprintf(nvfile, "%d", tmp);
+                                          }
+
+                                          int alt = 0;
+                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
+                                          {
+                                                if (alt == 0)
+                                                {
+                                                      alt++;
+                                                      fprintf(nvfile, "\n%d ", tmp);
+                                                }
+                                                else if (alt < 32)
+                                                {
+                                                      alt++;
+                                                      fprintf(nvfile, "%d ", tmp);
+                                                      if (alt == 32)
+                                                      {
+                                                            alt = 0;
+                                                      }
+                                                }
+                                          }
+                                          char number[10000];
+                                          sprintf(number, "%d", tmp);
+                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                    }
+                                    else
+                                    {
+                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
+                                                ;
+                                          char number[10000];
+                                          sprintf(number, "%d", tmp);
+                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                    }
+                              }
+                              fclose(fichier);
+                              fclose(nvfile);
+                              remove("../base_descripteur/base_descripteur_audio");
+                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_audio");
+                        }
+                        else
+                        {
+                              *Erreur = 7;
+                        }
+                  }
+                  else if (strcmp("nb", type_fichier) == 0)
+                  {
+                        remove("../liste_base/liste_base_image/NB");
+                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/NB");
+
+                        fichier = fopen("../base_descripteur/base_descripteur_image", "r");
+                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        if (fichier != NULL && nvfile != NULL)
+                        {
+
+                              int tmp1;
+
+                              while (fscanf(fichier, "%d", &tmp) != EOF)
+                              {
+                                    if (id != tmp)
+                                    {
+                                          fprintf(nvfile, "%d", tmp);
+                                          int alt = 0;
+                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
+                                          {
+                                                if (alt == 0)
+                                                {
+                                                      alt++;
+                                                      fprintf(nvfile, "\n%d ", tmp);
+                                                }
+                                                else
+                                                {
+                                                      alt--;
+                                                      fprintf(nvfile, "%d", tmp);
+                                                }
+                                          }
+                                          char number[10000];
+                                          sprintf(number, "%d", tmp);
+                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          fprintf(nvfile, "\n");
+                                    }
+                                    else
+                                    {
+                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
+                                                ;
+                                          char number[10000];
+                                          sprintf(number, "%d", tmp);
+                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                    }
+                              }
+                              fclose(fichier);
+                              fclose(nvfile);
+                              remove("../base_descripteur/base_descripteur_image");
+                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_image");
+                        }
+                        else
+                        {
+                              *Erreur = 7;
+                        }
+                  }
+                  else if (strcmp("rgb", type_fichier) == 0)
+                  {
+                        remove("../liste_base/liste_base_image/RGB");
+                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/RGB");
+
+                        fichier = fopen("../base_descripteur/base_descripteur_image", "r");
+                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        if (fichier != NULL && nvfile != NULL)
+                        {
+
+                              int tmp1;
+
+                              while (fscanf(fichier, "%d", &tmp) != EOF)
+                              {
+                                    if (id != tmp)
+                                    {
+                                          fprintf(nvfile, "%d", tmp);
+                                          int alt = 0;
+                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
+                                          {
+                                                if (alt == 0)
+                                                {
+                                                      alt++;
+                                                      fprintf(nvfile, "\n%d ", tmp);
+                                                }
+                                                else
+                                                {
+                                                      alt--;
+                                                      fprintf(nvfile, "%d", tmp);
+                                                }
+                                          }
+                                          char number[10000];
+                                          sprintf(number, "%d", tmp);
+                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          fprintf(nvfile, "\n");
+                                    }
+                                    else
+                                    {
+                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
+                                                ;
+                                          char number[10000];
+                                          sprintf(number, "%d", tmp);
+                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                    }
+                              }
+                              fclose(fichier);
+                              fclose(nvfile);
+                              remove("../base_descripteur/base_descripteur_image");
+                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_image");
+                        }
+                        else
+                        {
+                              *Erreur = 7;
+                        }
+                  }
             }
-            else if (strcmp("nb", type_fichier) == 0)
+            else
             {
-                remove("../liste_base/liste_base_image/NB");
-                rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/NB");
-
-                fichier = fopen("../base_descripteur/base_descripteur_image", "r");
-                nvfile = fopen("../base_descripteur/tmp.txt", "w");
-                if (fichier != NULL && nvfile != NULL)
-                {
-
-                    int tmp1;
-
-                    while (fscanf(fichier, "%d", &tmp) != EOF)
-                    {
-                        if (id != tmp)
-                        {
-                            fprintf(nvfile, "%d", tmp);
-                            int alt = 0;
-                            while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                            {
-                                if (alt == 0)
-                                {
-                                    alt++;
-                                    fprintf(nvfile, "\n%d ", tmp);
-                                }
-                                else
-                                {
-                                    alt--;
-                                    fprintf(nvfile, "%d", tmp);
-                                }
-                            }
-                            char number[10000];
-                            sprintf(number, "%d", tmp);
-                            fseek(fichier, -strlen(number), SEEK_CUR);
-                            fprintf(nvfile, "\n");
-                        }
-                        else
-                        {
-                            while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                ;
-                            char number[10000];
-                            sprintf(number, "%d", tmp);
-                            fseek(fichier, -strlen(number), SEEK_CUR);
-                        }
-                    }
-                    fclose(fichier);
-                    fclose(nvfile);
-                    remove("../base_descripteur/base_descripteur_image");
-                    rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_image");
-                }
-                else
-                {
-                    *Erreur = 7;
-                }
+                  *Erreur = 7;
             }
-            else if (strcmp("rgb", type_fichier) == 0)
-            {
-                remove("../liste_base/liste_base_image/RGB");
-                rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/RGB");
-
-                fichier = fopen("../base_descripteur/base_descripteur_image", "r");
-                nvfile = fopen("../base_descripteur/tmp.txt", "w");
-                if (fichier != NULL && nvfile != NULL)
-                {
-
-                    int tmp1;
-
-                    while (fscanf(fichier, "%d", &tmp) != EOF)
-                    {
-                        if (id != tmp)
-                        {
-                            fprintf(nvfile, "%d", tmp);
-                            int alt = 0;
-                            while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                            {
-                                if (alt == 0)
-                                {
-                                    alt++;
-                                    fprintf(nvfile, "\n%d ", tmp);
-                                }
-                                else
-                                {
-                                    alt--;
-                                    fprintf(nvfile, "%d", tmp);
-                                }
-                            }
-                            char number[10000];
-                            sprintf(number, "%d", tmp);
-                            fseek(fichier, -strlen(number), SEEK_CUR);
-                            fprintf(nvfile, "\n");
-                        }
-                        else
-                        {
-                            while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                ;
-                            char number[10000];
-                            sprintf(number, "%d", tmp);
-                            fseek(fichier, -strlen(number), SEEK_CUR);
-                        }
-                    }
-                    fclose(fichier);
-                    fclose(nvfile);
-                    remove("../base_descripteur/base_descripteur_image");
-                    rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_image");
-                }
-                else
-                {
-                    *Erreur = 7;
-                }
-            }
-        }
-        else
-        {
+      }
+      else
+      {
             *Erreur = 7;
-        }
-    }
-    else
-    {
-        *Erreur = 7;
-    }
+      }
 }
 
 int recupererDernierID(String type, int *Erreur)
 {
       FILE *fichier2;
       int id[2];
-      int id_finale =0;
+      int id_finale = 0;
       String commande;
 
       if (strcmp(type, "rgb") == 0 || strcmp(type, "nb") == 0)
       {
-            strcpy(commande,"wc -l ../liste_base/liste_base_image/RGB > traitement/id");
+            strcpy(commande, "wc -l ../liste_base/liste_base_image/RGB > traitement/id");
             system(commande);
-            strcpy(commande,"wc -l ../liste_base/liste_base_image/NB >> traitement/id");
-            system(commande);           
+            strcpy(commande, "wc -l ../liste_base/liste_base_image/NB >> traitement/id");
+            system(commande);
             fichier2 = fopen("traitement/id", "r");
             if (fichier2 != NULL)
-            {     
-                  for (int i=0 ; i<2;i++)
-                        {
-                            fscanf(fichier2, "%d %*s", &(id[i]));  
-                        } 
+            {
+                  for (int i = 0; i < 2; i++)
+                  {
+                        fscanf(fichier2, "%d %*s", &(id[i]));
+                  }
             }
             else
             {
                   *Erreur = 7;
             }
             fclose(fichier2);
-            id_finale= id[0]+id[1];
-            return id_finale +2;
+            id_finale = id[0] + id[1];
+            return id_finale + 2;
       }
 
       if (strcmp(type, "texte") == 0)
       {
             FILE *fichier3;
-            strcpy(commande,"wc -l ../liste_base/liste_base_texte > traitement/id");
+            strcpy(commande, "wc -l ../liste_base/liste_base_texte > traitement/id");
             system(commande);
             fichier3 = fopen("traitement/id", "r");
             if (fichier2 != NULL)
@@ -987,13 +999,13 @@ int recupererDernierID(String type, int *Erreur)
             }
             fclose(fichier3);
 
-            return id_finale +1 ;
+            return id_finale + 1;
       }
 
       if (strcmp(type, "audio") == 0)
       {
             FILE *fichier3;
-            strcpy(commande,"wc -l ../liste_base/liste_base_audio > traitement/id");
+            strcpy(commande, "wc -l ../liste_base/liste_base_audio > traitement/id");
             system(commande);
             fichier3 = fopen("traitement/id", "r");
             if (fichier3 != NULL)
@@ -1006,9 +1018,9 @@ int recupererDernierID(String type, int *Erreur)
                   *Erreur = 7;
             }
             fclose(fichier3);
-            return id_finale +1;
+            return id_finale + 1;
       }
-      return id_finale +1 ;
+      return id_finale + 1;
 }
 
 void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
