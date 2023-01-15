@@ -1095,8 +1095,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       int deb = 0;
 
       // TEXTE
-      /**
-       * fichier_texte = fopen("../liste_base/liste_base_texte", "r");
+      fichier_texte = fopen("../liste_base/liste_base_texte", "r");
        if (fichier_texte != NULL)
        {
              if (fscanf(fichier_texte, "%s", val) == EOF)
@@ -1114,7 +1113,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
        {
              *Erreur = 7;
        }
-       * */
+
      
       // IMAGE __NB
       FILE *fichier_nb = NULL;
