@@ -27,7 +27,7 @@ void MAE()
     //voir si un nv fichier
     //indexation
     //4 erreurs index gene, image,audio,texte
-    indexation(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
+    //indexation(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
     //verifier les erreurs de tt les phases
     switch (etat_courant)
     {
@@ -97,10 +97,7 @@ void MAE()
                 switch (choix[0])
                 {
                 case Indexation:
-                    // Indexation generale avec config.txt a voir avec yasmine
-                    // Indexation generale
-
-                    //si ya une erreur j'arrete tt
+                    indexation(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
                     break;
                 case Configuration :
                     etat_courant = Menu_Configuration;
@@ -121,7 +118,6 @@ void MAE()
 
             case Menu_Configuration:
                 printf("Configuration :\n");
-                //CONFIG config;
                 int Erreur;
                 config=Lire_CONFIG(&Erreur);
                 Afficher_CONFIG(config);
