@@ -513,6 +513,26 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       fclose(fichier_first);
 }
 
+void indexation_generale_ferme(CONFIG config, int Erreurimage, int Erreuraudio, int Erreurtexte, int Erreur)
+{
+      recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
+
+
+      PILE_image pileimage = NULL;
+      pileimage = base_descript_empiler_image(pileimage, &Erreur, &Erreurimage, config);
+      depiler_descripteur_image(pileimage, Erreurimage, &Erreur);
+
+
+      PILE_audio descripteur_audio = NULL;
+      descripteur_audio = base_descript_empiler_audio(descripteur_audio, &Erreur, &Erreuraudio, config);
+      depiler_descripteur_audio(descripteur_audio, &Erreur,Erreuraudio);
+
+
+      // PILE_texte piletexte = NULL;
+      // piletexte = base_descript_empiler_texte(piletexte, &Erreurtexte, config);
+      // depiler_descripteur_texte(piletexte, &Erreurtexte, config);
+}
+
 void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 {
 

@@ -163,7 +163,6 @@ DESCRIPTEUR_IMAGE Pack_Descripteur_image(int *Erreur, char Path[],int Nb_Bits_Fo
     // Variable
     IMAGE img;
     DESCRIPTEUR_IMAGE di;
-
     // Lis un image et verifie si tout est ok
     img = Lire_image(Erreur,Path);
     if(*Erreur == 0)

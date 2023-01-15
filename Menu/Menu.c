@@ -17,7 +17,7 @@ void MAE()
     LOGIN testlogin;
     lesLogins tablogin;
     int erreur;
-    int erreurConfig, erreurIndex, erreurTexte, erreurImage, erreurAudio;
+    int erreurConfig, erreurIndex=0, erreurTexte=0, erreurImage=0, erreurAudio=0;
     char motCle[25];
     tab_Res *tabResultatTexte=malloc(100*sizeof(tab_Res));
     int nombreElemetTab;
@@ -97,7 +97,7 @@ void MAE()
                 switch (choix[0])
                 {
                 case Indexation:
-                    indexation(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
+                    indexation_generale_ferme(config, erreurImage, erreurAudio, erreurTexte, erreurIndex);
                     break;
                 case Configuration :
                     etat_courant = Menu_Configuration;
@@ -276,6 +276,7 @@ void MAE()
                     printf("Entrer votre mot clé\n");
                     scanf("%s",motCle);
                     rechercheMot(motCle,cheminDescripteurTxt,tabResultatTexte,&nombreElemetTab,&erreur);
+                    free(tabResultatTexte);
                     //LireResultat(tabResultatTexte,nombreElemetTab);
                     break;
                 case Recherche_par_comparaison_Texte:
@@ -416,10 +417,10 @@ void MAE()
                         
                         //recherche comparaison
                         //je prend le nb de fenetre et d'intervalle
-                        /*fopen(chemin,"r");
-                        scanf("%d",&nbFenetre);
-                        scanf("%d",&intervalle);
-                        fclose(chemin);*/
+                        // fopen(chemin,"r");
+                        // scanf("%d",&nbFenetre);
+                        // scanf("%d",&intervalle);
+                        // fclose(chemin);
                         //appel indexation audio pour creer un descripteur pour le fichier donner par l'utilisateur
 
 
@@ -443,4 +444,5 @@ void MAE()
                 etat_courant=Menu_general;
             break;
             }
+            
 }}

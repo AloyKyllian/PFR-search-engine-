@@ -1,10 +1,11 @@
 //premier fichier main
 #include<stdint.h>
 #include <stdio.h>
-#include "../Menu/Menu.h"
+#include "Menu.h"
 
 int main(){
-    do{
+
+    do{ 
     MAE();
     }while(1);
 return 0;
