@@ -1,7 +1,5 @@
 menu : Global.o Config.o Login.o Connexion.o FichierExist.o Mot.o Menu.o tst_menu.o indexation_gene.o  element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o
 	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
-	valgrind --leak-check=full --show-leak-kinds=all -s ./menu.out
-
 
 Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
 	gcc -c -g ../Gestion-Config/Global.c
