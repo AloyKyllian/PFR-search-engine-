@@ -446,8 +446,18 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       strcat(commande, "> ../traitement/fic_temp");
       system(commande);
 
-      strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
-      system(commande);
+      if (strcmp(type, "texte") == 0)
+      {
+            strcpy(commande, "sed -i '1' ../tratement/fic_temp > ../traitement/texte");
+            system(commande);
+            strcpy(commande, "cut -d '/' -f 5 ../traitement/texte > ../traitement/fic");
+            system(commande);
+      }
+      else
+      {
+            strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
+            system(commande);
+      }
 
       strcpy(commande, "cut -d '/' -f 5 ");
       strcat(commande, cheminliste);
@@ -588,8 +598,8 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   }
                   fprintf(fichier2, "%d %d", descripteur_image.Bilan[i][0], descripteur_image.Bilan[i][1]);
                   total = total + descripteur_image.Bilan[i][1];
-                  
-                  //free les tableaus utilisés dans descripteur audio
+
+                  // free les tableaus utilisés dans descripteur audio
                   for (i = 0; i < descripteur_image.Nb_Ligne; i++)
                   {
                         free(descripteur_image.Bilan[i]);
@@ -980,10 +990,10 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
 
 int recupererDernierID(String type, int *Erreur)
 {
-      //FONCTIONNEMENT
+      // FONCTIONNEMENT
       /** exemple sur image
        * lire tous les ids present sur les fichiers liste_base/image/NB et liste_base/image/RGB et garder la plus grande valeur
-      */
+       */
       int id_finale = 0;
       int id_temp = 0;
       String commande;
@@ -1079,15 +1089,15 @@ int recupererDernierID(String type, int *Erreur)
 
 void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
-      // FONCTIONNEMENT : 
+      // FONCTIONNEMENT :
       /**
        * si le fichier liste_base/liste_base_type ( type = texte, audio, nb ou rgb) EST VIDE lancer indexation de tous les fichiers type
        * sinon
        * si il ya un fichier en plus
        *  l'indexe et le rajouter liste_base et ajouter son descripteur dans descripteur_base
-       * sinon 
+       * sinon
        * le supprimer dans liste_base et descripteur_base
-      */
+       */
       FILE *fichier_texte = NULL;
       String val;
 
@@ -1096,23 +1106,23 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
 
       // TEXTE
       fichier_texte = fopen("../liste_base/liste_base_texte", "r");
-       if (fichier_texte != NULL)
-       {
-             if (fscanf(fichier_texte, "%s", val) == EOF)
-             {
-                   indexation_texte(config,Erreur, Erreurtexte);
-                   fclose(fichier_texte);
-             }
-             else
-             {
-                   fclose(fichier_texte);
-                   indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-             }
-       }
-       else
-       {
-             *Erreur = 7;
-       }     
+      if (fichier_texte != NULL)
+      {
+            if (fscanf(fichier_texte, "%s", val) == EOF)
+            {
+                  indexation_texte(config, Erreur, Erreurtexte);
+                  fclose(fichier_texte);
+            }
+            else
+            {
+                  fclose(fichier_texte);
+                  indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+            }
+      }
+      else
+      {
+            *Erreur = 7;
+      }
       // IMAGE __NB
       FILE *fichier_nb = NULL;
       deb = 0;
@@ -1159,7 +1169,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             *Erreur = 7;
       }
 
-      // AUDIO 
+      // AUDIO
       FILE *fichier_son = NULL;
       deb = 0;
 
