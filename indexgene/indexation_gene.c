@@ -135,6 +135,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
 {
       ELEMENT_audio elementsupp;
       FILE *fichier = NULL;
+      bool first =true;
       fichier = fopen("../base_descripteur/base_descripteur_audio", "w");
       if (erreur_audio == 0)
       {
@@ -148,14 +149,21 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
                         // AFFICHAGE ELEMENT DANS FICHIER
                         //_______________________________
                         printf("DEPILE : NOMBRE DE LIGNE : %d\n", elementsupp.descripteur.ligne);
-                        fprintf(fichier, "-%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
+                        if( first ==true)
+                        {
+                              fprintf(fichier, "-%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
+                              first=false;
+                        }
+                        else
+                              fprintf(fichier, "\n-%d %d\n", elementsupp.id, elementsupp.descripteur.ligne);
                         for (unsigned i = 0; i < elementsupp.descripteur.ligne; ++i)
                         {
                               for (unsigned j = 0; j < elementsupp.descripteur.colonne; ++j)
                               {
                                     fprintf(fichier, " %d ", elementsupp.descripteur.tab[i][j]);
                               }
-                              fprintf(fichier, "\r\n");
+                              if(i < elementsupp.descripteur.ligne -1)
+                                    fprintf(fichier, "\r\n");
                         }
 
                         for (int i = 0; i < elementsupp.descripteur.ligne; i++) // creation des colonne du tableau
@@ -621,7 +629,8 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
       if (strcmp(type, "audio") == 0)
       {
-
+            
+            bool first = true;
             descri_audio descripteur;
             descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, temp, Erreur);
 
@@ -630,14 +639,16 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             fichieraudio = fopen("traitement/fic", "w");
             if (fichieraudio != NULL)
             {
-                  fprintf(fichieraudio, "-%d %d\n", id, descripteur.ligne);
+                   
+                  fprintf(fichieraudio, "\n-%d %d\n", id, descripteur.ligne);
                   for (unsigned i = 0; i < descripteur.ligne; ++i)
                   {
                         for (unsigned j = 0; j < descripteur.colonne; ++j)
                         {
                               fprintf(fichieraudio, " %d ", descripteur.tab[i][j]);
                         }
-                        fprintf(fichieraudio, "\r\n");
+                        if(i < descripteur.ligne -1)
+                               fprintf(fichieraudio, "\r\n");
                   }
             }
             fclose(fichieraudio);
@@ -685,22 +696,22 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
             if (nvfile != NULL)
             {
                   int seul = 0;
-                  while (fscanf(fichier, "%d %s", &tmp, &path) != EOF)
+                  while (fscanf(fichier, "-%d %s\n", &tmp, &path) != EOF)
                   {
                         if (strstr(path, Nom_Fichier) != NULL)
                         {
-                              id = tmp;
+                              id = -tmp;
                         }
                         else
                         {
                               if (seul == 0)
                               {
-                                    fprintf(nvfile, "%d %s", tmp, path);
+                                    fprintf(nvfile, "-%d %s", tmp, path);
                                     seul++;
                               }
                               else
                               {
-                                    fprintf(nvfile, "\n%d %s", tmp, path);
+                                    fprintf(nvfile, "\n-%d %s", tmp, path);
                               }
                         }
                   }
@@ -967,6 +978,7 @@ int recupererDernierID(String type, int *Erreur)
       FILE *fichier2;
       int id[2];
       int id_finale = 0;
+      int id_temp =0;
       String commande;
 
       if (strcmp(type, "rgb") == 0 || strcmp(type, "nb") == 0)
@@ -1014,20 +1026,25 @@ int recupererDernierID(String type, int *Erreur)
       if (strcmp(type, "audio") == 0)
       {
             FILE *fichier3;
-            strcpy(commande, "wc -l ../liste_base/liste_base_audio > traitement/id");
-            system(commande);
-            fichier3 = fopen("traitement/id", "r");
+            fichier3= fopen("../liste_base/liste_base_audio", "r");
             if (fichier3 != NULL)
             {
-                  fscanf(fichier3, "%d %*s", &id_finale);
-                  fflush(stdout);
+                  while(fscanf(fichier3, "-%d |%*s\n", &id_temp)!=EOF)
+                  {
+                        printf("id_temp : %d\n", id_temp);
+                        fflush(stdout);
+                        if(id_finale<id_temp)
+                        {
+                              id_finale=id_temp;
+                        }
+                     
+                  }
             }
             else
             {
                   *Erreur = 7;
             }
             fclose(fichier3);
-            return id_finale + 1;
       }
       return id_finale + 1;
 }
