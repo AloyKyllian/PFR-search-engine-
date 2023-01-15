@@ -30,6 +30,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
 
 void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur);
+void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[]);
 int recupererDernierID(String type, int *Erreur);
 
 #endif
