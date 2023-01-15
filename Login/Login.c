@@ -35,7 +35,7 @@ LOGIN saisir_login()
 void lire_fichier_login (lesLogins tablogin, int *erreur)
 {   
     FILE *fichier = NULL;
-    fichier = fopen("../Login.txt", "r");
+    fichier = fopen("../Login/Login.txt", "r");
     if (fichier != NULL)
     {
         //strcpy(*erreur,"Erreur : NULL");
