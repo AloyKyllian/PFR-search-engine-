@@ -1184,16 +1184,16 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       {
             *Erreur = 7;
       }
-      strcpy(commande, "rm traitement/diff");
-      system(commande);
-      strcpy(commande, "rm traitement/fic_temp");
-      system(commande);
-      strcpy(commande, "rm traitement/ListeDejaIndexeTemp");
-      system(commande);
-      strcpy(commande, "rm traitement/fic");
-      system(commande);
-      strcpy(commande, "rm traitement/fichieraindexe");
-      system(commande);
+      // strcpy(commande, "rm traitement/diff");
+      // system(commande);
+      // strcpy(commande, "rm traitement/fic_temp");
+      // system(commande);
+      // strcpy(commande, "rm traitement/ListeDejaIndexeTemp");
+      // system(commande);
+      // strcpy(commande, "rm traitement/fic");
+      // system(commande);
+      // strcpy(commande, "rm traitement/fichieraindexe");
+      // system(commande);
 }
 
 void indexation_audio(CONFIG config, int *Erreur, int *Erreuraudio)
