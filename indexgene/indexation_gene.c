@@ -684,6 +684,7 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
             nvfile = fopen("../liste_base/tmp.txt", "w");
             if (nvfile != NULL)
             {
+                  int seul = 0;
                   while (fscanf(fichier, "%d %s", &tmp, &path) != EOF)
                   {
                         if (strstr(path, Nom_Fichier) != NULL)
@@ -692,7 +693,15 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                         }
                         else
                         {
-                              fprintf(nvfile, "%d %s", tmp, path);
+                              if (seul == 0)
+                              {
+                                    fprintf(nvfile, "%d %s", tmp, path);
+                                    seul++;
+                              }
+                              else
+                              {
+                                    fprintf(nvfile, "\n%d %s", tmp, path);
+                              }
                         }
                   }
                   fclose(nvfile);
