@@ -2,6 +2,9 @@
 #define Menu_H_INCLUS   
 #include "../Connexion/Connexion.h"
 #include "../Gestion-Config/Config.h"
+#include "../Menu/FichierExist.h"
+#include "../RechercheMot/rechercheMot.h"
+#include "../indexgene/indexation_gene.h"
 
 
 void MAE();

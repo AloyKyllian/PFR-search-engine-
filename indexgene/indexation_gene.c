@@ -1112,9 +1112,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
        else
        {
              *Erreur = 7;
-       }
-
-     
+       }     
       // IMAGE __NB
       FILE *fichier_nb = NULL;
       deb = 0;
