@@ -796,12 +796,12 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                                                 if (alt == 0)
                                                 {
                                                       alt++;
-                                                      fprintf(nvfile, "\n%d ", tmp);
+                                                      fprintf(nvfile, "\n%d  ", tmp);
                                                 }
                                                 else if (alt < 32)
                                                 {
                                                       alt++;
-                                                      fprintf(nvfile, "%d ", tmp);
+                                                      fprintf(nvfile, "%d  ", tmp);
                                                       if (alt == 32)
                                                       {
                                                             alt = 0;
