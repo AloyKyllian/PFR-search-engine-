@@ -18,7 +18,7 @@ void MAE()
     LOGIN testlogin;
     lesLogins tablogin;
     int erreur;
-    int erreurConfig, erreurTexte,erreurImage,erreurAudio;
+    int erreurConfig, erreurIndex, erreurTexte, erreurImage, erreurAudio;
     char motCle[25];
     tab_Res *tabResultatTexte=malloc(100*sizeof(tab_Res));
     int nombreElemetTab;
@@ -28,7 +28,7 @@ void MAE()
     //voir si un nv fichier
     //indexation
     //4 erreurs index gene, image,audio,texte
-    
+    //indexation_generale_ferme(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
     //verifier les erreurs de tt les phases
     switch (etat_courant)
     {

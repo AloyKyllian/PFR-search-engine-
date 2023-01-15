@@ -7,6 +7,6 @@ typedef struct {
 }tabRes;
 
 void LireResultat(tabRes *tabResultat, int nbElement);
-
+void lire_chemin (PILE *pourchemin, String type, int * erreur);
 
 #endif
