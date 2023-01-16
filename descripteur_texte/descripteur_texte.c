@@ -79,7 +79,9 @@ char *nettoyage(char mot_lu[100])
     }
     
     mot_envoyer= strdup(mot_lu);
-    printf("%s\n",mot_envoyer);
+        
+    /*if(strlen(mot_envoyer)==0)
+        strcpy(mot_envoyer,"NO_DATA");*/
     return mot_envoyer;
     free( mot_envoyer );
 
@@ -105,7 +107,7 @@ bool filtrage(char* mot)
     
     bool verif=true;
 
-    for(int i=0;i<100;i++)
+    for(int i=0;i<cpt;i++)
     {
     if(strcmp(mot,tab_p[i])==0 || strlen(mot)<2)                                 // Si le mot en entrée est présent dans les mots bannis on ne le garde pas
         verif=false;
@@ -248,11 +250,13 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
 
-    // for(int x=0;x<nbr_occ;x++)
-    // {
-    //     printf("%s    |    %d\n",tab_renvoyer.tab_mot[x],tab_renvoyer.tab_app[x]);          //On affiche le tableau final     
-    //     fflush(stdout);
-    // }
+    for(int x=0;x<nbr_occ;x++)
+    {
+        if(strlen(tab_renvoyer.tab_mot[x])==0)
+    {
+        strcat(tab_renvoyer.tab_mot[x],"NO_DATA");
+    }
+    }
 
     return tab_renvoyer;
 }
