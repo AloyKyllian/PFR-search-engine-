@@ -1,12 +1,7 @@
 #include "descripteur_audio.h"
 
-<<<<<<< HEAD
-descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_fichier,int * erreur, int ligne){//demander comment recuperer le chemin et nom du fichier
-    double pas;//difference entre 2 intervalles
-=======
 descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_fichier,int * erreur){//demander comment recuperer le chemin et nom du fichier
     double pas = 2./intervalle;;//difference entre 2 intervalles
->>>>>>> descripteur_audio
     int nbr_val=0;//nombre de valeur dans un fichier texte
     int k;//(nbr_val_fenetre)
     int m;//nombre d'intervalle
@@ -46,49 +41,12 @@ descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_
     if(fichier==NULL){    
         *erreur=7;//regarder ouverture fichier
     }
-<<<<<<< HEAD
-    
-    k=(ligne/nb_val_fenetre);//calcul du nombre de fenetre
-    descri_audio descipteur_audio;
-    descipteur_audio.ligne=k;//donne le nombre de ligne du descripteur 
-    descipteur_audio.colonne=intervalle;//donne le nombre de colonne du descripteur 
-
-    descipteur_audio.tab = malloc(descipteur_audio.ligne * sizeof(*descipteur_audio.tab));
-    if (descipteur_audio.tab == NULL)
-    {
-        *erreur = 1;
-    }
-    for (int i = 0; i < descipteur_audio.ligne; i++)
-    {
-        descipteur_audio.tab[i] = malloc(descipteur_audio.colonne * sizeof(**descipteur_audio.tab));
-        if (descipteur_audio.tab[i] == NULL)
-        {
-            *erreur = 1;
-        }
-    }
-
-    for (int i = 0; i < descipteur_audio.ligne; ++i)
-    {
-        for (int j = 0; j < descipteur_audio.colonne; ++j)
-        {
-            descipteur_audio.tab[i][j]=0;
-        }
-    }
-
-    k=0;
-    pas=2./intervalle;
-
-    for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
-    {
-        if(cpt==nb_val_fenetre && k<descipteur_audio.ligne-1)//passer de fenetre en fenetre
-=======
 
     k=0;
     
     for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
     {
         if(cpt==nb_val_fenetre)//passer de fenetre en fenetre
->>>>>>> descripteur_audio
         {
             cpt=0;
             k++;

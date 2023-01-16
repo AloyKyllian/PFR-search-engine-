@@ -3,9 +3,9 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "../head/Global.h"
 #include <string.h>
 #include <ctype.h>
+#include "../Gestion-Config/Global.h"
 
 typedef struct 
 {

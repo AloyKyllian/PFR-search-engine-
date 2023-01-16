@@ -41,7 +41,8 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
     int id;
     descri_audio descri;
 
-    // getligne ici
+    int ligne;
+    ligne=getligne(chemin_descripteur_compare,erreur);
 
     descri = Descripteur_audio(fenetre, intervalle, chemin_descripteur_compare, &erreur);
 

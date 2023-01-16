@@ -12,10 +12,6 @@ typedef struct
     int **tab;
 } descri_audio;
 
-<<<<<<< HEAD
-descri_audio Descripteur_audio(int fenetre, int intervalle, char *chemin_fichier,int * erreur, int ligne);
-=======
-
 /**
  * @brief 
  * 
@@ -30,7 +26,7 @@ descri_audio Descripteur_audio(int fenetre, int intervalle, char *chemin_fichier
  * 
  * 
  */
-descri_audio Descripteur_audio(int fenetre, int intervalle, char *chemin_fichier,int * erreur);
+descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_fichier,int * erreur);
 
 /**
  * @brief 
@@ -42,6 +38,5 @@ descri_audio Descripteur_audio(int fenetre, int intervalle, char *chemin_fichier
  * @return int 
  */
 int getligne(char *path, int *erreur);
->>>>>>> descripteur_audio
 
 #endif
