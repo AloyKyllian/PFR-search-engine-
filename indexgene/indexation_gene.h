@@ -43,7 +43,7 @@ void indexation_image(CONFIG config, int *Erreur, int *Erreur_image);
 void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
 
 
-void indexation_generale_ferme(CONFIG config, int Erreurimage, int Erreuraudio, int Erreurtexte, int Erreur);
+void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur);
 
 //si les fichiers liste_base sont vides lancer indexation ferme
 //sinon si verifie si un fichier a ete ajoute pour lindexer 

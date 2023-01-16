@@ -1,5 +1,5 @@
-menu : Global.o Config.o Login.o Connexion.o FichierExist.o Mot.o Menu.o tst_menu.o ../indexgene/indexation_gene.o  ../indexgene/element.o  ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o  ../indexgene/Pile.o
-	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o Menu.o tst_menu.o ../indexgene/indexation_gene.o ../indexgene/element.o  ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o  ../indexgene/Pile.o -lm
+menu : Global.o Config.o ../indexgene/element.o ../indexgene/Pile.o ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o ../indexgene/indexation_gene.o Login.o Connexion.o FichierExist.o Mot.o Menu.o tst_menu.o
+	gcc -o Global.o Config.o ../indexgene/element.o ../indexgene/Pile.o ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o ../indexgene/indexation_gene.o Login.o Connexion.o FichierExist.o Mot.o Menu.o tst_menu.o -lm
 
 Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
 	gcc -c ../Gestion-Config/Global.c

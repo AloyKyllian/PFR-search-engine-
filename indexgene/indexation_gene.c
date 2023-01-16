@@ -516,21 +516,21 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       fclose(fichier_first);
 }
 
-void indexation_generale_ferme(CONFIG config, int Erreurimage, int Erreuraudio, int Erreurtexte, int Erreur)
+void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
 
       PILE_image pileimage = NULL;
-      pileimage = base_descript_empiler_image(pileimage, &Erreur, &Erreurimage, config);
-      depiler_descripteur_image(pileimage, Erreurimage, &Erreur);
+      pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
+      depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
 
       PILE_audio descripteur_audio = NULL;
-      descripteur_audio = base_descript_empiler_audio(descripteur_audio, &Erreur, &Erreuraudio, config);
-      depiler_descripteur_audio(descripteur_audio, &Erreur, Erreuraudio);
+      descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
+      depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
 
       PILE_texte piletexte = NULL;
-      piletexte = base_descript_empiler_texte(piletexte, &Erreurtexte, config);
-      depiler_descripteur_texte(piletexte, &Erreurtexte, config);
+      piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);
+      depiler_descripteur_texte(piletexte, Erreurtexte, config);
 }
 
 void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
@@ -1234,13 +1234,13 @@ void indexation_audio(CONFIG config, int *Erreur, int *Erreuraudio)
       // remplier base_descripteur_audio
       //___________________________________________________
       PILE_audio descripteur_audio = NULL;
-      printf("avant empile");
+      printf("\t INDEXATION TOUS FICHIERS AUDIO\navant empile");
       fflush(stdout);
       descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
-      printf("HELLOOOOO");
+      printf("\napres empiler");
       fflush(stdout);
       depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
-      printf("apresdepil");
+      printf("\napresdepil\nFIN AUDIO");
       fflush(stdout);
 }
 void indexation_texte(CONFIG config, int *Erreur, int *Erreurtexte)
@@ -1290,6 +1290,6 @@ void indexation_image(CONFIG config, int *Erreur, int *Erreurimage)
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
 
-      printf("FIN IMAGE");
+      printf("FIN IMAGE\n");
       fflush(stdout);
 }
