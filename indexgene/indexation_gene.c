@@ -433,7 +433,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       if (strcmp(type, "texte") == 0)
       {
             strcpy(cheminliste, "../liste_base/liste_base_texte");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/Textes");
+            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/Textes/*.xml");
       }
       if (strcmp(type, "audio") == 0)
       {
@@ -448,21 +448,24 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 
       if (strcmp(type, "texte") == 0)
       {
-            strcpy(commande, "sed -i '1' ../tratement/fic_temp > ../traitement/texte");
+            strcpy(commande, "cut -d '/' -f 4 ../traitement/fic_temp > ../traitement/fic");
             system(commande);
-            strcpy(commande, "cut -d '/' -f 5 ../traitement/texte > ../traitement/fic");
+
+            strcpy(commande, "cut -d '/' -f 4 ");
+            strcat(commande, cheminliste);
+            strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
             system(commande);
       }
       else
       {
             strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
             system(commande);
-      }
 
-      strcpy(commande, "cut -d '/' -f 5 ");
-      strcat(commande, cheminliste);
-      strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
-      system(commande);
+            strcpy(commande, "cut -d '/' -f 5 ");
+            strcat(commande, cheminliste);
+            strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
+            system(commande);
+      }
 
       strcpy(commande, "diff ../traitement/ListeDejaIndexeTemp ../traitement/fic  > ../traitement/diff");
       system(commande);
@@ -488,7 +491,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("> ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              printf("%s   FIN\n", val);
+                              printf("Ajout : %s   FIN\n", val);
                               fflush(stdout);
                               printf("AVANT AJOUT FICHIER: \ttype: %s val: %s\n", type, val);
                               fflush(stdout);
@@ -498,7 +501,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("< ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              printf("%s   FIN\n", val);
+                              printf("Suppr :%s   FIN\n", val);
                               fflush(stdout);
                               Supprimer_Descripteur(Erreur, val, type);
                               // appeler fonction pour supprimer
@@ -517,20 +520,17 @@ void indexation_generale_ferme(CONFIG config, int Erreurimage, int Erreuraudio, 
 {
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
 
-
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, &Erreur, &Erreurimage, config);
       depiler_descripteur_image(pileimage, Erreurimage, &Erreur);
 
-
       PILE_audio descripteur_audio = NULL;
       descripteur_audio = base_descript_empiler_audio(descripteur_audio, &Erreur, &Erreuraudio, config);
-      depiler_descripteur_audio(descripteur_audio, &Erreur,Erreuraudio);
+      depiler_descripteur_audio(descripteur_audio, &Erreur, Erreuraudio);
 
-
-      // PILE_texte piletexte = NULL;
-      // piletexte = base_descript_empiler_texte(piletexte, &Erreurtexte, config);
-      // depiler_descripteur_texte(piletexte, &Erreurtexte, config);
+      PILE_texte piletexte = NULL;
+      piletexte = base_descript_empiler_texte(piletexte, &Erreurtexte, config);
+      depiler_descripteur_texte(piletexte, &Erreurtexte, config);
 }
 
 void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
@@ -633,7 +633,6 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
       if (strcmp(type, "texte") == 0)
       {
-            bool first = true;
             DESCRIPTEUR_TEXTE descripteur_texte;
             descripteur_texte = descripteur_texte_finale(temp, config.Nb_Mots_Cle, descripteur_texte);
 
@@ -642,13 +641,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             fichier = fopen("../traitement/fic", "w");
             if (fichier != NULL)
             {
-                  if (first == true)
-                  {
-                        fprintf(fichier, "-%d\n", id);
-                        first = false;
-                  }
-                  else
-                        fprintf(fichier, "\n-%d\n", id);
+                        fprintf(fichier, "\n-%d", id);
 
                   for (int x = 0; x < config.Nb_Mots_Cle; x++)
                   {

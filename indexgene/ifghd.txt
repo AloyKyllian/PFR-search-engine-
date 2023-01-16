@@ -1,0 +1,7 @@
+total 30584
+-rw-rw-r-- 1 pandou pandou  8949480 janv. 15 21:20 corpus_fi.bin
+-rw-rw-r-- 1 pandou pandou 19017645 janv. 15 21:20 corpus_fi.txt
+-rw-rw-r-- 1 pandou pandou  2237488 janv. 15 21:20 corpus_fi.wav
+-rw-rw-r-- 1 pandou pandou   327552 janv. 15 21:20 jingle_fi.bin
+-rw-rw-r-- 1 pandou pandou   696048 janv. 15 21:20 jingle_fi.txt
+-rw-rw-r-- 1 pandou pandou    82014 janv. 15 21:20 jingle_fi.wav
