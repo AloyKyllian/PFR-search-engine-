@@ -79,6 +79,7 @@ char *nettoyage(char mot_lu[100])
     }
     
     mot_envoyer= strdup(mot_lu);
+    printf("%s\n",mot_envoyer);
     return mot_envoyer;
     free( mot_envoyer );
 
@@ -106,7 +107,7 @@ bool filtrage(char* mot)
 
     for(int i=0;i<100;i++)
     {
-    if(strcmp(mot,tab_p[i])==0)                                 // Si le mot en entrée est présent dans les mots bannis on ne le garde pas
+    if(strcmp(mot,tab_p[i])==0 || strlen(mot)<2)                                 // Si le mot en entrée est présent dans les mots bannis on ne le garde pas
         verif=false;
     }
 
