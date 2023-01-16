@@ -7,9 +7,8 @@
 #include "../descripteur_audio/descripteur_audio.h"
 #include "../descripteur_image/Descripteur_image.h"
 #include "../descripteur_texte/descripteur_texte.h"
+#include "../Gestion-Config/Global.h"
 
-#define MAX_CHAINE 100
-typedef char String[MAX_CHAINE];
 
 typedef struct 
 {
