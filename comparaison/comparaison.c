@@ -204,7 +204,7 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
     return tab;
 }
 
-tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], char PathNvImg[], int Nb_Bits_Fort, int *Nb_des)
+tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], char PathNvImg[], int Nb_Bits_Fort, int *Nb_des)  
 {
     // Variable
     DESCRIPTEUR_IMAGE descripteur_image;
@@ -304,3 +304,47 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
     }
     return Tab;
 }
+
+/*
+tab_similaire *comparaison_gene(int *erreur,char *chemin_fichier,char*chemin_descripteur,CONFIG config,type_compare type)
+{
+
+switch (type)
+{
+case texte:
+    
+    break;
+
+case image:
+
+    break
+
+case audio:
+
+    break
+
+default:
+    break;
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+*/

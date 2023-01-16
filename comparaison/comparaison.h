@@ -27,4 +27,6 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_descr
 tab_similaire* comparaison_texte(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur);
 
 
+typedef enum {texte,image,audio}type_compare;
+
 #endif
