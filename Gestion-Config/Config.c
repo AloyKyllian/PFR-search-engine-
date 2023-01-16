@@ -130,7 +130,7 @@ CONFIG Lire_nb_fenetre(CONFIG config,int *Erreur)
         if (tmp2 == (int)tmp2)
         {
             *Erreur = 0;
-            config.Nb_Bit_Fort = tmp;
+            config.Nb_Fenetre = tmp;
         }
         else
         {

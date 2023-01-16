@@ -3,6 +3,7 @@
 
 void MAE(CONFIG config,char choix[100])
 {
+        int erreurConfig=0, erreurIndex=0, erreurTexte=0, erreurImage=0, erreurAudio=0;
     static char etat_courant = Menu_general;
     char chemin[100];
     char cheminDescripteurTxt[200];
@@ -86,8 +87,7 @@ void MAE(CONFIG config,char choix[100])
                 switch (choix[0])
                 {
                 case Indexation:
-                    // Indexation generale avec config.txt a voir avec yasmine
-                    // Indexation generale
+                    indexation_generale_ferme(config, erreurImage, erreurAudio, erreurTexte, erreurIndex);// il faut mettre les erreur en pointeur pour les recuperer
                     
                     //si ya une erreur j'arrete tt
                     break;
