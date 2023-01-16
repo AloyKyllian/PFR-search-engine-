@@ -6,6 +6,8 @@ int main()
 
 //exemple de code pour utiliser la fonction comparaison
 
+/////////////////////////////////////////////AUDIO////////////////////////////////////////
+
 //recuperer les valeurs de config
 int config_fenetre=2048;
 int config_intervale=32;
@@ -14,54 +16,54 @@ int config_seuil=75;
 tab_similaire *tab;
 int erreur;
 
+
+
 //utilisation de ma fonction
-tab = comparaison_audio(config_seuil,config_fenetre,config_intervale,"../descripteur_a_compare.txt","../descripteur_texte_type.txt");
+tab = comparaison_audio(config_fenetre,config_intervale,"../descripteur_a_compare.txt","../descripteur_texte_type.txt",&erreur);
 
 //affichage
 
-for (unsigned int j = 0; tab[j].pourcentage>=config_seuil && tab[j].pourcentage<=100  ; j++)
+for (unsigned int j = 0; tab[j].pourcentage>=75 && tab[j].pourcentage<=100  ; j++)
 {
-    printf(" %f         %i\n ", tab[j].pourcentage,tab[j].id);
+    printf("tab audion Id: %d Pourcentage: %f\n", tab[j].id, tab[j].pourcentage);
 }
 
     free(tab);
 
-
-/*
+printf("\n\n");
+/////////////////////////////////////////////IMAGE////////////////////////////////////////
 
     tab_similaire *Tab;
-    int erreur;
     int Nb_ligne;
 
     Tab = Comparaison_descripteur_image(&erreur, "Recueil_descripteur.txt", "../descripteur_image/DATA_FIL_ROUGE_DEV/TEST_RGB/01.txt", 2, &Nb_ligne);
     
-    printf("Test de comparaison de 1 image a %d autres", Nb_ligne);
-    for (int i = 0; i < Nb_ligne; i++)
+
+    for (int i = 0; Tab[i].pourcentage>=75 && Tab[i].pourcentage<=100 ; i++)
     {
-        printf("\nId: %d Pourcentage: %f", Tab[i].id, Tab[i].pourcentage);
+        printf("tab image Id: %d Pourcentage: %f\n", Tab[i].id, Tab[i].pourcentage);
     }
 
 
-*/
-/*
+    free(Tab);
 
 
 
-
-
-
-
-
-
-
+printf("\n\n");
+/////////////////////////////////////////////TEXTE////////////////////////////////////////
 
 
     int* Erreur;
 
 
+   tab_similaire *Tab_texte;
 
+    Tab_texte = comparaison_texte(10,"../Textes/03-Mimer_un_signal_nerveux_pour.xml","michel.txt",Erreur);
 
+        for (int i = 0; Tab_texte[i].pourcentage>=20 && Tab_texte[i].pourcentage<=100  ; i++)
+    {
+        printf("tab texte Id: %d Pourcentage: %f\n", Tab_texte[i].id, Tab_texte[i].pourcentage);
+    }
 
-    comparaison_texte(10,"../Textes/03-Mimer_un_signal_nerveux_pour.xml","michel.txt",Erreur,0);
-    */
+    free(Tab_texte);
 }

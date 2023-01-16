@@ -27,25 +27,22 @@ float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int 
             max = pourcentage;
         }
     }
-    printf("max : %f \n", max);
 
     return max;
 }
 
-tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *chemin_descripteur_compare, char *chemin_descripteur_audio)
+tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_descripteur_compare, char *chemin_descripteur_audio,int *erreur)
 {
-
-    int erreur;
     int id;
     descri_audio descri;
 
     int ligne;
 
-    ligne = getligne(chemin_descripteur_compare, &erreur);
+    ligne = getligne(chemin_descripteur_compare, erreur);
 
-    descri = Descripteur_audio(fenetre, intervalle, chemin_descripteur_compare, &erreur);
+    descri = Descripteur_audio(fenetre, intervalle, chemin_descripteur_compare, erreur);
 
-    float verif_seuil;
+    float pourcentage;
     float max = 0;
     tab_similaire *tab = (tab_similaire *)malloc(100 * sizeof(tab_similaire));
     if (tab == NULL)
@@ -58,7 +55,7 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
     fichier = fopen("../descrripteur_texte_type.txt", "r");
     if (fichier == NULL)
     {
-        erreur = 7;
+        *erreur = 7;
     }
 
     int nbr_ligne;
@@ -87,9 +84,8 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
             }
         }
 
-        verif_seuil = comparaison(val_lu, descripteur_compare, descripteur_compare.ligne, intervalle, descri, fenetre);
-        if (verif_seuil > seuil)
-            tab[i].pourcentage = verif_seuil;
+        pourcentage = comparaison(val_lu, descripteur_compare, descripteur_compare.ligne, intervalle, descri, fenetre);
+        tab[i].pourcentage = pourcentage;
 
         for (int i = 0; i < descripteur_compare.ligne; i++) // creation des colonne du tableau
         {
@@ -105,47 +101,34 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
     }
     free(descri.tab);
 
-    tab_similaire *tab_finale = malloc(i * sizeof(tab_similaire));
-
-    for (int y = 0; y < i; y++)
-    {
-        tab_finale[y].id = 0;
-        tab_finale[y].pourcentage = 0;
-    }
-
     // Triage des fichiers par ordre de similariter
     for (int cpt = 0; cpt < i; cpt++)
     {
         for (int j = 0; j < i; j++)
         {
-            
+
             if (tab[cpt].pourcentage > tab[j].pourcentage)
             {
-                int tmpid = tab[cpt].id;//-1
+                int tmpid = tab[cpt].id;
                 float tmppour = tab[cpt].pourcentage;
-                tab[cpt].id = tab[j].id;//-2
+                tab[cpt].id = tab[j].id;
                 tab[cpt].pourcentage = tab[j].pourcentage;
-                tab[j].id = tmpid;//-1
+                tab[j].id = tmpid;
                 tab[j].pourcentage = tmppour;
             }
         }
     }
 
-
-
-    free(tab);
-
-    return tab_finale;
+    return tab;
 }
 
-tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, char *chemin_descripteur, int *Erreur, int seuil)
+tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, char *chemin_descripteur, int *Erreur)
 {
     char *mot_lu;
     int id_lu;
     int comp = 0;
     float cpt = 0;
     int j = 0;
-    float pourc = 0;
     DESCRIPTEUR_TEXTE tab1;
     DESCRIPTEUR_TEXTE tab2;
     String temp;
@@ -172,17 +155,16 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
             tab[j].id = id_lu; // Récupération de l'ID
             for (int i = 0; i < nbr_mot; i++)
             {
-                fscanf(fichierD, "%s %d", tab2.tab_mot[i], &tab2.tab_app[i]); // Remplir un tableau avec les mots et leur nombre d'apparition présent dans les descripteurs
+                fscanf(fichierD, "%s    |    %d", tab2.tab_mot[i], &tab2.tab_app[i]); // Remplir un tableau avec les mots et leur nombre d'apparition présent dans les descripteurs
             }
-            j++;
+
             for (int v = 0; v < nbr_mot; v++)
             {
                 for (int y = 0; y < nbr_mot; y++)
                 {
+
                     if (strcmp(tab1.tab_mot[v], tab2.tab_mot[y]) == 0) // Comparaison des deux tableaux pour trouver les mots en commun
                     {
-                        printf("%s ", tab2.tab_mot[y]);
-                        printf("%d\n", tab2.tab_app[y]);
                         comp = abs(tab1.tab_app[v] - tab2.tab_app[y]); // Valeur absolue entre le nombre d'apparition de chaque tableau pour le meme mot
                         if (0 < comp < 3)
                         {
@@ -191,21 +173,20 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
                     }
                 }
             }
-            pourc = cpt / nbr_mot * 100;
-            if (pourc > seuil)
-            {
                 tab[j].pourcentage = cpt / nbr_mot * 100; // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
                 // printf("Similarite : %f pourcent", tab[j].pourcentage);
-            }
+            j++;
         }
         fclose(fichierD);
+
+        cpt_sort = j;
         for (int c = 0; c < cpt_sort; c++)
         {
             for (int d = 0; d < cpt_sort; d++)
             {
-                if (tab[c].pourcentage < tab[d].pourcentage)
+                if (tab[c].pourcentage > tab[d].pourcentage)
                 {
-                    float tmpid = tab[c].id;
+                    int tmpid = tab[c].id;
                     float tmppour = tab[c].pourcentage; // Classement des pourcentages dans l'ordre drécroissants
                     tab[c].id = tab[d].id;
                     tab[c].pourcentage = tab[d].pourcentage;
@@ -299,9 +280,9 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
                 {
                     for (int j = 0; j < cpt_des; j++)
                     {
-                        if (Tab[i].pourcentage < Tab[j].pourcentage)
+                        if (Tab[i].pourcentage > Tab[j].pourcentage)
                         {
-                            float tmpid = Tab[i].id;
+                            int tmpid = Tab[i].id;
                             float tmppour = Tab[i].pourcentage;
                             Tab[i].id = Tab[j].id;
                             Tab[i].pourcentage = Tab[j].pourcentage;

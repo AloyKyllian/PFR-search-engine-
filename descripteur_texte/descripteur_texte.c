@@ -239,11 +239,13 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
 
-    for(int x=0;x<nbr_occ;x++)
+  /*  for(int x=0;x<nbr_occ;x++)
     {
-        printf("%s    |    %d\n",tab_renvoyer.tab_mot[x],tab_renvoyer.tab_app[x]);          //ET LA J'AFFICHE      ///////////////ICI YASMINE\\\\\\\\\\\\\\\\\\\\\\
+        printf("%s    |    %d\n",tab_renvoyer.tab_mot[x],tab_renvoyer.tab_app[x]);
     }
 
-}
+}*/
+
+return tab_renvoyer;
 }
 
