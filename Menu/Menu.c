@@ -290,6 +290,7 @@ void MAE(CONFIG config,char choix[100])
                             switch (choix[0])
                             {
                             case Utilisateur:
+                                test=0;
                                 etat_courant=Menu_Utilisateur;
                                 break;
                             case AutreFichier:
@@ -332,8 +333,6 @@ void MAE(CONFIG config,char choix[100])
                 switch (choix[0]){
                     case Recherche_comparaison_Image:
                         char *extension;
-                        printf("\nEntrez le chemin de votre fichier\n");
-                        scanf("%s", chemin);
                         // verification si le fichier existe
                         int test=-1;
                         while(test==-1){
@@ -346,21 +345,22 @@ void MAE(CONFIG config,char choix[100])
                                 scanf("%s",choix);
                                 switch (choix[0])
                                 {
-                                case Utilisateur:
-                                    etat_courant=Menu_Utilisateur;
-                                break;
-                                case AutreFichier:
-                                    test=-1;
-                                break;
-                                default:
-                                    etat_courant=Menu_Utilisateur;
-                                break;
+                                    case Utilisateur:
+                                        test=0;
+                                        etat_courant=Menu_Utilisateur;
+                                    break;
+                                    case AutreFichier:
+                                        test=-1;
+                                    break;
+                                    default:
+                                        etat_courant=Menu_Utilisateur;
+                                    break;
                                 }}}
                         //verification si le fichier passer est un fichier texte
                         test=VerifExtension(chemin,"txt");
                         if (test==-1){
-                            printf("\nCe fichier n'est pas de type texte\nVeuiller mettre un fichier texte\n");
-                            etat_courant=Menu_texte;}
+                            printf("\nCe fichier n'est pas de type image\nVeuiller mettre un fichier texte\n");
+                            etat_courant=Menu_image;}
                         else 
                             {tab_Res *tabResultatTexte=malloc(100*sizeof(tab_Res));
                             //recherche 
