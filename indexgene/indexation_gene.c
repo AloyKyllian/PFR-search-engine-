@@ -503,7 +503,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                               fscanf(fichier_first, "%s", val);
                               printf("Suppr :%s   FIN\n", val);
                               fflush(stdout);
-                              Supprimer_Descripteur(Erreur, val, type);
+                              //Supprimer_Descripteur(Erreur, val, type);
                               // appeler fonction pour supprimer
                         }
                   }
@@ -517,7 +517,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 }
 
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
-{
+{     
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
 
       PILE_image pileimage = NULL;

@@ -1,9 +1,9 @@
 #include "Menu.h"
 
 
-void MAE(CONFIG config,char choix[100])
+void MAE(CONFIG *config,char choix[100])
 {
-        int erreurConfig=0, erreurIndex=0, erreurTexte=0, erreurImage=0, erreurAudio=0;
+    int erreurConfig=0, erreurIndex=0, erreurTexte=0, erreurImage=0, erreurAudio=0;
     static char etat_courant = Menu_general;
     char chemin[100];
     char cheminDescripteurTxt[200];
@@ -87,7 +87,8 @@ void MAE(CONFIG config,char choix[100])
                 switch (choix[0])
                 {
                 case Indexation:
-                    indexation_generale_ferme(config, erreurImage, erreurAudio, erreurTexte, erreurIndex);// il faut mettre les erreur en pointeur pour les recuperer
+                    int Erreur;
+                    indexation_generale_ferme(*config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
                     
                     //si ya une erreur j'arrete tt
                     break;
@@ -111,8 +112,8 @@ void MAE(CONFIG config,char choix[100])
             case Menu_Configuration:
                 printf("\n__________________________Configuration__________________________\n");
                 int Erreur;
-                config=Lire_CONFIG(&Erreur);
-                Afficher_CONFIG(config);
+                *config=Lire_CONFIG(&Erreur);
+                Afficher_CONFIG(*config);
                 printf("\nSi vous voulez changer une valeur, veuillez faire votre choix  : \n");
                 printf("[1] Nombre de mots clé\n[2] Similarité\n[3] Nombre de bits \n[4] Nombre de fenetre\n");
                 printf("[5] Intervalle de temps\n[R] Retour\n[Q] Déconnexion\n");
@@ -120,32 +121,32 @@ void MAE(CONFIG config,char choix[100])
                 switch (choix[0])
                 {
                 case Nombre_de_mot_cle:
-                    printf("entrez le nombre de mot clé voulue :\n");
-                    Lire_mot_cle(config,&Erreur);
-                    Ecrire_CONFIG(config,&Erreur);
+                    printf("Entrez le nombre de mot clé voulue :\n");
+                    *config=Lire_mot_cle(*config,&Erreur);
+                    Ecrire_CONFIG(*config,&Erreur);
                     break;
                 case Similarité:
                     // pour changer similarité
-                    printf("entrez la valeur de similarité voulue :\n");
-                    config=Lire_similariter(config, &Erreur);
-                    Ecrire_CONFIG(config, &Erreur);
+                    printf("Entrez la valeur de similarité voulue :\n");
+                    *config=Lire_similariter(*config, &Erreur);
+                    Ecrire_CONFIG(*config, &Erreur);
                     break;
                 case Nombre_de_bits:
                     // pour changer niveau
-                    printf("entrez le nombre de bits voulue :\n");
-                    config=Lire_nb_bit_fort(config, &Erreur);
-                    Ecrire_CONFIG(config, &Erreur);
+                    printf("Entrez le nombre de bits voulue :\n");
+                    *config=Lire_nb_bit_fort(*config, &Erreur);
+                    Ecrire_CONFIG(*config, &Erreur);
                     break;
                 case Nombre_de_fenetre:
                     printf("Entrez le nombre de fenetre voulue :\n");
-                    config=Lire_nb_fenetre(config, &Erreur);
-                    Ecrire_CONFIG(config, &Erreur);
+                    *config=Lire_nb_fenetre(*config, &Erreur);
+                    Ecrire_CONFIG(*config, &Erreur);
                     break;
                 case Intervalle_de_temps:
                     // fct pour changer l'intervalle de temps
                     printf("Entrez l'intervalle de temps voulue' :\n");
-                    config=Lire_intervale(config, &Erreur);
-                    Ecrire_CONFIG( config, &Erreur);
+                    *config=Lire_intervale(*config, &Erreur);
+                    Ecrire_CONFIG( *config, &Erreur);
                     break;
                 case Retour:
                     etat_courant = Menu_Admin;
@@ -153,7 +154,7 @@ void MAE(CONFIG config,char choix[100])
                 case Deconnexion:
                     while (strcmp(&choix[0],"1")!=0)
                     {
-                        printf("\nVous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n [2] Non\n");
+                        printf("\nVous vous etes deconnecter, voulez vous retourner en mode utilisateur ?\n[1] Oui\n[2] Non\n");
                         scanf("%s",choix);
                         switch (choix[0])
                         {
