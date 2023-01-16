@@ -114,31 +114,22 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
         tab_finale[y].pourcentage = 0;
     }
 
-    /* trie a voir !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        int idx;
-
-        printf(" i = %d   \n",i);
-
-        for(int y=0;y<i;y++)
-        {
-            max=0;
-            for(int l=0;l<i;l++)
-            {
-                if(tab[l].pourcentage>max)
+                // Triage des fichiers par ordre de similariter
+                for (int i = 0; i < i; i++)
                 {
-                    max=tab[l].pourcentage;
-                    id=tab[l].id;
-                    idx=l;
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (tab_finale[i].pourcentage < tab_finale[j].pourcentage)
+                        {
+                            float tmpid = tab_finale[i].id;
+                            float tmppour = tab_finale[i].pourcentage;
+                            tab_finale[i].id = tab_finale[j].id;
+                            tab_finale[i].pourcentage = tab_finale[j].pourcentage;
+                            tab_finale[j].id = tmpid;
+                            tab_finale[j].pourcentage = tmppour;
+                        }
+                    }
                 }
-            }
-
-            tab[idx].pourcentage=0;
-            tab[idx].id=0;
-
-            tab_finale[y].pourcentage=max;
-            tab_finale[y].id=id;
-        }
-    */
 
     free(tab);
 
