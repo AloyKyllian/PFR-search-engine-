@@ -1,6 +1,5 @@
 #include "comparaison.h"
 
-
 float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int intervalle, descri_audio descri, float fenetre)
 {
 
@@ -42,13 +41,13 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
 
     int ligne;
 
-    // getligne ici
-    ligne=getligne(chemin_descripteur_compare,&erreur);
+    ligne = getligne(chemin_descripteur_compare, &erreur);
+
     descri = Descripteur_audio(fenetre, intervalle, chemin_descripteur_compare, &erreur);
 
     float verif_seuil;
     float max = 0;
-    tab_similaire *tab = malloc(100 * sizeof(tab_similaire));
+    tab_similaire *tab = (tab_similaire *)malloc(100 * sizeof(tab_similaire));
     if (tab == NULL)
     {
         return NULL;
@@ -114,112 +113,111 @@ tab_similaire *comparaison_audio(int seuil, int fenetre, int intervalle, char *c
         tab_finale[y].pourcentage = 0;
     }
 
-                // Triage des fichiers par ordre de similariter
-                for (int i = 0; i < i; i++)
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        if (tab_finale[i].pourcentage < tab_finale[j].pourcentage)
-                        {
-                            float tmpid = tab_finale[i].id;
-                            float tmppour = tab_finale[i].pourcentage;
-                            tab_finale[i].id = tab_finale[j].id;
-                            tab_finale[i].pourcentage = tab_finale[j].pourcentage;
-                            tab_finale[j].id = tmpid;
-                            tab_finale[j].pourcentage = tmppour;
-                        }
-                    }
-                }
+    // Triage des fichiers par ordre de similariter
+    for (int cpt = 0; cpt < i; cpt++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            
+            if (tab[cpt].pourcentage > tab[j].pourcentage)
+            {
+                int tmpid = tab[cpt].id;//-1
+                float tmppour = tab[cpt].pourcentage;
+                tab[cpt].id = tab[j].id;//-2
+                tab[cpt].pourcentage = tab[j].pourcentage;
+                tab[j].id = tmpid;//-1
+                tab[j].pourcentage = tmppour;
+            }
+        }
+    }
+
+
 
     free(tab);
 
     return tab_finale;
 }
 
-tab_similaire* comparaison_texte(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur,int seuil)
+tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, char *chemin_descripteur, int *Erreur, int seuil)
 {
-char * mot_lu;
-int id_lu;    
-int comp=0;
-float cpt=0;
-int j=0;
-float pourc=0;
-DESCRIPTEUR_TEXTE tab1;
-DESCRIPTEUR_TEXTE tab2;
-String temp;
-tab_similaire *tab=NULL;
-tab2.tab_mot = malloc(nbr_mot * sizeof(*tab2.tab_mot));//creation du tableau
-tab2.tab_app = malloc(nbr_mot * sizeof(*tab2.tab_app));//creation du tableau
-tab1=descripteur_texte_finale(chemin_fichier_a_compare,nbr_mot,tab1);
+    char *mot_lu;
+    int id_lu;
+    int comp = 0;
+    float cpt = 0;
+    int j = 0;
+    float pourc = 0;
+    DESCRIPTEUR_TEXTE tab1;
+    DESCRIPTEUR_TEXTE tab2;
+    String temp;
+    tab_similaire *tab = NULL;
+    tab2.tab_mot = malloc(nbr_mot * sizeof(*tab2.tab_mot)); // creation du tableau
+    tab2.tab_app = malloc(nbr_mot * sizeof(*tab2.tab_app)); // creation du tableau
+    tab1 = descripteur_texte_finale(chemin_fichier_a_compare, nbr_mot, tab1);
 
     tab = (tab_similaire *)malloc(nbr_mot * sizeof(tab_similaire));
-    if(tab2.tab_mot !=NULL && tab2.tab_app != NULL && tab != NULL)              //Vérification allocation malloc
+    if (tab2.tab_mot != NULL && tab2.tab_app != NULL && tab != NULL) // Vérification allocation malloc
     {
-        FILE* fichierD = NULL;
-       
-        
+        FILE *fichierD = NULL;
+
         int cpt_sort = 0;
-        fichierD = fopen(chemin_descripteur, "r");                           //Ouverture du texte à traiter
-        if(fichierD==NULL)
+        fichierD = fopen(chemin_descripteur, "r"); // Ouverture du texte à traiter
+        if (fichierD == NULL)
         {
-            *Erreur = 7;                                                //Erreur lors de l'ouverture d'un fichier
+            *Erreur = 7; // Erreur lors de l'ouverture d'un fichier
             exit(1);
         }
-        while(fscanf(fichierD,"%d",&id_lu)!=EOF)
+        while (fscanf(fichierD, "%d", &id_lu) != EOF)
         {
-            cpt=0;
-            tab[j].id=id_lu;                                        //Récupération de l'ID
-            for(int i=0;i<nbr_mot;i++)
+            cpt = 0;
+            tab[j].id = id_lu; // Récupération de l'ID
+            for (int i = 0; i < nbr_mot; i++)
             {
-                fscanf(fichierD,"%s %d",tab2.tab_mot[i],&tab2.tab_app[i]);      //Remplir un tableau avec les mots et leur nombre d'apparition présent dans les descripteurs
-        
+                fscanf(fichierD, "%s %d", tab2.tab_mot[i], &tab2.tab_app[i]); // Remplir un tableau avec les mots et leur nombre d'apparition présent dans les descripteurs
             }
             j++;
-            for(int v =0;v<nbr_mot; v++)
+            for (int v = 0; v < nbr_mot; v++)
             {
-                for(int y=0;y<nbr_mot;y++)
-                {   
-                    if(strcmp(tab1.tab_mot[v],tab2.tab_mot[y])==0)                      //Comparaison des deux tableaux pour trouver les mots en commun
-                    {
-                        printf("%s ",tab2.tab_mot[y]);
-                        printf("%d\n",tab2.tab_app[y]);
-                        comp = abs(tab1.tab_app[v]-tab2.tab_app[y]);                    //Valeur absolue entre le nombre d'apparition de chaque tableau pour le meme mot
-                        if(0<comp<3)
-                        {
-                            cpt++;                                                      //Si le mot apparaît à 3 près pour les deux textes on augmente un compteur
-                        }
-                    }
-                 }
-            } 
-            pourc=cpt/nbr_mot *100; 
-            if(pourc > seuil)
-            {
-            tab[j].pourcentage= cpt/nbr_mot *100;                                     // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
-            //printf("Similarite : %f pourcent", tab[j].pourcentage);
-            }   
-            
-        }
-        fclose(fichierD);
-        for (int c = 0; c < cpt_sort; c++)
+                for (int y = 0; y < nbr_mot; y++)
                 {
-                    for (int d = 0; d < cpt_sort; d++)
+                    if (strcmp(tab1.tab_mot[v], tab2.tab_mot[y]) == 0) // Comparaison des deux tableaux pour trouver les mots en commun
                     {
-                        if (tab[c].pourcentage < tab[d].pourcentage)
+                        printf("%s ", tab2.tab_mot[y]);
+                        printf("%d\n", tab2.tab_app[y]);
+                        comp = abs(tab1.tab_app[v] - tab2.tab_app[y]); // Valeur absolue entre le nombre d'apparition de chaque tableau pour le meme mot
+                        if (0 < comp < 3)
                         {
-                            float tmpid = tab[c].id;
-                            float tmppour = tab[c].pourcentage;                     // Classement des pourcentages dans l'ordre drécroissants
-                            tab[c].id = tab[d].id;
-                            tab[c].pourcentage = tab[d].pourcentage;
-                            tab[d].id = tmpid;
-                            tab[d].pourcentage = tmppour;
+                            cpt++; // Si le mot apparaît à 3 près pour les deux textes on augmente un compteur
                         }
                     }
                 }
-                
+            }
+            pourc = cpt / nbr_mot * 100;
+            if (pourc > seuil)
+            {
+                tab[j].pourcentage = cpt / nbr_mot * 100; // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
+                // printf("Similarite : %f pourcent", tab[j].pourcentage);
+            }
+        }
+        fclose(fichierD);
+        for (int c = 0; c < cpt_sort; c++)
+        {
+            for (int d = 0; d < cpt_sort; d++)
+            {
+                if (tab[c].pourcentage < tab[d].pourcentage)
+                {
+                    float tmpid = tab[c].id;
+                    float tmppour = tab[c].pourcentage; // Classement des pourcentages dans l'ordre drécroissants
+                    tab[c].id = tab[d].id;
+                    tab[c].pourcentage = tab[d].pourcentage;
+                    tab[d].id = tmpid;
+                    tab[d].pourcentage = tmppour;
+                }
+            }
+        }
     }
     else
     {
-        *Erreur=1;                      //Erreur Allocation
+        *Erreur = 1; // Erreur Allocation
         exit(1);
     }
     return tab;
@@ -230,7 +228,7 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
     // Variable
     DESCRIPTEUR_IMAGE descripteur_image;
     tab_similaire *Tab = NULL;
-    
+
     // Creation du descripteur de la nouvelle image
     descripteur_image = Pack_Descripteur_image(Erreur, PathNvImg, Nb_Bits_Fort);
     if (*Erreur == 0)
@@ -251,7 +249,6 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
                 int cpt_des = 0;
                 int max;
                 float TotalPourcentage;
-                
 
                 // Lecture du recueil de descripteur image
                 fscanf(fichier, "%d", &debut);
@@ -261,30 +258,29 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
                     float PourcentageDiff[descripteur_image.Nb_Ligne];
                     for (cptval = 0; cptval < descripteur_image.Nb_Ligne; cptval++)
                     {
-                        fscanf(fichier, "%d %d", &val,&val);
+                        fscanf(fichier, "%d %d", &val, &val);
 
                         max = (descripteur_image.Bilan[cptval][1] >= val) ? descripteur_image.Bilan[cptval][1] : val;
 
                         // Calcul du % de difference (entre 0 et 100)
-                        if(max == 0)
+                        if (max == 0)
                         {
                             PourcentageDiff[cptval] = 0;
                         }
                         else
                         {
-                            PourcentageDiff[cptval] = (float)(descripteur_image.Bilan[cptval][1] - val) / max*100;
-                            if(PourcentageDiff[cptval] < 0)
+                            PourcentageDiff[cptval] = (float)(descripteur_image.Bilan[cptval][1] - val) / max * 100;
+                            if (PourcentageDiff[cptval] < 0)
                             {
                                 PourcentageDiff[cptval] = -PourcentageDiff[cptval];
                             }
-                            
                         }
                         TotalPourcentage = TotalPourcentage + PourcentageDiff[cptval];
                     }
                     // Affectation des id et de la moyenne des Pourcentages
                     Tab[cpt_des].id = cpt_des;
                     TotalPourcentage = 100.0 - (TotalPourcentage / cptval);
-                    
+
                     Tab[cpt_des].pourcentage = TotalPourcentage;
                     cpt_des++;
 
