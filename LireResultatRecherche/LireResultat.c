@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "../LireResultatRecherche/LireResultat.h"
+#include "LireResultat.h"
 
 
 void LireResultat(tabRes *tabResultat, int nbElement, String type){

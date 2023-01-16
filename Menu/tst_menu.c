@@ -4,8 +4,15 @@
 #include "../Menu/Menu.h"
 
 int main(){
-    do{
-    MAE();
-    }while(1);
+    char choix[100];
+    CONFIG config;
+    int erreurConfig=0, erreurIndex=0, erreurTexte=0, erreurImage=0, erreurAudio=0;
+    config=Lire_CONFIG(&erreurConfig);
+    indexation_generale_ferme(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
+    if(erreurConfig==0){
+        do{
+        MAE(config,choix);
+        }while(1);
+    }
 return 0;
 }

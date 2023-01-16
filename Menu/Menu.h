@@ -4,7 +4,7 @@
 #include "../Config/Config.h"
 
 
-void MAE();
+void MAE(CONFIG config,char choix[100]);
 //Etat :
 //MENUS PRINCIPAUX
 #define Menu_general '1'
@@ -31,7 +31,7 @@ void MAE();
 //Menu configuration 
 #define Nombre_de_mot_cle '1'
 #define Similarité '2'
-#define Niveau '3'
+#define Nombre_de_bits '3'
 #define Nombre_de_fenetre '4'
 #define Intervalle_de_temps '5'
 
