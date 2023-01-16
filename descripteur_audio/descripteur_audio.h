@@ -32,7 +32,7 @@ descri_audio Descripteur_audio(int fenetre, int intervalle, char *chemin_fichier
 /**
  * @brief 
  * 
- * a quoi ellesert
+ * a quoi elle sert
  * 
  * @param path chemin du fichier
  * @param erreur 
