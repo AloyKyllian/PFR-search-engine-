@@ -12,7 +12,7 @@ descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_
     ligne=getligne(chemin_fichier,erreur);
     k=(ligne/nb_val_fenetre);//calcul du nombre de fenetre
     descri_audio descipteur_audio;
-    descipteur_audio.ligne=k+1;//donne le nombre de ligne du descripteur 
+    descipteur_audio.ligne=k;//donne le nombre de ligne du descripteur 
     descipteur_audio.colonne=intervalle;//donne le nombre de colonne du descripteur 
 
     descipteur_audio.tab = malloc(descipteur_audio.ligne * sizeof(*descipteur_audio.tab));
@@ -44,22 +44,25 @@ descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_
 
     k=0;
     
-    for(int cpt=0;fscanf(fichier,"%lf",&val)!=EOF;cpt++)
+    for(int cpt=0;k<descipteur_audio.ligne;cpt++)
     {
-        if(cpt==nb_val_fenetre)//passer de fenetre en fenetre
+        fscanf(fichier,"%lf",&val);
+
+            for(m=0;m<intervalle;m++)//change d'intervalle
+            {
+                if((val>=(pas*m-1)) && (val<(pas*(m+1)-1)))
+                {
+                    if(val<1&&val>-1&&m<intervalle)
+                        descipteur_audio.tab[k][m]++;
+                }
+            }
+
+        if(cpt>=nb_val_fenetre)//passer de fenetre en fenetre
         {
             cpt=0;
             k++;
         }
 
-        for(m=0;m<intervalle;m++)//change d'intervalle
-        {
-            if((val>=(pas*m-1)) && (val<(pas*(m+1)-1)))
-            {
-                if(val<1&&val>-1&&m<intervalle)
-                    descipteur_audio.tab[k][m]++;
-            }
-        }
     }
     fclose(fichier);//fermeture du fichier
 
