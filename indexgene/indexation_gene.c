@@ -1102,15 +1102,15 @@ int recupererDernierID(String type, int *Erreur)
 
 void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
-      // FONCTIONNEMENT :
+      // FONCTIONNEMENT : 
       /**
        * si le fichier liste_base/liste_base_type ( type = texte, audio, nb ou rgb) EST VIDE lancer indexation de tous les fichiers type
        * sinon
        * si il ya un fichier en plus
        *  l'indexe et le rajouter liste_base et ajouter son descripteur dans descripteur_base
-       * sinon
+       * sinon 
        * le supprimer dans liste_base et descripteur_base
-       */
+      */
       FILE *fichier_texte = NULL;
       String val;
 
@@ -1119,23 +1119,24 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
 
       // TEXTE
       fichier_texte = fopen("../liste_base/liste_base_texte", "r");
-      if (fichier_texte != NULL)
-      {
-            if (fscanf(fichier_texte, "%s", val) != EOF)
-            {
-                  fclose(fichier_texte);
-                  indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-            }
-            else
-            {
-                  indexation_texte(config, Erreur, Erreurtexte);
-                  fclose(fichier_texte);
-            }
-      }
-      else
-      {
-            *Erreur = 7;
-      }
+       if (fichier_texte != NULL)
+       {
+             if (fscanf(fichier_texte, "%s", val) == EOF)
+             {
+                   indexation_texte(config,Erreur, Erreurtexte);
+                   fclose(fichier_texte);
+             }
+             else
+             {
+                   fclose(fichier_texte);
+                   indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+             }
+       }
+       else
+       {
+             *Erreur = 7;
+       }    
+        
       // IMAGE __NB
       FILE *fichier_nb = NULL;
       deb = 0;
@@ -1144,15 +1145,15 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       fichier_nb = fopen("../liste_base/liste_base_image/NB", "r");
       if (fichier_nb != NULL)
       {
-            if (fscanf(fichier_nb, "%s", val) != EOF)
-            {
-                   fclose(fichier_nb);
-                  indexation_ouverte(config, "nb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-            }
-            else
+            if (fscanf(fichier_nb, "%s", val) == EOF)
             {
                   indexation_image(config, Erreur, Erreurimage);
                   fclose(fichier_nb);
+            }
+            else
+            {
+                  fclose(fichier_nb);
+                  indexation_ouverte(config, "nb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
             }
       }
       else
@@ -1166,15 +1167,15 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       fichier_rgb = fopen("../liste_base/liste_base_image/RGB", "r");
       if (fichier_rgb != NULL)
       {
-            if (fscanf(fichier_rgb, "%s", val) != EOF)
-            {
-                  fclose(fichier_rgb);
-                  indexation_ouverte(config, "rgb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-            }
-            else
+            if (fscanf(fichier_rgb, "%s", val) == EOF)
             {
                   indexation_image(config, Erreur, Erreurimage);
                   fclose(fichier_rgb);
+            }
+            else
+            {
+                  fclose(fichier_rgb);
+                  indexation_ouverte(config, "rgb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
             }
       }
       else
@@ -1182,23 +1183,22 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             *Erreur = 7;
       }
 
-      // AUDIO
+      // AUDIO 
       FILE *fichier_son = NULL;
       deb = 0;
 
       fichier_son = fopen("../liste_base/liste_base_audio", "r");
       if (fichier_son != NULL)
       {
-            if (fscanf(fichier_son, "%s", val) != EOF)
+            if (fscanf(fichier_son, "%s", val) == EOF)
             {
-            fclose(fichier_son);
-                  indexation_ouverte(config, "audio", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+                  indexation_audio(config, Erreur, Erreuraudio);
+                  fclose(fichier_son);
             }
             else
             {
-                  
-                  indexation_audio(config, Erreur, Erreuraudio);
                   fclose(fichier_son);
+                  indexation_ouverte(config, "audio", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
             }
       }
       else
