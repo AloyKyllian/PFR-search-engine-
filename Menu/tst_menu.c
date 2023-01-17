@@ -12,7 +12,7 @@ int main(){
     //affichage erreur
     if(erreurConfig==0){
         do{
-            MAE(&config,choix);
+            MAE(&config,choix,&erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
         }while(1);
     }
 }
