@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "Global.h"
 
 //Tout les parametres necessaires aux configurations .
 typedef struct
