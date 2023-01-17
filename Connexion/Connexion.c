@@ -1,6 +1,6 @@
 #include "Connexion.h"
 
-/*bool seconnecter (lesLogins tablogin, LOGIN newlogin, int *erreur)
+bool seconnecter (lesLogins tablogin, LOGIN newlogin, int *erreur)
 {   int i ;
     newlogin=saisir_login();
     lire_fichier_login(tablogin,erreur);
@@ -18,8 +18,8 @@
       //erreur
     }
 
-}*/
-bool seconnecter(lesLogins tablogin, LOGIN newlogin, int *erreur)
+}
+/*bool seconnecter(lesLogins tablogin, LOGIN newlogin, int *erreur)
 {
   int i;
   newlogin = saisir_login();
@@ -37,4 +37,4 @@ bool seconnecter(lesLogins tablogin, LOGIN newlogin, int *erreur)
   }
   return false;
 
-}
+}*/

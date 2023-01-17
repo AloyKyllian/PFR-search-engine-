@@ -1117,25 +1117,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       String path;
       int deb = 0;
 
-      // TEXTE
-      fichier_texte = fopen("../liste_base/liste_base_texte", "r");
-       if (fichier_texte != NULL)
-       {
-             if (fscanf(fichier_texte, "%s", val) == EOF)
-             {
-                   indexation_texte(config,Erreur, Erreurtexte);
-                   fclose(fichier_texte);
-             }
-             else
-             {
-                   fclose(fichier_texte);
-                   indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-             }
-       }
-       else
-       {
-             *Erreur = 7;
-       }    
+      
         
       // IMAGE __NB
       FILE *fichier_nb = NULL;
@@ -1182,7 +1164,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       {
             *Erreur = 7;
       }
-
+      
       // AUDIO 
       FILE *fichier_son = NULL;
       deb = 0;
@@ -1205,6 +1187,27 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       {
             *Erreur = 7;
       }
+
+      // TEXTE
+      fichier_texte = fopen("../liste_base/liste_base_texte", "r");
+       if (fichier_texte != NULL)
+       {
+             if (fscanf(fichier_texte, "%s", val) == EOF)
+             {
+                   indexation_texte(config,Erreur, Erreurtexte);
+                   fclose(fichier_texte);
+             }
+             else
+             {
+                   fclose(fichier_texte);
+                   indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+             }
+       }
+       else
+       {
+             *Erreur = 7;
+       }    
+
       // strcpy(commande, "rm ../traitement/diff");
       // system(commande);
       // strcpy(commande, "rm ../traitement/fic_temp");
