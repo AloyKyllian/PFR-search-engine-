@@ -1,5 +1,5 @@
-menu : Global.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o Mot.o Menu.o tst_menu.o
-	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
+menu : Global.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o LireResultat.o Menu.o tst_menu.o
+	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
 
 Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
 	gcc -c -g ../Gestion-Config/Global.c
@@ -16,8 +16,11 @@ Connexion.o : ../Connexion/Connexion.c ../Connexion/Connexion.h
 FichierExist.o : ../Menu/FichierExist.c ../Menu/FichierExist.h 
 	gcc -c -g ../Menu/FichierExist.c
 
-Mot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h
+rechercheMot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h
 	gcc -c -g -Wall ../RechercheMot/rechercheMot.c
+
+LireResultat.o : ../LireResultatRecherche/LireResultat.c ../LireResultatRecherche/LireResultat.h
+	gcc -c ../LireResultatRecherche/LireResultat.c
 
 Menu.o : ../Menu/Menu.c ../Menu/Menu.h 
 	gcc -c -g -Wall ../Menu/Menu.c
