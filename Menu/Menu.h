@@ -6,7 +6,7 @@
 #include "../RechercheMot/rechercheMot.h"
 #include "../indexgene/indexation_gene.h"
 
-void MAE(CONFIG *config,char choix[100]);
+void MAE(CONFIG *config,char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex);
 //Etat :
 //MENUS PRINCIPAUX
 #define Menu_general '1'

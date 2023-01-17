@@ -1,9 +1,8 @@
 #include "Menu.h"
 
 
-void MAE(CONFIG *config,char choix[100])
+void MAE(CONFIG *config,char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex)
 {
-    int erreurConfig=0, erreurIndex=0, erreurTexte=0, erreurImage=0, erreurAudio=0;
     static char etat_courant = Menu_general;
     char chemin[100];
     char cheminDescripteurTxt[200];
