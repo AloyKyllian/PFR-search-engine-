@@ -26,7 +26,7 @@ void MAE(CONFIG *config,char choix[100])
                     
                     case Administrateur:
                         // Connexion
-                        int erreur;
+                        int erreur=0;
                         int nbTentative=1;
                         bool result=false;
                         LOGIN testlogin;
@@ -36,7 +36,7 @@ void MAE(CONFIG *config,char choix[100])
                         {   
                             result = seconnecter(tablogin, testlogin, &erreur);
                             printf("\nConnexion ");
-                            (result) ? printf("Réussi\n\n") : printf("Échoué\n\n");
+                            (result) ? printf("Réussie\n\n") : printf("Échoué\n\n");
                             if (result){
                                 printf("\nDirection menu admin\n");
                                 etat_courant = Menu_Admin;}
@@ -87,7 +87,7 @@ void MAE(CONFIG *config,char choix[100])
                 switch (choix[0])
                 {
                 case Indexation:
-                    int Erreur;
+                    int Erreur=0;
                     indexation_generale_ferme(*config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
                     
                     //si ya une erreur j'arrete tt
@@ -111,7 +111,7 @@ void MAE(CONFIG *config,char choix[100])
 
             case Menu_Configuration:
                 printf("\n__________________________Configuration__________________________\n");
-                int Erreur;
+                int Erreur=0;
                 *config=Lire_CONFIG(&Erreur);
                 Afficher_CONFIG(*config);
                 printf("\nSi vous voulez changer une valeur, veuillez faire votre choix  : \n");
