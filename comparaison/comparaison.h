@@ -21,10 +21,10 @@ tab_similaire* Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
 float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int intervalle, descri_audio descri, float fenetre);
 
 
-tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_descripteur_compare, char *chemin_descripteur_audio,int *erreur);
+tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_descripteur_compare, char *chemin_descripteur_audio,int *erreur,int *Nb_ligne);
 
 
-tab_similaire* comparaison_texte(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur);
+tab_similaire* comparaison_texte(int nbr_mot,char* chemin_fichier_a_compare,char* chemin_descripteur,int * Erreur, int* Nb_ligne);
 
 
 typedef enum {texte,image,audio}type_compare;

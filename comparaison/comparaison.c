@@ -26,13 +26,13 @@ float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int 
         {
             max = pourcentage;
         }
-        //printf("max : %f\n",max);
+        // printf("max : %f\n",max);
     }
 
     return max;
 }
 
-tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichier, char *chemin_descripteur_audio,int *erreur)
+tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichier, char *chemin_descripteur_audio, int *erreur,int *Nb_ligne)
 {
     int id;
     descri_audio descri;
@@ -45,7 +45,7 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
 
     float pourcentage;
     float max = 0;
-    tab_similaire *tab = (tab_similaire *)malloc(20 * sizeof(tab_similaire));
+    tab_similaire *tab = (tab_similaire *)malloc(sizeof(tab_similaire));
     if (tab == NULL)
     {
         return NULL;
@@ -83,7 +83,7 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
                 fscanf(fichier, "%d", &descripteur_compare.tab[lig][col]);
             }
         }
-        //printf("\n\nnouveau fichier \n\n");
+        // printf("\n\nnouveau fichier \n\n");
         pourcentage = comparaison(val_lu, descripteur_compare, descripteur_compare.ligne, intervalle, descri, fenetre);
         tab[i].pourcentage = pourcentage;
 
@@ -92,7 +92,9 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
             free(descripteur_compare.tab[i]);
         }
         free(descripteur_compare.tab);
+        
         i++;
+        tab = (tab_similaire *)realloc(tab, (i + 1) * sizeof(tab_similaire));
     }
     fclose(fichier);
 
@@ -119,11 +121,12 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
             }
         }
     }
+    *Nb_ligne=i;
 
     return tab;
 }
 
-tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, char *chemin_descripteur, int *Erreur)
+tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, char *chemin_descripteur, int *Erreur,int* Nb_ligne)
 {
     char *mot_lu;
     int id_lu;
@@ -138,9 +141,9 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
     tab2.tab_app = malloc(nbr_mot * sizeof(*tab2.tab_app)); // creation du tableau
     tab1 = descripteur_texte_finale(chemin_fichier_a_compare, nbr_mot, tab1);
 
-    for(int i=0;i<nbr_mot;i++)
+    for (int i = 0; i < nbr_mot; i++)
     {
-        printf("tab1 %s  %d \n",tab1.tab_mot[i],tab1.tab_app[i]);
+        printf("tab1 %s  %d \n", tab1.tab_mot[i], tab1.tab_app[i]);
         fflush(stdout);
     }
 
@@ -158,9 +161,9 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
         }
         while (fscanf(fichierD, "%d", &id_lu) != EOF)
         {
-            printf("%d   ",id_lu);
+            printf("%d   ", id_lu);
             fflush(stdout);
-                      
+
             cpt = 0;
             tab[j].id = id_lu; // Récupération de l'ID
             for (int i = 0; i < nbr_mot; i++)
@@ -183,8 +186,8 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
                     }
                 }
             }
-                tab[j].pourcentage = cpt / nbr_mot * 100; // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
-                // printf("Similarite : %f pourcent", tab[j].pourcentage);
+            tab[j].pourcentage = cpt / nbr_mot * 100; // Calcul pourcentage nombre de mot correspondant / nombre de mot total *100
+            // printf("Similarite : %f pourcent", tab[j].pourcentage);
             j++;
         }
         fclose(fichierD);
@@ -211,27 +214,29 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
         *Erreur = 1; // Erreur Allocation
         exit(1);
     }
+    *Nb_ligne=j;
     return tab;
 }
 
-tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], char PathNvImg[], int Nb_Bits_Fort, int *Nb_des)  
+tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], char PathNvImg[], int Nb_Bits_Fort, int *Nb_des)
 {
     // Variable
     DESCRIPTEUR_IMAGE descripteur_image;
     tab_similaire *Tab = NULL;
+    int *des = NULL;
 
     // Creation du descripteur de la nouvelle image
     descripteur_image = Pack_Descripteur_image(Erreur, PathNvImg, Nb_Bits_Fort);
 
     if (*Erreur == 0)
     {
-
+        des = (int *)malloc(sizeof(int));
         // Allocation memoire du Tableau de similariter
         Tab = (tab_similaire *)malloc(sizeof(tab_similaire));
-        if (Tab != NULL)
+        if (Tab != NULL && des != NULL)
         {
             FILE *fichier = NULL;
-            int val;
+            int val = 10;
             int debut;
 
             fichier = fopen(PathRecueil, "r");
@@ -242,52 +247,111 @@ tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], ch
                 int cpt_des = 0;
                 int max;
                 float TotalPourcentage;
+                int cpt_val = 0;
 
                 // Lecture du recueil de descripteur image
                 fscanf(fichier, "%d", &debut);
-                while (debut <= 0)
+                Tab[0].id = debut;
+                while (fscanf(fichier, "%d", &debut) != EOF)
                 {
-                    TotalPourcentage = 0;
-                    float PourcentageDiff[descripteur_image.Nb_Ligne];
-                    for (cptval = 0; cptval < descripteur_image.Nb_Ligne; cptval++)
+                    if (debut < 0) // traitement et enregistrement de id
                     {
-                        fscanf(fichier, "%d %d", &val, &val);
+                        cpt_des++;
+                        // Allocation memoire du Tableau de similariter
+                        Tab = (tab_similaire *)realloc(Tab, (cpt_des + 1) * sizeof(tab_similaire));
+                        Tab[cpt_des].id = debut;
 
-                        max = (descripteur_image.Bilan[cptval][1] >= val) ? descripteur_image.Bilan[cptval][1] : val;
+                        TotalPourcentage = 0;
+                        float PourcentageDiff[descripteur_image.Nb_Ligne];
+                        for (int i = 0; i < descripteur_image.Nb_Ligne; i++)
+                        {
+                            PourcentageDiff[i] = 0;
+                        }
+
+                        if (cpt_val == descripteur_image.Nb_Ligne) // comparer que si c'est du meme type de couleur (exemple RGB avec RGB et NB avec NB)
+                        {
+                            for (int i = 0; i < descripteur_image.Nb_Ligne; i++)
+                            {
+
+                                max = (descripteur_image.Bilan[i][1] >= des[i]) ? descripteur_image.Bilan[i][1] : des[i];
+
+                                // Calcul du % de difference (entre 0 et 100)
+                                if (max == 0)
+                                {
+                                    PourcentageDiff[i] = 0;
+                                }
+                                else
+                                {
+                                    PourcentageDiff[i] = (float)(descripteur_image.Bilan[i][1] - des[i]) / max * 100;
+                                    if (PourcentageDiff[i] < 0)
+                                    {
+                                        PourcentageDiff[i] = -PourcentageDiff[i];
+                                    }
+                                }
+                                TotalPourcentage = TotalPourcentage + PourcentageDiff[i];
+                            }
+                            Tab[cpt_des - 1].pourcentage = TotalPourcentage / cpt_val;
+                        }
+                        else
+                        {
+                            free(des);
+                            des = (int *)malloc(sizeof(int));
+                            cpt_val = 0;
+                        }
+                    }
+
+                    else // affectation des valeurs du descripteur a un tableau
+                    {
+                        fscanf(fichier, "%d", &val);
+                        des[cpt_val] = val;
+                        cpt_val++;
+                        des = (int *)realloc(des, (cpt_val + 1) * sizeof(int));
+                    }
+                }
+                fclose(fichier);
+
+                // traitement
+                cpt_des++;
+                // Allocation memoire du Tableau de similariter
+                Tab = (tab_similaire *)realloc(Tab, (cpt_des + 1) * sizeof(tab_similaire));
+                Tab[cpt_des].id = debut;
+
+                TotalPourcentage = 0;
+                float PourcentageDiff[descripteur_image.Nb_Ligne];
+                for (int i = 0; i < descripteur_image.Nb_Ligne; i++)
+                {
+                    PourcentageDiff[i] = 0;
+                }
+
+                if (cpt_val == descripteur_image.Nb_Ligne) // comparer que si c'est du meme type de couleur (exemple RGB avec RGB et NB avec NB)
+                {
+                    for (int i = 0; i < descripteur_image.Nb_Ligne; i++)
+                    {
+                        max = (descripteur_image.Bilan[i][1] >= des[i]) ? descripteur_image.Bilan[i][1] : des[i];
 
                         // Calcul du % de difference (entre 0 et 100)
                         if (max == 0)
                         {
-                            PourcentageDiff[cptval] = 0;
+                            PourcentageDiff[i] = 0;
                         }
                         else
                         {
-                            PourcentageDiff[cptval] = (float)(descripteur_image.Bilan[cptval][1] - val) / max * 100;
-                            if (PourcentageDiff[cptval] < 0)
+                            PourcentageDiff[i] = (float)(descripteur_image.Bilan[i][1] - des[i]) / max * 100;
+                            if (PourcentageDiff[i] < 0)
                             {
-                                PourcentageDiff[cptval] = -PourcentageDiff[cptval];
+                                PourcentageDiff[i] = -PourcentageDiff[i];
                             }
                         }
-                        TotalPourcentage = TotalPourcentage + PourcentageDiff[cptval];
+                        TotalPourcentage = TotalPourcentage + PourcentageDiff[i];
+
                     }
-                    // Allocation memoire du Tableau de similariter
-                    Tab = (tab_similaire *)realloc(Tab,cpt_des+1 * sizeof(tab_similaire));
-                    printf("cpt : %d \n",cpt_des);
-                    // Affectation des id et de la moyenne des Pourcentages
-                    Tab[cpt_des].id = cpt_des;
-                    TotalPourcentage = 100.0 - (TotalPourcentage / cptval);
-
-                    Tab[cpt_des].pourcentage = TotalPourcentage;
-                    cpt_des++;
-
-
-                    // Verification s'il y a un autre descripteur
-                    if (fscanf(fichier, "%d", &debut) == EOF)
-                    {
-                        debut = 1;
-                    }
+                    Tab[cpt_des - 1].pourcentage = 100 - TotalPourcentage / cpt_val;
                 }
-                fclose(fichier);
+                else
+                {
+                    free(des);
+                    cpt_val = 0;
+                }
 
                 *Nb_des = cpt_des;
 
@@ -328,7 +392,7 @@ tab_similaire *comparaison_gene(int *erreur,char *chemin_fichier,char*chemin_des
 switch (type)
 {
 case texte:
-    
+
     break;
 
 case image:
