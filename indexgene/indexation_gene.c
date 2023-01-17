@@ -1121,15 +1121,15 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       fichier_texte = fopen("../liste_base/liste_base_texte", "r");
       if (fichier_texte != NULL)
       {
-            if (fscanf(fichier_texte, "%s", val) == EOF)
-            {
-                  indexation_texte(config, Erreur, Erreurtexte);
-                  fclose(fichier_texte);
-            }
-            else
+            if (fscanf(fichier_texte, "%s", val) != EOF)
             {
                   fclose(fichier_texte);
                   indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+            }
+            else
+            {
+                  indexation_texte(config, Erreur, Erreurtexte);
+                  fclose(fichier_texte);
             }
       }
       else
@@ -1144,15 +1144,15 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       fichier_nb = fopen("../liste_base/liste_base_image/NB", "r");
       if (fichier_nb != NULL)
       {
-            if (fscanf(fichier_nb, "%s", val) == EOF)
+            if (fscanf(fichier_nb, "%s", val) != EOF)
             {
-                  indexation_image(config, Erreur, Erreurimage);
-                  fclose(fichier_nb);
+                   fclose(fichier_nb);
+                  indexation_ouverte(config, "nb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
             }
             else
             {
+                  indexation_image(config, Erreur, Erreurimage);
                   fclose(fichier_nb);
-                  indexation_ouverte(config, "nb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
             }
       }
       else
@@ -1166,15 +1166,15 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       fichier_rgb = fopen("../liste_base/liste_base_image/RGB", "r");
       if (fichier_rgb != NULL)
       {
-            if (fscanf(fichier_rgb, "%s", val) == EOF)
-            {
-                  indexation_image(config, Erreur, Erreurimage);
-                  fclose(fichier_rgb);
-            }
-            else
+            if (fscanf(fichier_rgb, "%s", val) != EOF)
             {
                   fclose(fichier_rgb);
                   indexation_ouverte(config, "rgb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+            }
+            else
+            {
+                  indexation_image(config, Erreur, Erreurimage);
+                  fclose(fichier_rgb);
             }
       }
       else
@@ -1189,15 +1189,16 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       fichier_son = fopen("../liste_base/liste_base_audio", "r");
       if (fichier_son != NULL)
       {
-            if (fscanf(fichier_son, "%s", val) == EOF)
+            if (fscanf(fichier_son, "%s", val) != EOF)
             {
-                  indexation_audio(config, Erreur, Erreuraudio);
-                  fclose(fichier_son);
+            fclose(fichier_son);
+                  indexation_ouverte(config, "audio", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
             }
             else
             {
+                  
+                  indexation_audio(config, Erreur, Erreuraudio);
                   fclose(fichier_son);
-                  indexation_ouverte(config, "audio", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
             }
       }
       else

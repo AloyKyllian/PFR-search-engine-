@@ -269,11 +269,12 @@ void MAE(CONFIG *config,char choix[100])
                 case Recherche_mots_cle:
                     char motCle[27];
                     int erreur=0;
+                    char cheminDescripteurTxt[100]="../base_descripteur/base_descripteur_texte";
                     printf("\nEntrer votre mot clé\n");
                     scanf("%s",motCle);
                     tab_Res *tabResultatTexte=malloc(100*sizeof(tab_Res));
-                    rechercheMot(motCle,cheminDescripteurTxt,tabResultatTexte,&nombreElemetTab,&erreur);
-                    //LireResultat(tabResultatTexte,nombreElemetTab);
+                    rechercheMot(motCle,cheminDescripteurTxt,tabResultatTexte,config->Nb_Mots_Cle,&nombreElemetTab,&erreur);
+                    LireResultat(tabResultatTexte, nombreElemetTab, "rechercheMot", motCle);
                     free(tabResultatTexte);
                     break;
                 case Recherche_par_comparaison_Texte:

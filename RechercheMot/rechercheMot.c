@@ -1,6 +1,6 @@
 #include "rechercheMot.h"
 
-void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *erreur){
+void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int nb_mot,int *nbElTab, int *erreur){
     FILE *fp;
 	FILE *fres;
 	system("touch ../fichierRes.txt");
@@ -11,7 +11,7 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *err
 	char *commande2=(char*)malloc(100);
 	char *commande3=(char*)malloc(100);
 	char *commande4=(char*)malloc(100);
-	char* nb_occu=(char*)malloc(10);;
+	char* nb_occu=(char*)malloc(10);
 	int ID;
     int nombre_occurence;
 	int l=0;//pour remplir le tableau resultat
@@ -24,18 +24,19 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *err
 	    			strcpy(IDstring,chaine);
 	    			//printf("ID=%s\n",IDstring);
 	    			}
-		    	if (strstr(chaine,mot) !=NULL){
-                    fscanf(fp,"%s",nb_occu);
-		    		printf("chaine= %s son nombre d'occurence : %s et titre=%s\n",chaine,nb_occu,IDstring);
-					//stocker les donnee dans un fichier pour les trier avec la commande sort de linux
-					strcpy(commande,echo);
-					strcat(commande,IDstring);
-					strcat(commande," ");
-					strcat(commande,nb_occu);
-					strcat(commande," >> ./fichierRes.txt");
-					//printf("la commande %s\n", commande);
-					system(commande);
-					free(commande);
+				for(int i=0;i<nb_mot;i++){
+					fscanf(fp,"%s    |    %s",chaine,nb_occu);
+					if (strstr(chaine,mot) !=NULL){
+						printf("chaine= %s son nombre d'occurence : %s et titre=%s\n",chaine,nb_occu,IDstring);
+						//stocker les donnee dans un fichier pour les trier avec la commande sort de linux
+						strcpy(commande,echo);
+						strcat(commande,IDstring);
+						strcat(commande," ");
+						strcat(commande,nb_occu);
+						strcat(commande," >> ./fichierRes.txt");
+						//printf("la commande %s\n", commande);
+						system(commande);
+						free(commande);}
 				}
 		}
 	}
@@ -44,17 +45,17 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *err
 	fclose(fp);
 
 	//donner le droit d'ecriture dans le fichier resultat afin de trier ensuite
-	strcat(commande1,"chmod g+w fichierRes.txt");
+	strcpy(commande1,"chmod g+w fichierRes.txt");
 	//printf("commande %s:\n",commande1);
 	system(commande1);
 	free(commande1);
 	//trier dans l'ordre decroissant  et les stocker dans un fichier
-	strcat(commande2,"sort -k2nr,2nr ./fichierRes.txt >> ./fichierRestrie.txt");
+	strcpy(commande2,"sort -k2nr,2nr ./fichierRes.txt >> ./fichierRestrie.txt");
 	//printf("commande %s:\n",commande2);
 	system(commande2);
 	free(commande2);
 	//supprimer le fichier avec les resultat de la recherche dans la base des descripteur
-	strcat(commande3,"rm ./fichierRes.txt");
+	strcpy(commande3,"rm ./fichierRes.txt");
 	system(commande3);
 	free(commande3);
 	fres=fopen("./fichierRestrie.txt","rt");
@@ -70,10 +71,9 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int *nb, int *err
 			*erreur=7;
 		}
 	fclose(fres);
-	//stocker la taille du tableau pour le lire dans l'affichage
-	*nb=l;
+	*nbElTab=l;
 	//supprimer le fichier avec les resultat trier
-	strcat(commande4,"rm ./fichierRestrie.txt");
+	strcpy(commande4,"rm ./fichierRestrie.txt");
 	system(commande4);
 	free(commande4);
 	free(IDstring);
