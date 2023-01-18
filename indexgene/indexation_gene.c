@@ -456,7 +456,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
             strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
             system(commande);
       }
-      else
+      if(strcmp(type, "nb") == 0 || strcmp(type, "rgb") == 0|| strcmp(type, "audio") == 0)
       {
             strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
             system(commande);
@@ -503,8 +503,8 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                               fscanf(fichier_first, "%s", val);
                               printf("Suppr :%s   FIN\n", val);
                               fflush(stdout);
-                              //Supprimer_Descripteur(Erreur, val, type);
-                              // appeler fonction pour supprimer
+                              // Supprimer_Descripteur(Erreur, val, type);
+                              //  appeler fonction pour supprimer
                         }
                   }
             }
@@ -517,7 +517,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 }
 
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
-{     
+{
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
 
       PILE_image pileimage = NULL;
@@ -641,7 +641,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             fichier = fopen("../traitement/fic", "w");
             if (fichier != NULL)
             {
-                        fprintf(fichier, "\n-%d", id);
+                  fprintf(fichier, "\n-%d", id);
 
                   for (int x = 0; x < config.Nb_Mots_Cle; x++)
                   {
@@ -1102,27 +1102,46 @@ int recupererDernierID(String type, int *Erreur)
 
 void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
-      // FONCTIONNEMENT : 
+      // FONCTIONNEMENT :
       /**
        * si le fichier liste_base/liste_base_type ( type = texte, audio, nb ou rgb) EST VIDE lancer indexation de tous les fichiers type
        * sinon
        * si il ya un fichier en plus
        *  l'indexe et le rajouter liste_base et ajouter son descripteur dans descripteur_base
-       * sinon 
+       * sinon
        * le supprimer dans liste_base et descripteur_base
-      */
+       */
       FILE *fichier_texte = NULL;
       String val;
 
       String path;
       int deb = 0;
 
+      // TEXTE
+      fichier_texte = fopen("../liste_base/liste_base_texte", "r");
+      if (fichier_texte != NULL)
+      {
+            if (fscanf(fichier_texte, "%s", val) == EOF)
+            {
+                  indexation_texte(config, Erreur, Erreurtexte);
+                  fclose(fichier_texte);
+            }
+            else
+            {
+                  fclose(fichier_texte);
+                  indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+            }
+      }
+      else
+      {
+            *Erreur = 7;
+      }
       
-        
       // IMAGE __NB
       FILE *fichier_nb = NULL;
       deb = 0;
       String commande;
+      int a = 0;
 
       fichier_nb = fopen("../liste_base/liste_base_image/NB", "r");
       if (fichier_nb != NULL)
@@ -1130,6 +1149,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             if (fscanf(fichier_nb, "%s", val) == EOF)
             {
                   indexation_image(config, Erreur, Erreurimage);
+                  a = 1;
                   fclose(fichier_nb);
             }
             else
@@ -1143,29 +1163,32 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             *Erreur = 7;
       }
       // IMAGE __ RGB
-      FILE *fichier_rgb = NULL;
-      deb = 0;
-
-      fichier_rgb = fopen("../liste_base/liste_base_image/RGB", "r");
-      if (fichier_rgb != NULL)
+      if (a == 0)
       {
-            if (fscanf(fichier_rgb, "%s", val) == EOF)
+            FILE *fichier_rgb = NULL;
+            deb = 0;
+
+            fichier_rgb = fopen("../liste_base/liste_base_image/RGB", "r");
+            if (fichier_rgb != NULL)
             {
-                  indexation_image(config, Erreur, Erreurimage);
-                  fclose(fichier_rgb);
+                  if (fscanf(fichier_rgb, "%s", val) == EOF)
+                  {
+                        indexation_image(config, Erreur, Erreurimage);
+                        fclose(fichier_rgb);
+                  }
+                  else
+                  {
+                        fclose(fichier_rgb);
+                        indexation_ouverte(config, "rgb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+                  }
             }
             else
             {
-                  fclose(fichier_rgb);
-                  indexation_ouverte(config, "rgb", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+                  *Erreur = 7;
             }
       }
-      else
-      {
-            *Erreur = 7;
-      }
-      
-      // AUDIO 
+
+      // AUDIO
       FILE *fichier_son = NULL;
       deb = 0;
 
@@ -1188,25 +1211,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             *Erreur = 7;
       }
 
-      // TEXTE
-      // fichier_texte = fopen("../liste_base/liste_base_texte", "r");
-      //  if (fichier_texte != NULL)
-      //  {
-      //        if (fscanf(fichier_texte, "%s", val) == EOF)
-      //        {
-      //              indexation_texte(config,Erreur, Erreurtexte);
-      //              fclose(fichier_texte);
-      //        }
-      //        else
-      //        {
-      //              fclose(fichier_texte);
-      //              indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-      //        }
-      //  }
-      //  else
-      //  {
-      //        *Erreur = 7;
-      //  }    
+
 
       // strcpy(commande, "rm ../traitement/diff");
       // system(commande);
