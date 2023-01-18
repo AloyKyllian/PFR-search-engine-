@@ -3,8 +3,8 @@
 void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int nb_mot,int *nbElTab, int *erreur){
     FILE *fp;
 	FILE *fres;
-	system("touch ../fichierRes.txt");
-	system("touch ../fichierRestrie.txt");
+	system("touch fichierRes.txt");
+	system("touch fichierRestrie.txt");
 	char* echo="echo ";
 	char *commande=(char*)malloc(100);
 	char *commande1=(char*)malloc(100);
@@ -33,7 +33,7 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int nb_mot,int *n
 						strcat(commande,IDstring);
 						strcat(commande," ");
 						strcat(commande,nb_occu);
-						strcat(commande," >> ./fichierRes.txt");
+						strcat(commande," >> fichierRes.txt");
 						//printf("la commande %s\n", commande);
 						system(commande);
 						free(commande);}
@@ -55,10 +55,10 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int nb_mot,int *n
 	system(commande2);
 	free(commande2);
 	//supprimer le fichier avec les resultat de la recherche dans la base des descripteur
-	strcpy(commande3,"rm ./fichierRes.txt");
+	strcpy(commande3,"rm fichierRes.txt");
 	system(commande3);
 	free(commande3);
-	fres=fopen("./fichierRestrie.txt","rt");
+	fres=fopen("fichierRestrie.txt","rt");
 	if(fres!=NULL){
 		while(fscanf(fres,"%d %d",&ID,&nombre_occurence)!=EOF){
 			//printf("test : ID=%d, nb=%d\n",ID,nb_occu);
@@ -73,7 +73,7 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int nb_mot,int *n
 	fclose(fres);
 	*nbElTab=l;
 	//supprimer le fichier avec les resultat trier
-	strcpy(commande4,"rm ./fichierRestrie.txt");
+	strcpy(commande4,"rm fichierRestrie.txt");
 	system(commande4);
 	free(commande4);
 	free(IDstring);
