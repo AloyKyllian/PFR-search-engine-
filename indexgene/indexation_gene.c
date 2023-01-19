@@ -456,7 +456,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
             strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
             system(commande);
       }
-      if(strcmp(type, "nb") == 0 || strcmp(type, "rgb") == 0|| strcmp(type, "audio") == 0)
+      if (strcmp(type, "nb") == 0 || strcmp(type, "rgb") == 0 || strcmp(type, "audio") == 0)
       {
             strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
             system(commande);
@@ -503,7 +503,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                               fscanf(fichier_first, "%s", val);
                               printf("Suppr :%s   FIN\n", val);
                               fflush(stdout);
-                              // Supprimer_Descripteur(Erreur, val, type);
+                              Supprimer_Descripteur(Erreur, val, type,config.Intervale);
                               //  appeler fonction pour supprimer
                         }
                   }
@@ -693,8 +693,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
       }
 }
 
-void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
+void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[], int intervale)
 {
+      // Ouverture du fichier correspondant au type du fichier a supprimer
       FILE *fichier = NULL;
 
       if (strcmp("texte", type_fichier) == 0)
@@ -713,30 +714,32 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
       {
             fichier = fopen("../liste_base/liste_base_image/RGB", "r");
       }
-
+      // Recopiage de l'ancienne liste_base mais sans le fichier à supprimer
       if (fichier != NULL)
       {
             int tmp;
-            int id;
+            int id_ASupprimer;
             char path[1000];
 
             FILE *nvfile = NULL;
+            // Creation d'un fichier temporaire
             nvfile = fopen("../liste_base/tmp.txt", "w");
             if (nvfile != NULL)
             {
-                  int seul = 0;
+                  bool a_faire_une_fois = false;
                   while (fscanf(fichier, "-%d %s\n", &tmp, &path) != EOF)
                   {
                         if (strstr(path, Nom_Fichier) != NULL)
                         {
-                              id = -tmp;
+                              // Memorisation de l'id du fichier à supprimer
+                              id_ASupprimer = -tmp;
                         }
                         else
                         {
-                              if (seul == 0)
+                              if (a_faire_une_fois == false)
                               {
                                     fprintf(nvfile, "-%d %s", tmp, path);
-                                    seul++;
+                                    a_faire_une_fois = true;
                               }
                               else
                               {
@@ -749,8 +752,10 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                   nvfile = NULL;
                   fichier = NULL;
 
+                  // Si c'est un fichier texte va supprimer le descripteur associer à l'id
                   if (strcmp("texte", type_fichier) == 0)
                   {
+                        // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
                         remove("../liste_base/liste_base_texte");
                         rename("../liste_base/tmp.txt", "../liste_base/liste_base_texte");
 
@@ -758,44 +763,56 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                         nvfile = fopen("../base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
-                              int tmp1;
+                              char val_lue[50];
+                              int cpt_aff = 0;
+                              int id_lue = 0;
+                              bool a_faire_une_fois = false;
 
-                              char mot_lue[20];
-                              char idc[10000];
-
-                              sprintf(idc, "%d", id);
-
-                              while (fscanf(fichier, "%s", &mot_lue) != EOF)
+                              while (1)
                               {
-                                    if (strcmp(idc, mot_lue) != 0)
+                                    // Si fichier vide on arrete de le lire
+                                    if (fscanf(fichier, "%s", &val_lue) == EOF)
                                     {
-                                          fprintf(nvfile, "%s\n", mot_lue);
-                                          int alt = 0;
-                                          while (fscanf(fichier, "%s", &mot_lue) != EOF && atoi(mot_lue) >= 0)
-                                          {
-                                                if (alt == 0)
-                                                {
-                                                      alt++;
-                                                      fprintf(nvfile, "%s\t", mot_lue);
-                                                }
-                                                else if (alt == 1)
-                                                {
-                                                      alt++;
-                                                      fprintf(nvfile, "%s\t", mot_lue);
-                                                }
-                                                else
-                                                {
-                                                      alt = 0;
-                                                      fprintf(nvfile, "%s\n", mot_lue);
-                                                }
-                                          }
-                                          fseek(fichier, -strlen(mot_lue), SEEK_CUR);
+                                          break;
                                     }
-                                    else
+                                    // Obligatoire si le 1er identifaint et 0
+                                    if (a_faire_une_fois == false)
                                     {
-                                          while (fscanf(fichier, "%s", &mot_lue) != EOF && atoi(mot_lue) >= 0)
-                                                ;
-                                          fseek(fichier, -strlen(mot_lue), SEEK_CUR);
+                                          a_faire_une_fois = true;
+                                          if (atoi(val_lue) == 0)
+                                          {
+                                                fprintf(nvfile, "%s", val_lue);
+                                                fscanf(fichier, "%s", &val_lue);
+                                          }
+                                    }
+                                    // Recopie de l'id
+                                    if (atoi(val_lue) < 0)
+                                    {
+                                          id_lue = atoi(val_lue);
+                                          if (id_lue != id_ASupprimer)
+                                          {
+                                                fprintf(nvfile, "\n%s", val_lue);
+                                                fscanf(fichier, "%s", &val_lue);
+                                          }
+                                    }
+                                    // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
+                                    if (id_lue != id_ASupprimer)
+                                    {
+                                          if (cpt_aff == 0)
+                                          {
+                                                fprintf(nvfile, "\n%s    ", val_lue);
+                                                cpt_aff++;
+                                          }
+                                          else if (cpt_aff == 1)
+                                          {
+                                                fprintf(nvfile, "%s    ", val_lue);
+                                                cpt_aff++;
+                                          }
+                                          else
+                                          {
+                                                fprintf(nvfile, "%s", val_lue);
+                                                cpt_aff = 0;
+                                          }
                                     }
                               }
                               fclose(fichier);
@@ -808,8 +825,10 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                               *Erreur = 7;
                         }
                   }
+                  // Si c'est un audio texte va supprimer le descripteur associer à l'id
                   else if (strcmp("audio", type_fichier) == 0)
                   {
+                        // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
                         remove("../liste_base/liste_base_audio");
                         rename("../liste_base/tmp.txt", "../liste_base/liste_base_audio");
 
@@ -817,57 +836,58 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                         nvfile = fopen("../base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
+                              int val_lue;
+                              int cpt_aff = 0;
+                              int id_lue = 0;
+                              bool a_faire_une_fois = false;
 
-                              int tmp1;
-                              int uneseulefois = 0;
-
-                              while (fscanf(fichier, "%d", &tmp) != EOF)
+                              while (1)
                               {
-                                    if (id != tmp)
+                                    // Lecture de l'ancien base descripteur tant que le fichier n'est pa vide
+                                    if (fscanf(fichier, "%d", &val_lue) == EOF)
                                     {
-                                          if (uneseulefois == 0)
-                                          {
-                                                fprintf(nvfile, "%d ", tmp);
-                                                fscanf(fichier, "%d", &tmp);
-                                                fprintf(nvfile, "%d", tmp);
-                                                uneseulefois++;
-                                          }
-                                          else
-                                          {
-                                                fprintf(nvfile, "\n%d ", tmp);
-                                                fscanf(fichier, "%d", &tmp);
-                                                fprintf(nvfile, "%d", tmp);
-                                          }
-
-                                          int alt = 0;
-                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                          {
-                                                if (alt == 0)
-                                                {
-                                                      alt++;
-                                                      fprintf(nvfile, "\n%d  ", tmp);
-                                                }
-                                                else if (alt < 32)
-                                                {
-                                                      alt++;
-                                                      fprintf(nvfile, "%d  ", tmp);
-                                                      if (alt == 32)
-                                                      {
-                                                            alt = 0;
-                                                      }
-                                                }
-                                          }
-                                          char number[10000];
-                                          sprintf(number, "%d", tmp);
-                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          break;
                                     }
-                                    else
+                                    if (a_faire_une_fois == false)
                                     {
-                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                                ;
-                                          char number[10000];
-                                          sprintf(number, "%d", tmp);
-                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          // Lecture et ecriture dans la nouvelle base
+                                          a_faire_une_fois = true;
+                                          if (val_lue == 0)
+                                          {
+                                                fprintf(nvfile, "-%d ", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                                fprintf(nvfile, "%d", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                          }
+                                    }
+                                    if (val_lue < 0)
+                                    {
+                                          id_lue = val_lue;
+                                          if (id_lue != id_ASupprimer)
+                                          {
+                                                fprintf(nvfile, "\n%d ", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                                fprintf(nvfile, "%d", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                          }
+                                    }
+                                    // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
+                                    if (id_lue != id_ASupprimer)
+                                    {
+                                          if (cpt_aff == 0)
+                                          {
+                                                fprintf(nvfile, "\n%d  ", val_lue);
+                                                cpt_aff++;
+                                          }
+                                          else if (cpt_aff < intervale)
+                                          {
+                                                fprintf(nvfile, "%d  ", val_lue);
+                                                cpt_aff++;
+                                                if (cpt_aff == 32)
+                                                {
+                                                      cpt_aff = 0;
+                                                }
+                                          }
                                     }
                               }
                               fclose(fichier);
@@ -880,8 +900,10 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                               *Erreur = 7;
                         }
                   }
+                  // Si c'est un fichier image noir et blanc va supprimer le descripteur associer à l'id
                   else if (strcmp("nb", type_fichier) == 0)
                   {
+
                         remove("../liste_base/liste_base_image/NB");
                         rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/NB");
 
@@ -889,39 +911,51 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                         nvfile = fopen("../base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
+                              bool a_faire_une_fois = false;
+                              int val_lue;
+                              int id_lue = 0;
+                              bool alt = false;
 
-                              int tmp1;
-
-                              while (fscanf(fichier, "%d", &tmp) != EOF)
+                              while (1)
                               {
-                                    if (id != tmp)
+                                    // Lecture de l'ancien base descripteur tant que le fichier n'est pa vide
+                                    if (fscanf(fichier, "%d", &val_lue) == EOF)
                                     {
-                                          fprintf(nvfile, "\n%d", tmp);
-                                          int alt = 0;
-                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                          {
-                                                if (alt == 0)
-                                                {
-                                                      alt++;
-                                                      fprintf(nvfile, "\n%d ", tmp);
-                                                }
-                                                else
-                                                {
-                                                      alt--;
-                                                      fprintf(nvfile, "%d", tmp);
-                                                }
-                                          }
-                                          char number[10000];
-                                          sprintf(number, "%d", tmp);
-                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          break;
                                     }
-                                    else
+                                    if (a_faire_une_fois == false)
                                     {
-                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                                ;
-                                          char number[10000];
-                                          sprintf(number, "%d", tmp);
-                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          // Lecture et ecriture dans la nouvelle base
+                                          a_faire_une_fois = true;
+                                          if (val_lue == 0)
+                                          {
+                                                fprintf(nvfile, "-%d", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                          }
+                                    }
+
+                                    if (val_lue < 0)
+                                    {
+                                          id_lue = val_lue;
+                                          if (id_lue != id_ASupprimer)
+                                          {
+                                                fprintf(nvfile, "\n%d", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                          }
+                                    }
+                                    // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
+                                    if (id_lue != id_ASupprimer)
+                                    {
+                                          if (alt == false)
+                                          {
+                                                fprintf(nvfile, "\n%d ", val_lue);
+                                                alt = true;
+                                          }
+                                          else
+                                          {
+                                                fprintf(nvfile, "%d", val_lue);
+                                                alt = false;
+                                          }
                                     }
                               }
                               fclose(fichier);
@@ -934,8 +968,10 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                               *Erreur = 7;
                         }
                   }
+                  // Si c'est un fichier image rgb va supprimer le descripteur associer à l'id
                   else if (strcmp("rgb", type_fichier) == 0)
                   {
+                        // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
                         remove("../liste_base/liste_base_image/RGB");
                         rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/RGB");
 
@@ -943,40 +979,51 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[])
                         nvfile = fopen("../base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
+                              bool a_faire_une_fois = false;
+                              int val_lue;
+                              int id_lue = 0;
+                              bool alt = false;
 
-                              int tmp1;
-
-                              while (fscanf(fichier, "%d", &tmp) != EOF)
+                              while (1)
                               {
-                                    if (id != tmp)
+                                    // Lecture de l'ancien base descripteur tant que le fichier n'est pa vide
+                                    if (fscanf(fichier, "%d", &val_lue) == EOF)
                                     {
-                                          fprintf(nvfile, "\n%d", tmp);
-                                          int alt = 0;
-                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                          {
-                                                printf("%d \n", tmp);
-                                                if (alt == 0)
-                                                {
-                                                      alt++;
-                                                      fprintf(nvfile, "\n%d ", tmp);
-                                                }
-                                                else
-                                                {
-                                                      alt--;
-                                                      fprintf(nvfile, "%d", tmp);
-                                                }
-                                          }
-                                          char number[10000];
-                                          sprintf(number, "%d", tmp);
-                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          break;
                                     }
-                                    else
+                                    if (a_faire_une_fois == false)
                                     {
-                                          while (fscanf(fichier, "%d", &tmp) != EOF && tmp >= 0)
-                                                ;
-                                          char number[10000];
-                                          sprintf(number, "%d", tmp);
-                                          fseek(fichier, -strlen(number), SEEK_CUR);
+                                          // Lecture et ecriture dans la nouvelle base
+                                          a_faire_une_fois = true;
+                                          if (val_lue == 0)
+                                          {
+                                                fprintf(nvfile, "-%d", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                          }
+                                    }
+
+                                    if (val_lue < 0)
+                                    {
+                                          id_lue = val_lue;
+                                          if (id_lue != id_ASupprimer)
+                                          {
+                                                fprintf(nvfile, "\n%d", val_lue);
+                                                fscanf(fichier, "%d", &val_lue);
+                                          }
+                                    }
+                                    // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
+                                    if (id_lue != id_ASupprimer)
+                                    {
+                                          if (alt == false)
+                                          {
+                                                fprintf(nvfile, "\n%d ", val_lue);
+                                                alt = true;
+                                          }
+                                          else
+                                          {
+                                                fprintf(nvfile, "%d", val_lue);
+                                                alt = false;
+                                          }
                                     }
                               }
                               fclose(fichier);
@@ -1136,7 +1183,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       {
             *Erreur = 7;
       }
-      
+
       // IMAGE __NB
       FILE *fichier_nb = NULL;
       deb = 0;
@@ -1210,8 +1257,6 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       {
             *Erreur = 7;
       }
-
-
 
       // strcpy(commande, "rm ../traitement/diff");
       // system(commande);
