@@ -503,7 +503,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                               fscanf(fichier_first, "%s", val);
                               printf("Suppr :%s   FIN\n", val);
                               fflush(stdout);
-                              Supprimer_Descripteur(Erreur, val, type,config.Intervale);
+                              //Supprimer_Descripteur(Erreur, val, type,config.Intervale);
                               //  appeler fonction pour supprimer
                         }
                   }
@@ -1165,24 +1165,24 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       int deb = 0;
 
       // TEXTE
-      fichier_texte = fopen("../liste_base/liste_base_texte", "r");
-      if (fichier_texte != NULL)
-      {
-            if (fscanf(fichier_texte, "%s", val) == EOF)
-            {
-                  indexation_texte(config, Erreur, Erreurtexte);
-                  fclose(fichier_texte);
-            }
-            else
-            {
-                  fclose(fichier_texte);
-                  indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-            }
-      }
-      else
-      {
-            *Erreur = 7;
-      }
+      // fichier_texte = fopen("../liste_base/liste_base_texte", "r");
+      // if (fichier_texte != NULL)
+      // {
+      //       if (fscanf(fichier_texte, "%s", val) == EOF)
+      //       {
+      //             indexation_texte(config, Erreur, Erreurtexte);
+      //             fclose(fichier_texte);
+      //       }
+      //       else
+      //       {
+      //             fclose(fichier_texte);
+      //             indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+      //       }
+      // }
+      // else
+      // {
+      //       *Erreur = 7;
+      // }
 
       // IMAGE __NB
       FILE *fichier_nb = NULL;

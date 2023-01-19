@@ -54,7 +54,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
 // ajoute son id et chemin dans liste_base et ajoute son descripteur dans les base_descripteur
 void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur);
 // supprime id et chemin dans liste_base et supprime le descripteur associé
-void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[]);
+void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],int intervalle);
 // recupere l'id a affecter
 int recupererDernierID(String type, int *Erreur);
 
