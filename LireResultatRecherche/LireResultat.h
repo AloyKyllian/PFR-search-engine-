@@ -7,6 +7,7 @@ typedef struct {
     int pourcentage;
 }tabRes;
 
-void LireResultat(tabRes*, int, String, String);
-void lire_chemin (PILE*,tabRes*,int,String, int*);
+void LireResultat(tabRes*, int,char*, char*,char**);
+void lire_chemin (PILE*,tabRes*,int,char*, int*);
+void affichage(PILE*, tabRes*, char**);
 #endif

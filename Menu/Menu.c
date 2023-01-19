@@ -4,7 +4,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
 {
     static char etat_courant = Menu_general;
 
-    //variables a utiliser au cours du programme
+    // variables a utiliser au cours du programme
     char chemin[100];
     char cheminDescripteurTxt[200];
     int erreur = 0;
@@ -17,6 +17,14 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     lesLogins tablogin;
     char *extension;
     int test;
+    char *lire = "xdg-open ";
+    char *cheminBasetxt = "../DATA_FIL_ROUGE_DEV/Textes";
+    char cheminDescripteurTxt[100] = "../base_descripteur/base_descripteur_texte";
+    char *cheminBaseImgNB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB";
+    char *cheminBaseImgRGB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB";
+    char cheminDescripteurIMG[100] = "../base_descripteur/base_descripteur_image";
+    char *cheminBaseAudio = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON";
+    char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
     // lire config si ya une erreur
     // config=Lire_CONFIG(&erreurConfig);
     // voir si un nv fichier
@@ -72,7 +80,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             etat_courant = Menu_Utilisateur;
             break;
         case Quitter:
-            printf("\n\tVous avez quitté le programme\n\n\n\n");
+            printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
             exit(EXIT_SUCCESS);
             break;
         default:
@@ -273,19 +281,62 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         switch (choix[0])
         {
         case Recherche_mots_cle:
-
+            char *tabFileName = (char *)malloc(100);
+            char *commande = (char *)malloc(500);
             erreur = 0;
-            char cheminDescripteurTxt[100] = "../base_descripteur/base_descripteur_texte";
             printf("\nEntrer votre mot clé\n");
             scanf("%s", motCle);
             tab_Res *tabResultatTexte = malloc(100 * sizeof(tab_Res));
             rechercheMot(motCle, cheminDescripteurTxt, tabResultatTexte, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
-            //LireResultat(tabResultatTexte, nombreElemetTab, "rechercheMot", motCle);
-            free(tabResultatTexte);
-            break;
+            LireResultat(tabResultatTexte, nombreElemetTab, "rechercheMot", motCle, tabFileName);
+            printf("\n[R] Retour\n");
+            strcpy(commande, lire);
+            strcat(commande, cheminBasetxt);
+            strcat(commande, tabFileName[0]);
+            system(commande);
+            free(commande);
+            printf("\nVoulez vous visionné un autre fichier ?\n[1] Oui\n[2] Non\n");
+            scanf("%s", choix);
+            switch (choix[0])
+            {
+            case oui:
+                while (choix[0] != Retour)
+                {
+                    char *commande = (char *)malloc(500);
+                    printf("\nEntrer le numero de fichier que vous voulez visualiser, ou R pour un retour vers le menu de recherche texte\n");
+                    strcpy(commande, lire);
+                    strcat(commande, cheminBasetxt);
+                    strcat(commande, tabFileName[choix[0]-1]);
+                    system(commande);
+                    free(commande);
+                }
+                etat_courant=Menu_texte;
+                break;
+            case non:
+                printf("\nVoulez vous revenir au Menu de recherche principale ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
+                scanf("%s", choix);
+                switch (choix[0])
+                {
+                case Retour:
+                    etat_courant = Menu_Utilisateur;
+                    break;
+                case Quitter:
+                    printf("\n\tVous avez quitté le programme\n\n\n\n");
+                    exit(EXIT_SUCCESS);
+                    break;
+                default:
+                    printf("erreur de choix, vous allez etre redirigez vers le menu de la recherche texte\n");
+                    etat_courant = Menu_texte;
+                    break;
+                }
+                free(tabResultatTexte);
+                free(tabFileName);
+                break;
+            }
+
         case Recherche_par_comparaison_Texte:
             // verification si le fichier existe
-             test = -1;
+            test = -1;
             while (test == -1)
             {
                 printf("\nEntrez le chemin de votre fichier\n");
@@ -349,7 +400,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         {
         case Recherche_comparaison_Image:
             // verification si le fichier existe
-             test = -1;
+            test = -1;
             while (test == -1)
             {
                 printf("\nEntrez le chemin de votre fichier\n");
@@ -412,7 +463,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         {
         case Recherche_comparaison_Audio:
             // verification si le fichier existe
-             test = -1;
+            test = -1;
             while (test == -1)
             {
                 printf("\nEntrez le chemin de votre fichier\n");
@@ -477,4 +528,8 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         etat_courant = Menu_general;
         break;
     }
+}
+
+void visionnerFichier()
+{
 }
