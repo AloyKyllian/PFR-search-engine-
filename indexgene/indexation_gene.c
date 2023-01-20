@@ -775,24 +775,23 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                                     {
                                           break;
                                     }
-                                    // Obligatoire si le 1er identifaint et 0
-                                    if (a_faire_une_fois == false)
-                                    {
-                                          a_faire_une_fois = true;
-                                          if (atoi(val_lue) == 0)
-                                          {
-                                                fprintf(nvfile, "%s", val_lue);
-                                                fscanf(fichier, "%s", &val_lue);
-                                          }
-                                    }
                                     // Recopie de l'id
                                     if (atoi(val_lue) < 0)
                                     {
                                           id_lue = atoi(val_lue);
                                           if (id_lue != id_ASupprimer)
                                           {
-                                                fprintf(nvfile, "\n%s", val_lue);
-                                                fscanf(fichier, "%s", &val_lue);
+                                                if (a_faire_une_fois == false)
+                                                {
+                                                      a_faire_une_fois = true;
+                                                      fprintf(nvfile, "%s", val_lue);
+                                                      fscanf(fichier, "%s", &val_lue);
+                                                }
+                                                else
+                                                {
+                                                      fprintf(nvfile, "\n%s", val_lue);
+                                                      fscanf(fichier, "%s", &val_lue);
+                                                }
                                           }
                                     }
                                     // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
@@ -848,27 +847,27 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                                     {
                                           break;
                                     }
-                                    if (a_faire_une_fois == false)
-                                    {
-                                          // Lecture et ecriture dans la nouvelle base
-                                          a_faire_une_fois = true;
-                                          if (val_lue == 0)
-                                          {
-                                                fprintf(nvfile, "-%d ", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
-                                                fprintf(nvfile, "%d", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
-                                          }
-                                    }
                                     if (val_lue < 0)
                                     {
                                           id_lue = val_lue;
                                           if (id_lue != id_ASupprimer)
                                           {
-                                                fprintf(nvfile, "\n%d ", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
-                                                fprintf(nvfile, "%d", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
+                                                if (a_faire_une_fois == false)
+                                                {
+                                                      // Lecture et ecriture dans la nouvelle base
+                                                      a_faire_une_fois = true;
+                                                      fprintf(nvfile, "%d ", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                      fprintf(nvfile, "%d", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                }
+                                                else
+                                                {
+                                                      fprintf(nvfile, "\n%d ", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                      fprintf(nvfile, "%d", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                }
                                           }
                                     }
                                     // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
@@ -923,24 +922,24 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                                     {
                                           break;
                                     }
-                                    if (a_faire_une_fois == false)
-                                    {
-                                          // Lecture et ecriture dans la nouvelle base
-                                          a_faire_une_fois = true;
-                                          if (val_lue == 0)
-                                          {
-                                                fprintf(nvfile, "-%d", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
-                                          }
-                                    }
 
                                     if (val_lue < 0)
                                     {
                                           id_lue = val_lue;
                                           if (id_lue != id_ASupprimer)
                                           {
-                                                fprintf(nvfile, "\n%d", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
+                                                if (a_faire_une_fois == false)
+                                                {
+                                                      // Lecture et ecriture dans la nouvelle base
+                                                      a_faire_une_fois = true;
+                                                      fprintf(nvfile, "%d", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                }
+                                                else
+                                                {
+                                                      fprintf(nvfile, "\n%d", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                }
                                           }
                                     }
                                     // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
@@ -991,24 +990,24 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                                     {
                                           break;
                                     }
-                                    if (a_faire_une_fois == false)
-                                    {
-                                          // Lecture et ecriture dans la nouvelle base
-                                          a_faire_une_fois = true;
-                                          if (val_lue == 0)
-                                          {
-                                                fprintf(nvfile, "-%d", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
-                                          }
-                                    }
 
                                     if (val_lue < 0)
                                     {
                                           id_lue = val_lue;
                                           if (id_lue != id_ASupprimer)
                                           {
-                                                fprintf(nvfile, "\n%d", val_lue);
-                                                fscanf(fichier, "%d", &val_lue);
+                                                if (a_faire_une_fois == false)
+                                                {
+                                                      // Lecture et ecriture dans la nouvelle base
+                                                      a_faire_une_fois = true;
+                                                      fprintf(nvfile, "%d", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                }
+                                                else
+                                                {
+                                                      fprintf(nvfile, "\n%d", val_lue);
+                                                      fscanf(fichier, "%d", &val_lue);
+                                                }
                                           }
                                     }
                                     // detection du descripteur a supprimer donc si different recopiage de l'ancien descripteur dans le nouveau
