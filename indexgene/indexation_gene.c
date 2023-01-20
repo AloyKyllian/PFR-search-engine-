@@ -503,7 +503,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                               fscanf(fichier_first, "%s", val);
                               // printf("Suppr :%s   FIN\n", val);
                               // fflush(stdout);
-                              //Supprimer_Descripteur(Erreur, val, type,config.Intervale);
+                              Supprimer_Descripteur(Erreur, val, type,config.Intervale);
                               //  appeler fonction pour supprimer
                         }
                   }

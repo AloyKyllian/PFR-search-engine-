@@ -20,7 +20,7 @@ void rechercheMot(char *mot, char *chemin,tab_similaire *tabResultat,int nb_mot,
 	fp = fopen(chemin, "rt");
 	if (fp != NULL){ 
 		while(fscanf(fp,"%s",chaine)!=EOF){
-				if(atoi(chaine)<0  || strstr(chaine,"-0")){	
+				if(atoi(chaine)<0){	
 	    			strcpy(IDstring,chaine);
 	    			//printf("ID=%s\n",IDstring);
 	    			}

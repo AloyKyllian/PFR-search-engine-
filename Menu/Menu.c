@@ -178,7 +178,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     etat_courant = Menu_Utilisateur;
                     break;
                 case non:
-                    printf("\n\tVous avez quitté le programme\n\n\n\n");
+                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
                     exit(EXIT_SUCCESS);
                     break;
                 default:
@@ -231,7 +231,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     etat_courant = Menu_Utilisateur;
                     break;
                 case non:
-                    printf("\n\tVous avez quitté le programme\n\n\n\n");
+                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
                     exit(EXIT_SUCCESS);
                     break;
                 default:
@@ -251,7 +251,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     case Menu_Utilisateur:
         printf("\n__________________________Menu utilisateur__________________________\n");
         printf("\nVeuillez faire votre choix  : \n");
-        printf("\n[1] Recherche fichier texte\n[2] Recherche fichier image\n[3] Recherche fichier audio \n[Q] Déconnexion\n");
+        printf("\n[1] Recherche fichier texte\n[2] Recherche fichier image\n[3] Recherche fichier audio \n[R] Retour\n[Q] Déconnexion\n");
         scanf("%s", choix);
         switch (choix[0])
         {
@@ -268,7 +268,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             etat_courant = Menu_general;
             break;
         case Quitter:
-            printf("\n\tVous avez quitté le programme\n\n\n\n");
+            printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
             exit(EXIT_SUCCESS);
             break;
         default:
@@ -327,7 +327,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             //         etat_courant = Menu_Utilisateur;
             //         break;
             //     case Quitter:
-            //         printf("\n\tVous avez quitté le programme\n\n\n\n");
+            //         printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
             //         exit(EXIT_SUCCESS);
             //         break;
             //     default:
@@ -383,7 +383,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             {
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatTexte = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700);
+                char *tabFileName = (char *)malloc(700* sizeof(char));
                 tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
                 LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName);
                 printf("\n[R] Retour\n");
@@ -395,7 +395,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             etat_courant = Menu_Utilisateur;
             break;
         case Quitter:
-            printf("\n\tVous avez quitté le programme\n\n\n\n");
+            printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
             exit(EXIT_SUCCESS);
             break;
         default:
@@ -452,7 +452,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             {
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatIMG = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700);
+                char *tabFileName = (char *)malloc(700* sizeof(char));
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
                 printf("debut de l'affichage\n");
                 LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName);
@@ -465,7 +465,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             etat_courant = Menu_Utilisateur;
             break;
         case Quitter:
-            printf("\n\tVous avez quitté le programme\n\n\n\n");
+            printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
             exit(EXIT_SUCCESS);
             break;
         default:
@@ -522,7 +522,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 erreur = 0;
                 nombreElemetTab = 0;
                 tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700);
+                char *tabFileName = (char *)malloc(700* sizeof(char));
                 tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
                 printf("debut de l'affichage\n");
                 LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName);
@@ -535,7 +535,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             etat_courant = Menu_Utilisateur;
             break;
         case Quitter:
-            printf("\n\tVous avez quitté le programme\n\n\n\n");
+            printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
             exit(EXIT_SUCCESS);
             break;
         default:
