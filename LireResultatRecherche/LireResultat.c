@@ -5,62 +5,69 @@
 #include "../LireResultatRecherche/LireResultat.h"
 
 
-void LireResultat(tabRes *tabResultat, int nbElement, char* type, char* requete,char *tabFileName[]){
+void LireResultat(tab_similaire *tabResultat, int nbElement, char* type, char* requete,char *tabFileName[]){
     PILE IDchemin;
     char *commande=(char*)malloc(200);
     strcpy(commande,"basename ");
     int erreur;
     int max=0;
     IDchemin=init_PILE();
-    printf("verifie les element du tableau\n");
-    for(int k=0;k<nbElement;k++){
-	   printf("ID=%d, nb=%d\n",tabResultat[k].id,tabResultat[k].pourcentage);
-	}
+    // printf("verifie les element du tableau\n");
+    // for(int k=0;k<nbElement && tabResultat[k].pourcentage>0;k++){
+	//    printf("ID=%d, nb=%f\n",tabResultat[k].id,tabResultat[k].pourcentage);
+	// }
     
     //affichage des resultat de recherche par mot cle :
     printf("\nLes resultat pour votre recherche :\n");
-    if(nbElement==0){
-        printf("\nRequete mot-cle : %s\n",requete);
-        printf("\nRésultats (fichier -> occurrences) :\n");
-        printf("\nCe mot ne figure pas dans notre base de données\n");
-    }
-    else{
         if(strstr(type,"rechercheMot")){
             lire_chemin (&IDchemin,tabResultat,nbElement,"texte",&erreur);
             printf("\nRequete mot-cle : \"%s\"\n",requete);
             printf("\nRésultats (fichier -> occurrences) :\n");
-            affichage(&IDchemin,tabResultat,tabFileName);
+            if(nbElement==0){
+                printf("\nCe mot ne figure pas dans notre base de données\n");}
+            else{
+            affichage(&IDchemin,tabResultat,&tabFileName[nbElement]);}
         }
-    }
+    
 
     //affichage des resultat de comparaison texte :
     if(strstr(type,"texte")){
         lire_chemin (&IDchemin,tabResultat,nbElement,type,&erreur);
         printf("\nRequete fichier : \"%s\"\n",requete);
         printf("\nRésultats (fichier -> nombre de mots-clés communs) :\n");
-        affichage(&IDchemin,tabResultat,tabFileName);   
+        if(nbElement==0){
+                printf("\nAucun mot en communs n'a été trouvé dans notre base de données\n");}
+        else{
+        affichage(&IDchemin,tabResultat,&tabFileName[nbElement]);} 
     }
 
     //affichage des resultat de comparaison Image :
     if(strstr(type,"image")){
         lire_chemin (&IDchemin,tabResultat,nbElement,type,&erreur);
+        printf("on check la pile apres lire_chemin\n");
+        affichePILE(IDchemin);
         printf("\nRequete image : \"%s\"\n",requete);
         printf("\nRésultats :\n");
-        affichage(&IDchemin,tabResultat,tabFileName);
+        if(nbElement==0){
+                printf("\nAucune image similaire n'a été trouvé dans notre base de données\n");}
+        else{
+        affichage(&IDchemin,tabResultat,&tabFileName[nbElement]);}
     }
     //affichage des resultat de comparaison Audio :
     if(strstr(type,"audio")){
         lire_chemin (&IDchemin,tabResultat,nbElement,type,&erreur);
         printf("\nRequete son (jingle) : \"%s\"\n",requete);
         printf("\nRésultats :\n");
-        affichage(&IDchemin,tabResultat,tabFileName);
+        if(nbElement==0){
+                printf("\nAucun mot en communs n'a été trouvé dans notre base de données\n");}
+        else{
+        affichage(&IDchemin,tabResultat,&tabFileName[nbElement]);}
         
     }
-    
 }
 
 
-void lire_chemin (PILE *pourchemin,tabRes *tabResultat,int nbElement,char* type, int *erreur)
+void lire_chemin (PILE *pourchemin,tab_similaire *tabResultat,int nbElement,char* type, int *erreur)
 {   
     FILE *fichier = NULL;
     ELEMENT element;
@@ -72,22 +79,26 @@ void lire_chemin (PILE *pourchemin,tabRes *tabResultat,int nbElement,char* type,
            fichier = fopen("../liste_base/liste_base_audio", "r");    
     if (fichier != NULL){
                     while (fscanf(fichier, "%d | %s\n",&element.id,element.CHEMIN)!=EOF)
-                    {   for(int i=0;i<nbElement;i++){
+                    {   for(int i=0;i<nbElement && tabResultat[i].pourcentage>0;i++){
                             if(element.id==tabResultat[i].id){
+                                printf("element id%d\n",element.id);
                                 *pourchemin= emPILE(*pourchemin, element);
+                                
                             }       
                         }
                     }
     }
+    
     else{
         *erreur=7;
     }
+    printf("affichage de pile dans lire_chemin\n");
+    affichePILE(*pourchemin);
     fclose(fichier);
 }
 
-void affichage(PILE *IDchemin, tabRes *tabResultat,char *tabFileName[]){
+void affichage(PILE *IDchemin, tab_similaire *tabResultat,char *tabFileName[]){
     PILE temp = *IDchemin;
-    ;
     int maxLength = 0,l=0;
     do
         {   
@@ -109,6 +120,7 @@ void affichage(PILE *IDchemin, tabRes *tabResultat,char *tabFileName[]){
             char *filename = strrchr((*temp).element.CHEMIN, '/');
             if (filename) {
                 tabFileName[l]=filename;
+                printf("\n file name :%s et l=%d\n",tabFileName[l],l);
                 filename++;
             } 
             else {
@@ -116,9 +128,9 @@ void affichage(PILE *IDchemin, tabRes *tabResultat,char *tabFileName[]){
             }
             int spaces = maxLength - strlen(filename);
             
-            printf("[%d] %s%*s ->%d\n",l+1, filename, spaces, "",tabResultat[l].pourcentage);
+            printf("[%d] %s%*s ->%f\n",l+1, filename, spaces, "",tabResultat[l].pourcentage);
             temp = (*temp).suiv;
             l++;
-    } while (temp != NULL);
+    } while (temp != NULL );
     *IDchemin=temp;
 }
