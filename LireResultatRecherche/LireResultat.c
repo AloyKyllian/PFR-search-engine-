@@ -79,7 +79,7 @@ void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *r
         }
         else
         {
-            affichage(&IDchemin, tabResultat, &tabFileName[nbElement]);
+            // affichage(&IDchemin, tabResultat, &tabFileName[nbElement]);
         }
     }
 }
@@ -100,7 +100,7 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
                 {
                     if (element.id == tabResultat[i].id)
                     {
-                        //printf("element id%d\n", element.id);
+                        // printf("element id%d\n", element.id);
                         *pourchemin = emPILE(*pourchemin, element);
                     }
                 }
@@ -115,17 +115,33 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
 
     if (strcmp(type, "audio") == 0)
     {
+        ELEMENT base[100];
         fichier = fopen("../liste_base/liste_base_audio", "r");
+        int y = 0;
         if (fichier != NULL)
         {
-            while (fscanf(fichier, "%d | %s\n", &element.id, element.CHEMIN) != EOF)
+            while (fscanf(fichier, "%d | %s\n", &base[y].id, base[y].CHEMIN) != EOF)
             {
-                for (int i = 0; i < nbElement && tabResultat[i].pourcentage > 0; i++)
+                y++;
+            }
+
+            for (int i = 0; i < nbElement; i++)
+            {
+                for (int y = 0; y < nbElement; y++)
                 {
-                    if (element.id == tabResultat[i].id)
+                    if (tabResultat[i].id == base[y].id)
                     {
-                        //printf("element id%d\n", element.id);
-                        *pourchemin = emPILE(*pourchemin, element);
+                        char *filename = strrchr(base[y].CHEMIN, '/');
+                        if (filename)
+                        {
+                            filename++;
+                        }
+                        else
+                        {
+                            filename = base[y].CHEMIN;
+                        }
+                        printf("[%d] %s\t ->%f\n", i + 1, filename, tabResultat[i].pourcentage);
+                        fflush(stdout);
                     }
                 }
             }
@@ -143,7 +159,7 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
                 {
                     if (element.id == tabResultat[i].id)
                     {
-                        //printf("element id%d\n", element.id);
+                        // printf("element id%d\n", element.id);
                         *pourchemin = emPILE(*pourchemin, element);
                     }
                 }
@@ -160,7 +176,7 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
                 {
                     if (element.id == tabResultat[i].id)
                     {
-                        //printf("element id%d\n", element.id);
+                        // printf("element id%d\n", element.id);
                         *pourchemin = emPILE(*pourchemin, element);
                     }
                 }
