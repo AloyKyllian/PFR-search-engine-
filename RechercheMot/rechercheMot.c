@@ -1,6 +1,6 @@
 #include "rechercheMot.h"
 
-void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int nb_mot,int *nbElTab, int *erreur){
+void rechercheMot(char *mot, char *chemin,tab_similaire *tabResultat,int nb_mot,int *nbElTab, int *erreur){
     FILE *fp;
 	FILE *fres;
 	system("touch fichierRes.txt");
@@ -64,7 +64,7 @@ void rechercheMot(char *mot, char *chemin,tab_Res *tabResultat,int nb_mot,int *n
 			//printf("test : ID=%d, nb=%d\n",ID,nb_occu);
 			//stocker le resultat dans un tableau si le nombre d'occurence est plus grand que le seuil qu'on a pris dans le config
 				tabResultat[l].id=ID;
-				tabResultat[l].nb_occurence=nombre_occurence;
+				tabResultat[l].pourcentage=nombre_occurence;
 				l++;}
 		}
 	else{

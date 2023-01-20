@@ -17,8 +17,8 @@ int FichierExist(char chemin[100])
 }
 
 int VerifExtension(char chemin[100],char extension[4]){
-    extension=strstr(chemin,"xml");
-            if (extension==NULL)
+    char *i=strstr(chemin,extension);
+            if (i==NULL)
                 return -1;//meme chose
             else
                  return 1;//meme chose

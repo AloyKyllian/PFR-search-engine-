@@ -6,7 +6,7 @@ int main()
 {
     tabRes *tabResultat = malloc(100 * sizeof(tabRes));
     char *type = "rechercheMot";
-    char *lire = "xdg-open ";
+    char *lire = "gedit ";
     char *cheminBase = "../DATA_FIL_ROUGE_DEV/Textes";
     char *choix = "1";
     char *commande=(char*)malloc(500);

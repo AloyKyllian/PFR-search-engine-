@@ -1,10 +1,7 @@
 #ifndef RECHERCHEMOT_H
 #define RECHERCHEMOT_H
 #include "../Gestion-Config/Global.h"
+#include "../comparaison/comparaison.h"
 
-typedef struct{
-    int id;
-    int nb_occurence;
-}tab_Res;
-void rechercheMot(char*,char*,tab_Res*,int,int*, int*);
+void rechercheMot(char*,char*,tab_similaire*,int,int*, int*);
 #endif
