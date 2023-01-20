@@ -287,8 +287,8 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         switch (choix[0])
         {
         case Recherche_mots_cle:
-            char *tabFileName = (char *)malloc(700);
-            char *commande = (char *)malloc(500);
+            char *tabFileName = (char *)malloc(700* sizeof(char));
+            char *commande = (char *)malloc(500* sizeof(char));
             erreur = 0;
             printf("\nEntrer votre mot clé\n");
             scanf("%s", motCle);
