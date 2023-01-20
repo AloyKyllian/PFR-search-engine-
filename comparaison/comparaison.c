@@ -83,7 +83,7 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
                 fscanf(fichier, "%d", &descripteur_compare.tab[lig][col]);
             }
         }
-         printf("\n\nnouveau fichier \n\n");
+        //printf("\n\nnouveau fichier \n\n");
         pourcentage = comparaison(val_lu, descripteur_compare, descripteur_compare.ligne, intervalle, descri, fenetre);
         tab[i].pourcentage = pourcentage;
 

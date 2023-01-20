@@ -115,7 +115,7 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
 
     if (strcmp(type, "audio") == 0)
     {
-        ELEMENT base[100];
+        ELEMENT *base= (ELEMENT *)malloc(sizeof(ELEMENT));
         fichier = fopen("../liste_base/liste_base_audio", "r");
         int y = 0;
         if (fichier != NULL)
@@ -123,6 +123,7 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
             while (fscanf(fichier, "%d | %s\n", &base[y].id, base[y].CHEMIN) != EOF)
             {
                 y++;
+                base = (ELEMENT *)realloc(base, (y + 1) * sizeof(ELEMENT));
             }
 
             for (int i = 0; i < nbElement; i++)
@@ -140,11 +141,13 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
                         {
                             filename = base[y].CHEMIN;
                         }
+                        //printf("\n----------------REPERE--------------\n");
                         printf("[%d] %s\t ->%f\n", i + 1, filename, tabResultat[i].pourcentage);
                         fflush(stdout);
                     }
                 }
             }
+            free(base);
         }
     }
 
