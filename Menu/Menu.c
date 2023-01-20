@@ -10,6 +10,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     int nbTentative = 1;
     int Erreur = 0;
     char motCle[27];
+    char *choixIMG;
     int nombreElemetTab = 0;
     bool result = false;
     LOGIN testlogin;
