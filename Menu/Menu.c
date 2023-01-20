@@ -203,19 +203,19 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         switch (choix[0])
         {
         case texte:
-            system("chmod a-w ../base_descripteur/base_descripteur_texte");
+            system("chmod o-w ../base_descripteur/base_descripteur_texte");
             system("gedit ../base_descripteur/base_descripteur_texte");
-            system("chmod a+w ../base_descripteur/base_descripteur_texte");
+            system("chmod o+w ../base_descripteur/base_descripteur_texte");
             break;
         case image:
-            system("chmod a-w ../base_descripteur/base_descripteur_image");
+            system("chmod o-w ../base_descripteur/base_descripteur_image");
             system("gedit ../base_descripteur/base_descripteur_image");
-            system("chmod a+w ../base_descripteur/base_descripteur_image");
+            system("chmod o+w ../base_descripteur/base_descripteur_image");
             break;
         case audio:
-            system("chmod a-w ../base_descripteur/base_descripteur_audio");
+            system("chmod o-w ../base_descripteur/base_descripteur_audio");
             system("gedit ../base_descripteur/base_descripteur_audio");
-            system("chmod a+w ../base_descripteur/base_descripteur_audio");
+            system("chmod o+w ../base_descripteur/base_descripteur_audio");
             break;
         case Retour:
             etat_courant = Menu_Admin;
