@@ -480,8 +480,8 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       {
             if (fscanf(fichier_first, "%s", val) == EOF)
             {
-                  printf("AUCUN FICHIER NA ETE AJOUTER ni SUPPRIMER dans %s\n", type);
-                  fflush(stdout);
+                  // printf("AUCUN FICHIER NA ETE AJOUTER ni SUPPRIMER dans %s\n", type);
+                  // fflush(stdout);
             }
             else
             {
@@ -491,18 +491,18 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("> ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              printf("Ajout : %s   FIN\n", val);
-                              fflush(stdout);
-                              printf("AVANT AJOUT FICHIER: \ttype: %s val: %s\n", type, val);
-                              fflush(stdout);
+                              // printf("Ajout : %s   FIN\n", val);
+                              // fflush(stdout);
+                              // printf("AVANT AJOUT FICHIER: \ttype: %s val: %s\n", type, val);
+                              // fflush(stdout);
                               ajoutfichier(config, type, val, Erreur);
                               //  appeler fonction ajout d'un fichier
                         }
                         if (strstr("< ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              printf("Suppr :%s   FIN\n", val);
-                              fflush(stdout);
+                              // printf("Suppr :%s   FIN\n", val);
+                              // fflush(stdout);
                               //Supprimer_Descripteur(Erreur, val, type,config.Intervale);
                               //  appeler fonction pour supprimer
                         }
@@ -600,7 +600,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             descripteur_image = Pack_Descripteur_image(Erreur, temp, config.Nb_Bit_Fort);
 
             FILE *fichier2 = NULL;
-            printf("\n\tID FANS AJOUT FICHIER : %d\n", id);
+            // printf("\n\tID FANS AJOUT FICHIER : %d\n", id);
 
             fichier2 = fopen("../traitement/fic", "w");
             if (fichier2 != NULL)
@@ -1096,7 +1096,7 @@ int recupererDernierID(String type, int *Erreur)
                   *Erreur = 7;
             }
             fclose(fichier2);
-            printf("ID FINALE : %d", id_finale);
+            // printf("ID FINALE : %d", id_finale);
             return id_finale + 1;
       }
 
@@ -1287,14 +1287,14 @@ void indexation_audio(CONFIG config, int *Erreur, int *Erreuraudio)
       // remplier base_descripteur_audio
       //___________________________________________________
       PILE_audio descripteur_audio = NULL;
-      printf("\t INDEXATION TOUS FICHIERS AUDIO\navant empile");
-      fflush(stdout);
+      // printf("\t INDEXATION TOUS FICHIERS AUDIO\navant empile");
+      // fflush(stdout);
       descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
-      printf("\napres empiler");
-      fflush(stdout);
+      // printf("\napres empiler");
+      // fflush(stdout);
       depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
-      printf("\napresdepil\nFIN AUDIO");
-      fflush(stdout);
+      // printf("\napresdepil\nFIN AUDIO");
+      // fflush(stdout);
 }
 void indexation_texte(CONFIG config, int *Erreur, int *Erreurtexte)
 {
@@ -1343,6 +1343,6 @@ void indexation_image(CONFIG config, int *Erreur, int *Erreurimage)
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
 
-      printf("FIN IMAGE\n");
-      fflush(stdout);
+      // printf("FIN IMAGE\n");
+      // fflush(stdout);
 }

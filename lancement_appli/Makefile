@@ -1,5 +1,5 @@
-menu : Global.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o LireResultat.o Menu.o tst_menu.o
-	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
+menu : Global.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o
+	gcc -o menu.out Global.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
 
 Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
 	gcc -c -g ../Gestion-Config/Global.c
@@ -21,6 +21,9 @@ rechercheMot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h
 
 LireResultat.o : ../LireResultatRecherche/LireResultat.c ../LireResultatRecherche/LireResultat.h
 	gcc -c ../LireResultatRecherche/LireResultat.c
+
+comparaison.o : ../comparaison/comparaison.c ../comparaison/comparaison.h 
+	gcc -c ../comparaison/comparaison.c 
 
 Menu.o : ../Menu/Menu.c ../Menu/Menu.h 
 	gcc -c -g -Wall ../Menu/Menu.c

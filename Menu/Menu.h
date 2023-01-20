@@ -1,5 +1,5 @@
-#ifndef Menu_H_INCLUS
-#define Menu_H_INCLUS
+#ifndef Menu_H_INCLUS    
+#define Menu_H_INCLUS   
 #include "../Connexion/Connexion.h"
 #include "../Gestion-Config/Config.h"
 #include "../Menu/FichierExist.h"
@@ -7,7 +7,8 @@
 #include "../indexgene/indexation_gene.h"
 #include "../comparaison/comparaison.h"
 
-void MAE(CONFIG config,char choix[100], interreurImage, int erreurAudio, interreurTexte, int *erreurIndex);
+void MAE(CONFIG *config,char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex);
+
 //Etat :
 //MENUS PRINCIPAUX
 #define Menu_general '1'
