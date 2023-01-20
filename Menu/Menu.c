@@ -6,7 +6,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
 
     // variables a utiliser au cours du programme
     char chemin[100];
-    char cheminDescripteurTxt[200];
+    //char cheminDescripteurTxt[200];
     int erreur = 0;
     int nbTentative = 1;
     int Erreur = 0;

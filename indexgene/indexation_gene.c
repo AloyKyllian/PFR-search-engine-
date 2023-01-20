@@ -385,7 +385,7 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       PILE pileimage_path = init_PILE();
       PILE pileaudio_path = init_PILE();
       String path;
-      int deb = 0;
+      int deb = 1;
       //_________________
       // TEXTE
       //_________________
@@ -1164,26 +1164,6 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       String path;
       int deb = 0;
 
-      // TEXTE
-      // fichier_texte = fopen("../liste_base/liste_base_texte", "r");
-      // if (fichier_texte != NULL)
-      // {
-      //       if (fscanf(fichier_texte, "%s", val) == EOF)
-      //       {
-      //             indexation_texte(config, Erreur, Erreurtexte);
-      //             fclose(fichier_texte);
-      //       }
-      //       else
-      //       {
-      //             fclose(fichier_texte);
-      //             indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
-      //       }
-      // }
-      // else
-      // {
-      //       *Erreur = 7;
-      // }
-
       // IMAGE __NB
       FILE *fichier_nb = NULL;
       deb = 0;
@@ -1258,6 +1238,26 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             *Erreur = 7;
       }
 
+      //TEXTE
+      fichier_texte = fopen("../liste_base/liste_base_texte", "r");
+      if (fichier_texte != NULL)
+      {
+            if (fscanf(fichier_texte, "%s", val) == EOF)
+            {
+                  indexation_texte(config, Erreur, Erreurtexte);
+                  fclose(fichier_texte);
+            }
+            else
+            {
+                  fclose(fichier_texte);
+                  indexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur);
+            }
+      }
+      else
+      {
+            *Erreur = 7;
+      }
+
       // strcpy(commande, "rm ../traitement/diff");
       // system(commande);
       // strcpy(commande, "rm ../traitement/fic_temp");
@@ -1272,7 +1272,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
 
 void indexation_audio(CONFIG config, int *Erreur, int *Erreuraudio)
 {
-      int deb = 0;
+      int deb = 1;
       String path;
       //___________________________________________________
       // indexation de tous les fichiers audios
@@ -1299,7 +1299,7 @@ void indexation_audio(CONFIG config, int *Erreur, int *Erreuraudio)
 }
 void indexation_texte(CONFIG config, int *Erreur, int *Erreurtexte)
 {
-      int deb = 0;
+      int deb = 1;
       String path;
       //___________________________________________________
       // indexation de tous les fichiers textes
@@ -1320,7 +1320,7 @@ void indexation_texte(CONFIG config, int *Erreur, int *Erreurtexte)
 }
 void indexation_image(CONFIG config, int *Erreur, int *Erreurimage)
 {
-      int deb = 0;
+      int deb = 1;
       String path;
       //___________________________________________________
       // indexation de tous les fichiers images

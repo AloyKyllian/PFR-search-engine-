@@ -9,7 +9,7 @@ int main()
 
 //recuperer les valeurs de config
 int config_fenetre=2048;
-int config_intervale=15;
+int config_intervale=32;
 int config_seuil=75;
     int Nb_ligne;
 //creation du tableau 
@@ -49,21 +49,22 @@ printf("\n\n");
 printf("\n\n");
 
 /////////////////////////////////////////////TEXTE////////////////////////////////////////
-/*
+
 
     int* Erreur;
 
 
    tab_similaire *Tab_texte;
 
-    Tab_texte = comparaison_texte(10,"../DATA_FIL_ROUGE_DEV/Textes/03-Mimer_un_signal_nerveux_pour.xml","../base_descripteur/base_descripteur_texte",Erreur,int* Nb_ligne);
+    Tab_texte = comparaison_texte(666,"../DATA_FIL_ROUGE_DEV/Textes/03-Mimer_un_signal_nerveux_pour.xml","../base_descripteur/base_descripteur_texte",Erreur,&Nb_ligne);
 
-        for (int i = 0; Tab_texte[i].pourcentage>=config_seuil && Tab_texte[i].pourcentage<=100  ; i++)
+
+        for (int i = 0; Tab_texte[i].pourcentage>=0.2 && i<Nb_ligne   ; i++)
     {
         printf("tab texte Id: %d Pourcentage: %f\n", Tab_texte[i].id, Tab_texte[i].pourcentage);
     }
 
     free(Tab_texte);
 
-    */
+    
 }

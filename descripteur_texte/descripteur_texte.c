@@ -89,8 +89,8 @@ char *nettoyage(char mot_lu[100])
 
 bool filtrage(char* mot)
 {
-    char mot_Banni[100];
-    String tab_p[100];
+    char mot_Banni[10000];
+    String tab_p[10000];
     int cpt=0;
     FILE* fichierBanni = NULL;
     fichierBanni = fopen("../descripteur_texte/MotBanni.txt", "r");
@@ -103,6 +103,7 @@ bool filtrage(char* mot)
     {       
         strcpy(tab_p[cpt],mot_Banni);
         cpt++;
+
     }
     
     bool verif=true;
@@ -249,12 +250,19 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
 
     tab_renvoyer=tab_occ(nbr_occ,tab,tab_renvoyer);
 
+    String nodata;
 
     for(int x=0;x<nbr_occ;x++)
     {
         if(strlen(tab_renvoyer.tab_mot[x])==0)
     {
-        strcat(tab_renvoyer.tab_mot[x],"NO_DATA");
+        sprintf(nodata,"NO_DATA%d",x);
+        // strcpy(nodata,"NO_DATA" );
+        // char num=(char)x;
+        // strcat(nodata,&num);
+        // printf("%s",nodata);
+        // fflush(stdout);
+        strcpy(tab_renvoyer.tab_mot[x],nodata);
     }
     }
 
