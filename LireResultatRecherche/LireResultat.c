@@ -4,24 +4,21 @@
 #include <math.h>
 #include "../LireResultatRecherche/LireResultat.h"
 
-void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *requete, char *tabFileName[])
+void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *requete, char *tabFileName[], int nombre_mot_cle, int similarite)
 {
-    PILE IDchemin;
-    char *commande = (char *)malloc(200);
-    strcpy(commande, "basename ");
+    
     int erreur;
     int max = 0;
-    IDchemin = init_PILE();
-    // printf("verifie les element du tableau\n");
-    // for(int k=0;k<nbElement && tabResultat[k].pourcentage>0;k++){
-    //    printf("ID=%d, nb=%f\n",tabResultat[k].id,tabResultat[k].pourcentage);
-    // }
+    printf("\nverifie les element du tableau\n");
+    for (int w = 0; w < nbElement && tabResultat[w].pourcentage >= similarite ; w++)
+    {
+        printf("\nID=%d, nb=%f\n", tabResultat[w].id, tabResultat[w].pourcentage);
+    }
 
     // affichage des resultat de recherche par mot cle :
     printf("\nLes resultat pour votre recherche :\n");
     if (strstr(type, "rechercheMot"))
     {
-        lire_chemin(&IDchemin, tabResultat, nbElement, "texte", &erreur);
         printf("\nRequete mot-cle : \"%s\"\n", requete);
         printf("\nRésultats (fichier -> occurrences) :\n");
         if (nbElement == 0)
@@ -30,14 +27,13 @@ void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *r
         }
         else
         {
-            affichage(&IDchemin, tabResultat, &tabFileName[nbElement]);
+            lire_chemin(tabResultat, nbElement, "rechercheMot", nombre_mot_cle, similarite, &erreur);
         }
     }
 
     // affichage des resultat de comparaison texte :
     if (strstr(type, "texte"))
     {
-        lire_chemin(&IDchemin, tabResultat, nbElement, type, &erreur);
         printf("\nRequete fichier : \"%s\"\n", requete);
         printf("\nRésultats (fichier -> nombre de mots-clés communs) :\n");
         if (nbElement == 0)
@@ -46,16 +42,13 @@ void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *r
         }
         else
         {
-            affichage(&IDchemin, tabResultat, &tabFileName[nbElement]);
+            lire_chemin( tabResultat, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
 
     // affichage des resultat de comparaison Image :
     if (strstr(type, "image"))
     {
-        lire_chemin(&IDchemin, tabResultat, nbElement, type, &erreur);
-        printf("on check la pile apres lire_chemin\n");
-        affichePILE(IDchemin);
         printf("\nRequete image : \"%s\"\n", requete);
         printf("\nRésultats :\n");
         if (nbElement == 0)
@@ -64,13 +57,13 @@ void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *r
         }
         else
         {
-            affichage(&IDchemin, tabResultat, &tabFileName[nbElement]);
+            lire_chemin( tabResultat, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
     // affichage des resultat de comparaison Audio :
     if (strstr(type, "audio"))
     {
-        lire_chemin(&IDchemin, tabResultat, nbElement, type, &erreur);
+
         printf("\nRequete son (jingle) : \"%s\"\n", requete);
         printf("\nRésultats :\n");
         if (nbElement == 0)
@@ -79,43 +72,63 @@ void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *r
         }
         else
         {
-            // affichage(&IDchemin, tabResultat, &tabFileName[nbElement]);
+            lire_chemin( tabResultat, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
 }
 
-void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, char *type, int *erreur)
+void lire_chemin(tab_similaire *tabResultat, int nbElement, char *type, int nombre_mot_cle, int similarite, int *erreur)
 {
     FILE *fichier = NULL;
     FILE *fichier1 = NULL;
     ELEMENT element;
-    if (strcmp(type, "texte") == 0)
+    if (strcmp(type, "texte") == 0 || strcmp(type, "rechercheMot") == 0)
     {
+        ELEMENT *base = (ELEMENT *)malloc(sizeof(ELEMENT));
+        int y = 0;
         fichier = fopen("../liste_base/liste_base_texte", "r");
         if (fichier != NULL)
         {
-            while (fscanf(fichier, "%d | %s\n", &element.id, element.CHEMIN) != EOF)
+            while (fscanf(fichier, "%d | %s\n", &base[y].id, base[y].CHEMIN) != EOF)
             {
-                for (int i = 0; i < nbElement && tabResultat[i].pourcentage > 0; i++)
+                y++;
+                base = (ELEMENT *)realloc(base, (y + 1) * sizeof(ELEMENT));
+            }
+
+            for (int i = 0; i < nbElement; i++)
+            {
+                for (int k = 0; k < y; k++)
                 {
-                    if (element.id == tabResultat[i].id)
+                    if (tabResultat[i].id == base[k].id)
                     {
-                        // printf("element id%d\n", element.id);
-                        *pourchemin = emPILE(*pourchemin, element);
+                        char *filename = strrchr(base[k].CHEMIN, '/');
+                        if (filename)
+                        {
+                            filename++;
+                        }
+                        else
+                        {
+                            filename = base[k].CHEMIN;
+                        }
+                        if (strcmp(type, "rechercheMot") == 0 && tabResultat[i].pourcentage > 1)
+                            printf("[%d] %s\t ->%d\n", i + 1, filename, (int)tabResultat[i].pourcentage);
+                        if (strcmp(type, "texte") == 0 && tabResultat[i].pourcentage > 1)
+                            printf("[%d] %s\t ->%d\n", i + 1, filename, (int)(tabResultat[i].pourcentage * nombre_mot_cle) / 100);
                     }
                 }
             }
         }
-
         else
         {
             *erreur = 7;
         }
+        fclose(fichier);
+        free(base);
     }
 
     if (strcmp(type, "audio") == 0)
     {
-        ELEMENT *base= (ELEMENT *)malloc(sizeof(ELEMENT));
+        ELEMENT *base = (ELEMENT *)malloc(sizeof(ELEMENT));
         fichier = fopen("../liste_base/liste_base_audio", "r");
         int y = 0;
         if (fichier != NULL)
@@ -128,11 +141,11 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
 
             for (int i = 0; i < nbElement; i++)
             {
-                for (int y = 0; y < nbElement; y++)
+                for (int k = 0; k < y; k++)
                 {
-                    if (tabResultat[i].id == base[y].id)
+                    if (tabResultat[i].id == base[k].id)
                     {
-                        char *filename = strrchr(base[y].CHEMIN, '/');
+                        char *filename = strrchr(base[k].CHEMIN, '/');
                         if (filename)
                         {
                             filename++;
@@ -141,97 +154,133 @@ void lire_chemin(PILE *pourchemin, tab_similaire *tabResultat, int nbElement, ch
                         {
                             filename = base[y].CHEMIN;
                         }
-                        //printf("\n----------------REPERE--------------\n");
-                        printf("[%d] %s\t ->%f\n", i + 1, filename, tabResultat[i].pourcentage);
-                        fflush(stdout);
+                        if (tabResultat[i].pourcentage >= similarite)
+                            printf("[%d] %s\t ->%f\n", i + 1, filename, tabResultat[i].pourcentage);
                     }
                 }
             }
-            free(base);
+            
+            
         }
+        fclose(fichier);
+        free(base);
     }
 
     if (strcmp(type, "image") == 0)
     {
+        ELEMENT *base = (ELEMENT *)malloc(sizeof(ELEMENT));
+        int y = 0;
         fichier1 = fopen("../liste_base/liste_base_image/NB", "r");
         if (fichier1 != NULL)
         {
-            while (fscanf(fichier1, "%d | %s\n", &element.id, element.CHEMIN) != EOF)
+            while (fscanf(fichier, "%d | %s\n", &base[y].id, base[y].CHEMIN) != EOF)
             {
-                for (int i = 0; i < nbElement && tabResultat[i].pourcentage > 0; i++)
+                y++;
+                base = (ELEMENT *)realloc(base, (y + 1) * sizeof(ELEMENT));
+            }
+
+            for (int i = 0; i < nbElement; i++)
+            {
+                for (int k = 0; k < y; k++)
                 {
-                    if (element.id == tabResultat[i].id)
+                    if (tabResultat[i].id == base[k].id)
                     {
-                        // printf("element id%d\n", element.id);
-                        *pourchemin = emPILE(*pourchemin, element);
+                        char *filename = strrchr(base[k].CHEMIN, '/');
+                        if (filename)
+                        {
+                            filename++;
+                        }
+                        else
+                        {
+                            filename = base[k].CHEMIN;
+                        }
+                        if (tabResultat[i].pourcentage >= similarite)
+                            printf("[%d] %s\t ->%f\n", i + 1, filename, tabResultat[i].pourcentage);
                     }
                 }
             }
         }
         fclose(fichier1);
-
+        free(base);
+        ELEMENT *base2 = (ELEMENT *)malloc(sizeof(ELEMENT));
+        int l=0;
         fichier = fopen("../liste_base/liste_base_image/RGB", "r");
         if (fichier != NULL)
         {
-            while (fscanf(fichier, "%d | %s\n", &element.id, element.CHEMIN) != EOF)
+            while (fscanf(fichier, "%d | %s\n", &base2[l].id, base2[l].CHEMIN) != EOF)
             {
-                for (int i = 0; i < nbElement && tabResultat[i].pourcentage > 0; i++)
+                l++;
+                base2 = (ELEMENT *)realloc(base2, (l + 1) * sizeof(ELEMENT));
+                
+            }
+
+            for (int i = 0; i < nbElement; i++)
+            {
+                for (int k = 0; k < l; k++)
                 {
-                    if (element.id == tabResultat[i].id)
+                    if (tabResultat[i].id == base2[k].id)
                     {
-                        // printf("element id%d\n", element.id);
-                        *pourchemin = emPILE(*pourchemin, element);
+                        char *filename = strrchr(base2[k].CHEMIN, '/');
+                        if (filename)
+                        {
+                            filename++;
+                        }
+                        else
+                        {
+                            filename = base2[k].CHEMIN;
+                        }
+                        if (tabResultat[i].pourcentage >= similarite)
+                            printf("[%d] %s\t ->%f\n", i + 1, filename, tabResultat[i].pourcentage);
                     }
                 }
             }
+            
         }
         fclose(fichier);
+        
+        free(base2);
     }
-
-    printf("affichage de pile dans lire_chemin\n");
-    affichePILE(*pourchemin);
-    fclose(fichier);
 }
 
-void affichage(PILE *IDchemin, tab_similaire *tabResultat, char *tabFileName[])
-{
-    PILE temp = *IDchemin;
-    int maxLength = 0, l = 0;
-    do
-    {
-        char *filename = strrchr((*temp).element.CHEMIN, '/');
-        if (filename)
-        {
-            filename++;
-        }
-        else
-        {
-            filename = (*temp).element.CHEMIN;
-        }
-        maxLength = fmax(maxLength, strlen(filename));
-        temp = (*temp).suiv;
-    } while (temp != NULL);
+// void affichage(PILE *IDchemin, tab_similaire *tabResultat, char *tabFileName[])
+// {
+//     PILE temp = *IDchemin;
+//     int maxLength = 0, l = 0;
+//     do
+//     {
+//         char *filename = strrchr((*temp).element.CHEMIN, '/');
+//         if (filename)
+//         {
+//             filename++;
+//         }
+//         else
+//         {
+//             filename = (*temp).element.CHEMIN;
+//         }
+//         maxLength = fmax(maxLength, strlen(filename));
+//         temp = (*temp).suiv;
+//     } while (temp != NULL);
 
-    temp = *IDchemin;
-    l = 0;
-    do
-    {
-        char *filename = strrchr((*temp).element.CHEMIN, '/');
-        if (filename)
-        {
-            tabFileName[l] = filename;
-            printf("\n file name :%s et l=%d\n", tabFileName[l], l);
-            filename++;
-        }
-        else
-        {
-            filename = (*temp).element.CHEMIN;
-        }
-        int spaces = maxLength - strlen(filename);
+//     temp = *IDchemin;
+//     l = 0;
+//     do
+//     {
+//         char *filename = strrchr((*temp).element.CHEMIN, '/');
+//         if (filename)
+//         {
+//             tabFileName[l] = filename;
+//             printf("\n file name :%s et l=%d\n", tabFileName[l], l);
+//             filename++;
+//         }
+//         else
+//         {
+//             filename = (*temp).element.CHEMIN;
+//         }
+//         int spaces = maxLength - strlen(filename);
 
-        printf("[%d] %s%*s ->%f\n", l + 1, filename, spaces, "", tabResultat[l].pourcentage);
-        temp = (*temp).suiv;
-        l++;
-    } while (temp != NULL);
-    *IDchemin = temp;
-}
+//         printf("[%d] %s%*s ->%f\n", l + 1, filename, spaces, "", tabResultat[l].pourcentage);
+//         temp = (*temp).suiv;
+//         l++;
+//     } while (temp != NULL);
+//     *IDchemin = temp;
+// }
