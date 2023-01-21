@@ -37,10 +37,6 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
     int id;
     descri_audio descri;
 
-    int ligne;
-
-    ligne = getligne(chemin_fichier, erreur);
-
     descri = Descripteur_audio(fenetre, intervalle, chemin_fichier, erreur);
 
     float pourcentage;
@@ -122,14 +118,6 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
         }
     }
     *Nb_ligne = i;
-
-
-for (unsigned int j = 0; tab[j].pourcentage>=0 && j<*Nb_ligne ; j++)
-{
-    printf("tab audion Id: %d Pourcentage: %f\n", tab[j].id, tab[j].pourcentage);
-}
-
-
     return tab;
 }
 
@@ -190,7 +178,7 @@ tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, ch
             // printf("Similarite : %f pourcent", tab[j].pourcentage);
             j++;
 
-            printf("ID : %d    , cpt : %d\n",j,cpt);
+            //printf("ID : %d    , cpt : %d\n",j,cpt);
         }
         fclose(fichierD);
         cpt_sort = j;
