@@ -12,7 +12,7 @@ CONFIG Lire_CONFIG(int *Erreur)
     if (fichier != NULL)
     {
         *Erreur = 0;
-        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
+        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d\n[6] Seuil : %d", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale,&config.Seuil);
     }
     else
     {
@@ -29,6 +29,7 @@ void Afficher_CONFIG(CONFIG config)
     printf("Nombre de bits de poids fort = %d\n", config.Nb_Bit_Fort);
     printf("Nombre de fenetre = %d\n", config.Nb_Fenetre);
     printf("Intervale = %d\n", config.Intervale);
+    printf("Seuil = %d\n", config.Seuil);
 }
 
 CONFIG Lire_mot_cle(CONFIG config,int *Erreur)
@@ -163,6 +164,33 @@ CONFIG Lire_intervale(CONFIG config, int *Erreur)
     return config;
 }
 
+CONFIG Lire_seuil(CONFIG config,int *Erreur)
+{
+    // Variable
+    int tmp;
+
+    // Verifie si la valeur entrer est valide
+    if (!scanf("%d", &tmp))
+    {
+       *Erreur = 9;
+        viderBuffer();
+    }
+    else if (tmp <= 0)
+    {
+       *Erreur = 2;
+    }
+    else if (tmp >= 100)
+    {
+       *Erreur = 10;
+    }
+    else
+    {
+        *Erreur = 0;
+        config.Seuil = tmp;
+    }
+    return config;
+}
+
 void Ecrire_CONFIG(CONFIG config,int *Erreur)
 {
     // Variable
@@ -172,7 +200,7 @@ void Ecrire_CONFIG(CONFIG config,int *Erreur)
     if (fichier != NULL)
     {
         *Erreur = 0;
-        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d", config.Nb_Mots_Cle, config.Similariter, config.Nb_Bit_Fort, config.Nb_Fenetre, config.Intervale);
+        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d\n[6] Seuil : %d", config.Nb_Mots_Cle, config.Similariter, config.Nb_Bit_Fort, config.Nb_Fenetre, config.Intervale, config.Seuil);
     }
     else
     {

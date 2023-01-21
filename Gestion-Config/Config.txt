@@ -3,3 +3,4 @@
 [3] Nombre de bits : 2
 [4] Nombre de fenetre : 2048
 [5] Intervale de temps : 32
+[6] Seuil : 4

@@ -12,18 +12,15 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     char motCle[27];
     char *choixIMG;
     int nombreElemetTab = 0;
+    int nombreElementTabFIN=0;
     bool result = false;
+    char *type;
     LOGIN testlogin;
     lesLogins tablogin;
     char *extension;
     int test;
-    char *lire = "gedit ";
-    char *cheminBasetxt = "../DATA_FIL_ROUGE_DEV/Textes";
     char cheminDescripteurTxt[200] = "../base_descripteur/base_descripteur_texte";
-    char *cheminBaseImgNB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB";
-    char *cheminBaseImgRGB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB";
     char cheminDescripteurIMG[100] = "../base_descripteur/base_descripteur_image";
-    char *cheminBaseAudio = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON";
     char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
     // lire config si ya une erreur
     // config=Lire_CONFIG(&erreurConfig);
@@ -129,8 +126,8 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         *config = Lire_CONFIG(&Erreur);
         Afficher_CONFIG(*config);
         printf("\nSi vous voulez changer une valeur, veuillez faire votre choix  : \n");
-        printf("[1] Nombre de mots clé\n[2] Similarité\n[3] Nombre de bits \n[4] Nombre de fenetre\n");
-        printf("[5] Intervalle de temps\n[R] Retour\n[Q] Déconnexion\n");
+        printf("\n[1] Nombre de mots clé\n[2] Similarité\n[3] Nombre de bits \n[4] Nombre de fenetre\n");
+        printf("[5] Intervalle de temps\n[6] Seuil\n[R] Retour\n[Q] Déconnexion\n");
         scanf("%s", choix);
         switch (choix[0])
         {
@@ -161,6 +158,12 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             // fct pour changer l'intervalle de temps
             printf("Entrez l'intervalle de temps voulue' :\n");
             *config = Lire_intervale(*config, &Erreur);
+            Ecrire_CONFIG(*config, &Erreur);
+            break;
+        case seuil:
+            // fct pour changer le seuil
+            printf("Entrez le seuil voulue :\n");
+            *config = Lire_seuil(*config, &Erreur);
             Ecrire_CONFIG(*config, &Erreur);
             break;
         case Retour:
@@ -287,61 +290,26 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         switch (choix[0])
         {
         case Recherche_mots_cle:
-            char *tabFileName = (char *)malloc(700* sizeof(char));
-            char *commande = (char *)malloc(500* sizeof(char));
+            char *tabFileName = (char *)malloc(700 * sizeof(char));
             erreur = 0;
             printf("\nEntrer votre mot clé\n");
             scanf("%s", motCle);
             tab_similaire *tabResultatMot = malloc(100 * sizeof(tab_similaire));
             rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
-            LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName,config->Nb_Mots_Cle,config->Similariter);
-            //printf("\n[R] Retour\n");
-            // strcpy(commande, lire);
-            // strcat(commande, cheminBasetxt);
-            // strcat(commande, tabFileName[0]);
-            // system(commande);
-            // free(commande);
-            // printf("\nVoulez vous visionné un autre fichier ?\n[1] Oui\n[2] Non\n");
-            // scanf("%s", choix);
-            // switch (choix[0])
+            LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName,config->Nb_Mots_Cle,config->Seuil, config->Similariter,&nombreElementTabFIN);
+            printf("\n[R] Retour\n");
+            // printf("verification des element du tab filename le premier \n");
+            // printf("%d = %s\n", 0, tabFileName[0]);
+            //     fflush(stdout);
+            // for (int i = 0; i < nombreElemetTab; i++)
             // {
-            // case oui:
-            //     while (choix[0] != Retour)
-            //     {
-            //         char *commande = (char *)malloc(500);
-            //         printf("\nEntrer le numero de fichier que vous voulez visualiser, ou R pour un retour vers le menu de recherche texte\n");
-            //         strcpy(commande, lire);
-            //         strcat(commande, cheminBasetxt);
-            //         strcat(commande, tabFileName[choix[0] - 1]);
-            //         system(commande);
-            //         free(commande);
-            //     }
-            //     etat_courant = Menu_texte;
-            //     break;
-            // case non:
-            //     printf("\nVoulez vous revenir au Menu de recherche principale ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
-            //     scanf("%s", choix);
-            //     switch (choix[0])
-            //     {
-            //     case Retour:
-            //         etat_courant = Menu_Utilisateur;
-            //         break;
-            //     case Quitter:
-            //         printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
-            //         exit(EXIT_SUCCESS);
-            //         break;
-            //     default:
-            //         printf("erreur de choix, vous allez etre redirigez vers le menu de la recherche texte\n");
-            //         etat_courant = Menu_texte;
-            //         break;
-            //     }
-            // break;
-            // default:
-            //     printf("erreur de choix, vous allez etre redirigez vers le menu recherche texte\n");
-            // break;
+            //     printf("%d = %s\n", i, tabFileName[i]);
+            //     fflush(stdout);
             // }
+            //choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "texte");
             free(tabResultatMot);
             free(tabFileName);
+
             break;
 
         case Recherche_par_comparaison_Texte:
@@ -355,7 +323,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 if (test == -1)
                 {
                     printf("\nLe fichier n'existe pas\n");
-                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n [2] Retour menu principale\n");
+                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n[2] Retour menu principale\n");
                     scanf("%s", choix);
                     switch (choix[0])
                     {
@@ -383,10 +351,10 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             {
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatTexte = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700* sizeof(char));
+                char *tabFileName = (char *)malloc(700 * sizeof(char));
                 tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
-                LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName,config->Nb_Mots_Cle,config->Similariter);
-                //printf("\n[R] Retour\n");
+                LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter,&nombreElementTabFIN);
+                printf("\n[R] Retour\n");
                 free(tabResultatTexte);
                 free(tabFileName);
             }
@@ -452,11 +420,11 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             {
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatIMG = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700* sizeof(char));
+                char *tabFileName = (char *)malloc(700 * sizeof(char));
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
                 printf("debut de l'affichage\n");
-                LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName,config->Nb_Mots_Cle,config->Similariter);
-                //printf("\n[R] Retour\n");
+                LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter,&nombreElementTabFIN);
+                printf("\n[R] Retour\n");
                 free(tabResultatIMG);
                 free(tabFileName);
             }
@@ -522,11 +490,11 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 erreur = 0;
                 nombreElemetTab = 0;
                 tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700* sizeof(char));
+                char *tabFileName = (char *)malloc(700 * sizeof(char));
                 tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
                 printf("debut de l'affichage\n");
-                LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName,config->Nb_Mots_Cle,config->Similariter);
-                //printf("\n[R] Retour\n");
+                LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter,&nombreElementTabFIN);
+                printf("\n[R] Retour\n");
                 free(tabResultatAudio);
                 free(tabFileName);
             }

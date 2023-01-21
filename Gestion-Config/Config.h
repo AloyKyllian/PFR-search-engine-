@@ -14,6 +14,7 @@ typedef struct
     int Nb_Bit_Fort;
     int Nb_Fenetre;
     int Intervale;
+    int Seuil;
 }CONFIG;
 
 //Lis Config.txt et renvoie les parametre dans la structure CONFIG
@@ -36,6 +37,9 @@ CONFIG Lire_nb_fenetre(CONFIG , int*);
 
 //Lis et verifie la validiter de la valeur de l'intervale
 CONFIG Lire_intervale(CONFIG , int*);
+
+//Lis et verifie la validiter de la valeur du seuil
+CONFIG Lire_seuil(CONFIG config,int *Erreur);
 
 //Ecrit dans Config.txt les valeur stocker dans la structure CONFIG
 void Ecrire_CONFIG(CONFIG , int*);

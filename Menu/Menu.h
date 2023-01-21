@@ -38,6 +38,7 @@ void MAE(CONFIG *config,char choix[100], int *erreurImage, int *erreurAudio, int
 #define Nombre_de_bits '3'
 #define Nombre_de_fenetre '4'
 #define Intervalle_de_temps '5'
+#define seuil '6'
 
 //Visualisation descripeteur
 //Menu Utilisateur
