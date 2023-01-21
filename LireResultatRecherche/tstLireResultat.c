@@ -11,6 +11,7 @@ int main()
     char *choix = "1";
     char *commande=(char*)malloc(500);
     int nb_cle=10;
+    int nb_Element_Tab=10;
     float similarite=75;
     tabResultat[0].id = -0;
     tabResultat[0].pourcentage = 35;
@@ -20,7 +21,7 @@ int main()
     tabResultat[2].pourcentage = 20;
     int nbElement = 3;
     char *tabFileName[nbElement];
-    LireResultat(tabResultat, nbElement, type, "soleil", tabFileName,nb_cle,similarite);
+    LireResultat(tabResultat, nbElement, type, "soleil", tabFileName,nb_cle,similarite,&nb_Element_Tab);
     strcpy(commande, lire);
     strcat(commande,cheminBase);
     strcat(commande, tabFileName[0]);
