@@ -21,7 +21,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
         }
         else
         {
-            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, "rechercheMot", nombre_mot_cle,similarite, &erreur);
+            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, "rechercheMot", nombre_mot_cle, similarite, &erreur);
         }
     }
 
@@ -96,7 +96,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int k = 0; k < y; k++)
                 {
-                    if (tabResultat[i].pourcentage > (int)(similarite* nombre_mot_cle) / 100)
+                    if (tabResultat[i].pourcentage >= (int)(similarite * nombre_mot_cle) / 100)
                     {
                         if (tabResultat[i].id == base[k].id)
                         {
@@ -141,7 +141,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int y = 0; y <= nbElement; y++)
                 {
-                    if (tabResultat[i].pourcentage >(int)(similarite* nombre_mot_cle) / 100)
+                    if (tabResultat[i].pourcentage > (int)(similarite * nombre_mot_cle) / 100)
                     {
 
                         if (tabResultat[i].id == base[y].id)
@@ -201,7 +201,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                                 filename = base[y].CHEMIN;
                             }
                             tabFileName[l] = filename;
-                            printf("\n[%d] %s\t ->%f\n", l + 1, filename, tabResultat[i].pourcentage);
+                            printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             fflush(stdout);
                             l++;
                         }
@@ -243,7 +243,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                                 filename = base[y].CHEMIN;
                             }
                             tabFileName[l] = filename;
-                            printf("\n[%d] %s\t ->%f\n", l + 1, filename, tabResultat[i].pourcentage);
+                            printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
                         }
                     }
@@ -279,7 +279,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                                 filename = base2[y].CHEMIN;
                             }
                             tabFileName[i] = filename;
-                            printf("[%d] %s\t ->%f\n", l + 1, filename, tabResultat[i].pourcentage);
+                            printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
                         }
                     }
@@ -294,6 +294,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
 
 char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
 {
+    FILE *image;
     char choix[100];
     char choixRQ[100];
     char numero_fichier[100] = "10000";
@@ -332,15 +333,23 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
         strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
         strcat(cheminBase, tabFileName[0]);
         recup_CheminPour_Affichage("rgb", cheminBase);
-        strcpy(commande, lire);
-        strcat(commande, cheminBase);
-        system(commande);
-        strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
-        strcat(cheminBase, tabFileName[0]);
-        recup_CheminPour_Affichage("nb", cheminBase);
-        strcpy(commande, lire);
-        strcat(commande, cheminBase);
-        system(commande);
+        image = fopen(cheminBase, "r");
+        if (image != NULL)
+        {
+            fclose(image);
+            strcpy(commande, lire);
+            strcat(commande, cheminBase);
+            system(commande);
+        }
+        else
+        {
+            strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
+            strcat(cheminBase, tabFileName[0]);
+            recup_CheminPour_Affichage("nb", cheminBase);
+            strcpy(commande, lire);
+            strcat(commande, cheminBase);
+            system(commande);
+        }
     }
     if (strcmp(type, "audio") == 0)
     {
@@ -355,15 +364,20 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
         system(commande);
     }
 
-    if (nbElement != 1 || nbElement != 0)
+    if (nbElement != 0)
     {
+        strcpy(choix, "CHOIX");
         while (choix[0] != '2' || choix[0] != '1')
         {
-            printf("\nVoulez vous visionné un autre fichier ?\n[1] Oui\n[2] Non\n");
+            if (nbElement == 1)
+                printf("\nVoulez vous revisionné ce fichier ?\n[1] Oui\n[2] Non\n");
+            if (nbElement > 1)
+                printf("\nVoulez vous visionné un autre fichier ?\n[1] Oui\n[2] Non\n");
+            
             scanf("%s", choix);
             if (choix[0] == '2')
             {
-                printf("\nVoulez vous revenir au Menu de recherche texte ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
+                printf("\nVoulez vous revenir au Menu de recherche ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
                 scanf("%s", choixRQ);
 
                 return choixRQ[0];
@@ -372,7 +386,7 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
             {
                 while (atoi(numero_fichier) > nbElement)
                 {
-                    printf("\nEntrer le numero de fichier que vous voulez visualiser, ou R pour un retour vers le menu de recherche texte\n");
+                    printf("\nEntrer le numero de fichier que vous voulez visualiser, ou R pour un retour vers le menu de recherche\n");
                     scanf("%s", numero_fichier);
                     if (numero_fichier[0] == 'R')
                         return numero_fichier[0];
@@ -430,7 +444,6 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
 void recup_CheminPour_Affichage(char *type, char *chemin)
 {
     char *extension = strrchr(chemin, '.');
-    printf("chemin avant %s\n", chemin);
     if (extension != NULL && strcmp(type, "rgb") == 0)
     {
         strcpy(extension, ".jpg");
@@ -443,5 +456,4 @@ void recup_CheminPour_Affichage(char *type, char *chemin)
     {
         strcpy(extension, ".wav");
     }
-    printf("chemin apres %s\n", chemin);
 }

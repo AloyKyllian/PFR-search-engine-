@@ -15,7 +15,7 @@ bool seconnecter (lesLogins tablogin, LOGIN newlogin, int *erreur)
       }
       return false;}
     else{
-      //erreur
+      *erreur=7;
     }
 
 }

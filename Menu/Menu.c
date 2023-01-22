@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex)
+void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex, String ERREUR)
 {
     static char etat_courant = Menu_general;
 
@@ -35,31 +35,39 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             do
             {
                 result = seconnecter(tablogin, testlogin, &erreur);
-                printf("\nConnexion ");
-                (result) ? printf("Réussie\n\n") : printf("Échoué\n\n");
-                if (result)
+                if (erreur == 7)
                 {
-                    printf("\nDirection menu admin\n");
-                    etat_courant = Menu_Admin;
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    printf("%s", ERREUR);
                 }
-                if (nbTentative == 3 && result == false)
+                else
                 {
-                    printf("\nSouhaitez vous basculer en mode utilisateur ou essayer de se connecter une nouvelle fois ?\n");
-                    printf("\n[1] Mode utilisateur\n[2] nouvelle tentative de connexion\n");
-                    scanf("%s", choix);
-                    if (strcmp(&choix[0], "1") == 0)
-                        etat_courant = Menu_Utilisateur;
-                    if (strcmp(&choix[0], "2") == 0)
+                    printf("\nConnexion ");
+                    (result) ? printf("Réussie\n\n") : printf("Échoué\n\n");
+                    if (result)
                     {
-                        int nbr_microsec = 0;
-                        printf("\nVous devez attendre 30 seconde pour réessayer\n");
-                        usleep(nbr_microsec);
-                        sleep(30);
-                        printf("\nFin 30 sec, Vous pouvez réessayer maintenant\n");
-                        nbTentative = 0;
+                        printf("\nDirection menu administrateur\n");
+                        etat_courant = Menu_Admin;
                     }
+                    if (nbTentative == 3 && result == false)
+                    {
+                        printf("\nSouhaitez vous basculer en mode utilisateur ou essayer de se connecter une nouvelle fois ?\n");
+                        printf("\n[1] Mode utilisateur\n[2] nouvelle tentative de connexion\n");
+                        scanf("%s", choix);
+                        if (strcmp(&choix[0], "1") == 0)
+                            etat_courant = Menu_Utilisateur;
+                        if (strcmp(&choix[0], "2") == 0)
+                        {
+                            int nbr_microsec = 0;
+                            printf("\nVous devez attendre 30 seconde pour réessayer\n");
+                            usleep(nbr_microsec);
+                            sleep(30);
+                            printf("\nFin 30 sec, Vous pouvez réessayer maintenant\n");
+                            nbTentative = 0;
+                        }
+                    }
+                    nbTentative++;
                 }
-                nbTentative++;
             } while (nbTentative < 4 && result == false);
 
             break;
@@ -71,7 +79,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             exit(EXIT_SUCCESS);
             break;
         default:
-            printf("erreur de choix\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_general;
             break;
         }
@@ -104,7 +114,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             etat_courant = Menu_Utilisateur;
             break;
         default:
-            printf("erreur de choix\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_Admin;
             break;
         }
@@ -124,34 +136,97 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         case Nombre_de_mot_cle:
             printf("Entrez le nombre de mot clé voulue :\n");
             *config = Lire_mot_cle(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
+
             Ecrire_CONFIG(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
             printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Similarité:
             // pour changer similarité
             printf("Entrez la valeur de similarité voulue :\n");
             *config = Lire_similariter(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
+
             Ecrire_CONFIG(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
             printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Nombre_de_bits:
             // pour changer niveau
             printf("Entrez le nombre de bits voulue :\n");
             *config = Lire_nb_bit_fort(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
+
             Ecrire_CONFIG(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
             printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Nombre_de_fenetre:
             printf("Entrez le nombre de fenetre voulue :\n");
             *config = Lire_nb_fenetre(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
             Ecrire_CONFIG(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
             printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Intervalle_de_temps:
             // fct pour changer l'intervalle de temps
             printf("Entrez l'intervalle de temps voulue' :\n");
             *config = Lire_intervale(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
             Ecrire_CONFIG(*config, &Erreur);
+            if (Erreur != 0)
+            {
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
+                Erreur = 0;
+            }
             printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Retour:
@@ -173,14 +248,18 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     exit(EXIT_SUCCESS);
                     break;
                 default:
-                    printf("\nMauvais choix, vous allez etre rediriger au menu configuration\n");
+                    erreur = 11;
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    printf("%s", ERREUR);
                     etat_courant = Menu_Configuration;
                     break;
                 }
             }
             break;
         default:
-            printf("Erreur de choix\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_Configuration;
             break;
         }
@@ -234,7 +313,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             }
             break;
         default:
-            printf("erreur de choix\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_Visualisation;
             break;
         }
@@ -264,7 +345,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             exit(EXIT_SUCCESS);
             break;
         default:
-            printf("erreur de choix menu utilisateur\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_Utilisateur;
             break;
         }
@@ -286,17 +369,25 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             scanf("%s", motCle);
             tab_similaire *tabResultatMot = malloc(100 * sizeof(tab_similaire));
             rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
-            nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName, config->Nb_Mots_Cle, config->Similariter);
-            printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
-
-            if (nombreElementTabFIN > 0)
+            if (erreur == 7)
             {
-                choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "texte");
+                Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                printf("%s", ERREUR);
             }
-            if (strcmp(choix, "Q") == 0)
+            else
             {
-                printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
-                exit(EXIT_SUCCESS);
+                nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+
+                if (nombreElementTabFIN > 0)
+                {
+                    printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
+                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "texte");
+                }
+                if (strcmp(choix, "Q") == 0)
+                {
+                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
+                    exit(EXIT_SUCCESS);
+                }
             }
             free(tabResultatMot);
         }
@@ -344,6 +435,11 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 tab_similaire *tabResultatTexte = malloc(100 * sizeof(tab_similaire));
                 char *tabFileName[700];
                 tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
+                if (erreur == 7 || erreur == 1)
+                {
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    printf("%s", ERREUR);
+                }
                 nombreElementTabFIN = LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
 
                 if (nombreElementTabFIN > 0)
@@ -367,7 +463,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             exit(EXIT_SUCCESS);
             break;
         default:
-            printf("erreur de choix\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_texte;
             break;
         }
@@ -422,17 +520,24 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 tab_similaire *tabResultatIMG;
                 char *tabFileName[700];
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
-                printf("Debut de l'affichage\n");
-                nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
-                if (nombreElementTabFIN > 0)
+                if (erreur != 0)
                 {
-                    printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
-                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "image");
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    printf("%s", ERREUR);
                 }
-                if (strcmp(choix, "Q") == 0)
+                else
                 {
-                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
-                    exit(EXIT_SUCCESS);
+                    nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                    if (nombreElementTabFIN > 0)
+                    {
+                        printf("\n[R] Retour\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
+                        choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "image");
+                    }
+                    if (strcmp(choix, "Q") == 0)
+                    {
+                        printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
+                        exit(EXIT_SUCCESS);
+                    }
                 }
                 free(tabResultatIMG);
             }
@@ -445,7 +550,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             exit(EXIT_SUCCESS);
             break;
         default:
-            printf("erreur de choix\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_image;
             break;
         }
@@ -499,21 +606,29 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 nombreElemetTab = 0;
                 tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
                 char *tabFileName[700];
-                tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
-                printf("debut de l'affichage\n");
-                nombreElementTabFIN = LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                if (erreur != 0)
+                {
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    printf("%s", ERREUR);
+                }
+                else
+                {
+                    tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
+                    printf("debut de l'affichage\n");
+                    nombreElementTabFIN = LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
 
-                if (nombreElementTabFIN > 0)
-                {
-                    printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
-                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "audio");
+                    if (nombreElementTabFIN > 0)
+                    {
+                        printf("\n[R] Retour\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
+                        choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "audio");
+                    }
+                    if (strcmp(choix, "Q") == 0)
+                    {
+                        printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
+                        exit(EXIT_SUCCESS);
+                    }
+                    free(tabResultatAudio);
                 }
-                if (strcmp(choix, "Q") == 0)
-                {
-                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
-                    exit(EXIT_SUCCESS);
-                }
-                free(tabResultatAudio);
             }
             break;
         case Retour:
@@ -524,7 +639,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             exit(EXIT_SUCCESS);
             break;
         default:
-            printf("Erreur de choix\n");
+            erreur = 11;
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
             etat_courant = Menu_audio;
             break;
         }
@@ -532,11 +649,13 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
 
     default:
         printf("il y a une erreur, vous allez etre redirigez vers le menu general\n");
+        erreur = 14;
+        if (erreur != 0)
+        {
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            printf("%s", ERREUR);
+        }
         etat_courant = Menu_general;
         break;
     }
-}
-
-void visionnerFichier()
-{
 }

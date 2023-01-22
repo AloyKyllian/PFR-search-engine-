@@ -6,8 +6,10 @@
 #include "../RechercheMot/rechercheMot.h"
 #include "../indexgene/indexation_gene.h"
 #include "../comparaison/comparaison.h"
+#include "../LireResultatRecherche/LireResultat.h"
+#include "../Gestion-Erreur/Erreur.h"
 
-void MAE(CONFIG *config,char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex);
+void MAE(CONFIG *,char*, int *, int *, int *, int *,String);
 
 //Etat :
 //MENUS PRINCIPAUX

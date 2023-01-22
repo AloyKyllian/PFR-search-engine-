@@ -2,4 +2,4 @@
 [2] Similarité : 50
 [3] Nombre de bits : 2
 [4] Nombre de fenetre : 2048
-[5] Intervale de temps : 32
+[5] Intervale de temps : 15

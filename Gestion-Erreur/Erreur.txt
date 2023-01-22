@@ -8,3 +8,7 @@ ERREUR 6: Pas une puissance de 2
 ERREUR 7: Fichier introuvable
 ERREUR 9: Pas un nombre
 ERREUR 10: Nombre superieur a 100
+ERREUR 11: Ce choix ne figure pas dans la liste
+ERREUR 12: Mauvais identifiant admin
+ERREUR 13: Mauvaise extension
+ERREUR 14: Il y a une erreur, vous allez etre redirigez vers le menu general

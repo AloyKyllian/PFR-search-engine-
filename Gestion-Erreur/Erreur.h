@@ -1,7 +1,6 @@
 #ifndef ERREUR_H
 #define ERREUR_H
-
-typedef char String[100];
+#include "../Gestion-Config/Global.h"
 /* Exemple d'utilsation
 void main()
 {
