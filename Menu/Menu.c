@@ -7,6 +7,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
 
     // variables a utiliser au cours du programme
     char chemin[100];
+    char requete[100];
     int erreur = 0;
     int nbTentative = 1;
     char motCle[27];
@@ -15,7 +16,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     bool result = false;
     LOGIN testlogin;
     lesLogins tablogin;
-    int test;
+    int test, test2;
     char cheminDescripteurTxt[200] = "../base_descripteur/base_descripteur_texte";
     char cheminDescripteurIMG[100] = "../base_descripteur/base_descripteur_image";
     char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
@@ -509,17 +510,20 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 }
             }
             // verification si le fichier passer est un fichier texte
-            test = VerifExtension(chemin, "txt");
-            if (test == -1)
+            test = VerifExtension(chemin, "jpg");
+            test2 = VerifExtension(chemin, "bmp");
+            if (test == -1 && test2 == -1)
             {
-                printf("\nCe fichier n'est pas de type image\nVeuiller mettre un fichier .txt\n");
+                printf("\nCe fichier n'est pas de type image\nVeuiller mettre un fichier .jpg ou .bmp\n");
                 etat_courant = Menu_image;
             }
             else
             {
+                strcpy(requete, chemin);
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatIMG;
                 char *tabFileName[700];
+                recup_CheminPour_Affichage("texte", &chemin);
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
                 if (erreur != 0)
                 {
@@ -528,7 +532,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 }
                 else
                 {
-                    nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                    nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", requete, tabFileName, config->Nb_Mots_Cle, config->Similariter);
                     if (nombreElementTabFIN > 0)
                     {
                         printf("\n[R] Retour\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
@@ -595,7 +599,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 }
             }
             // verification si le fichier passer est un fichier texte
-            test = VerifExtension(chemin, "txt");
+            test = VerifExtension(chemin, "wav");
             if (test == -1)
             {
                 printf("\nCe fichier n'est pas de type audio\nVeuiller faire le choix de recherche qui vous correspond\n");
@@ -614,8 +618,8 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 }
                 else
                 {
+                    recup_CheminPour_Affichage("texte", &chemin);
                     tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
-                    printf("debut de l'affichage\n");
                     nombreElementTabFIN = LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
 
                     if (nombreElementTabFIN > 0)

@@ -12,7 +12,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     // affichage des resultat de recherche par mot cle :
     printf("\nLes resultat pour votre recherche :\n");
     if (strstr(type, "rechercheMot"))
-    {
+    {   
         printf("\nRequete mot-cle : \"%s\"\n", requete);
         printf("\nRésultats (fichier -> occurrences) :\n");
         if (nbElement == 0)
@@ -42,7 +42,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
 
     // affichage des resultat de comparaison Image :
     if (strstr(type, "image"))
-    {
+    {   
         printf("\nRequete image : \"%s\"\n", requete);
         printf("\nRésultats :\n");
         if (nbElement == 0)
@@ -200,6 +200,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             {
                                 filename = base[y].CHEMIN;
                             }
+                            recup_CheminPour_Affichage("audio", filename);
                             tabFileName[l] = filename;
                             printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             fflush(stdout);
@@ -242,6 +243,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             {
                                 filename = base[y].CHEMIN;
                             }
+                            recup_CheminPour_Affichage("nb", filename);
                             tabFileName[l] = filename;
                             printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
@@ -278,6 +280,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             {
                                 filename = base2[y].CHEMIN;
                             }
+                            recup_CheminPour_Affichage("rgb", filename);
                             tabFileName[i] = filename;
                             printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
@@ -447,6 +450,10 @@ void recup_CheminPour_Affichage(char *type, char *chemin)
     if (extension != NULL && strcmp(type, "rgb") == 0)
     {
         strcpy(extension, ".jpg");
+    }
+    if (extension != NULL && strcmp(type, "texte") == 0)
+    {
+        strcpy(extension, ".txt");
     }
     if (extension != NULL && strcmp(type, "nb") == 0)
     {
