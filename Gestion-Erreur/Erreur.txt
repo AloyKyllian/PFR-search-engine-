@@ -1,14 +1,14 @@
 ERREUR 0: NULL
 ERREUR 1: Alocation memoire
-ERREUR 2: Nombre inferieur a 0
-ERREUR 3: Nombre inferieur a 256
-ERREUR 4: Nombre superieur a 0
-ERREUR 5: Nombre superieur a 8
-ERREUR 6: Pas une puissance de 2
+ERREUR 2: Le nombre doit etre superieur a 0
+ERREUR 3: Le nombre doit etre superieur a 256
+ERREUR 4: Le nombre doit etre inferieur a 0
+ERREUR 5:  Le nombre doit etre inferieur a 8
+ERREUR 6: Le nombre n'est pas une puissance de 2
 ERREUR 7: Fichier introuvable
 ERREUR 8: 404
-ERREUR 9: Pas un nombre
-ERREUR 10: Nombre superieur a 100
+ERREUR 9: Ce n'est pas un nombre
+ERREUR 10:  Le nombre doit etre inferieur a 100
 ERREUR 11: Ce choix ne figure pas dans la liste
 ERREUR 12: Mauvais identifiant admin
 ERREUR 13: Mauvaise extension
