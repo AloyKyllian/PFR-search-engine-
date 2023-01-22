@@ -17,9 +17,12 @@ int FichierExist(char chemin[100])
 }
 
 int VerifExtension(char chemin[100],char extension[4]){
-    char *i=strstr(chemin,extension);
-            if (i==NULL)
-                return -1;//meme chose
-            else
-                 return 1;//meme chose
+    char *i = strrchr(chemin, '.'); // recherche le dernier point dans le chemin
+    if(i != NULL) {
+        i++; // on passe le point
+        if(strcmp(i, extension) == 0) {
+            return 1;
+        }
+    }
+    return -1;
 }
