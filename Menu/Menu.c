@@ -18,7 +18,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     char cheminDescripteurTxt[200] = "../base_descripteur/base_descripteur_texte";
     char cheminDescripteurIMG[100] = "../base_descripteur/base_descripteur_image";
     char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
-    
+
     switch (etat_courant)
     {
     case Menu_general:
@@ -279,6 +279,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         switch (choix[0])
         {
         case Recherche_mots_cle:
+        {
             char *tabFileName[700];
             erreur = 0;
             printf("\nEntrer votre mot clé\n");
@@ -298,7 +299,9 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 exit(EXIT_SUCCESS);
             }
             free(tabResultatMot);
-            break;
+        }
+
+        break;
 
         case Recherche_par_comparaison_Texte:
             // verification si le fichier existe
@@ -410,16 +413,16 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             test = VerifExtension(chemin, "txt");
             if (test == -1)
             {
-                printf("\nCe fichier n'est pas de type image\nVeuiller mettre un fichier texte\n");
+                printf("\nCe fichier n'est pas de type image\nVeuiller mettre un fichier .txt\n");
                 etat_courant = Menu_image;
             }
             else
             {
                 erreur = 0, nombreElemetTab = 0;
-                tab_similaire *tabResultatIMG = malloc(100 * sizeof(tab_similaire));
+                tab_similaire *tabResultatIMG;
                 char *tabFileName[700];
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
-                printf("debut de l'affichage\n");
+                printf("Debut de l'affichage\n");
                 nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
                 if (nombreElementTabFIN > 0)
                 {

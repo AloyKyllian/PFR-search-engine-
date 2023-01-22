@@ -1,6 +1,5 @@
-[1] Nombre de mots clé : 666
-[2] Similarité : 10
+[1] Nombre de mots clé : 10
+[2] Similarité : 50
 [3] Nombre de bits : 2
 [4] Nombre de fenetre : 2048
 [5] Intervale de temps : 32
-[6] Seuil : 4

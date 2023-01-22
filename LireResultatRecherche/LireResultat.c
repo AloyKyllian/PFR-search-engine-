@@ -229,7 +229,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int y = 0; y <= nbElement; y++)
                 {
-                    if (tabResultat[i].pourcentage >similarite)
+                    if (tabResultat[i].pourcentage >= similarite)
                     {
                         if (tabResultat[i].id == base[y].id)
                         {
@@ -265,7 +265,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int y = 0; y <= nbElement; y++)
                 {
-                    if (tabResultat[i].pourcentage > 75)
+                    if (tabResultat[i].pourcentage >= similarite)
                     {
                         if (tabResultat[i].id == base2[y].id)
                         {
