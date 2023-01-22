@@ -84,8 +84,6 @@ int getligne(char *path, int *erreur)
       fichier = fopen("getligne_temp", "r"); // Ouverture du texte à traiter
       if (fichier == NULL)
       {
-            // printf("Erreur lors de l'ouverture d'un fichier");
-            // exit(1);
             *erreur = 7;
       }
 

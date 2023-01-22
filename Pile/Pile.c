@@ -14,10 +14,9 @@ void affichePILE(PILE pile)
     int i;
     PILE temp= pile;
       if(PILE_estVide(pile)==1)
-          {printf("VIDE\n\n");}
+      {}
        else
        {
-           printf("\nAffichage de la pile:\n");
            do
            {
                affiche_ELEMENT((*temp).element);
@@ -30,10 +29,9 @@ void affichePILE_audio(PILE_audio pile)
     int i;
     PILE_audio temp= pile;
       if(pile==NULL)
-          {printf("VIDE\n\n");}
+      {}
        else
        {
-           printf("\nAffichage de la pile:\n");
            do
            {
                affiche_ELEMENT_audio(temp->element);
@@ -47,10 +45,9 @@ void affichePILE_image(PILE_image pile)
     int i;
     PILE_image temp= pile;
       if(pile==NULL)
-          {printf("VIDE\n\n");}
+          {}
        else
        {
-           printf("\nAffichage de la pile:\n");
            do
            {
                affiche_ELEMENT_image(temp->element);
@@ -158,10 +155,9 @@ void affichePILE_texte(PILE_texte pile)
     int i;
     PILE_texte temp= pile;
       if(pile==NULL)
-          {printf("VIDE\n\n");}
+          {}
        else
        {
-           printf("\nAffichage de la pile:\n");
            do
            {
                 printf("%d",temp->element.id);

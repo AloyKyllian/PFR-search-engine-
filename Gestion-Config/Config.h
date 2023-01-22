@@ -3,6 +3,7 @@
 
 
 #include "Global.h"
+#include <math.h>
 
 //Tout les parametres necessaires aux configurations .
 typedef struct

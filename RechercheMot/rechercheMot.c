@@ -31,7 +31,6 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 				fscanf(fp, "%s    |    %s", chaine, nb_occu);
 				if (strcmp(chaine, mot) == 0)
 				{
-					// printf("chaine= %s son nombre d'occurence : %s et ID=%s\n", chaine, nb_occu, IDstring);
 					// stocker les donnee dans un fichier pour les trier avec la commande sort de linux
 					strcpy(commande, echo);
 					strcat(commande, IDstring);

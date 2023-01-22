@@ -10,7 +10,6 @@ int FichierExist(char chemin[100])
 	}
 	else
 	{
-    	//printf("Le fichier existe et on le referme aussitôt");
     	fclose(fichier);
         return 1;//passer erreur en parametre et le rendre erreur =??
 	}

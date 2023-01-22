@@ -10,10 +10,10 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     int erreur;
     int element_tableauRes = 0;
     // affichage des resultat de recherche par mot cle :
-    printf("\nLes resultat pour votre recherche :\n");
+    printf("\nLes resultats pour votre recherche :\n");
     if (strstr(type, "rechercheMot"))
     {   
-        printf("\nRequete mot-cle : \"%s\"\n", requete);
+        printf("\nRequete mot-clé : \"%s\"\n", requete);
         printf("\nRésultats (fichier -> occurrences) :\n");
         if (nbElement == 0)
         {
@@ -58,7 +58,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     if (strstr(type, "audio"))
     {
 
-        printf("\nRequete son (jingle) : \"%s\"\n", requete);
+        printf("\nRequete son : \"%s\"\n", requete);
         printf("\nRésultats :\n");
         if (nbElement == 0)
         {
@@ -373,14 +373,14 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
         while (choix[0] != '2' || choix[0] != '1')
         {
             if (nbElement == 1)
-                printf("\nVoulez vous revisionné ce fichier ?\n[1] Oui\n[2] Non\n");
+                printf("\nVoulez vous revisionner ce fichier ?\n[1] Oui\n[2] Non\n");
             if (nbElement > 1)
-                printf("\nVoulez vous visionné un autre fichier ?\n[1] Oui\n[2] Non\n");
+                printf("\nVoulez vous visionner un autre fichier ?\n[1] Oui\n[2] Non\n");
             
             scanf("%s", choix);
             if (choix[0] == '2')
             {
-                printf("\nVoulez vous revenir au Menu de recherche ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
+                printf("\nVoulez vous revenir au \"Menu Recherche\" ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
                 scanf("%s", choixRQ);
 
                 return choixRQ[0];
@@ -390,7 +390,7 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
                 strcpy(numero_fichier, "1000000");
                 while (atoi(numero_fichier) > nbElement)
                 {
-                    printf("\nEntrer le numero de fichier que vous voulez visualiser, ou R pour un retour vers le menu de recherche\n");
+                    printf("\nEntrez le numero de fichier que vous voulez visualiser, ou R pour un retour vers \"Menu Recherche\"\n");
                     scanf("%s", numero_fichier);
                     if (numero_fichier[0] == 'R')
                         return numero_fichier[0];
@@ -437,7 +437,7 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
 
                 else
                 {
-                    printf("\nCe choix n'existe pas, veuillez faire le bon choix\n");
+                    printf("\nCe choix n'existe pas, Réessayez\n");
                 }
             }
         }

@@ -12,7 +12,7 @@ void Afficher_Erreur(int Erreur,char Path[], char Phrase[])
     fichier = fopen(Path,"r");
     if(fichier == NULL)
     {
-        printf("Erreur : Ouverture fuchier");
+        printf("Erreur : Ouverture fichier");
     }
     else
     {

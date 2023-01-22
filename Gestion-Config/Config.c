@@ -12,7 +12,7 @@ CONFIG Lire_CONFIG(int *Erreur)
     if (fichier != NULL)
     {
         *Erreur = 0;
-        fscanf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d\n", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
+        fscanf(fichier, "[1] Nombre de mots-clé : %d\n[2] Similarité : %d\n[3] Nombre de bits de poids fort : %d\n[4] Nombre de fenetres : %d\n[5] Intervale de temps : %d\n", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
     }
     else
     {
@@ -24,11 +24,11 @@ CONFIG Lire_CONFIG(int *Erreur)
 
 void Afficher_CONFIG(CONFIG config)
 {
-    printf("Nombre de mots cle = %d\n", config.Nb_Mots_Cle);
-    printf("Similariter = %d\n", config.Similariter);
+    printf("Nombre de mots-clé = %d\n", config.Nb_Mots_Cle);
+    printf("Similarité = %d\n", config.Similariter);
     printf("Nombre de bits de poids fort = %d\n", config.Nb_Bit_Fort);
-    printf("Nombre de fenetre = %d\n", config.Nb_Fenetre);
-    printf("Intervale = %d\n", config.Intervale);
+    printf("Nombre de fenetres = %d\n", config.Nb_Fenetre);
+    printf("Intervale de temps= %d\n", config.Intervale);
 }
 
 CONFIG Lire_mot_cle(CONFIG config,int *Erreur)
@@ -173,7 +173,7 @@ void Ecrire_CONFIG(CONFIG config,int *Erreur)
     if (fichier != NULL)
     {
         *Erreur = 0;
-        fprintf(fichier, "[1] Nombre de mots clé : %d\n[2] Similarité : %d\n[3] Nombre de bits : %d\n[4] Nombre de fenetre : %d\n[5] Intervale de temps : %d\n", config.Nb_Mots_Cle, config.Similariter, config.Nb_Bit_Fort, config.Nb_Fenetre, config.Intervale);
+        fprintf(fichier, "[1] Nombre de mots-clé : %d\n[2] Similarité : %d\n[3] Nombre de bits de poids fort : %d\n[4] Nombre de fenetres : %d\n[5] Intervale de temps : %d\n", &config.Nb_Mots_Cle, &config.Similariter, &config.Nb_Bit_Fort, &config.Nb_Fenetre, &config.Intervale);
     }
     else
     {

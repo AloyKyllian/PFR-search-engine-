@@ -95,7 +95,6 @@ bool filtrage(char* mot)
     FILE* fichierBanni = NULL;
     fichierBanni = fopen("../descripteur_texte/MotBanni.txt", "r");
     if(fichierBanni==NULL){
-        printf("Erreur fichier 666666666");               //Vérification ouverture du fichier
         exit(1);
     }
 
@@ -170,11 +169,6 @@ DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE ta
         max=1;
     }
 
-//_________________________________________
-   // for(int x=0;x<nbr_occ;x++)
-   // {
-     //   printf("%s    |    %d\n",tab_occ_finale.tab_mot[x],tab_occ_finale.tab_app[x]);          //On affiche le tableau final
-    //}
 
     return tab_occ_finale;
 
@@ -188,7 +182,6 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
     FILE* fichier = NULL;
     fichier = fopen(chemin_fichier, "r");                           //Ouverture du texte à traiter
     if(fichier==NULL){
-        printf("Erreur lors de l'ouverture d'un fichier");
         exit(1);
     }
 
@@ -257,11 +250,6 @@ DESCRIPTEUR_TEXTE descripteur_texte_finale(char* chemin_fichier,int nbr_occ,DESC
         if(strlen(tab_renvoyer.tab_mot[x])==0)
     {
         sprintf(nodata,"NO_DATA%d",x);
-        // strcpy(nodata,"NO_DATA" );
-        // char num=(char)x;
-        // strcat(nodata,&num);
-        // printf("%s",nodata);
-        // fflush(stdout);
         strcpy(tab_renvoyer.tab_mot[x],nodata);
     }
     }
