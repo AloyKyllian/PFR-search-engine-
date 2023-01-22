@@ -24,7 +24,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     switch (etat_courant)
     {
     case Menu_general:
-        printf("\n__________________________Menu général__________________________\n");
+        printf("\n__________________________Menu Général__________________________\n");
         printf("\nVeuillez faire votre choix : \n");
         printf("\n[1] Administrateur \n[2] Utilisateur \n[Q] Quitter\n");
         scanf("%s", choix);
@@ -409,7 +409,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 if (test == -1)
                 {
                     printf("\nLe fichier n'existe pas\n");
-                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n[2] Retour \"Menu Principal\"\n");
+                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n[2] Retour \"Menu Général\"\n");
                     scanf("%s", choix);
                     switch (choix[0])
                     {
@@ -494,7 +494,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 if (test == -1)
                 {
                     printf("\nLe fichier n'existe pas\n");
-                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrez un autre fichier\n[2] Retour \"Menu principal\"\n");
+                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrez un autre fichier\n[2] Retour \"Menu Général\"\n");
                     scanf("%s", choix);
                     switch (choix[0])
                     {
@@ -583,7 +583,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 if (test == -1)
                 {
                     printf("\nLe fichier n'existe pas\n");
-                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrez un autre fichier\n[2] Retour \"Menu principal\"\n");
+                    printf("\nVeuillez faire un choix pour continuer\n[1] Entrez un autre fichier\n[2] Retour \"Menu Général\"\n");
                     scanf("%s", choix);
                     switch (choix[0])
                     {
