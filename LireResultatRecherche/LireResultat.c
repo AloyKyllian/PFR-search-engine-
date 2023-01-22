@@ -96,7 +96,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int k = 0; k < y; k++)
                 {
-                    if (tabResultat[i].pourcentage >= (int)(similarite * nombre_mot_cle) / 100)
+                    if (tabResultat[0].pourcentage / 2)
                     {
                         if (tabResultat[i].id == base[k].id)
                         {
