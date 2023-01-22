@@ -8,27 +8,17 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
     char chemin[100];
     int erreur = 0;
     int nbTentative = 1;
-    int Erreur = 0;
     char motCle[27];
-    char *choixIMG;
     int nombreElemetTab = 0;
     int nombreElementTabFIN = 0;
     bool result = false;
-    char *type;
     LOGIN testlogin;
     lesLogins tablogin;
-    char *extension;
     int test;
     char cheminDescripteurTxt[200] = "../base_descripteur/base_descripteur_texte";
     char cheminDescripteurIMG[100] = "../base_descripteur/base_descripteur_image";
     char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
-    // lire config si ya une erreur
-    // config=Lire_CONFIG(&erreurConfig);
-    // voir si un nv fichier
-    // indexation
-    // 4 erreurs index gene, image,audio,texte
-    // indexation_generale_ferme(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
-    // verifier les erreurs de tt les phases
+    
     switch (etat_courant)
     {
     case Menu_general:
@@ -127,7 +117,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         Afficher_CONFIG(*config);
         printf("\nSi vous voulez changer une valeur, veuillez faire votre choix  : \n");
         printf("\n[1] Nombre de mots clé\n[2] Similarité\n[3] Nombre de bits \n[4] Nombre de fenetre\n");
-        printf("[5] Intervalle de temps\n[6] Seuil\n[R] Retour\n[Q] Déconnexion\n");
+        printf("[5] Intervalle de temps\n[R] Retour\n[Q] Déconnexion\n");
         scanf("%s", choix);
         switch (choix[0])
         {
@@ -135,36 +125,34 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             printf("Entrez le nombre de mot clé voulue :\n");
             *config = Lire_mot_cle(*config, &Erreur);
             Ecrire_CONFIG(*config, &Erreur);
-            //???????????????????????????????
+            printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Similarité:
             // pour changer similarité
             printf("Entrez la valeur de similarité voulue :\n");
             *config = Lire_similariter(*config, &Erreur);
             Ecrire_CONFIG(*config, &Erreur);
+            printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Nombre_de_bits:
             // pour changer niveau
             printf("Entrez le nombre de bits voulue :\n");
             *config = Lire_nb_bit_fort(*config, &Erreur);
             Ecrire_CONFIG(*config, &Erreur);
+            printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Nombre_de_fenetre:
             printf("Entrez le nombre de fenetre voulue :\n");
             *config = Lire_nb_fenetre(*config, &Erreur);
             Ecrire_CONFIG(*config, &Erreur);
+            printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Intervalle_de_temps:
             // fct pour changer l'intervalle de temps
             printf("Entrez l'intervalle de temps voulue' :\n");
             *config = Lire_intervale(*config, &Erreur);
             Ecrire_CONFIG(*config, &Erreur);
-            break;
-        case seuil:
-            // fct pour changer le seuil
-            printf("Entrez le seuil voulue :\n");
-            *config = Lire_seuil(*config, &Erreur);
-            Ecrire_CONFIG(*config, &Erreur);
+            printf("\nSi vous avez changer votre configuration veuillez lancer l'indexation pour appliquer vos modification\n");
             break;
         case Retour:
             etat_courant = Menu_Admin;
@@ -206,19 +194,19 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         switch (choix[0])
         {
         case texte:
-            system("chmod o-w ../base_descripteur/base_descripteur_texte");
+            system("chmod a-w ../base_descripteur/base_descripteur_texte");
             system("gedit ../base_descripteur/base_descripteur_texte");
-            system("chmod o+w ../base_descripteur/base_descripteur_texte");
+            system("chmod 777 ../base_descripteur/base_descripteur_texte");
             break;
         case image:
-            system("chmod o-w ../base_descripteur/base_descripteur_image");
+            system("chmod a-w ../base_descripteur/base_descripteur_image");
             system("gedit ../base_descripteur/base_descripteur_image");
-            system("chmod o+w ../base_descripteur/base_descripteur_image");
+            system("chmod 777 ../base_descripteur/base_descripteur_image");
             break;
         case audio:
-            system("chmod o-w ../base_descripteur/base_descripteur_audio");
+            system("chmod a-w ../base_descripteur/base_descripteur_audio");
             system("gedit ../base_descripteur/base_descripteur_audio");
-            system("chmod o+w ../base_descripteur/base_descripteur_audio");
+            system("chmod 777 ../base_descripteur/base_descripteur_audio");
             break;
         case Retour:
             etat_courant = Menu_Admin;
@@ -297,7 +285,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             scanf("%s", motCle);
             tab_similaire *tabResultatMot = malloc(100 * sizeof(tab_similaire));
             rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
-            nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName, config->Nb_Mots_Cle, config->Seuil, config->Similariter);
+            nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName, config->Nb_Mots_Cle, config->Similariter);
             printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
 
             if (nombreElementTabFIN > 0)

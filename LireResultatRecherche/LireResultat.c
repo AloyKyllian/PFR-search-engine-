@@ -4,17 +4,11 @@
 #include <math.h>
 #include "../LireResultatRecherche/LireResultat.h"
 
-int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *requete, char *tabFileName[], int nombre_mot_cle, int seuil, int similarite)
+int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *requete, char *tabFileName[], int nombre_mot_cle, int similarite)
 {
 
     int erreur;
     int element_tableauRes = 0;
-    // printf("\nverifie les element du tableau\n");
-    // for (int w = 0; w < nbElement; w++)
-    // {
-    //     printf("\nID=%d, nb=%f\n", tabResultat[w].id, tabResultat[w].pourcentage);
-    // }
-
     // affichage des resultat de recherche par mot cle :
     printf("\nLes resultat pour votre recherche :\n");
     if (strstr(type, "rechercheMot"))
@@ -27,7 +21,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
         }
         else
         {
-            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, "rechercheMot", nombre_mot_cle, seuil, similarite, &erreur);
+            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, "rechercheMot", nombre_mot_cle,similarite, &erreur);
         }
     }
 
@@ -42,7 +36,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
         }
         else
         {
-            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, seuil, similarite, &erreur);
+            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
 
@@ -57,7 +51,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
         }
         else
         {
-            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, seuil, similarite, &erreur);
+            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
     // affichage des resultat de comparaison Audio :
@@ -72,13 +66,13 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
         }
         else
         {
-            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, seuil, similarite, &erreur);
+            element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
     return element_tableauRes;
 }
 
-int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, char *type, int nombre_mot_cle, int seuil, int similarite, int *erreur)
+int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, char *type, int nombre_mot_cle, int similarite, int *erreur)
 {
     FILE *fichier = NULL;
     FILE *fichier1 = NULL;
@@ -102,7 +96,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int k = 0; k < y; k++)
                 {
-                    if (tabResultat[i].pourcentage > 0)
+                    if (tabResultat[i].pourcentage > (int)(similarite* nombre_mot_cle) / 100)
                     {
                         if (tabResultat[i].id == base[k].id)
                         {
@@ -147,7 +141,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int y = 0; y <= nbElement; y++)
                 {
-                    if (tabResultat[i].pourcentage > seuil)
+                    if (tabResultat[i].pourcentage >(int)(similarite* nombre_mot_cle) / 100)
                     {
 
                         if (tabResultat[i].id == base[y].id)
@@ -193,7 +187,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int y = 0; y <= nbElement; y++)
                 {
-                    if (tabResultat[i].pourcentage > 30)
+                    if (tabResultat[i].pourcentage > similarite)
                     {
                         if (tabResultat[i].id == base[y].id)
                         {
@@ -235,7 +229,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int y = 0; y <= nbElement; y++)
                 {
-                    if (tabResultat[i].pourcentage > 75)
+                    if (tabResultat[i].pourcentage >similarite)
                     {
                         if (tabResultat[i].id == base[y].id)
                         {
@@ -309,12 +303,6 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
     char *addDroit = "chmod o+w ";
     char commande[1000];
 
-    // printf("verification des element du tab filename\n");
-    // for (int i = 0; i < nbElement; i++)
-    // {
-    //     printf("%d = %s\n", i, tabFileName[i]);
-    // }
-
     if (strcmp(type, "texte") == 0)
     {
         strcpy(lire, "gedit ");
@@ -367,25 +355,6 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
         system(commande);
     }
 
-    char *cheminBaseImgNB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/";
-    char *cheminBaseImgRGB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/";
-    // afin de visualiser le premier fichier resultat on enleve les droits
-    // strcpy(commande, rmDroit);
-    // strcat(commande, cheminBase);
-    // strcat(commande, tabFileName[0]);
-    // system(commande);
-
-    // // on l'ouvre pour que l'utilisateur le visualise
-    // strcpy(commande, lire);
-    // strcat(commande, cheminBase);
-    // strcat(commande, tabFileName[0]);
-    // system(commande);
-
-    // // on remet les permissions d'ecriture sur le fichier
-    // strcpy(commande, addDroit);
-    // strcat(commande, cheminBase);
-    // strcat(commande, tabFileName[0]);
-    // system(commande);
     if (nbElement != 1 || nbElement != 0)
     {
         while (choix[0] != '2' || choix[0] != '1')
