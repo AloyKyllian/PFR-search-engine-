@@ -276,16 +276,19 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         {
         case texte:
             system("chmod a-w ../base_descripteur/base_descripteur_texte");
+            printf("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
             system("gedit ../base_descripteur/base_descripteur_texte");
             system("chmod 777 ../base_descripteur/base_descripteur_texte");
             break;
         case image:
             system("chmod a-w ../base_descripteur/base_descripteur_image");
+            printf("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
             system("gedit ../base_descripteur/base_descripteur_image");
             system("chmod 777 ../base_descripteur/base_descripteur_image");
             break;
         case audio:
             system("chmod a-w ../base_descripteur/base_descripteur_audio");
+            printf("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
             system("gedit ../base_descripteur/base_descripteur_audio");
             system("chmod 777 ../base_descripteur/base_descripteur_audio");
             break;
@@ -365,7 +368,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         {
         case Recherche_mots_cle:
         {
-            char *tabFileName[700];
+            char *tabFileNameMOT[700];
             erreur = 0;
             printf("\nEntrer votre mot clé\n");
             scanf("%s", motCle);
@@ -378,12 +381,12 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             }
             else
             {
-                nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileNameMOT, config->Nb_Mots_Cle, config->Similariter);
 
                 if (nombreElementTabFIN > 0)
                 {
                     printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
-                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "texte");
+                    choix[0] = visualiser_fichier(tabFileNameMOT, nombreElementTabFIN, "texte");
                 }
                 if (strcmp(choix, "Q") == 0)
                 {
@@ -435,19 +438,19 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             {
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatTexte = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName[700];
+                char *tabFileNameTEXTE[700];
                 tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
                 if (erreur == 7 || erreur == 1)
                 {
                     Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                     printf("%s", ERREUR);
                 }
-                nombreElementTabFIN = LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                nombreElementTabFIN = LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileNameTEXTE, config->Nb_Mots_Cle, config->Similariter);
 
                 if (nombreElementTabFIN > 0)
                 {
                     printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
-                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "texte");
+                    choix[0] = visualiser_fichier(tabFileNameTEXTE, nombreElementTabFIN, "texte");
                 }
                 if (strcmp(choix, "Q") == 0)
                 {
@@ -522,7 +525,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 strcpy(requete, chemin);
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatIMG;
-                char *tabFileName[700];
+                char *tabFileNameIMG[700];
                 recup_CheminPour_Affichage("texte", &chemin);
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
                 if (erreur != 0)
@@ -532,11 +535,11 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 }
                 else
                 {
-                    nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", requete, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                    nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", requete, tabFileNameIMG, config->Nb_Mots_Cle, config->Similariter);
                     if (nombreElementTabFIN > 0)
                     {
                         printf("\n[R] Retour\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-                        choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "image");
+                        choix[0] = visualiser_fichier(tabFileNameIMG, nombreElementTabFIN, "image");
                     }
                     if (strcmp(choix, "Q") == 0)
                     {
@@ -610,7 +613,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 erreur = 0;
                 nombreElemetTab = 0;
                 tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName[700];
+                char *tabFileNameAUDIO[700];
                 if (erreur != 0)
                 {
                     Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
@@ -620,12 +623,12 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 {
                     recup_CheminPour_Affichage("texte", &chemin);
                     tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
-                    nombreElementTabFIN = LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                    nombreElementTabFIN = LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileNameAUDIO, config->Nb_Mots_Cle, config->Similariter);
 
                     if (nombreElementTabFIN > 0)
                     {
                         printf("\n[R] Retour\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-                        choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "audio");
+                        choix[0] = visualiser_fichier(tabFileNameAUDIO, nombreElementTabFIN, "audio");
                     }
                     if (strcmp(choix, "Q") == 0)
                     {
