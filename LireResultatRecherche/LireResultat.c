@@ -12,7 +12,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     // affichage des resultat de recherche par mot cle :
     printf("\nLes resultats pour votre recherche :\n");
     if (strstr(type, "rechercheMot"))
-    {   
+    {
         printf("\nRequete mot-clé : \"%s\"\n", requete);
         printf("\nRésultats (fichier -> occurrences) :\n");
         if (nbElement == 0)
@@ -42,7 +42,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
 
     // affichage des resultat de comparaison Image :
     if (strstr(type, "image"))
-    {   
+    {
         printf("\nRequete image : \"%s\"\n", requete);
         printf("\nRésultats :\n");
         if (nbElement == 0)
@@ -96,7 +96,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int k = 0; k < y; k++)
                 {
-                    if (tabResultat[i].pourcentage >= tabResultat[0].pourcentage *similarite/100)
+                    if (tabResultat[i].pourcentage >= tabResultat[0].pourcentage * similarite / 100)
                     {
                         if (tabResultat[i].id == base[k].id)
                         {
@@ -376,7 +376,7 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
                 printf("\nVoulez vous revisionner ce fichier ?\n[1] Oui\n[2] Non\n");
             if (nbElement > 1)
                 printf("\nVoulez vous visionner un autre fichier ?\n[1] Oui\n[2] Non\n");
-            
+
             scanf("%s", choix);
             if (choix[0] == '2')
             {
@@ -411,6 +411,30 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
                     strcpy(commande, lire);
                     strcat(commande, cheminBase);
                     system(commande);
+                }
+                if (strcmp(type, "image") == 0)
+                {
+                    strcpy(lire, "eog ");
+                    strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
+                    strcat(cheminBase, tabFileName[(atoi(numero_fichier)) - 1]);
+                    recup_CheminPour_Affichage("rgb", cheminBase);
+                    image = fopen(cheminBase, "r");
+                    if (image != NULL)
+                    {
+                        fclose(image);
+                        strcpy(commande, lire);
+                        strcat(commande, cheminBase);
+                        system(commande);
+                    }
+                    else
+                    {
+                        strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
+                        strcat(cheminBase, tabFileName[(atoi(numero_fichier)) - 1]);
+                        recup_CheminPour_Affichage("nb", cheminBase);
+                        strcpy(commande, lire);
+                        strcat(commande, cheminBase);
+                        system(commande);
+                    }
                 }
                 if (strcmp(type, "texte") == 0)
                 {

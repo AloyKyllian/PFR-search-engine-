@@ -42,7 +42,7 @@ int main()
 
         else
         {
-            printf("\n\tFin de la Phase d'initialisation\n");
+            printf("\nFin de la Phase d'initialisation\n");
             do
             {
                 MAE(&config, choix, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
