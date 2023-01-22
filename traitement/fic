@@ -1,668 +1,84 @@
-
--175
-frames    |    2
-affiche    |    2
-navigateur    |    2
-avoir    |    2
-faut    |    2
-desk    |    2
-visualiser    |    2
-NO_DATA7    |    0
-NO_DATA8    |    0
-NO_DATA9    |    0
-NO_DATA10    |    0
-NO_DATA11    |    0
-NO_DATA12    |    0
-NO_DATA13    |    0
-NO_DATA14    |    0
-NO_DATA15    |    0
-NO_DATA16    |    0
-NO_DATA17    |    0
-NO_DATA18    |    0
-NO_DATA19    |    0
-NO_DATA20    |    0
-NO_DATA21    |    0
-NO_DATA22    |    0
-NO_DATA23    |    0
-NO_DATA24    |    0
-NO_DATA25    |    0
-NO_DATA26    |    0
-NO_DATA27    |    0
-NO_DATA28    |    0
-NO_DATA29    |    0
-NO_DATA30    |    0
-NO_DATA31    |    0
-NO_DATA32    |    0
-NO_DATA33    |    0
-NO_DATA34    |    0
-NO_DATA35    |    0
-NO_DATA36    |    0
-NO_DATA37    |    0
-NO_DATA38    |    0
-NO_DATA39    |    0
-NO_DATA40    |    0
-NO_DATA41    |    0
-NO_DATA42    |    0
-NO_DATA43    |    0
-NO_DATA44    |    0
-NO_DATA45    |    0
-NO_DATA46    |    0
-NO_DATA47    |    0
-NO_DATA48    |    0
-NO_DATA49    |    0
-NO_DATA50    |    0
-NO_DATA51    |    0
-NO_DATA52    |    0
-NO_DATA53    |    0
-NO_DATA54    |    0
-NO_DATA55    |    0
-NO_DATA56    |    0
-NO_DATA57    |    0
-NO_DATA58    |    0
-NO_DATA59    |    0
-NO_DATA60    |    0
-NO_DATA61    |    0
-NO_DATA62    |    0
-NO_DATA63    |    0
-NO_DATA64    |    0
-NO_DATA65    |    0
-NO_DATA66    |    0
-NO_DATA67    |    0
-NO_DATA68    |    0
-NO_DATA69    |    0
-NO_DATA70    |    0
-NO_DATA71    |    0
-NO_DATA72    |    0
-NO_DATA73    |    0
-NO_DATA74    |    0
-NO_DATA75    |    0
-NO_DATA76    |    0
-NO_DATA77    |    0
-NO_DATA78    |    0
-NO_DATA79    |    0
-NO_DATA80    |    0
-NO_DATA81    |    0
-NO_DATA82    |    0
-NO_DATA83    |    0
-NO_DATA84    |    0
-NO_DATA85    |    0
-NO_DATA86    |    0
-NO_DATA87    |    0
-NO_DATA88    |    0
-NO_DATA89    |    0
-NO_DATA90    |    0
-NO_DATA91    |    0
-NO_DATA92    |    0
-NO_DATA93    |    0
-NO_DATA94    |    0
-NO_DATA95    |    0
-NO_DATA96    |    0
-NO_DATA97    |    0
-NO_DATA98    |    0
-NO_DATA99    |    0
-NO_DATA100    |    0
-NO_DATA101    |    0
-NO_DATA102    |    0
-NO_DATA103    |    0
-NO_DATA104    |    0
-NO_DATA105    |    0
-NO_DATA106    |    0
-NO_DATA107    |    0
-NO_DATA108    |    0
-NO_DATA109    |    0
-NO_DATA110    |    0
-NO_DATA111    |    0
-NO_DATA112    |    0
-NO_DATA113    |    0
-NO_DATA114    |    0
-NO_DATA115    |    0
-NO_DATA116    |    0
-NO_DATA117    |    0
-NO_DATA118    |    0
-NO_DATA119    |    0
-NO_DATA120    |    0
-NO_DATA121    |    0
-NO_DATA122    |    0
-NO_DATA123    |    0
-NO_DATA124    |    0
-NO_DATA125    |    0
-NO_DATA126    |    0
-NO_DATA127    |    0
-NO_DATA128    |    0
-NO_DATA129    |    0
-NO_DATA130    |    0
-NO_DATA131    |    0
-NO_DATA132    |    0
-NO_DATA133    |    0
-NO_DATA134    |    0
-NO_DATA135    |    0
-NO_DATA136    |    0
-NO_DATA137    |    0
-NO_DATA138    |    0
-NO_DATA139    |    0
-NO_DATA140    |    0
-NO_DATA141    |    0
-NO_DATA142    |    0
-NO_DATA143    |    0
-NO_DATA144    |    0
-NO_DATA145    |    0
-NO_DATA146    |    0
-NO_DATA147    |    0
-NO_DATA148    |    0
-NO_DATA149    |    0
-NO_DATA150    |    0
-NO_DATA151    |    0
-NO_DATA152    |    0
-NO_DATA153    |    0
-NO_DATA154    |    0
-NO_DATA155    |    0
-NO_DATA156    |    0
-NO_DATA157    |    0
-NO_DATA158    |    0
-NO_DATA159    |    0
-NO_DATA160    |    0
-NO_DATA161    |    0
-NO_DATA162    |    0
-NO_DATA163    |    0
-NO_DATA164    |    0
-NO_DATA165    |    0
-NO_DATA166    |    0
-NO_DATA167    |    0
-NO_DATA168    |    0
-NO_DATA169    |    0
-NO_DATA170    |    0
-NO_DATA171    |    0
-NO_DATA172    |    0
-NO_DATA173    |    0
-NO_DATA174    |    0
-NO_DATA175    |    0
-NO_DATA176    |    0
-NO_DATA177    |    0
-NO_DATA178    |    0
-NO_DATA179    |    0
-NO_DATA180    |    0
-NO_DATA181    |    0
-NO_DATA182    |    0
-NO_DATA183    |    0
-NO_DATA184    |    0
-NO_DATA185    |    0
-NO_DATA186    |    0
-NO_DATA187    |    0
-NO_DATA188    |    0
-NO_DATA189    |    0
-NO_DATA190    |    0
-NO_DATA191    |    0
-NO_DATA192    |    0
-NO_DATA193    |    0
-NO_DATA194    |    0
-NO_DATA195    |    0
-NO_DATA196    |    0
-NO_DATA197    |    0
-NO_DATA198    |    0
-NO_DATA199    |    0
-NO_DATA200    |    0
-NO_DATA201    |    0
-NO_DATA202    |    0
-NO_DATA203    |    0
-NO_DATA204    |    0
-NO_DATA205    |    0
-NO_DATA206    |    0
-NO_DATA207    |    0
-NO_DATA208    |    0
-NO_DATA209    |    0
-NO_DATA210    |    0
-NO_DATA211    |    0
-NO_DATA212    |    0
-NO_DATA213    |    0
-NO_DATA214    |    0
-NO_DATA215    |    0
-NO_DATA216    |    0
-NO_DATA217    |    0
-NO_DATA218    |    0
-NO_DATA219    |    0
-NO_DATA220    |    0
-NO_DATA221    |    0
-NO_DATA222    |    0
-NO_DATA223    |    0
-NO_DATA224    |    0
-NO_DATA225    |    0
-NO_DATA226    |    0
-NO_DATA227    |    0
-NO_DATA228    |    0
-NO_DATA229    |    0
-NO_DATA230    |    0
-NO_DATA231    |    0
-NO_DATA232    |    0
-NO_DATA233    |    0
-NO_DATA234    |    0
-NO_DATA235    |    0
-NO_DATA236    |    0
-NO_DATA237    |    0
-NO_DATA238    |    0
-NO_DATA239    |    0
-NO_DATA240    |    0
-NO_DATA241    |    0
-NO_DATA242    |    0
-NO_DATA243    |    0
-NO_DATA244    |    0
-NO_DATA245    |    0
-NO_DATA246    |    0
-NO_DATA247    |    0
-NO_DATA248    |    0
-NO_DATA249    |    0
-NO_DATA250    |    0
-NO_DATA251    |    0
-NO_DATA252    |    0
-NO_DATA253    |    0
-NO_DATA254    |    0
-NO_DATA255    |    0
-NO_DATA256    |    0
-NO_DATA257    |    0
-NO_DATA258    |    0
-NO_DATA259    |    0
-NO_DATA260    |    0
-NO_DATA261    |    0
-NO_DATA262    |    0
-NO_DATA263    |    0
-NO_DATA264    |    0
-NO_DATA265    |    0
-NO_DATA266    |    0
-NO_DATA267    |    0
-NO_DATA268    |    0
-NO_DATA269    |    0
-NO_DATA270    |    0
-NO_DATA271    |    0
-NO_DATA272    |    0
-NO_DATA273    |    0
-NO_DATA274    |    0
-NO_DATA275    |    0
-NO_DATA276    |    0
-NO_DATA277    |    0
-NO_DATA278    |    0
-NO_DATA279    |    0
-NO_DATA280    |    0
-NO_DATA281    |    0
-NO_DATA282    |    0
-NO_DATA283    |    0
-NO_DATA284    |    0
-NO_DATA285    |    0
-NO_DATA286    |    0
-NO_DATA287    |    0
-NO_DATA288    |    0
-NO_DATA289    |    0
-NO_DATA290    |    0
-NO_DATA291    |    0
-NO_DATA292    |    0
-NO_DATA293    |    0
-NO_DATA294    |    0
-NO_DATA295    |    0
-NO_DATA296    |    0
-NO_DATA297    |    0
-NO_DATA298    |    0
-NO_DATA299    |    0
-NO_DATA300    |    0
-NO_DATA301    |    0
-NO_DATA302    |    0
-NO_DATA303    |    0
-NO_DATA304    |    0
-NO_DATA305    |    0
-NO_DATA306    |    0
-NO_DATA307    |    0
-NO_DATA308    |    0
-NO_DATA309    |    0
-NO_DATA310    |    0
-NO_DATA311    |    0
-NO_DATA312    |    0
-NO_DATA313    |    0
-NO_DATA314    |    0
-NO_DATA315    |    0
-NO_DATA316    |    0
-NO_DATA317    |    0
-NO_DATA318    |    0
-NO_DATA319    |    0
-NO_DATA320    |    0
-NO_DATA321    |    0
-NO_DATA322    |    0
-NO_DATA323    |    0
-NO_DATA324    |    0
-NO_DATA325    |    0
-NO_DATA326    |    0
-NO_DATA327    |    0
-NO_DATA328    |    0
-NO_DATA329    |    0
-NO_DATA330    |    0
-NO_DATA331    |    0
-NO_DATA332    |    0
-NO_DATA333    |    0
-NO_DATA334    |    0
-NO_DATA335    |    0
-NO_DATA336    |    0
-NO_DATA337    |    0
-NO_DATA338    |    0
-NO_DATA339    |    0
-NO_DATA340    |    0
-NO_DATA341    |    0
-NO_DATA342    |    0
-NO_DATA343    |    0
-NO_DATA344    |    0
-NO_DATA345    |    0
-NO_DATA346    |    0
-NO_DATA347    |    0
-NO_DATA348    |    0
-NO_DATA349    |    0
-NO_DATA350    |    0
-NO_DATA351    |    0
-NO_DATA352    |    0
-NO_DATA353    |    0
-NO_DATA354    |    0
-NO_DATA355    |    0
-NO_DATA356    |    0
-NO_DATA357    |    0
-NO_DATA358    |    0
-NO_DATA359    |    0
-NO_DATA360    |    0
-NO_DATA361    |    0
-NO_DATA362    |    0
-NO_DATA363    |    0
-NO_DATA364    |    0
-NO_DATA365    |    0
-NO_DATA366    |    0
-NO_DATA367    |    0
-NO_DATA368    |    0
-NO_DATA369    |    0
-NO_DATA370    |    0
-NO_DATA371    |    0
-NO_DATA372    |    0
-NO_DATA373    |    0
-NO_DATA374    |    0
-NO_DATA375    |    0
-NO_DATA376    |    0
-NO_DATA377    |    0
-NO_DATA378    |    0
-NO_DATA379    |    0
-NO_DATA380    |    0
-NO_DATA381    |    0
-NO_DATA382    |    0
-NO_DATA383    |    0
-NO_DATA384    |    0
-NO_DATA385    |    0
-NO_DATA386    |    0
-NO_DATA387    |    0
-NO_DATA388    |    0
-NO_DATA389    |    0
-NO_DATA390    |    0
-NO_DATA391    |    0
-NO_DATA392    |    0
-NO_DATA393    |    0
-NO_DATA394    |    0
-NO_DATA395    |    0
-NO_DATA396    |    0
-NO_DATA397    |    0
-NO_DATA398    |    0
-NO_DATA399    |    0
-NO_DATA400    |    0
-NO_DATA401    |    0
-NO_DATA402    |    0
-NO_DATA403    |    0
-NO_DATA404    |    0
-NO_DATA405    |    0
-NO_DATA406    |    0
-NO_DATA407    |    0
-NO_DATA408    |    0
-NO_DATA409    |    0
-NO_DATA410    |    0
-NO_DATA411    |    0
-NO_DATA412    |    0
-NO_DATA413    |    0
-NO_DATA414    |    0
-NO_DATA415    |    0
-NO_DATA416    |    0
-NO_DATA417    |    0
-NO_DATA418    |    0
-NO_DATA419    |    0
-NO_DATA420    |    0
-NO_DATA421    |    0
-NO_DATA422    |    0
-NO_DATA423    |    0
-NO_DATA424    |    0
-NO_DATA425    |    0
-NO_DATA426    |    0
-NO_DATA427    |    0
-NO_DATA428    |    0
-NO_DATA429    |    0
-NO_DATA430    |    0
-NO_DATA431    |    0
-NO_DATA432    |    0
-NO_DATA433    |    0
-NO_DATA434    |    0
-NO_DATA435    |    0
-NO_DATA436    |    0
-NO_DATA437    |    0
-NO_DATA438    |    0
-NO_DATA439    |    0
-NO_DATA440    |    0
-NO_DATA441    |    0
-NO_DATA442    |    0
-NO_DATA443    |    0
-NO_DATA444    |    0
-NO_DATA445    |    0
-NO_DATA446    |    0
-NO_DATA447    |    0
-NO_DATA448    |    0
-NO_DATA449    |    0
-NO_DATA450    |    0
-NO_DATA451    |    0
-NO_DATA452    |    0
-NO_DATA453    |    0
-NO_DATA454    |    0
-NO_DATA455    |    0
-NO_DATA456    |    0
-NO_DATA457    |    0
-NO_DATA458    |    0
-NO_DATA459    |    0
-NO_DATA460    |    0
-NO_DATA461    |    0
-NO_DATA462    |    0
-NO_DATA463    |    0
-NO_DATA464    |    0
-NO_DATA465    |    0
-NO_DATA466    |    0
-NO_DATA467    |    0
-NO_DATA468    |    0
-NO_DATA469    |    0
-NO_DATA470    |    0
-NO_DATA471    |    0
-NO_DATA472    |    0
-NO_DATA473    |    0
-NO_DATA474    |    0
-NO_DATA475    |    0
-NO_DATA476    |    0
-NO_DATA477    |    0
-NO_DATA478    |    0
-NO_DATA479    |    0
-NO_DATA480    |    0
-NO_DATA481    |    0
-NO_DATA482    |    0
-NO_DATA483    |    0
-NO_DATA484    |    0
-NO_DATA485    |    0
-NO_DATA486    |    0
-NO_DATA487    |    0
-NO_DATA488    |    0
-NO_DATA489    |    0
-NO_DATA490    |    0
-NO_DATA491    |    0
-NO_DATA492    |    0
-NO_DATA493    |    0
-NO_DATA494    |    0
-NO_DATA495    |    0
-NO_DATA496    |    0
-NO_DATA497    |    0
-NO_DATA498    |    0
-NO_DATA499    |    0
-NO_DATA500    |    0
-NO_DATA501    |    0
-NO_DATA502    |    0
-NO_DATA503    |    0
-NO_DATA504    |    0
-NO_DATA505    |    0
-NO_DATA506    |    0
-NO_DATA507    |    0
-NO_DATA508    |    0
-NO_DATA509    |    0
-NO_DATA510    |    0
-NO_DATA511    |    0
-NO_DATA512    |    0
-NO_DATA513    |    0
-NO_DATA514    |    0
-NO_DATA515    |    0
-NO_DATA516    |    0
-NO_DATA517    |    0
-NO_DATA518    |    0
-NO_DATA519    |    0
-NO_DATA520    |    0
-NO_DATA521    |    0
-NO_DATA522    |    0
-NO_DATA523    |    0
-NO_DATA524    |    0
-NO_DATA525    |    0
-NO_DATA526    |    0
-NO_DATA527    |    0
-NO_DATA528    |    0
-NO_DATA529    |    0
-NO_DATA530    |    0
-NO_DATA531    |    0
-NO_DATA532    |    0
-NO_DATA533    |    0
-NO_DATA534    |    0
-NO_DATA535    |    0
-NO_DATA536    |    0
-NO_DATA537    |    0
-NO_DATA538    |    0
-NO_DATA539    |    0
-NO_DATA540    |    0
-NO_DATA541    |    0
-NO_DATA542    |    0
-NO_DATA543    |    0
-NO_DATA544    |    0
-NO_DATA545    |    0
-NO_DATA546    |    0
-NO_DATA547    |    0
-NO_DATA548    |    0
-NO_DATA549    |    0
-NO_DATA550    |    0
-NO_DATA551    |    0
-NO_DATA552    |    0
-NO_DATA553    |    0
-NO_DATA554    |    0
-NO_DATA555    |    0
-NO_DATA556    |    0
-NO_DATA557    |    0
-NO_DATA558    |    0
-NO_DATA559    |    0
-NO_DATA560    |    0
-NO_DATA561    |    0
-NO_DATA562    |    0
-NO_DATA563    |    0
-NO_DATA564    |    0
-NO_DATA565    |    0
-NO_DATA566    |    0
-NO_DATA567    |    0
-NO_DATA568    |    0
-NO_DATA569    |    0
-NO_DATA570    |    0
-NO_DATA571    |    0
-NO_DATA572    |    0
-NO_DATA573    |    0
-NO_DATA574    |    0
-NO_DATA575    |    0
-NO_DATA576    |    0
-NO_DATA577    |    0
-NO_DATA578    |    0
-NO_DATA579    |    0
-NO_DATA580    |    0
-NO_DATA581    |    0
-NO_DATA582    |    0
-NO_DATA583    |    0
-NO_DATA584    |    0
-NO_DATA585    |    0
-NO_DATA586    |    0
-NO_DATA587    |    0
-NO_DATA588    |    0
-NO_DATA589    |    0
-NO_DATA590    |    0
-NO_DATA591    |    0
-NO_DATA592    |    0
-NO_DATA593    |    0
-NO_DATA594    |    0
-NO_DATA595    |    0
-NO_DATA596    |    0
-NO_DATA597    |    0
-NO_DATA598    |    0
-NO_DATA599    |    0
-NO_DATA600    |    0
-NO_DATA601    |    0
-NO_DATA602    |    0
-NO_DATA603    |    0
-NO_DATA604    |    0
-NO_DATA605    |    0
-NO_DATA606    |    0
-NO_DATA607    |    0
-NO_DATA608    |    0
-NO_DATA609    |    0
-NO_DATA610    |    0
-NO_DATA611    |    0
-NO_DATA612    |    0
-NO_DATA613    |    0
-NO_DATA614    |    0
-NO_DATA615    |    0
-NO_DATA616    |    0
-NO_DATA617    |    0
-NO_DATA618    |    0
-NO_DATA619    |    0
-NO_DATA620    |    0
-NO_DATA621    |    0
-NO_DATA622    |    0
-NO_DATA623    |    0
-NO_DATA624    |    0
-NO_DATA625    |    0
-NO_DATA626    |    0
-NO_DATA627    |    0
-NO_DATA628    |    0
-NO_DATA629    |    0
-NO_DATA630    |    0
-NO_DATA631    |    0
-NO_DATA632    |    0
-NO_DATA633    |    0
-NO_DATA634    |    0
-NO_DATA635    |    0
-NO_DATA636    |    0
-NO_DATA637    |    0
-NO_DATA638    |    0
-NO_DATA639    |    0
-NO_DATA640    |    0
-NO_DATA641    |    0
-NO_DATA642    |    0
-NO_DATA643    |    0
-NO_DATA644    |    0
-NO_DATA645    |    0
-NO_DATA646    |    0
-NO_DATA647    |    0
-NO_DATA648    |    0
-NO_DATA649    |    0
-NO_DATA650    |    0
-NO_DATA651    |    0
-NO_DATA652    |    0
-NO_DATA653    |    0
-NO_DATA654    |    0
-NO_DATA655    |    0
-NO_DATA656    |    0
-NO_DATA657    |    0
-NO_DATA658    |    0
-NO_DATA659    |    0
-NO_DATA660    |    0
-NO_DATA661    |    0
-NO_DATA662    |    0
-NO_DATA663    |    0
-NO_DATA664    |    0
-NO_DATA665    |    0
+29-Forte_réduction_de_la_calotte.xml
+05-Le_théâtre_de_texte_confronté.xml
+23-Les_Bleus,_tombeurs_de_la.xml
+28-A_Hossegor,_Kelly_Slater_peut.xml
+28-Danse___Robyn_Orlin_et.xml
+27-Voyager_1_s_aventure_dans_l_au-delą.xml
+06-Sensibiliser_à_la_vaccination_grippale.xml
+22-Des_laboureurs,_des_OGM..._et.xml
+03-Mimer_un_signal_nerveux_pour.xml
+05-Jean-Christophe_Bette_a_dû_attendre.xml
+05-L_apnéiste_français_Guillaume_Néry_plonge.xml
+05-Musique_électronique___l_élan_collectif.xml
+06-Les_mauvais_comptes_d_une_élimination.xml
+08-L_équipe_de_France_victime_d_un.xml
+08-Carlos_do_Carmo____Le.xml
+07-Un_député_UMP_lance_une.xml
+08-US_Open___Pierce_élimine.xml
+08-Théâtre___l_échappée_belle,_peu.xml
+11-La_troposphère_paie,_au_prix.xml
+10-Le_cyclone_Katrina_complique_le.xml
+13-Les_accidents_vasculaires_cérébraux,_à.xml
+13-Des_astronomes_détectent_l_explosion_cosmique.xml
+15-Capturer_et_emprisonner_le_CO.xml
+15-Capturer_et_emprisonner_le_CO2,.xml
+14-Grippe_aviaire___l_OMS_exhorte.xml
+13-Ligue_des_champions____Si.xml
+15-_Si_on_veut_aller_trop.xml
+17-La_voix_envoûtante_de_Girija.xml
+18-Ligue_1___Lyon_a.xml
+18-Les_22e_Journées_du_Patrimoine.xml
+22-Dominique_Noël____Les_architectes.xml
+22-Danse___quarante_jeunes_de.xml
+22-Sursaut_des_Monégasques_après_le.xml
+26-Grippe_aviaire___une_sixième.xml
+24-Canicules_et_sécheresses_menacent_de.xml
+26-Tom_Boonen_sacré_champion_du.xml
+28-Festival___Ososphère,_un_week-end.xml
+05-Edition___les_mots_et.xml
+05-Au_stade_d_Abidjan,_la_défaite.xml
+05-Le_Colombien_Juan_Pablo_Montoya.xml
+05-La_circoncision_pourrait_réduire_le.xml
+05-Prague_inaugure_les_Journées_européennes.xml
+05-Photographie___Philip_Blenkinsop_a.xml
+06-La_contamination_du_maļs_par.xml
+05-Tours_d_honneur_pour_les_athlètes.xml
+08-Sous_l_effet_du_réchauffement,_les.xml
+06-US_Open___Mauresmo_et.xml
+08-La_mission_Deep_Impact_permet.xml
+10-La_réalité_virtuelle_et_l_informatique.xml
+09-Miracle___le_cricket_est.xml
+12-Jean-Marie_Sevestre,_libraire_et_PDG.xml
+12-Fernando_Alonso_n_est_plus_qu_à.xml
+12-Agassi_plie_face_au_meilleur.xml
+12-Succès_sur_les_tatamis,_polémique.xml
+12-Musiques_du_monde___les.xml
+12-Musique_classique___un__Oberon_.xml
+13-L_inattendue_lévitation_de_la_goutte.xml
+15-La_mort_de_Robert_Wise,.xml
+15-Danse___Preljocaj_emmène_l_Opéra.xml
+15-Un_quasar_solitaire_bouleverse_les.xml
+15-Lille_s_incline_dans_les.xml
+15-Le_Théâtre_des_Champs-Elysées_s_offre.xml
+17-De_la_difficulté_d_anticiper_les.xml
+17-Anouk_Aimée_et_Philippe_Noiret.xml
+16-Une_sonde_japonaise_va_tenter.xml
+18-L_équipe_de_France_de_tennis.xml
+18-Battue_par_la_Slovénie,_l_équipe.xml
+17-Une_équipe_française_a_réussi.xml
+21-Matières_plastiques_et_pesticides_pourraient.xml
+21-La_France_se_réveille_pour.xml
+22-Les_clubs_de_football_anglais.xml
+22-Grippe_aviaire___la_course.xml
+22-Exposition___les_métamorphoses_picturales.xml
+22-Ted_Stanger,_l_Américain_de_service.xml
+26-Lyon_prend_ses_aises_en.xml
+27-Martin_Scorsese_inaugure_la_Cinémathèque.xml
+27-Le_Stade_de_France_s_ouvre.xml
+27-A_Lens,_le_Louvre_sera.xml
+26-Jazz___Manu_Katché,_haut.xml
+08-Pavé,_tour_ou_silo,_cinq.xml
+05-Rock___l_Illinois_magique_de.xml
+28-_Œdipe_à_Colone_,_la_rage.xml
+29-Ligue_des_champions___Lyon.xml
+03-Des_chercheurs_parviennent_à_régénérer.xml

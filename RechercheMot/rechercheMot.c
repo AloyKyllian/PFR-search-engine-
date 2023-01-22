@@ -23,7 +23,7 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	{
 		while (fscanf(fp, "%s", chaine) != EOF && atoi(chaine) < 0)
 		{
-			// if ()
+			// if (atoi(chaine) < 0)
 			// {
 				strcpy(IDstring, chaine);
 				//printf("ID=%s\n",IDstring);

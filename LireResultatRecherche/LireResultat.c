@@ -4,12 +4,12 @@
 #include <math.h>
 #include "../LireResultatRecherche/LireResultat.h"
 
-void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *requete, char *tabFileName[], int nombre_mot_cle, int seuil, int similarite, int *nombreElementTabFIN)
+int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *requete, char *tabFileName[], int nombre_mot_cle, int seuil, int similarite)
 {
 
     int erreur;
     int element_tableauRes = 0;
-    printf("\nverifie les element du tableau\n");
+    // printf("\nverifie les element du tableau\n");
     // for (int w = 0; w < nbElement; w++)
     // {
     //     printf("\nID=%d, nb=%f\n", tabResultat[w].id, tabResultat[w].pourcentage);
@@ -75,11 +75,7 @@ void LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *r
             element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, seuil, similarite, &erreur);
         }
     }
-    *nombreElementTabFIN = element_tableauRes;
-    // for (int i = 0; i < element_tableauRes; i++)
-    // {
-    //     printf("tab filename dans lire resultat apres lire chemin %d : %s\n", i, tabFileName[i]);
-    // }
+    return element_tableauRes;
 }
 
 int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, char *type, int nombre_mot_cle, int seuil, int similarite, int *erreur)
@@ -87,6 +83,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
     FILE *fichier = NULL;
     FILE *fichier1 = NULL;
     ELEMENT *base = (ELEMENT *)malloc((nbElement + 1) * sizeof(ELEMENT));
+    ELEMENT *base2 = (ELEMENT *)malloc((nbElement + 1) * sizeof(ELEMENT));
     int ligne = 0;
     int l = 0;
     if (strcmp(type, "rechercheMot") == 0)
@@ -196,7 +193,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
             {
                 for (int y = 0; y <= nbElement; y++)
                 {
-                    if (tabResultat[i].pourcentage > 75)
+                    if (tabResultat[i].pourcentage > 30)
                     {
                         if (tabResultat[i].id == base[y].id)
                         {
@@ -209,7 +206,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             {
                                 filename = base[y].CHEMIN;
                             }
-                            tabFileName[i] = filename;
+                            tabFileName[l] = filename;
                             printf("\n[%d] %s\t ->%f\n", l + 1, filename, tabResultat[i].pourcentage);
                             fflush(stdout);
                             l++;
@@ -251,7 +248,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             {
                                 filename = base[y].CHEMIN;
                             }
-                            tabFileName[i] = filename;
+                            tabFileName[l] = filename;
                             printf("\n[%d] %s\t ->%f\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
                         }
@@ -265,7 +262,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
 
         if (fichier != NULL)
         {
-            while (fscanf(fichier, "%d | %s\n", &base[ligne].id, base[ligne].CHEMIN) != EOF)
+            while (fscanf(fichier, "%d | %s\n", &base2[ligne].id, base2[ligne].CHEMIN) != EOF)
             {
                 ligne++;
             }
@@ -276,18 +273,17 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                 {
                     if (tabResultat[i].pourcentage > 75)
                     {
-                        if (tabResultat[i].id == base[y].id)
+                        if (tabResultat[i].id == base2[y].id)
                         {
-                            char *filename = strrchr(base[y].CHEMIN, '/');
+                            char *filename = strrchr(base2[y].CHEMIN, '/');
                             if (filename)
                             {
                                 filename++;
                             }
                             else
                             {
-                                filename = base[y].CHEMIN;
+                                filename = base2[y].CHEMIN;
                             }
-
                             tabFileName[i] = filename;
                             printf("[%d] %s\t ->%f\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
@@ -306,9 +302,9 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
 {
     char choix[100];
     char choixRQ[100];
-    char *numero_fichier = "1";
-    char *lire = "gedit ";
-    char *cheminBase;
+    char numero_fichier[100] = "10000";
+    char lire[100];
+    char cheminBase[100];
     char *rmDroit = "chmod o-w ";
     char *addDroit = "chmod o+w ";
     char commande[1000];
@@ -321,90 +317,162 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
 
     if (strcmp(type, "texte") == 0)
     {
-        cheminBase = "../DATA_FIL_ROUGE_DEV/Textes/";
+        strcpy(lire, "gedit ");
+        strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/Textes/");
+        // afin de visualiser le premier fichier resultat on enleve les droits
+        strcpy(commande, rmDroit);
+        strcat(commande, cheminBase);
+        strcat(commande, tabFileName[0]);
+        system(commande);
+
+        // on l'ouvre pour que l'utilisateur le visualise
+        strcpy(commande, lire);
+        strcat(commande, cheminBase);
+        strcat(commande, tabFileName[0]);
+        system(commande);
+
+        // on remet les permissions d'ecriture sur le fichier
+        strcpy(commande, addDroit);
+        strcat(commande, cheminBase);
+        strcat(commande, tabFileName[0]);
+        system(commande);
     }
 
     if (strcmp(type, "image") == 0)
     {
-        cheminBase = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/";
+        strcpy(lire, "eog ");
+        strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
+        strcat(cheminBase, tabFileName[0]);
+        recup_CheminPour_Affichage("rgb", cheminBase);
+        strcpy(commande, lire);
+        strcat(commande, cheminBase);
+        system(commande);
+        strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
+        strcat(cheminBase, tabFileName[0]);
+        recup_CheminPour_Affichage("nb", cheminBase);
+        strcpy(commande, lire);
+        strcat(commande, cheminBase);
+        system(commande);
     }
-
     if (strcmp(type, "audio") == 0)
     {
-        cheminBase = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/";
+        strcpy(lire, "vlc ");
+        strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
+        strcat(cheminBase, tabFileName[0]);
+        fflush(stdout);
+        recup_CheminPour_Affichage(type, cheminBase);
+        fflush(stdout);
+        strcpy(commande, lire);
+        strcat(commande, cheminBase);
+        system(commande);
     }
 
     char *cheminBaseImgNB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/";
     char *cheminBaseImgRGB = "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/";
-    fflush(stdout);
     // afin de visualiser le premier fichier resultat on enleve les droits
-    strcpy(commande, rmDroit);
-    strcat(commande, cheminBase);
-    strcat(commande, tabFileName[0]);
-    fflush(stdout);
-    system(commande);
+    // strcpy(commande, rmDroit);
+    // strcat(commande, cheminBase);
+    // strcat(commande, tabFileName[0]);
+    // system(commande);
 
-    // on l'ouvre pour que l'utilisateur le visualise
-    strcpy(commande, lire);
-    strcat(commande, cheminBase);
-    strcat(commande, tabFileName[0]);
-    system(commande);
+    // // on l'ouvre pour que l'utilisateur le visualise
+    // strcpy(commande, lire);
+    // strcat(commande, cheminBase);
+    // strcat(commande, tabFileName[0]);
+    // system(commande);
 
-    // on remet les permissions d'ecriture sur le fichier
-    strcpy(commande, addDroit);
-    strcat(commande, cheminBase);
-    strcat(commande, tabFileName[0]);
-    system(commande);
+    // // on remet les permissions d'ecriture sur le fichier
+    // strcpy(commande, addDroit);
+    // strcat(commande, cheminBase);
+    // strcat(commande, tabFileName[0]);
+    // system(commande);
     if (nbElement != 1 || nbElement != 0)
     {
         while (choix[0] != '2' || choix[0] != '1')
         {
             printf("\nVoulez vous visionné un autre fichier ?\n[1] Oui\n[2] Non\n");
             scanf("%s", choix);
-            printf("choix [0] : %c\n",choix[0]);
             if (choix[0] == '2')
             {
-                printf("\nVoulez vous revenir au Menu de recherche principale ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
+                printf("\nVoulez vous revenir au Menu de recherche texte ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
                 scanf("%s", choixRQ);
-                printf("choixRQ [0] : %c\n",choixRQ[0]);
 
                 return choixRQ[0];
             }
-
             if (choix[0] == '1')
             {
-                while (((int)numero_fichier[0]) > nbElement)
+                while (atoi(numero_fichier) > nbElement)
                 {
                     printf("\nEntrer le numero de fichier que vous voulez visualiser, ou R pour un retour vers le menu de recherche texte\n");
                     scanf("%s", numero_fichier);
-                    if (((int)(numero_fichier[0])) > nbElement || numero_fichier[0] != 'R')
-                        printf("\nCe choix de fichier ne figure pas dans la liste\n");
                     if (numero_fichier[0] == 'R')
                         return numero_fichier[0];
+                    if (atoi(numero_fichier) > nbElement)
+                        printf("\nCe choix de fichier ne figure pas dans la liste\n");
                 }
-                strcpy(commande, rmDroit);
-                strcat(commande, cheminBase);
-                strcat(commande, tabFileName[((int)(numero_fichier[0])) - 1]);
-                system(commande);
 
-                // on l'ouvre pour que l'utilisateur le visualise
-                strcpy(commande, lire);
-                strcat(commande, cheminBase);
-                strcat(commande, tabFileName[((int)(numero_fichier[0])) - 1]);
-                system(commande);
+                if (strcmp(type, "audio") == 0)
+                {
+                    strcpy(lire, "vlc ");
+                    fflush(stdout);
+                    strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
+                    printf(" [(atoi(numero_fichier))-1]: %s\n", tabFileName[(atoi(numero_fichier)) - 1]);
+                    strcat(cheminBase, tabFileName[(atoi(numero_fichier)) - 1]);
+                    fflush(stdout);
+                    recup_CheminPour_Affichage(type, cheminBase);
+                    fflush(stdout);
+                    strcpy(commande, lire);
+                    strcat(commande, cheminBase);
+                    system(commande);
+                }
+                if (strcmp(type, "texte") == 0)
+                {
+                    strcpy(lire, "gedit ");
+                    strcpy(cheminBase, "../DATA_FIL_ROUGE_DEV/Textes/");
+                    // afin de visualiser le premier fichier resultat on enleve les droits
+                    strcpy(commande, rmDroit);
+                    strcat(commande, cheminBase);
+                    strcat(commande, tabFileName[(atoi(numero_fichier)) - 1]);
+                    system(commande);
 
-                // on remet les permissions d'ecriture sur le fichier
-                strcpy(commande, addDroit);
-                strcat(commande, cheminBase);
-                strcat(commande, tabFileName[((int)(numero_fichier[0])) - 1]);
-                system(commande);
-            }
+                    // on l'ouvre pour que l'utilisateur le visualise
+                    strcpy(commande, lire);
+                    strcat(commande, cheminBase);
+                    strcat(commande, tabFileName[(atoi(numero_fichier)) - 1]);
+                    system(commande);
 
-            else
-            {
-                printf("\nCe choix n'existe pas, veuillez faire le bon choix\n");
+                    // on remet les permissions d'ecriture sur le fichier
+                    strcpy(commande, addDroit);
+                    strcat(commande, cheminBase);
+                    strcat(commande, tabFileName[(atoi(numero_fichier)) - 1]);
+                    system(commande);
+                }
+
+                else
+                {
+                    printf("\nCe choix n'existe pas, veuillez faire le bon choix\n");
+                }
             }
         }
+        return 'R';
     }
-    return 'R';
+}
+
+void recup_CheminPour_Affichage(char *type, char *chemin)
+{
+    char *extension = strrchr(chemin, '.');
+    printf("chemin avant %s\n", chemin);
+    if (extension != NULL && strcmp(type, "rgb") == 0)
+    {
+        strcpy(extension, ".jpg");
+    }
+    if (extension != NULL && strcmp(type, "nb") == 0)
+    {
+        strcpy(extension, ".bmp");
+    }
+    if (extension != NULL && strcmp(type, "audio") == 0)
+    {
+        strcpy(extension, ".wav");
+    }
+    printf("chemin apres %s\n", chemin);
 }

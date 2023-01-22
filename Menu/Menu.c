@@ -297,25 +297,18 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             scanf("%s", motCle);
             tab_similaire *tabResultatMot = malloc(100 * sizeof(tab_similaire));
             rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
-            LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName, config->Nb_Mots_Cle, config->Seuil, config->Similariter, &nombreElementTabFIN);
+            nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileName, config->Nb_Mots_Cle, config->Seuil, config->Similariter);
             printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
-            // printf("verification des element du tab filename le premier \n");
-            // printf("nombreElementTabFIN =%d\n", nombreElementTabFIN);
-            // fflush(stdout);
-            // for (int i = 0; i < nombreElementTabFIN; i++)
-            // {
-            //     printf("%d = %s\n", i, tabFileName[i]);
-            //     fflush(stdout);
-            // }
+
             if (nombreElementTabFIN > 0)
             {
                 choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "texte");
-                printf("choix apres visualisation : %s\n", choix);
             }
             if (strcmp(choix, "Q") == 0)
-                choix[0] = Quitter;
-            if (strcmp(choix, "R") == 0)
-                choix[0] = Retour;
+            {
+                printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
+                exit(EXIT_SUCCESS);
+            }
             free(tabResultatMot);
             break;
 
@@ -358,12 +351,21 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             {
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatTexte = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700 * sizeof(char));
+                char *tabFileName[700];
                 tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
-                LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter, &nombreElementTabFIN);
-                printf("\n[R] Retour\n");
+                nombreElementTabFIN = LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+
+                if (nombreElementTabFIN > 0)
+                {
+                    printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
+                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "texte");
+                }
+                if (strcmp(choix, "Q") == 0)
+                {
+                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
+                    exit(EXIT_SUCCESS);
+                }
                 free(tabResultatTexte);
-                free(tabFileName);
             }
             break;
         case Retour:
@@ -427,13 +429,21 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             {
                 erreur = 0, nombreElemetTab = 0;
                 tab_similaire *tabResultatIMG = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700 * sizeof(char));
+                char *tabFileName[700];
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
                 printf("debut de l'affichage\n");
-                LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter, &nombreElementTabFIN);
-                printf("\n[R] Retour\n");
+                nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+                if (nombreElementTabFIN > 0)
+                {
+                    printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
+                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "image");
+                }
+                if (strcmp(choix, "Q") == 0)
+                {
+                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
+                    exit(EXIT_SUCCESS);
+                }
                 free(tabResultatIMG);
-                free(tabFileName);
             }
             break;
         case Retour:
@@ -497,13 +507,22 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 erreur = 0;
                 nombreElemetTab = 0;
                 tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
-                char *tabFileName = (char *)malloc(700 * sizeof(char));
+                char *tabFileName[700];
                 tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
                 printf("debut de l'affichage\n");
-                LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter, &nombreElementTabFIN);
-                printf("\n[R] Retour\n");
+                nombreElementTabFIN = LireResultat(tabResultatAudio, nombreElemetTab, "audio", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
+
+                if (nombreElementTabFIN > 0)
+                {
+                    printf("\n[R] Retour\nPenser a fermé l'editeur de texte apres l'avoir consulter pour poursuivre votre activité\n");
+                    choix[0] = visualiser_fichier(tabFileName, nombreElementTabFIN, "audio");
+                }
+                if (strcmp(choix, "Q") == 0)
+                {
+                    printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
+                    exit(EXIT_SUCCESS);
+                }
                 free(tabResultatAudio);
-                free(tabFileName);
             }
             break;
         case Retour:
