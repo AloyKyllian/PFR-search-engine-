@@ -1,5 +1,5 @@
 [1] Nombre de mots-clé : 10
 [2] Similarité : 50
-[3] Nombre de bits de poids fort : 2
+[3] Nombre de bits de poids fort : 3
 [4] Nombre de fenetres : 2048
-[5] Intervale de temps : 15
+[5] Intervale de temps : 32

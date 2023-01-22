@@ -64,6 +64,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                             printf("\nVous devez attendre 30 secondes pour réessayer\n");
                             usleep(nbr_microsec);
                             sleep(30);
+                            viderBuffer();
                             printf("\nFin des 30 secondes, Vous pouvez réessayer maintenant\n");
                             nbTentative = 0;
                         }
@@ -130,7 +131,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         *config = Lire_CONFIG(&Erreur);
         Afficher_CONFIG(*config);
         printf("\nSi vous voulez changer une valeur, veuillez faire votre choix  : \n");
-        printf("\n[1] Nombre de mots-clé \tsupérieur à 0\n[2] Similarité\t entre 1 et 100\n[3] Nombre de bits\t entre 1 et 8 \n[4] Nombre de fenetre\t supeieur a 256 et une puissance de 2\n[5] Intervalle de temps\t superieur a 0 \n[R] Retour\n[Q] Déconnexion\n");
+        printf("\n[1] Nombre de mots-clé \t supérieur à 0\n[2] Similarité         \t entre 1 et 100\n[3] Nombre de bits     \t entre 1 et 8 \n[4] Nombre de fenetre  \t supeieur a 256 et une puissance de 2\n[5] Intervalle de temps\t superieur a 0 \n[R] Retour\n[Q] Déconnexion\n");
         scanf("%s", choix);
         switch (choix[0])
         {
@@ -384,7 +385,8 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
 
                 if (nombreElementTabFIN > 0)
                 {
-                    printf("\n[R] Retour\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité\n");
+
+                    printf("[R] Retour\n\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité\n");
                     choix[0] = visualiser_fichier(tabFileNameMOT, nombreElementTabFIN, "texte");
                 }
                 if (strcmp(choix, "Q") == 0)
@@ -448,7 +450,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
 
                 if (nombreElementTabFIN > 0)
                 {
-                    printf("\n[R] Retour\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité\n");
+                    printf("[R] Retour\n\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité\n");
                     choix[0] = visualiser_fichier(tabFileNameTEXTE, nombreElementTabFIN, "texte");
                 }
                 if (strcmp(choix, "Q") == 0)
@@ -537,7 +539,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     nombreElementTabFIN = LireResultat(tabResultatIMG, nombreElemetTab, "image", requete, tabFileNameIMG, config->Nb_Mots_Cle, config->Similariter);
                     if (nombreElementTabFIN > 0)
                     {
-                        printf("\n[R] Retour\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
+                        printf("[R] Retour\n\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
                         choix[0] = visualiser_fichier(tabFileNameIMG, nombreElementTabFIN, "image");
                     }
                     if (strcmp(choix, "Q") == 0)
@@ -626,7 +628,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
 
                     if (nombreElementTabFIN > 0)
                     {
-                        printf("\n[R] Retour\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
+                        printf("[R] Retour\n\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
                         choix[0] = visualiser_fichier(tabFileNameAUDIO, nombreElementTabFIN, "audio");
                     }
                     if (strcmp(choix, "Q") == 0)

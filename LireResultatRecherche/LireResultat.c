@@ -14,7 +14,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     if (strstr(type, "rechercheMot"))
     {
         printf("\nRequete mot-clé : \"%s\"\n", requete);
-        printf("\nRésultats (fichier -> occurrences) :\n");
+        printf("\nRésultats (fichier -> occurrences) :\n\n");
         if (nbElement == 0)
         {
             printf("\nCe mot ne figure pas dans notre base de données\n");
@@ -29,7 +29,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     if (strstr(type, "texte"))
     {
         printf("\nRequete fichier : \"%s\"\n", requete);
-        printf("\nRésultats (fichier -> nombre de mots-clés communs) :\n");
+        printf("\nRésultats (fichier -> nombre de mots-clés communs) :\n\n");
         if (nbElement == 0)
         {
             printf("\nAucun mot en communs n'a été trouvé dans notre base de données\n");
@@ -44,7 +44,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     if (strstr(type, "image"))
     {
         printf("\nRequete image : \"%s\"\n", requete);
-        printf("\nRésultats :\n");
+        printf("\nRésultats :\n\n");
         if (nbElement == 0)
         {
             printf("\nAucune image similaire n'a été trouvé dans notre base de données\n");
@@ -59,7 +59,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
     {
 
         printf("\nRequete son : \"%s\"\n", requete);
-        printf("\nRésultats :\n");
+        printf("\nRésultats :\n\n");
         if (nbElement == 0)
         {
             printf("\nAucun mot en communs n'a été trouvé dans notre base de données\n");
@@ -75,7 +75,6 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
 int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, char *type, int nombre_mot_cle, int similarite, int *erreur)
 {
     FILE *fichier = NULL;
-    FILE *fichier1 = NULL;
     ELEMENT *base = (ELEMENT *)malloc((nbElement + 1) * sizeof(ELEMENT));
     ELEMENT *base2 = (ELEMENT *)malloc((nbElement + 1) * sizeof(ELEMENT));
     int ligne = 0;
@@ -110,7 +109,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                                 filename = base[k].CHEMIN;
                             }
                             tabFileName[l] = filename;
-                            printf("\n[%d] %s\t ->%d\n", l + 1, filename, (int)tabResultat[i].pourcentage);
+                            printf("[%d] %s\t ->%d\n", l + 1, filename, (int)tabResultat[i].pourcentage);
                             fflush(stdout);
                             l++;
                         }
@@ -156,7 +155,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                                 filename = base[y].CHEMIN;
                             }
                             tabFileName[l] = filename;
-                            printf("\n[%d] %s\t ->%d\n", l + 1, filename, (int)(tabResultat[i].pourcentage * nombre_mot_cle) / 100);
+                            printf("[%d] %s\t ->%d\n", l + 1, filename, (int)(tabResultat[i].pourcentage * nombre_mot_cle) / 100);
                             fflush(stdout);
                             l++;
                         }
@@ -202,7 +201,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             }
                             recup_CheminPour_Affichage("audio", filename);
                             tabFileName[l] = filename;
-                            printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
+                            printf("[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             fflush(stdout);
                             l++;
                         }
@@ -217,15 +216,14 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
     if (strcmp(type, "image") == 0)
     {
 
-        fichier1 = fopen("../liste_base/liste_base_image/NB", "r");
+        fichier = fopen("../liste_base/liste_base_image/NB", "r");
 
-        if (fichier1 != NULL)
+        if (fichier != NULL)
         {
-            while (fscanf(fichier1, "%d | %s\n", &base[ligne].id, base[ligne].CHEMIN) != EOF)
+            while (fscanf(fichier, "%d | %s\n", &base[ligne].id, base[ligne].CHEMIN) != EOF)
             {
                 ligne++;
             }
-
             for (int i = 0; i <= nbElement; i++)
             {
                 for (int y = 0; y <= nbElement; y++)
@@ -245,14 +243,14 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             }
                             recup_CheminPour_Affichage("nb", filename);
                             tabFileName[l] = filename;
-                            printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
+                            printf("[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
                         }
                     }
                 }
             }
         }
-        fclose(fichier1);
+        fclose(fichier);
 
         fichier = fopen("../liste_base/liste_base_image/RGB", "r");
 
@@ -282,7 +280,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
                             }
                             recup_CheminPour_Affichage("rgb", filename);
                             tabFileName[i] = filename;
-                            printf("\n[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
+                            printf("[%d] %s\t ->%.2f%%\n", l + 1, filename, tabResultat[i].pourcentage);
                             l++;
                         }
                     }
@@ -380,10 +378,14 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
             scanf("%s", choix);
             if (choix[0] == '2')
             {
-                printf("\nVoulez vous revenir au \"Menu Recherche\" ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
-                scanf("%s", choixRQ);
-
-                return choixRQ[0];
+                while (choixRQ[0] != 'R' && choixRQ[0] != 'Q')
+                {
+                    printf("\nVoulez vous revenir au \"Menu Recherche\" ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
+                    scanf("%s", choixRQ);
+                    if(choixRQ[0] != 'R' && choixRQ[0] != 'Q')
+                    {printf("\nCe choix ne figure pas dans la liste !\n");}
+                }
+                 return choixRQ[0];
             }
             if (choix[0] == '1')
             {
