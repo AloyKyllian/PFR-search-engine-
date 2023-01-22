@@ -387,6 +387,7 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
             }
             if (choix[0] == '1')
             {
+                strcpy(numero_fichier, "1000000");
                 while (atoi(numero_fichier) > nbElement)
                 {
                     printf("\nEntrer le numero de fichier que vous voulez visualiser, ou R pour un retour vers le menu de recherche\n");
