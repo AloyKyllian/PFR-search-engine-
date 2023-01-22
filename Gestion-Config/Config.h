@@ -1,9 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "Global.h"
 
 //Tout les parametres necessaires aux configurations .

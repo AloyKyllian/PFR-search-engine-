@@ -2,7 +2,7 @@
 #define DESCRIPTEUR_TEXTE_H
 
 #include <stdint.h>
-#include <stdio.h>
+#include <stdbool.h>
 #include "../Gestion-Config/Global.h"
 #include <string.h>
 #include <ctype.h>

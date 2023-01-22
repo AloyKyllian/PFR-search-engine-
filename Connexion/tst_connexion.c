@@ -2,7 +2,7 @@
 
 int main()
 {
-    String erreur;
+    int erreur;
     LOGIN test;
     lesLogins tablogin;
     bool result;

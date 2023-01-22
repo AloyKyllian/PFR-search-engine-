@@ -1,6 +1,8 @@
 #ifndef ERREUR_H
 #define ERREUR_H
 #include "../Gestion-Config/Global.h"
+#include <stdbool.h>
+#include <string.h>
 /* Exemple d'utilsation
 void main()
 {

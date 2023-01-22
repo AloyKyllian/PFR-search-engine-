@@ -1,8 +1,8 @@
 ConnexionTest : Global.o Login.o Connexion.o tst_connexion.o
 	gcc -o ConnexionTest.out Global.o Login.o Connexion.o tst_connexion.o -lm
 
-Global.o : ../Global/Global.c ../Global/Global.h 
-	gcc -c ../Global/Global.c
+Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
+	gcc -c -g ../Gestion-Config/Global.c
 
 Login.o : ../Login/Login.c ../Login/Login.h 
 	gcc -c ../Login/Login.c

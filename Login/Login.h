@@ -4,6 +4,9 @@
 #define MAXPW 32
 #include "../Gestion-Config/Global.h"
 #include <unistd.h>
+#include <stdbool.h>
+#include <string.h>
+
 // structure login :
 //                    - ID
 //                    - MOT DE PASSE
