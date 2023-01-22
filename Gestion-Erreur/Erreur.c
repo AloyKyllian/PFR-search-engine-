@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "Erreur.h"
 
-void Afficher_Erreur(int Erreur,char Path[], String* Phrase)
+void Afficher_Erreur(int Erreur,char Path[], char Phrase[])
 {
     // Variable
     FILE *fichier = NULL;
@@ -16,10 +16,11 @@ void Afficher_Erreur(int Erreur,char Path[], String* Phrase)
     }
     else
     {
+
         for (int i = 0; i < Erreur; i++)
         {
-           fgets(*Phrase,100,fichier);
+           fgets(Phrase,100,fichier);
         }
-        fgets(*Phrase,100,fichier);
+        fgets(Phrase,100,fichier);
     }
 }

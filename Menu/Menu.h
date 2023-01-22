@@ -9,7 +9,7 @@
 #include "../LireResultatRecherche/LireResultat.h"
 #include "../Gestion-Erreur/Erreur.h"
 
-void MAE(CONFIG *,char*, int *, int *, int *, int *,String);
+void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex);
 
 //Etat :
 //MENUS PRINCIPAUX

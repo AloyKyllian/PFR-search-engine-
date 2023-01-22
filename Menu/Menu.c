@@ -1,7 +1,8 @@
 #include "Menu.h"
 
-void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex, String ERREUR)
+void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, int *erreurTexte, int *erreurIndex)
 {
+    char ERREUR[100];
     static char etat_courant = Menu_general;
 
     // variables a utiliser au cours du programme
@@ -37,7 +38,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 result = seconnecter(tablogin, testlogin, &erreur);
                 if (erreur == 7)
                 {
-                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                     printf("%s", ERREUR);
                 }
                 else
@@ -80,7 +81,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_general;
             break;
@@ -115,7 +116,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_Admin;
             break;
@@ -138,7 +139,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             *config = Lire_mot_cle(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -146,7 +147,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             Ecrire_CONFIG(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -158,7 +159,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             *config = Lire_similariter(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -166,7 +167,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             Ecrire_CONFIG(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -178,7 +179,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             *config = Lire_nb_bit_fort(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -186,7 +187,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             Ecrire_CONFIG(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -197,14 +198,14 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             *config = Lire_nb_fenetre(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
             Ecrire_CONFIG(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -216,14 +217,14 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             *config = Lire_intervale(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
             Ecrire_CONFIG(*config, &Erreur);
             if (Erreur != 0)
             {
-                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(Erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
                 Erreur = 0;
             }
@@ -249,7 +250,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     break;
                 default:
                     erreur = 11;
-                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                     printf("%s", ERREUR);
                     etat_courant = Menu_Configuration;
                     break;
@@ -258,7 +259,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_Configuration;
             break;
@@ -314,7 +315,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_Visualisation;
             break;
@@ -346,7 +347,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_Utilisateur;
             break;
@@ -371,7 +372,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
             if (erreur == 7)
             {
-                Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                 printf("%s", ERREUR);
             }
             else
@@ -437,7 +438,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
                 if (erreur == 7 || erreur == 1)
                 {
-                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                     printf("%s", ERREUR);
                 }
                 nombreElementTabFIN = LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileName, config->Nb_Mots_Cle, config->Similariter);
@@ -464,7 +465,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_texte;
             break;
@@ -522,7 +523,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
                 if (erreur != 0)
                 {
-                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                     printf("%s", ERREUR);
                 }
                 else
@@ -551,7 +552,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_image;
             break;
@@ -608,7 +609,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                 char *tabFileName[700];
                 if (erreur != 0)
                 {
-                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+                    Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
                     printf("%s", ERREUR);
                 }
                 else
@@ -640,7 +641,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             break;
         default:
             erreur = 11;
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
             etat_courant = Menu_audio;
             break;
@@ -652,7 +653,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         erreur = 14;
         if (erreur != 0)
         {
-            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", &ERREUR);
+            Afficher_Erreur(erreur, "../Gestion-Erreur/Erreur.txt", ERREUR);
             printf("%s", ERREUR);
         }
         etat_courant = Menu_general;

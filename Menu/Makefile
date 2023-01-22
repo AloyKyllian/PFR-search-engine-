@@ -1,3 +1,4 @@
+
 menu : Global.o Erreur.o Config.o ../indexgene/element.o ../indexgene/Pile.o ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o ../indexgene/indexation_gene.o Login.o Connexion.o FichierExist.o Mot.o lireResultatCompare.o Menu.o tst_menu.o
 	gcc -o Global.o Erreur.o Config.o ../indexgene/element.o ../indexgene/Pile.o ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o ../indexgene/indexation_gene.o Login.o Connexion.o FichierExist.o Mot.o lireResultatCompare.o Menu.o tst_menu.o -lm
 
@@ -20,13 +21,13 @@ FichierExist.o : ../Menu/FichierExist.c ../Menu/FichierExist.h
 	gcc -c ../Menu/FichierExist.c
 
 Mot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h
-	gcc -c -Wall ../RechercheMot/rechercheMot.c
+	gcc -c ../RechercheMot/rechercheMot.c
 
 lireResultatCompare.o : ../LireResultatRecherche/LireResultat.c ../LireResultatRecherche/LireResultat.h
 	gcc -c ../LireResultatRecherche/LireResultat.c
 
 Menu.o : ../Menu/Menu.c ../Menu/Menu.h 
-	gcc -c -Wall ../Menu/Menu.c
+	gcc -c ../Menu/Menu.c
 
 tst_menu.o : ../Menu/tst_menu.c
 	gcc -c ../Menu/tst_menu.c

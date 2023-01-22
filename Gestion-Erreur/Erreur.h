@@ -10,6 +10,6 @@ void main()
 }
 */
 // Stocke la phrase d'erreur dans Phrase
-void Afficher_Erreur(int Erreur, char Path[], String *Phrase);
+void Afficher_Erreur(int Erreur,char Path[], char Phrase[]);
 
 #endif
