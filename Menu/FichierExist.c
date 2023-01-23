@@ -1,3 +1,9 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    15/12/2022
+//
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,12 +12,12 @@ int FichierExist(char chemin[100])
  
 	if (fichier == NULL)
 	{
-        return -1;//passer erreur en parametre et le rendre erreur =??
+        return -1;//passer erreur en parametre
 	}
 	else
 	{
     	fclose(fichier);
-        return 1;//passer erreur en parametre et le rendre erreur =??
+        return 1;//passer erreur en parametre
 	}
 }
 

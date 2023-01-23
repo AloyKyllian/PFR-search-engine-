@@ -11,7 +11,11 @@
 
 /**
  * @brief
- *
+ *La fonction MAE gère les différents menus de l'application, permettant à un utilisateur ou un administrateur de naviguer entre les différentes options.
+ Il y a un menu général, un menu administrateur, un menu utilisateur et des sous-menus pour la recherche de fichiers de différents types (texte, image, audio).
+ Le menu général permet de choisir entre les options de connexion en tant qu'administrateur ou utilisateur, et de quitter le programme.
+ Le menu administrateur permet aux utilisateurs connectés en tant qu'administrateur de gérer les utilisateurs et les fichiers.
+ Le menu utilisateur permet aux utilisateurs de rechercher des fichiers par mot-clé ou par comparaison de textes, de visualiser les résultats de la recherche et de retourner au menu précédent ou de quitter le programme.
  * @param config
  * @param choix
  * @param erreurImage

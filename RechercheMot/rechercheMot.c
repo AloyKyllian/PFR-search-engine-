@@ -1,3 +1,10 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    16/01/2023
+//
+
 #include "rechercheMot.h"
 
 void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mot, int *nbElTab, int *erreur)
@@ -20,16 +27,16 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	char *chaine = (char *)malloc(100);
 	fp = fopen(chemin, "rt");
 	if (fp != NULL)
-	{
+	{// on lit ligne par ligne le fichier descripteur texte passer en parametre et si on rencontre un numero negatif on le stock comme ID 
 		while (fscanf(fp, "%s", chaine) != EOF && atoi(chaine) < 0)
 		{
 
 			strcpy(IDstring, chaine);
 
 			for (int i = 0; i < nb_mot; i++)
-			{
+			{// on commence a parcourir les mots du descripteur ainsi que leurs nombre d'occurence
 				fscanf(fp, "%s    |    %s", chaine, nb_occu);
-				if (strcmp(chaine, mot) == 0)
+				if (strcmp(chaine, mot) == 0)// des que le mot recherché est trouvé on stock son nombre d'occurence
 				{
 					// stocker les donnee dans un fichier pour les trier avec la commande sort de linux
 					strcpy(commande, echo);

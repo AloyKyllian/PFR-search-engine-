@@ -1,3 +1,10 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    23/01/2023
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -379,11 +386,16 @@ char visualiser_fichier(char *tabFileName[], int nbElement, char *type)
 
             scanf("%s", choix);
             if (choix[0] == '2')
-            {    
-                while(choixRQ[0]!='R' || )
-                printf("\nVoulez vous revenir au \"Menu Recherche\" ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
-                scanf("%s", choixRQ);
-
+            {
+                while (choixRQ[0] != 'R' && choixRQ[0] != 'Q')
+                {
+                    printf("\nVoulez vous revenir au \"Menu Recherche\" ou quitter le programme?\n[R] Retour\n[Q] Quitter\n");
+                    scanf("%s", choixRQ);
+                    if (choixRQ[0] != 'R' && choixRQ[0] != 'Q')
+                    {
+                        printf("\nCe choix ne figure pas dans la liste !\n");
+                    }
+                }
                 return choixRQ[0];
             }
             if (choix[0] == '1')
