@@ -369,6 +369,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
         case Recherche_mots_cle:
         {
             char *tabFileNameMOT[700];
+
             erreur = 0;
             printf("\nEntrez votre mot-clé\n");
             scanf("%s", motCle);
@@ -382,7 +383,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
             else
             {
                 nombreElementTabFIN = LireResultat(tabResultatMot, nombreElemetTab, "rechercheMot", motCle, tabFileNameMOT, config->Nb_Mots_Cle, config->Similariter);
-
+                free(tabResultatMot);
                 if (nombreElementTabFIN > 0)
                 {
 
@@ -395,7 +396,6 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     exit(EXIT_SUCCESS);
                 }
             }
-            free(tabResultatMot);
         }
 
         break;
@@ -447,7 +447,7 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     printf("%s", ERREUR);
                 }
                 nombreElementTabFIN = LireResultat(tabResultatTexte, nombreElemetTab, "texte", chemin, tabFileNameTEXTE, config->Nb_Mots_Cle, config->Similariter);
-
+                free(tabResultatTexte);
                 if (nombreElementTabFIN > 0)
                 {
                     printf("[R] Retour\n\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité\n");
@@ -458,7 +458,6 @@ void MAE(CONFIG *config, char choix[100], int *erreurImage, int *erreurAudio, in
                     printf("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
                     exit(EXIT_SUCCESS);
                 }
-                free(tabResultatTexte);
             }
             break;
         case Retour:

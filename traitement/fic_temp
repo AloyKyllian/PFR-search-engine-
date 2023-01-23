@@ -7,7 +7,6 @@
 -rw-rw-r-- 1 pandou pandou 4348 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/05-Rock___l_Illinois_magique_de.xml
 -rw-rw-r-- 1 pandou pandou 5020 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/05-Prague_inaugure_les_Journées_européennes.xml
 -rw-rw-r-- 1 pandou pandou 2564 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/05-Photographie___Philip_Blenkinsop_a.xml
--rw-rw-r-- 1 pandou pandou 3579 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/05-Musique_électronique___l_élan_collectif.xml
 -rw-rw-r-- 1 pandou pandou 5580 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/05-L_apnéiste_français_Guillaume_Néry_plonge.xml
 -rw-rw-r-- 1 pandou pandou 7258 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/05-La_circoncision_pourrait_réduire_le.xml
 -rw-rw-r-- 1 pandou pandou 4946 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/05-Jean-Christophe_Bette_a_dû_attendre.xml
@@ -46,7 +45,6 @@
 -rw-rw-r-- 1 pandou pandou 2276 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/13-L_inattendue_lévitation_de_la_goutte.xml
 -rw-rw-r-- 1 pandou pandou 7716 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/13-Les_accidents_vasculaires_cérébraux,_à.xml
 -rw-rw-r-- 1 pandou pandou 3975 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/13-Des_astronomes_détectent_l_explosion_cosmique.xml
--rw-rw-r-- 1 pandou pandou 7506 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/12-Jean-Marie_Sevestre,_libraire_et_PDG.xml
 -rw-rw-r-- 1 pandou pandou 4515 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/12-Fernando_Alonso_n_est_plus_qu_à.xml
 -rw-rw-r-- 1 pandou pandou 6597 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/12-Agassi_plie_face_au_meilleur.xml
 -rw-rw-r-- 1 pandou pandou 4474 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/11-La_troposphère_paie,_au_prix.xml
@@ -80,5 +78,7 @@
 -rw-rw-rw- 1 pandou pandou 6606 janv. 22 19:34 ../DATA_FIL_ROUGE_DEV/Textes/08-Carlos_do_Carmo____Le.xml
 -rw-rw-rw- 1 pandou pandou 2174 janv. 22 20:00 ../DATA_FIL_ROUGE_DEV/Textes/26-Grippe_aviaire___une_sixième.xml
 -rw-rw-rw- 1 pandou pandou 6868 janv. 22 22:56 ../DATA_FIL_ROUGE_DEV/Textes/22-Grippe_aviaire___la_course.xml
--rw-rw-rw- 1 pandou pandou  657 janv. 22 22:56 ../DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml
--rw-rw-rw- 1 pandou pandou 5042 janv. 22 23:25 ../DATA_FIL_ROUGE_DEV/Textes/28-_Œdipe_à_Colone_,_la_rage.xml
+-rw-rw-rw- 1 pandou pandou 3579 janv. 22 23:37 ../DATA_FIL_ROUGE_DEV/Textes/05-Musique_électronique___l_élan_collectif.xml
+-rw-rw-rw- 1 pandou pandou 7506 janv. 23 10:31 ../DATA_FIL_ROUGE_DEV/Textes/12-Jean-Marie_Sevestre,_libraire_et_PDG.xml
+-rw-rw-rw- 1 pandou pandou  657 janv. 23 11:37 ../DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml
+-rw-rw-rw- 1 pandou pandou 5042 janv. 23 11:37 ../DATA_FIL_ROUGE_DEV/Textes/28-_Œdipe_à_Colone_,_la_rage.xml
