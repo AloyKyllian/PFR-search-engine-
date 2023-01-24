@@ -28,6 +28,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
         }
         else
         {
+            // Appel de la fonction lire_chemin pour afficher les résultats de recherche par mot clé
             element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, "rechercheMot", nombre_mot_cle, similarite, &erreur);
         }
     }
@@ -42,7 +43,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
             printf("\nAucun mot en communs n'a été trouvé dans notre base de données\n");
         }
         else
-        {
+        { // Appel de la fonction lire_chemin pour afficher les résultats de comparaison de texte
             element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
@@ -57,7 +58,8 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
             printf("\nAucune image similaire n'a été trouvé dans notre base de données\n");
         }
         else
-        {
+        { 
+            // Appel de la fonction lire_chemin pour afficher les résultats de comparaison d'image
             element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
@@ -73,6 +75,7 @@ int LireResultat(tab_similaire *tabResultat, int nbElement, char *type, char *re
         }
         else
         {
+            // Appel de la fonction lire_chemin pour afficher les résultats de comparaison d'audio
             element_tableauRes = lire_chemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, similarite, &erreur);
         }
     }
@@ -83,6 +86,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
 {
     FILE *fichier = NULL;
     FILE *fichier1 = NULL;
+    // allocation de mémoire pour stocker les résultats dans un tableau
     ELEMENT *base = (ELEMENT *)malloc((nbElement + 1) * sizeof(ELEMENT));
     ELEMENT *base2 = (ELEMENT *)malloc((nbElement + 1) * sizeof(ELEMENT));
     int ligne = 0;
@@ -90,6 +94,7 @@ int lire_chemin(tab_similaire *tabResultat, char *tabFileName[], int nbElement, 
     if (strcmp(type, "rechercheMot") == 0)
     {
         int y = 0;
+        // ouverture du fichier liste base texte pour avoir le chemin du fichier qui correspond a l'id
         fichier = fopen("../liste_base/liste_base_texte", "r");
         if (fichier != NULL)
         {
