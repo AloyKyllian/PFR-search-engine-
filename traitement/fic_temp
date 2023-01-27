@@ -1,5 +1,4 @@
 -rw-rw-r-- 1 pandou pandou 3750 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/07-Un_député_UMP_lance_une.xml
--rw-rw-r-- 1 pandou pandou  486 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/06-US_Open___Mauresmo_et.xml
 -rw-rw-r-- 1 pandou pandou 7921 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/06-Sensibiliser_à_la_vaccination_grippale.xml
 -rw-rw-r-- 1 pandou pandou 7435 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/06-Les_mauvais_comptes_d_une_élimination.xml
 -rw-rw-r-- 1 pandou pandou 6427 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/06-La_contamination_du_maļs_par.xml
@@ -32,7 +31,6 @@
 -rw-rw-r-- 1 pandou pandou 1581 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/18-Les_22e_Journées_du_Patrimoine.xml
 -rw-rw-r-- 1 pandou pandou 3882 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/18-Battue_par_la_Slovénie,_l_équipe.xml
 -rw-rw-r-- 1 pandou pandou 7579 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/17-Une_équipe_française_a_réussi.xml
--rw-rw-r-- 1 pandou pandou 4749 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/17-La_voix_envoûtante_de_Girija.xml
 -rw-rw-r-- 1 pandou pandou 4710 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/17-De_la_difficulté_d_anticiper_les.xml
 -rw-rw-r-- 1 pandou pandou 3764 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/17-Anouk_Aimée_et_Philippe_Noiret.xml
 -rw-rw-r-- 1 pandou pandou 7901 janv. 22 18:15 ../DATA_FIL_ROUGE_DEV/Textes/16-Une_sonde_japonaise_va_tenter.xml
@@ -71,14 +69,16 @@
 -rw-rw-r-- 1 pandou pandou 4584 janv. 22 18:18 ../DATA_FIL_ROUGE_DEV/Textes/12-Succès_sur_les_tatamis,_polémique.xml
 -rw-rw-r-- 1 pandou pandou 4258 janv. 22 18:18 ../DATA_FIL_ROUGE_DEV/Textes/12-Musiques_du_monde___les.xml
 -rw-rw-r-- 1 pandou pandou 2987 janv. 22 18:18 ../DATA_FIL_ROUGE_DEV/Textes/12-Musique_classique___un__Oberon_.xml
--rw-rw-r-- 1 pandou pandou  705 janv. 22 18:18 ../DATA_FIL_ROUGE_DEV/Textes/08-US_Open___Pierce_élimine.xml
 -rw-rw-rw- 1 pandou pandou  791 janv. 22 18:59 ../DATA_FIL_ROUGE_DEV/Textes/18-Ligue_1___Lyon_a.xml
 -rw-rw-r-- 1 pandou pandou 8412 janv. 22 19:25 ../DATA_FIL_ROUGE_DEV/Textes/05-Le_Colombien_Juan_Pablo_Montoya.xml
 -rw-rw-rw- 1 pandou pandou  529 janv. 22 19:26 ../DATA_FIL_ROUGE_DEV/Textes/18-L_équipe_de_France_de_tennis.xml
 -rw-rw-rw- 1 pandou pandou 6606 janv. 22 19:34 ../DATA_FIL_ROUGE_DEV/Textes/08-Carlos_do_Carmo____Le.xml
--rw-rw-rw- 1 pandou pandou 2174 janv. 22 20:00 ../DATA_FIL_ROUGE_DEV/Textes/26-Grippe_aviaire___une_sixième.xml
 -rw-rw-rw- 1 pandou pandou 6868 janv. 22 22:56 ../DATA_FIL_ROUGE_DEV/Textes/22-Grippe_aviaire___la_course.xml
 -rw-rw-rw- 1 pandou pandou 3579 janv. 22 23:37 ../DATA_FIL_ROUGE_DEV/Textes/05-Musique_électronique___l_élan_collectif.xml
--rw-rw-rw- 1 pandou pandou 7506 janv. 23 10:31 ../DATA_FIL_ROUGE_DEV/Textes/12-Jean-Marie_Sevestre,_libraire_et_PDG.xml
--rw-rw-rw- 1 pandou pandou  657 janv. 23 11:37 ../DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml
--rw-rw-rw- 1 pandou pandou 5042 janv. 23 11:37 ../DATA_FIL_ROUGE_DEV/Textes/28-_Œdipe_à_Colone_,_la_rage.xml
+-rw-rw-rw- 1 pandou pandou  486 janv. 23 12:45 ../DATA_FIL_ROUGE_DEV/Textes/06-US_Open___Mauresmo_et.xml
+-rw-rw-rw- 1 pandou pandou  705 janv. 23 12:47 ../DATA_FIL_ROUGE_DEV/Textes/08-US_Open___Pierce_élimine.xml
+-rw-rw-rw- 1 pandou pandou 7506 janv. 23 12:49 ../DATA_FIL_ROUGE_DEV/Textes/12-Jean-Marie_Sevestre,_libraire_et_PDG.xml
+-rw-rw-rw- 1 pandou pandou 5042 janv. 23 13:16 ../DATA_FIL_ROUGE_DEV/Textes/28-_Œdipe_à_Colone_,_la_rage.xml
+-rw-rw-rw- 1 pandou pandou 2174 janv. 23 13:16 ../DATA_FIL_ROUGE_DEV/Textes/26-Grippe_aviaire___une_sixième.xml
+-rw-rw-rw- 1 pandou pandou  657 janv. 23 13:16 ../DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml
+-rw-rw-rw- 1 pandou pandou 4749 janv. 23 13:16 ../DATA_FIL_ROUGE_DEV/Textes/17-La_voix_envoûtante_de_Girija.xml
