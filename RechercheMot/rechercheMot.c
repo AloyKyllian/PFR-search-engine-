@@ -1,11 +1,18 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    16/01/2023
+//
+
 #include "rechercheMot.h"
 
 void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mot, int *nbElTab, int *erreur)
 {
 	FILE *fp;
 	FILE *fres;
-	system("touch fichierRes.txt");
-	system("touch fichierRestrie.txt");
+	system("touch fichierRes.txt");		// Création d'un fichier temporaire pour stocker les résultats de la recherche
+	system("touch fichierRestrie.txt"); // Création d'un autre fichier temporaire pour stocker les résultats triés
 	char *echo = "echo ";
 	char *commande = (char *)malloc(100);
 	char *commande1 = (char *)malloc(100);
@@ -18,20 +25,20 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	int l = 0; // pour remplir le tableau resultat
 	char *IDstring = (char *)malloc(5);
 	char *chaine = (char *)malloc(100);
-	fp = fopen(chemin, "rt");
+	fp = fopen(chemin, "rt"); // ouverture du fichier de descripteurs en mode lecture
 	if (fp != NULL)
-	{
+	{ // on lit ligne par ligne le fichier descripteur texte passer en parametre et si on rencontre un numero negatif on le stock comme ID
 		while (fscanf(fp, "%s", chaine) != EOF && atoi(chaine) < 0)
 		{
 
 			strcpy(IDstring, chaine);
 
 			for (int i = 0; i < nb_mot; i++)
-			{
+			{ // on commence a parcourir les mots du descripteur ainsi que leurs nombre d'occurence
 				fscanf(fp, "%s    |    %s", chaine, nb_occu);
-				if (strcmp(chaine, mot) == 0)
+				if (strcmp(chaine, mot) == 0) // des que le mot recherché est trouvé on stock son nombre d'occurence
 				{
-					// stocker les donnee dans un fichier pour les trier avec la commande sort de linux
+					// Stockage des données dans un fichier pour trier ensuite avec la commande sort de Linux
 					strcpy(commande, echo);
 					strcat(commande, IDstring);
 					strcat(commande, " ");
@@ -44,19 +51,19 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	}
 	else
 	{
-		*erreur = 7;
+		*erreur = 7; // Erreur lors de l'ouverture du fichier
 	}
 	fclose(fp);
 
-	// donner le droit d'ecriture dans le fichier resultat afin de trier ensuite
+	// Donner les droits d'écriture sur le fichier de résultats pour trier ensuite
 	strcpy(commande1, "chmod g+w fichierRes.txt");
 	system(commande1);
 
-	// trier dans l'ordre decroissant  et les stocker dans un fichier
+	// Trier les résultats dans l'ordre décroissant et stocker dans un fichier
 	strcpy(commande2, "sort -k2nr,2nr ./fichierRes.txt >> ./fichierRestrie.txt");
 	system(commande2);
 
-	// supprimer le fichier avec les resultat de la recherche dans la base des descripteur
+	// Suppression du fichier temporaire de résultats
 	strcpy(commande3, "rm fichierRes.txt");
 	system(commande3);
 
@@ -73,7 +80,7 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	}
 	else
 	{
-		*erreur = 7;
+		*erreur = 7; // Erreur lors de l'ouverture du fichier
 	}
 	fclose(fres);
 	*nbElTab = l;

@@ -2,21 +2,6 @@
 #include "descripteur_texte.h"
 
 
-int comptemot(char* mot_lu)
-{
-    int nbr_mot=0;
-    char* mot;
-    while(strcmp(mot_lu,"<texte>"))
-    {
-        
-    
-    };
-
-    
-return nbr_mot;    
-}
-
-
 char *nettoyage(char mot_lu[100])
 {
 

@@ -43,6 +43,27 @@ float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int 
  */
 tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_descripteur_compare, char *chemin_descripteur_audio, int *erreur, int *Nb_ligne);
 
+
+/**
+ * @brief
+ *
+ * Cette fonction commence par créer un descripteur pour le nouveau fichier ajouté.
+ * Elle fait une boucle qui balaye tous les descripteurs déjà créé et pour chacun :
+ * Récupère l'id du descripteur déjà créé.
+ * Puis vérifie si les mots du nouveau descripteur sont présents dans celui déjà présent
+ * Si c'est le cas on regarde leur nombre d'apparition chacun, s'ils apparaissent à +/- 3 près alors on considère que ce mot est cité de manière similaire dans les deux textes.
+ * Dans ce cas on augmente un compteur
+ * Puis à la fin on fait le calcul du nombre de mot similaire divisé par le nombre de mot total multiplié par 100 pour avoir la similarité des deux textes en pourcentage.
+ * Enfin on passe au descripteur suivant pour comparer.
+ *
+ * @param nbr_mot
+ * @param chemin_fichier_a_compare
+ * @param chemin_descripteur_compare
+ * @param chemin_descripteur
+ * @param Erreur
+ * @param Nb_ligne
+ * @return tab_similaire*
+ */
 tab_similaire *comparaison_texte(int nbr_mot, char *chemin_fichier_a_compare, char *chemin_descripteur, int *Erreur, int *Nb_ligne);
 
 // typedef enum {texte,image,audio}type_compare;
