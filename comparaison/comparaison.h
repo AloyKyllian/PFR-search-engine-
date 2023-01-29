@@ -47,6 +47,7 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_descr
 /**
  * @brief
  *
+ * Auteur : Hugo Lestrade
  * Cette fonction commence par créer un descripteur pour le nouveau fichier ajouté.
  * Elle fait une boucle qui balaye tous les descripteurs déjà créé et pour chacun :
  * Récupère l'id du descripteur déjà créé.
