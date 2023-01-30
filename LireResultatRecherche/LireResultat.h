@@ -1,3 +1,9 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    23/01/2023
+//
 #ifndef LIRERESULTAT_H_INCLUS    
 #define LIRERESULTAT_H_INCLUS   
 #include "../Pile/Pile.h"

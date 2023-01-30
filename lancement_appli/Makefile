@@ -1,3 +1,5 @@
+ # Fait par YASMINE ALLAL YOUSSERA ACHACHERA LOIC MAIGNAN HUGO LESTRADE KYLLIAN ALOY
+ # Le 23/01/2023
 PFResearch : Global.o Erreur.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o
 	gcc -o PFResearch.out Global.o Erreur.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
 

@@ -1,3 +1,12 @@
+/**
+ * Fait par Loic Maignan, Hugo Lestrade, Kyllian Aloy
+ * 
+ * Le 23/01/2023
+ * 
+*/
+
+
+
 #include "comparaison.h"
 
 float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int intervalle, descri_audio descri, float fenetre)

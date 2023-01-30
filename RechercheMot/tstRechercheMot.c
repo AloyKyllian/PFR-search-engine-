@@ -1,3 +1,9 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    16/01/2023
+//
 #include "rechercheMot.h"
 
 int main(){

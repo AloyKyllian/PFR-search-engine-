@@ -1,3 +1,10 @@
+/**
+ * Fait par Kyllian Aloy
+ * 
+ * Le 23/01/2023
+ * 
+*/
+
 #ifndef DESCRIPT_AUDIO_H
 #define DESCRIPT_AUDIO_H
 

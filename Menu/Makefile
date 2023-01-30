@@ -1,4 +1,5 @@
-
+ # Fait par YOUSSERA ACHACHERA
+ # Le 23/01/2023
 menu : Global.o Erreur.o Config.o ../indexgene/element.o ../indexgene/Pile.o ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o ../indexgene/indexation_gene.o Login.o Connexion.o FichierExist.o Mot.o lireResultatCompare.o Menu.o tst_menu.o
 	gcc -o Global.o Erreur.o Config.o ../indexgene/element.o ../indexgene/Pile.o ../indexgene/descripteur_texte.o  ../indexgene/descripteur_audio.o  ../indexgene/Descripteur_image.o ../indexgene/indexation_gene.o Login.o Connexion.o FichierExist.o Mot.o lireResultatCompare.o Menu.o tst_menu.o -lm
 

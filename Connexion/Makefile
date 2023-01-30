@@ -1,3 +1,5 @@
+ # Fait par Yassmine Allal
+ # Le 23/01/2023
 ConnexionTest : Global.o Login.o Connexion.o tst_connexion.o
 	gcc -o ConnexionTest.out Global.o Login.o Connexion.o tst_connexion.o -lm
 

@@ -1,3 +1,9 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    16/01/2023
+//
 #ifndef RECHERCHEMOT_H
 #define RECHERCHEMOT_H
 #include "../Gestion-Config/Global.h"

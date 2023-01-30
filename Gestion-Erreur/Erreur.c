@@ -1,3 +1,9 @@
+/**
+ * Fait par Loic Maignan
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include "Erreur.h"

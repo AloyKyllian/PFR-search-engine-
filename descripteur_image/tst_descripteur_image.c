@@ -1,3 +1,9 @@
+/**
+ * Fait par Loic Maignan
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #include "Descripteur_image.h"
 
 void main()

@@ -1,4 +1,9 @@
-
+/**
+ * Fait par Hugo Lestrade
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #include "descripteur_texte.h"
 
 

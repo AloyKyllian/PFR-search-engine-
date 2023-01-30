@@ -1,3 +1,9 @@
+/**
+ * Fait par Hugo Lestrade
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #ifndef DESCRIPTEUR_TEXTE_H
 #define DESCRIPTEUR_TEXTE_H
 

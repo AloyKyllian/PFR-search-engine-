@@ -1,3 +1,9 @@
+/**
+ * Fait par Loic Maignan
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #include "Config.h"
 const char PATH_CONFIG[] = "../Gestion-Config/Config.txt";
 
