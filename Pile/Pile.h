@@ -1,3 +1,9 @@
+//
+// AUTEUR :
+//          YASMINE ALLAL
+// DERNIERE VERSION :
+//    15/01/2023
+//
 #ifndef PILE_h
 #define PILE_h
 #include "../Element/element.h"

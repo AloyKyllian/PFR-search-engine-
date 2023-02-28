@@ -1,3 +1,6 @@
+ # Fait par YOUSSERA ACHACHERA 
+ # Le 23/01/2023
+
 Lire : element.o Pile.o LireResultat.o tstLireResultat.o
 	gcc -o Lire.out element.o Pile.o LireResultat.o tstLireResultat.o -lm
 

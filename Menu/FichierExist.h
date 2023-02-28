@@ -1,3 +1,9 @@
+//
+// AUTEUR :
+//          YOUSSERA ACHACHERA
+// DERNIERE VERSION :
+//    15/12/2022
+//
 #ifndef FichierExist_H_INCLUS    
 #define FichierExist_H_INCLUS   
 

@@ -1,3 +1,5 @@
+ # Fait par Kyllian Aloy
+ # Le 23/01/2023
 descripteur_audio : descripteur_audio.o test_descripteur_audio.o
 	gcc -o test_descripteur_audio.out descripteur_audio.o test_descripteur_audio.o
 

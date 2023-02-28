@@ -1,3 +1,9 @@
+/**
+ * Fait par Kyllian Aloy
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #include"descripteur_audio.h"
 
 int main()

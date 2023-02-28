@@ -1,3 +1,9 @@
+/**
+ * Fait par Loic Maignan
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #ifndef ERREUR_H
 #define ERREUR_H
 #include "../Gestion-Config/Global.h"

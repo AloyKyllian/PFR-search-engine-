@@ -1,3 +1,9 @@
+/**
+ * Fait par Yassmine Allal
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #include "Connexion.h"
 
 bool seconnecter(lesLogins tablogin, LOGIN newlogin, int *erreur)

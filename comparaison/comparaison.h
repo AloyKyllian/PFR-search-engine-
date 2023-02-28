@@ -1,3 +1,11 @@
+/**
+ * Fait par Loic Maignan, Hugo Lestrade, Kyllian Aloy
+ * 
+ * Le 23/01/2023
+ * 
+*/
+
+
 #ifndef COMPARAISON_H
 #define COMPARAISON_H
 
@@ -15,11 +23,35 @@ typedef struct
     float pourcentage;
 } tab_similaire;
 
+/**
+ * @brief
+ * La fonction "Comparaison_descripteur_image" compare un descripteur d'image nouvellement créé à un recueil de descripteurs d'images enregistrés. 
+ * Le descripteur nouvellement créé est créé à partir du chemin de l'image spécifié (PathNvImg) avec un nombre de bits forts spécifié (Nb_Bits_Fort). 
+ * La fonction retourne un tableau de similarités qui contient les identificateurs des images du recueil et le pourcentage de différence avec la nouvelle image. 
+ * L'erreur rencontrée est indiquée dans la variable Erreur passée en argument.
+ * 
+ * @param Erreur
+ * @param PathRecueil
+ * @param PathNvImg
+ * @param Nb_Bits_Fort
+ * @param Nb_des
+ * @return tab_similaire*
+ */
 tab_similaire *Comparaison_descripteur_image(int *Erreur, char PathRecueil[], char PathNvImg[], int Nb_Bits_Fort, int *Nb_des);
 
 /**
  * @brief
- *
+ * La fonction "comparaison" compare deux descripteurs audio et retourne le pourcentage de similarité le plus élevé entre eux. 
+ * La comparaison se fait en calculant la différence entre chaque élément des deux tableaux et en la comparant à une fenêtre donnée. 
+ * Le pourcentage de similarité est ensuite calculé en divisant la somme des différences par la taille de la fenêtre et en retournant la valeur inverse.
+ * 
+ * @param val_lu
+ * @param descripteur_comparé
+ * @param ligne
+ * @param intervalle
+ * @param descri
+ * @param fenetre
+ * @return float
  */
 float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int intervalle, descri_audio descri, float fenetre);
 
@@ -47,6 +79,7 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_descr
 /**
  * @brief
  *
+ * Auteur : Hugo Lestrade
  * Cette fonction commence par créer un descripteur pour le nouveau fichier ajouté.
  * Elle fait une boucle qui balaye tous les descripteurs déjà créé et pour chacun :
  * Récupère l'id du descripteur déjà créé.

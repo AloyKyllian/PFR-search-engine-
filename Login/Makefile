@@ -1,3 +1,5 @@
+ # Fait par YASMINE ALLAL
+ # Le 23/01/2023.
 LoginTest : Global.o Login.o tst_login.o
 	gcc -o LoginTest.out Global.o Login.o tst_login.o -lm
 

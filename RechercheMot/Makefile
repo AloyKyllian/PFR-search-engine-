@@ -1,3 +1,5 @@
+ # Fait par YOUSSERA ACHACHERA
+ # Le 23/01/2023
 RechercheMot : rechercheMot.o tstRechercheMot.o
 	gcc -o RechercheMot.out rechercheMot.o tstRechercheMot.o -lm
 

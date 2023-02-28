@@ -1,3 +1,7 @@
+ # Fait par Loic Maignan, Hugo Lestrade, Kyllian Aloy
+ # Le 23/01/2023
+
+
 test_comparaison : tst_comparaison.o comparaison.o descripteur_audio.o descripteur_texte.o Descripteur_image.o Global.o
 	gcc -o test_comparaison.out tst_comparaison.o comparaison.o descripteur_audio.o descripteur_texte.o Descripteur_image.o -lm
 

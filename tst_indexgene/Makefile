@@ -1,3 +1,5 @@
+ # Fait par YASMINE ALLAL
+ # Le 23/01/2023
 inde : Global.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o tst_indexgene.o
 	gcc -o inde.out Global.o Config.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o tst_indexgene.o -lm
 

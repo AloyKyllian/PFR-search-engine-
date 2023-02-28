@@ -1,3 +1,10 @@
+//
+// AUTEUR :
+//          YASMINE ALLAL
+// DERNIERE VERSION :
+//    15/01/2023
+//
+// Fonction Supprimer_Descripteur developpe par Loic Maignan
 #ifndef indexation_gene_h
 #define indexation_gene_h
 

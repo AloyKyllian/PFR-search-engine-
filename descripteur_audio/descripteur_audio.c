@@ -1,3 +1,10 @@
+/**
+ * Fait par Kyllian Aloy
+ * 
+ * Le 23/01/2023
+ * 
+*/
+
 #include "descripteur_audio.h"
 
 descri_audio Descripteur_audio(int nb_val_fenetre, int intervalle, char *chemin_fichier,int * erreur){//demander comment recuperer le chemin et nom du fichier

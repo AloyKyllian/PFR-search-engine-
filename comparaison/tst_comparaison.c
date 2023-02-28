@@ -1,3 +1,10 @@
+/**
+ * Fait par Loic Maignan, Hugo Lestrade, Kyllian Aloy
+ * 
+ * Le 23/01/2023
+ * 
+*/
+
 #include "comparaison.h"
 
 int main()
@@ -31,7 +38,7 @@ for (unsigned int j = 0; tab_audio[j].pourcentage>=0 && j<Nb_ligne ; j++)
 
 printf("\n\n");
 
-/////////////////////////////////////////////IMAGE/////////////////////A CORRIGER LE MALLOC ET TAILLE DESCRIPTEUR///////////////////si tab est plus grand compare que les premiere valuer du plus grand avec TOUTES les valurs du plus petit
+/////////////////////////////////////////////IMAGE///////////////////
     tab_similaire *Tab_image;
 
     Tab_image = Comparaison_descripteur_image(&erreur, "../base_descripteur/base_descripteur_image", "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/51.txt", 2, &Nb_ligne);

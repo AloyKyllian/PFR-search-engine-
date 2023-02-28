@@ -1,3 +1,9 @@
+/**
+ * Fait par Hugo Lestrade
+ * 
+ * Le 23/01/2023
+ * 
+*/
 #ifndef DESCRIPTEUR_TEXTE_H
 #define DESCRIPTEUR_TEXTE_H
 
@@ -18,6 +24,7 @@ int index;
 /**
  * @brief
  *
+ * Auteur : Hugo Lestrade
  * Cette fonction récupère un mot en paramètre d'entrée.
  * Elle commence par transformer toutes les lettres majuscules en minuscules.
  * Puis en fonction de ceux qu'il faut nettoyer dans le mot ( une balise, une ponctuation ou tout caractère empéchant la lecture du mot)
@@ -32,6 +39,7 @@ char *nettoyage(char mot_lu[100]);
 /**
  * @brief
  *
+ * Auteur : Hugo Lestrade
  * Cette fonction récupère le mot que retourne la fonction nettoyage.
  * Elle ouvre ensuite un fichier qui contient tous les mots bannis qu'on ne souhaite pas garder comme les mots de liaisons "le , la ..."
  * Elle remplit un tableau avec ces différents mots.
@@ -46,6 +54,7 @@ bool filtrage(char* mot);
 /**
  * @brief
  *
+ * Auteur : Hugo Lestrade
  * Cette fonction récupère le nombre de mot du texte, le mot que retourne la fonction "nettoyage" et un tableau fait d'une structure déclarer précédemment.
  * Cette fonction à pour but de répertorier tous les mots du texte avec leur nombre d'apparition.
  * Dans un premier temps elle vérifie si le mot est déjà présent dans le tableau.
@@ -63,6 +72,7 @@ DESCRIPTEUR_TEXTE descripteur_texte( int nbr_mot, char* mot,DESCRIPTEUR_TEXTE ta
 /**
  * @brief
  *
+ * Auteur : Hugo Lestrade
  * Cette fonction récupère le nombre de mot-clé souhaité par l'utilisateur dans le fichier config 
  * Elle récupère le tableau retourné par la fonction "descripteur_texte" et un tableau avec un taille équivalente au nombre de mot-clé et du même type que le tableau de "descripteur_texte".
  * Cette fonction sert à récupérer les mots les plus cités dans le tableau de "descripteur_texte", le nombre de mots dépendant du nombre de mot-clés souhaité
@@ -79,6 +89,7 @@ DESCRIPTEUR_TEXTE tab_occ(int nbr_occ,DESCRIPTEUR_TEXTE tab,DESCRIPTEUR_TEXTE ta
 /**
  * @brief
  *
+ * Auteur : Hugo Lestrade
  * Cette fonction récupère le chemin du fichier texte à ouvrir, le nombre de mot-clé souhaité par l'utilisateur dans le fichier config et le tableau renvoyer
  * Mais également le tableau qui copiera le tableau retourné par la fonction "tab_occ".
  * Cette fonction sert à organiser toutes les fonctions cités au-dessus.

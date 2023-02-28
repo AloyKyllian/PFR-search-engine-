@@ -1,0 +1,1400 @@
+Script started on 2023-01-23 12:59:18+01:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="152" LINES="38"]
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ make clean
+[?2004lrm -rf *.o
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ [7mcat /dev/null > ../liste_base/liste_base_audio [27m
+[7mcat /dev/null > ../liste_base/liste_base_texte [27m
+[7mcat /dev/null > ../liste_base/liste_base_image/NB [27m
+[7mcat /dev/null > ../liste_base/liste_base_image/RGB [27m
+[7mcat /dev/null > ../base_descripteur/base_descripteur_audio [27m
+[7mcat /dev/null > ../base_descripteur/base_descripteur_texte [27m
+[7mcat /dev/null > ../base_descripteur/base_descripteur_image[27m[A[A[A[A[A[A]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ cat /dev/null > ../liste_base/liste_base_audio 
+cat /dev/null > ../liste_base/liste_base_texte 
+cat /dev/null > ../liste_base/liste_base_image/NB 
+cat /dev/null > ../liste_base/liste_base_image/RGB 
+cat /dev/null > ../base_descripteur/base_descripteur_audio 
+cat /dev/null > ../base_descripteur/base_descripteur_texte 
+cat /dev/null > ../base_descripteur/base_descripteur_image
+[?2004l[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ make 
+[?2004lgcc -c -g ../Gestion-Config/Global.c
+gcc -c ../Gestion-Erreur/Erreur.c
+gcc -c -g ../Gestion-Config/Config.c
+gcc -c -g ../Element/element.c
+gcc -c -g ../Pile/Pile.c
+gcc -c -g ../descripteur_texte/descripteur_texte.c
+gcc -c -g ../descripteur_audio/descripteur_audio.c
+gcc -c -g ../descripteur_image/Descripteur_image.c
+gcc -c -g ../indexgene/indexation_gene.c
+[01m[K../indexgene/indexation_gene.c:[m[K In function ‘[01m[KSupprimer_Descripteur[m[K’:
+[01m[K../indexgene/indexation_gene.c:721:48:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%s[m[K’ expects argument of type ‘[01m[Kchar *[m[K’, but argument 4 has type ‘[01m[Kchar (*)[1000][m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+  721 |                   while (fscanf(fichier, "-%d [01;35m[K%s[m[K\n", &tmp, [32m[K&path[m[K) != EOF)
+      |                                               [01;35m[K~^[m[K           [32m[K~~~~~[m[K
+      |                                                [01;35m[K|[m[K           [32m[K|[m[K
+      |                                                [01;35m[Kchar *[m[K      [32m[Kchar (*)[1000][m[K
+[01m[K../indexgene/indexation_gene.c:765:59:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%s[m[K’ expects argument of type ‘[01m[Kchar *[m[K’, but argument 3 has type ‘[01m[Kchar (*)[50][m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+  765 |                                     if (fscanf(fichier, "[01;35m[K%s[m[K", [32m[K&val_lue[m[K) == EOF)
+      |                                                          [01;35m[K~^[m[K   [32m[K~~~~~~~~[m[K
+      |                                                           [01;35m[K|[m[K   [32m[K|[m[K
+      |                                                           [01;35m[K|[m[K   [32m[Kchar (*)[50][m[K
+      |                                                           [01;35m[Kchar *[m[K
+[01m[K../indexgene/indexation_gene.c:779:73:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%s[m[K’ expects argument of type ‘[01m[Kchar *[m[K’, but argument 3 has type ‘[01m[Kchar (*)[50][m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+  779 |                                                       fscanf(fichier, "[01;35m[K%s[m[K", [32m[K&val_lue[m[K);
+      |                                                                        [01;35m[K~^[m[K   [32m[K~~~~~~~~[m[K
+      |                                                                         [01;35m[K|[m[K   [32m[K|[m[K
+      |                                                                         [01;35m[K|[m[K   [32m[Kchar (*)[50][m[K
+      |                                                                         [01;35m[Kchar *[m[K
+[01m[K../indexgene/indexation_gene.c:784:73:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%s[m[K’ expects argument of type ‘[01m[Kchar *[m[K’, but argument 3 has type ‘[01m[Kchar (*)[50][m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+  784 |                                                       fscanf(fichier, "[01;35m[K%s[m[K", [32m[K&val_lue[m[K);
+      |                                                                        [01;35m[K~^[m[K   [32m[K~~~~~~~~[m[K
+      |                                                                         [01;35m[K|[m[K   [32m[K|[m[K
+      |                                                                         [01;35m[K|[m[K   [32m[Kchar (*)[50][m[K
+      |                                                                         [01;35m[Kchar *[m[K
+[01m[K../indexgene/indexation_gene.c:[m[K In function ‘[01m[Krecuperer_path_tous_fichiers[m[K’:
+[01m[K../indexgene/indexation_gene.c:393:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  393 |       [01;35m[Krecup_path(&piletexte_path, deb, path, "texte", Erreurtexte)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:393:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:394:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 31 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  394 |       [01;35m[Kdepiler_path(&piletexte_path, "../liste_base/liste_base_texte", Erreurtexte)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:394:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:400:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  400 |       [01;35m[Krecup_path(&pileaudio_path, deb, path, "audio", Erreuraudio)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:400:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:401:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 31 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  401 |       [01;35m[Kdepiler_path(&pileaudio_path, "../liste_base/liste_base_audio", Erreuraudio)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:401:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:407:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  407 |       [01;35m[Krecup_path(&pileimage_path, deb, path, "image", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:407:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:409:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 35 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  409 |       [01;35m[Kdepiler_path(&pileimage_path, "../liste_base/liste_base_image/RGB", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:409:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:411:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  411 |       [01;35m[Krecup_path(&pileimage_path, deb, path, "image", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:411:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:412:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 34 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+  412 |       [01;35m[Kdepiler_path(&pileimage_path, "../liste_base/liste_base_image/NB", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:412:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:[m[K In function ‘[01m[Kindexation[m[K’:
+[01m[K../indexgene/indexation_gene.c:1174:19:[m[K [01;35m[Kwarning: [m[K‘[01m[Kindexation_ouverte[m[K’ accessing 700 bytes in a region of size 3 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1174 |                   [01;35m[Kindexation_ouverte(config, "nb", Erreurimage, Erreuraudio, Erreurtexte, Erreur)[m[K;
+      |                   [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1174:19:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:415:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kindexation_ouverte[m[K’
+  415 | void [01;36m[Kindexation_ouverte[m[K(CONFIG config, String type, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
+      |      [01;36m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1198:25:[m[K [01;35m[Kwarning: [m[K‘[01m[Kindexation_ouverte[m[K’ accessing 700 bytes in a region of size 4 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1198 |                         [01;35m[Kindexation_ouverte(config, "rgb", Erreurimage, Erreuraudio, Erreurtexte, Erreur)[m[K;
+      |                         [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1198:25:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:415:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kindexation_ouverte[m[K’
+  415 | void [01;36m[Kindexation_ouverte[m[K(CONFIG config, String type, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
+      |      [01;36m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1222:19:[m[K [01;35m[Kwarning: [m[K‘[01m[Kindexation_ouverte[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1222 |                   [01;35m[Kindexation_ouverte(config, "audio", Erreurimage, Erreuraudio, Erreurtexte, Erreur)[m[K;
+      |                   [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1222:19:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:415:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kindexation_ouverte[m[K’
+  415 | void [01;36m[Kindexation_ouverte[m[K(CONFIG config, String type, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
+      |      [01;36m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1242:19:[m[K [01;35m[Kwarning: [m[K‘[01m[Kindexation_ouverte[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1242 |                   [01;35m[Kindexation_ouverte(config, "texte", Erreurimage, Erreuraudio, Erreurtexte, Erreur)[m[K;
+      |                   [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1242:19:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:415:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kindexation_ouverte[m[K’
+  415 | void [01;36m[Kindexation_ouverte[m[K(CONFIG config, String type, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
+      |      [01;36m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:[m[K In function ‘[01m[Kindexation_audio[m[K’:
+[01m[K../indexgene/indexation_gene.c:1274:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1274 |       [01;35m[Krecup_path(&pileaudio_path, deb, path, "audio", Erreuraudio)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1274:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1275:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 31 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1275 |       [01;35m[Kdepiler_path(&pileaudio_path, "../liste_base/liste_base_audio", Erreuraudio)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1275:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:[m[K In function ‘[01m[Kindexation_texte[m[K’:
+[01m[K../indexgene/indexation_gene.c:1295:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1295 |       [01;35m[Krecup_path(&piletexte_path, deb, path, "texte", Erreurtexte)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1295:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1296:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 31 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1296 |       [01;35m[Kdepiler_path(&piletexte_path, "../liste_base/liste_base_texte", Erreurtexte)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1296:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:[m[K In function ‘[01m[Kindexation_image[m[K’:
+[01m[K../indexgene/indexation_gene.c:1317:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1317 |       [01;35m[Krecup_path(&pileimage_path, deb, path, "image", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1317:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1319:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 35 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1319 |       [01;35m[Kdepiler_path(&pileimage_path, "../liste_base/liste_base_image/RGB", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1319:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1321:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Krecup_path[m[K’ accessing 700 bytes in a region of size 6 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1321 |       [01;35m[Krecup_path(&pileimage_path, deb, path, "image", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1321:7:[m[K [01;36m[Knote: [m[Kreferencing argument 4 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:11:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Krecup_path[m[K’
+   11 | void [01;36m[Krecup_path[m[K(PILE *pourchemin, int deb, String path, String type, int *erreur)
+      |      [01;36m[K^~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1322:7:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdepiler_path[m[K’ accessing 700 bytes in a region of size 34 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wstringop-overflow=-Wstringop-overflow=]8;;[m[K]
+ 1322 |       [01;35m[Kdepiler_path(&pileimage_path, "../liste_base/liste_base_image/NB", Erreurimage)[m[K;
+      |       [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K../indexgene/indexation_gene.c:1322:7:[m[K [01;36m[Knote: [m[Kreferencing argument 2 of type ‘[01m[Kchar *[m[K’
+[01m[K../indexgene/indexation_gene.c:67:6:[m[K [01;36m[Knote: [m[Kin a call to function ‘[01m[Kdepiler_path[m[K’
+   67 | void [01;36m[Kdepiler_path[m[K(PILE *pourchemin, char *path, int *erreur)
+      |      [01;36m[K^~~~~~~~~~~~[m[K
+gcc -c -g ../Login/Login.c
+gcc -c -g ../Connexion/Connexion.c
+gcc -c -g ../Menu/FichierExist.c
+gcc -c -g -Wall ../RechercheMot/rechercheMot.c
+gcc -c ../comparaison/comparaison.c 
+gcc -c ../LireResultatRecherche/LireResultat.c
+gcc -c -g -Wall ../Menu/Menu.c
+[01m[K../Menu/Menu.c:[m[K In function ‘[01m[KMAE[m[K’:
+[01m[K../Menu/Menu.c:529:53:[m[K [01;35m[Kwarning: [m[Kpassing argument 2 of ‘[01m[Krecup_CheminPour_Affichage[m[K’ from incompatible pointer type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wincompatible-pointer-types-Wincompatible-pointer-types]8;;[m[K]
+  529 |                 recup_CheminPour_Affichage("texte", [01;35m[K&chemin[m[K);
+      |                                                     [01;35m[K^~~~~~~[m[K
+      |                                                     [01;35m[K|[m[K
+      |                                                     [01;35m[Kchar (*)[100][m[K
+In file included from [01m[K../Menu/Menu.h:9[m[K,
+                 from [01m[K../Menu/Menu.c:1[m[K:
+[01m[K../Menu/../LireResultatRecherche/LireResultat.h:14:40:[m[K [01;36m[Knote: [m[Kexpected ‘[01m[Kchar *[m[K’ but argument is of type ‘[01m[Kchar (*)[100][m[K’
+   14 | void recup_CheminPour_Affichage(char*, [01;36m[Kchar*[m[K);
+      |                                        [01;36m[K^~~~~[m[K
+[01m[K../Menu/Menu.c:624:57:[m[K [01;35m[Kwarning: [m[Kpassing argument 2 of ‘[01m[Krecup_CheminPour_Affichage[m[K’ from incompatible pointer type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wincompatible-pointer-types-Wincompatible-pointer-types]8;;[m[K]
+  624 |                     recup_CheminPour_Affichage("texte", [01;35m[K&chemin[m[K);
+      |                                                         [01;35m[K^~~~~~~[m[K
+      |                                                         [01;35m[K|[m[K
+      |                                                         [01;35m[Kchar (*)[100][m[K
+In file included from [01m[K../Menu/Menu.h:9[m[K,
+                 from [01m[K../Menu/Menu.c:1[m[K:
+[01m[K../Menu/../LireResultatRecherche/LireResultat.h:14:40:[m[K [01;36m[Knote: [m[Kexpected ‘[01m[Kchar *[m[K’ but argument is of type ‘[01m[Kchar (*)[100][m[K’
+   14 | void recup_CheminPour_Affichage(char*, [01;36m[Kchar*[m[K);
+      |                                        [01;36m[K^~~~~[m[K
+gcc -c -g ../Menu/tst_menu.c
+gcc -o PFResearch.out Global.o Erreur.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ ./PFResearch.out 
+[?2004l
+Debut de la Phase d'initialisation
+
+Fin de la Phase d'initialisation
+
+__________________________Menu Général__________________________
+
+Veuillez faire votre choix : 
+
+[1] Administrateur 
+[2] Utilisateur 
+[Q] Quitter
+1
+Entrez votre ID : SD
+Entrez votre mot de passe : 
+
+Connexion Échouée
+
+Entrez votre ID : QSF
+Entrez votre mot de passe : 
+
+Connexion Échouée
+
+Entrez votre ID : QSD
+Entrez votre mot de passe : 
+
+Connexion Échouée
+
+
+Souhaitez vous basculer en "Mode Utilisateur" ou essayer de se connecter une nouvelle fois ?
+
+[1] Mode Utilisateur
+[2] nouvelle tentative de connexion
+2
+
+Vous devez attendre 30 secondes pour réessayer
+
+Fin des 30 secondes, Vous pouvez réessayer maintenant
+Entrez votre ID : YOU   youssera
+Entrez votre mot de passe : 
+
+Connexion Réussie
+
+
+Direction "Menu Administrateur"
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+3
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+1
+
+Penser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+ss
+ERREUR 11: Ce choix ne figure pas dans la liste
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+R
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+2
+
+__________________________Configuration__________________________
+Nombre de mots-clé = 50
+Similarité = 50
+Nombre de bits de poids fort = 3
+Nombre de fenetres = 2048
+Intervale de temps= 15
+
+Si vous voulez changer une valeur, veuillez faire votre choix  : 
+
+[1] Nombre de mots-clé 	 supérieur à 0
+[2] Similarité         	 entre 1 et 100
+[3] Nombre de bits     	 entre 1 et 8 
+[4] Nombre de fenetre  	 supeieur a 256 et une puissance de 2
+[5] Intervalle de temps	 superieur a 0 
+[R] Retour
+[Q] Déconnexion
+1
+Entrez le nombre de mot-clé voulu :
+10
+
+Si vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications
+
+__________________________Configuration__________________________
+Nombre de mots-clé = 10
+Similarité = 50
+Nombre de bits de poids fort = 3
+Nombre de fenetres = 2048
+Intervale de temps= 15
+
+Si vous voulez changer une valeur, veuillez faire votre choix  : 
+
+[1] Nombre de mots-clé 	 supérieur à 0
+[2] Similarité         	 entre 1 et 100
+[3] Nombre de bits     	 entre 1 et 8 
+[4] Nombre de fenetre  	 supeieur a 256 et une puissance de 2
+[5] Intervalle de temps	 superieur a 0 
+[R] Retour
+[Q] Déconnexion
+3
+Entrez le nombre de bits voulu :
+9
+ERREUR 5:  Le nombre doit etre inferieur a 8
+
+Si vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications
+
+__________________________Configuration__________________________
+Nombre de mots-clé = 10
+Similarité = 50
+Nombre de bits de poids fort = 3
+Nombre de fenetres = 2048
+Intervale de temps= 15
+
+Si vous voulez changer une valeur, veuillez faire votre choix  : 
+
+[1] Nombre de mots-clé 	 supérieur à 0
+[2] Similarité         	 entre 1 et 100
+[3] Nombre de bits     	 entre 1 et 8 
+[4] Nombre de fenetre  	 supeieur a 256 et une puissance de 2
+[5] Intervalle de temps	 superieur a 0 
+[R] Retour
+[Q] Déconnexion
+5
+Entrez l'intervalle de temps voulue :
+32
+
+Si vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications
+
+__________________________Configuration__________________________
+Nombre de mots-clé = 10
+Similarité = 50
+Nombre de bits de poids fort = 3
+Nombre de fenetres = 2048
+Intervale de temps= 32
+
+Si vous voulez changer une valeur, veuillez faire votre choix  : 
+
+[1] Nombre de mots-clé 	 supérieur à 0
+[2] Similarité         	 entre 1 et 100
+[3] Nombre de bits     	 entre 1 et 8 
+[4] Nombre de fenetre  	 supeieur a 256 et une puissance de 2
+[5] Intervalle de temps	 superieur a 0 
+[R] Retour
+[Q] Déconnexion
+r R
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+1
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+3
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+1
+
+Penser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+R
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+3
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+3
+
+Penser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+2
+
+Penser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+R
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+4
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+1
+
+__________________________Recherche fichier texte__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par mot-clé
+[2] Recherche par comparaison de textes
+[R] Retour
+[Q] Quitter
+1
+
+Entrez votre mot-clé
+homme
+
+Les resultats pour votre recherche :
+
+Requete mot-clé : "homme"
+
+Résultats (fichier -> occurrences) :
+
+[1] 28-_Œdipe_à_Colone_,_la_rage.xml	 ->5
+[2] 26-Grippe_aviaire___une_sixième.xml	 ->4
+[R] Retour
+
+Pensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+1
+
+Entrez le numero de fichier que vous voulez visualiser, ou R pour un retour vers "Menu Recherche"
+2
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+é 2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+r
+
+Ce choix ne figure pas dans la liste !
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Recherche fichier texte__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par mot-clé
+[2] Recherche par comparaison de textes
+[R] Retour
+[Q] Quitter
+2
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml
+
+Les resultats pour votre recherche :
+
+Requete fichier : "/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/Textes/29-Ligue_des_champions___Lyon.xml"
+
+Résultats (fichier -> nombre de mots-clés communs) :
+
+[1] 29-Ligue_des_champions___Lyon.xml	 ->10
+[2] 08-US_Open___Pierce_élimine.xml	 ->8
+[3] 06-US_Open___Mauresmo_et.xml	 ->8
+[4] 18-L_équipe_de_France_de_tennis.xml	 ->8
+[5] 18-Ligue_1___Lyon_a.xml	 ->7
+[R] Retour
+
+Pensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+r R
+
+__________________________Recherche fichier texte__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par mot-clé
+[2] Recherche par comparaison de textes
+[R] Retour
+[Q] Quitter
+1
+
+Entrez votre mot-clé
+musique
+
+Les resultats pour votre recherche :
+
+Requete mot-clé : "musique"
+
+Résultats (fichier -> occurrences) :
+
+[1] 17-La_voix_envoûtante_de_Girija.xml	 ->4
+[2] 22-Danse___quarante_jeunes_de.xml	 ->3
+[R] Retour
+
+Pensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Recherche fichier texte__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par mot-clé
+[2] Recherche par comparaison de textes
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+3
+
+__________________________Recherche fichier audio__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'audio
+[R] Retour
+[Q] Quitter
+1
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/jingle_fi.wav
+
+Les resultats pour votre recherche :
+
+Requete son : "/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/jingle_fi.txt"
+
+Résultats :
+
+[1] jingle_fi.wav	 ->100.00%
+[2] corpus_fi.wav	 ->51.97%
+[R] Retour
+
+Pensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité
+VLC media player 3.0.18 Vetinari (revision 3.0.18-0-ge9eceaed4d)
+[[32;1m0000558f055aba00[0m] main libvlc: [0;1mLancement de vlc avec l'interface par défaut. Utiliser « cvlc » pour démarrer VLC sans interface.[0m
+Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
+Qt: Session management error: Could not open network socket
+QObject::~QObject: Timers cannot be stopped from another thread
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+1
+
+Entrez le numero de fichier que vous voulez visualiser, ou R pour un retour vers "Menu Recherche"
+2
+ [(atoi(numero_fichier))-1]: corpus_fi.wav
+VLC media player 3.0.18 Vetinari (revision 3.0.18-0-ge9eceaed4d)
+[[32;1m00005561fbb80a00[0m] main libvlc: [0;1mLancement de vlc avec l'interface par défaut. Utiliser « cvlc » pour démarrer VLC sans interface.[0m
+Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
+Qt: Session management error: Could not open network socket
+QObject::~QObject: Timers cannot be stopped from another thread
+
+Ce choix n'existe pas, Réessayez
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+1
+
+Entrez le numero de fichier que vous voulez visualiser, ou R pour un retour vers "Menu Recherche"
+r r R
+
+__________________________Recherche fichier audio__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'audio
+[R] Retour
+[Q] Quitter
+r R
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+3
+
+__________________________Recherche fichier audio__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'audio
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+2
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+1
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/07.jpg
+
+Les resultats pour votre recherche :
+
+Requete image : "/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/07.jpg"
+
+Résultats :
+
+[1] 07.jpg	 ->100.00%
+[2] 27.jpg	 ->91.28%
+[3] 06.jpg	 ->89.46%
+[4] 05.jpg	 ->89.04%
+[5] 19.jpg	 ->89.04%
+[6] 13.jpg	 ->87.53%
+[7] 21.jpg	 ->87.52%
+[8] 18.jpg	 ->87.51%
+[9] 22.jpg	 ->86.80%
+[10] 26.jpg	 ->86.07%
+[11] 04.jpg	 ->85.06%
+[12] 09.jpg	 ->84.88%
+[13] 25.jpg	 ->84.51%
+[14] 08.jpg	 ->84.42%
+[15] 01.jpg	 ->84.21%
+[16] 12.jpg	 ->84.11%
+[17] 14.jpg	 ->82.87%
+[18] 20.jpg	 ->82.39%
+[19] 03.jpg	 ->80.89%
+[20] 02.jpg	 ->80.86%
+[21] 31.jpg	 ->80.63%
+[22] 29.jpg	 ->80.12%
+[23] 32.jpg	 ->80.11%
+[24] 11.jpg	 ->79.66%
+[25] 10.jpg	 ->78.84%
+[26] 30.jpg	 ->78.76%
+[27] 38.jpg	 ->77.15%
+[28] 15.jpg	 ->76.96%
+[29] 16.jpg	 ->76.82%
+[30] 33.jpg	 ->73.12%
+[31] 36.jpg	 ->71.40%
+[32] 45.jpg	 ->71.34%
+[33] 28.jpg	 ->71.22%
+[34] 46.jpg	 ->70.14%
+[35] 39.jpg	 ->70.11%
+[36] 23.jpg	 ->69.74%
+[37] 37.jpg	 ->69.01%
+[38] 47.jpg	 ->68.14%
+[39] 24.jpg	 ->67.61%
+[40] 50.jpg	 ->67.35%
+[41] 48.jpg	 ->67.07%
+[42] 44.jpg	 ->66.68%
+[43] 34.jpg	 ->65.39%
+[44] 49.jpg	 ->65.21%
+[45] 41.jpg	 ->64.85%
+[46] 43.jpg	 ->63.56%
+[47] 35.jpg	 ->62.62%
+[48] 17.jpg	 ->62.52%
+[49] 40.jpg	 ->60.86%
+[50] 42.jpg	 ->58.12%
+[R] Retour
+
+Pensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+1
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/07.jpg^[[D^[[D              45.jpg
+
+Les resultats pour votre recherche :
+
+Requete image : "/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/45.jpg"
+
+Résultats :
+
+[1] 45.jpg	 ->100.00%
+[2] 07.jpg	 ->71.34%
+[3] 13.jpg	 ->70.81%
+[4] 27.jpg	 ->70.11%
+[5] 06.jpg	 ->69.83%
+[6] 19.jpg	 ->69.42%
+[7] 05.jpg	 ->69.18%
+[8] 26.jpg	 ->68.50%
+[9] 21.jpg	 ->68.48%
+[10] 22.jpg	 ->68.16%
+[11] 18.jpg	 ->67.82%
+[12] 44.jpg	 ->67.47%
+[13] 08.jpg	 ->67.39%
+[14] 31.jpg	 ->67.17%
+[15] 09.jpg	 ->67.11%
+[16] 01.jpg	 ->67.07%
+[17] 12.jpg	 ->67.02%
+[18] 04.jpg	 ->66.94%
+[19] 25.jpg	 ->66.74%
+[20] 02.jpg	 ->66.42%
+[21] 46.jpg	 ->65.93%
+[22] 30.jpg	 ->65.74%
+[23] 14.jpg	 ->65.74%
+[24] 11.jpg	 ->65.64%
+[25] 47.jpg	 ->65.47%
+[26] 10.jpg	 ->65.28%
+[27] 03.jpg	 ->65.03%
+[28] 32.jpg	 ->64.86%
+[29] 20.jpg	 ->64.68%
+[30] 29.jpg	 ->64.57%
+[31] 16.jpg	 ->64.55%
+[32] 15.jpg	 ->64.44%
+[33] 38.jpg	 ->63.68%
+[34] 23.jpg	 ->63.08%
+[35] 33.jpg	 ->62.82%
+[36] 39.jpg	 ->61.61%
+[37] 48.jpg	 ->61.39%
+[38] 24.jpg	 ->61.10%
+[39] 36.jpg	 ->60.91%
+[40] 41.jpg	 ->60.51%
+[41] 49.jpg	 ->60.47%
+[42] 37.jpg	 ->60.46%
+[43] 28.jpg	 ->59.73%
+[44] 43.jpg	 ->58.87%
+[45] 50.jpg	 ->58.65%
+[46] 17.jpg	 ->57.84%
+[47] 40.jpg	 ->57.31%
+[48] 42.jpg	 ->54.88%
+[49] 34.jpg	 ->54.50%
+[50] 35.jpg	 ->53.56%
+[R] Retour
+
+Pensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+R
+
+__________________________Menu Général__________________________
+
+Veuillez faire votre choix : 
+
+[1] Administrateur 
+[2] Utilisateur 
+[Q] Quitter
+1
+Entrez votre ID : l
+Entrez votre mot de passe : 
+
+Connexion Réussie
+
+
+Direction "Menu Administrateur"
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+2
+
+__________________________Configuration__________________________
+Nombre de mots-clé = 10
+Similarité = 50
+Nombre de bits de poids fort = 3
+Nombre de fenetres = 2048
+Intervale de temps= 32
+
+Si vous voulez changer une valeur, veuillez faire votre choix  : 
+
+[1] Nombre de mots-clé 	 supérieur à 0
+[2] Similarité         	 entre 1 et 100
+[3] Nombre de bits     	 entre 1 et 8 
+[4] Nombre de fenetre  	 supeieur a 256 et une puissance de 2
+[5] Intervalle de temps	 superieur a 0 
+[R] Retour
+[Q] Déconnexion
+3
+Entrez le nombre de bits voulu :
+2
+
+Si vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications
+
+__________________________Configuration__________________________
+Nombre de mots-clé = 10
+Similarité = 50
+Nombre de bits de poids fort = 2
+Nombre de fenetres = 2048
+Intervale de temps= 32
+
+Si vous voulez changer une valeur, veuillez faire votre choix  : 
+
+[1] Nombre de mots-clé 	 supérieur à 0
+[2] Similarité         	 entre 1 et 100
+[3] Nombre de bits     	 entre 1 et 8 
+[4] Nombre de fenetre  	 supeieur a 256 et une puissance de 2
+[5] Intervalle de temps	 superieur a 0 
+[R] Retour
+[Q] Déconnexion
+R
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+4
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+2
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+1
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/07.jpg                                                                              ^C
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ ./PFResearch.out 
+[?2004l
+Debut de la Phase d'initialisation
+
+Fin de la Phase d'initialisation
+
+__________________________Menu Général__________________________
+
+Veuillez faire votre choix : 
+
+[1] Administrateur 
+[2] Utilisateur 
+[Q] Quitter
+^[[A    1
+Entrez votre ID : l
+Entrez votre mot de passe : 
+
+Connexion Réussie
+
+
+Direction "Menu Administrateur"
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+1
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+4
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+R
+
+__________________________Menu Général__________________________
+
+Veuillez faire votre choix : 
+
+[1] Administrateur 
+[2] Utilisateur 
+[Q] Quitter
+2
+
+__________________________Menu utilisateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche fichier texte
+[2] Recherche fichier image
+[3] Recherche fichier audio 
+[R] Retour
+[Q] Déconnexion
+2
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+1
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/07.jpg      45.jpg
+
+Les resultats pour votre recherche :
+
+Requete image : "/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/45.jpg"
+
+Résultats :
+
+[1] 45.jpg	 ->100.00%
+[R] Retour
+
+Pensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous revisionner ce fichier ?
+[1] Oui
+[2] Non
+2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+1
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/53.bmp
+
+Les resultats pour votre recherche :
+
+Requete image : "/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/53.bmp"
+
+Résultats :
+
+[1] 53.bmp	 ->100.00%
+[2] 51.bmp	 ->99.79%
+[3] 52.bmp	 ->98.83%
+[4] 54.bmp	 ->51.33%
+[5] 55.bmp	 ->51.27%
+[6] 56.bmp	 ->51.18%
+[7] 53.jpg	 ->100.00%
+[8] 51.jpg	 ->99.79%
+[9] 52.jpg	 ->98.83%
+[10] 54.jpg	 ->51.33%
+[11] 55.jpg	 ->51.27%
+[12] 56.jpg	 ->51.18%
+[R] Retour
+
+Pensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+1
+
+Entrez le chemin de votre fichier
+/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/53.bmp      60.bmp
+
+Les resultats pour votre recherche :
+
+Requete image : "/home/pandou/Documents/PFR/PFR/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/60.bmp"
+
+Résultats :
+
+[1] 60.bmp	 ->100.00%
+[2] 61.bmp	 ->98.84%
+[3] 59.bmp	 ->92.50%
+[4] 54.bmp	 ->55.41%
+[5] 55.bmp	 ->55.18%
+[6] 56.bmp	 ->54.81%
+[7] 60.jpg	 ->100.00%
+[8] 61.jpg	 ->98.84%
+[9] 59.jpg	 ->92.50%
+[10] 54.jpg	 ->55.41%
+[11] 55.jpg	 ->55.18%
+[12] 56.jpg	 ->54.81%
+[R] Retour
+
+Pensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+1
+
+Entrez le numero de fichier que vous voulez visualiser, ou R pour un retour vers "Menu Recherche"
+2
+
+Ce choix n'existe pas, Réessayez
+
+Voulez vous visionner un autre fichier ?
+[1] Oui
+[2] Non
+2
+
+Voulez vous revenir au "Menu Recherche" ou quitter le programme?
+[R] Retour
+[Q] Quitter
+R
+
+__________________________Recherche fichier image__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Recherche par comparaison d'images
+[R] Retour
+[Q] Quitter
+Q
+
+	[0;31mVous avez quitté le programme[0m
+
+
+
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ ./PFResearch.out 
+[?2004l
+Debut de la Phase d'initialisation
+sh: 1: Syntax error: "(" unexpected
+Erreur de segmentation (core dumped)
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ ./PFResearch.out 
+[?2004l
+Debut de la Phase d'initialisation
+
+Fin de la Phase d'initialisation
+
+__________________________Menu Général__________________________
+
+Veuillez faire votre choix : 
+
+[1] Administrateur 
+[2] Utilisateur 
+[Q] Quitter
+1
+Entrez votre ID : k
+Entrez votre mot de passe : 
+
+Connexion Réussie
+
+
+Direction "Menu Administrateur"
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+3
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+1
+
+Penser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+Q
+
+Vous vous êtes deconnecté, voulez vous retourner en "Mode Utilisateur" ?
+[1] Oui
+[2] Non
+2
+
+	[0;31mVous avez quitté le programme[0m
+
+
+
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ ./PFResearch.out 
+[?2004l
+Debut de la Phase d'initialisation
+
+Fin de la Phase d'initialisation
+
+__________________________Menu Général__________________________
+
+Veuillez faire votre choix : 
+
+[1] Administrateur 
+[2] Utilisateur 
+[Q] Quitter
+1
+Entrez votre ID : k
+Entrez votre mot de passe : 
+
+Connexion Réussie
+
+
+Direction "Menu Administrateur"
+
+__________________________Menu Administrateur__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Indexation
+[2] Configuration
+[3] Visualisation des recueils des descripteurs
+[4] Retour "Mode Utilisateur"
+3
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+1
+
+Penser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité
+
+__________________________Visualisation des recueils des descripteurs__________________________
+
+Veuillez faire votre choix  : 
+
+[1] Texte
+[2] Image
+[3] Audio 
+[R] Retour
+[Q] Déconnexion
+Q
+
+Vous vous êtes deconnecté, voulez vous retourner en "Mode Utilisateur" ?
+[1] Oui
+[2] Non
+2
+
+	[0;31mVous avez quitté le programme[0m
+
+
+
+[?2004h]0;pandou@pandou-AORUS-5-MB: ~/Documents/PFR/PFR/lancement_appli[01;32mpandou@pandou-AORUS-5-MB[00m:[01;34m~/Documents/PFR/PFR/lancement_appli[00m$ exit
+[?2004lexit
+
+Script done on 2023-01-23 13:26:39+01:00 [COMMAND_EXIT_CODE="0"]
