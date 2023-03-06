@@ -1,6 +1,3 @@
-public class Main {
-    
-}
 import com.sun.jna.ptr.PointerByReference;
 
 public class Main {
