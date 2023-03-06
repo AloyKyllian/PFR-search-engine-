@@ -21,7 +21,7 @@ int main(){
 	}
 	else{
 	for(int k=0;k<nbElementTabRes;k++){
-		printf("ID=%d, nb=%d\n",tabResultat[k].id,tabResultat[k].pourcentage);
+		printf("ID=%d, nb=%f\n",tabResultat[k].id,tabResultat[k].pourcentage);
 	}}
     return 0;
 }
