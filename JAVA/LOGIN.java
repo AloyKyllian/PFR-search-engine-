@@ -1,3 +1,4 @@
+package JAVA;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 
