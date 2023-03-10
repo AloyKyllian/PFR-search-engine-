@@ -1,3 +1,4 @@
+package JAVA;
 import com.sun.jna.Structure;
 import com.sun.jna.ptr.ByReference;
 

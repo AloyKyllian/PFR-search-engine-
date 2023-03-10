@@ -1,3 +1,4 @@
+package JAVA;
 import com.sun.jna.Structure;
 import java.util.List;
 import java.util.Arrays;

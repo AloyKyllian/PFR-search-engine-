@@ -4,7 +4,6 @@ import com.sun.jna.Library;
 import com.sun.jna.Pointer;
 import com.sun.jna.Memory;
 import com.sun.jna.Structure;
-import JAVA.LOGIN;
 
 public class Main {
    
@@ -19,8 +18,6 @@ public class Main {
         LOGIN saisir_login();
         //void lire_fichier_login (lesLogins tablogin, int * erreur);
     }
-
-
     public static void main(String[] args) {
 
         LOGIN test = new LOGIN();
