@@ -4,7 +4,7 @@ import com.sun.jna.Library;
 import com.sun.jna.Pointer;
 import com.sun.jna.Memory;
 import com.sun.jna.Structure;
-
+import com.myproject.models.LOGIN;
 public class Main {
    
     public interface MyLibrary extends Library {

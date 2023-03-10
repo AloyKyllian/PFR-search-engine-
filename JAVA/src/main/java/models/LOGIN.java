@@ -1,4 +1,4 @@
-package JAVA;
+package com.myproject.models;
 import com.sun.jna.Structure;
 
 public class LOGIN extends Structure {

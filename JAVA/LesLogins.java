@@ -2,6 +2,8 @@ package JAVA;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 
+import JAVA.src.main.java.models.LOGIN;
+
 
 
 public static class LesLogins extends Structure {
