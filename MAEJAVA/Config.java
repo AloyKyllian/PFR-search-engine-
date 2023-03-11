@@ -31,7 +31,7 @@ public class Config {
     public void Lire_config()
     {
         String chaine="";
-        chaine=READ_WRITE_FICHIER.read("Gestion-Config/Config.txt");
+        chaine=READ_WRITE_FICHIER.read("../MoteurC/Gestion-Config/Config.txt");
         String[] premier = chaine.split("\n");
         String cle = premier[0].substring(25,premier[0].length());
         this.Nb_Mots_Cle=cle;
