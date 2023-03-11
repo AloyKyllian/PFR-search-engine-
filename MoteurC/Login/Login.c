@@ -20,16 +20,26 @@ void afficher_les_login (lesLogins tablogin)
         afficher_un_login (tablogin,i);
     }
 }
+// ouvrir avant chaque fpriintf le fichier C vers java
+//le fermer apres fprintf
+//ouvrir fichier java C avant chaque scfanf
+//fermer apres fscanf
 
 
 // entrer id
 LOGIN saisir_login()
 {   LOGIN login;
     char *mdp;
-    printf("Entrez votre ID : ");
-    scanf(" %[^\n]", login.id);
+    // do{
+    //     attente(JNA);
+    // }while(JNA==2);
+    fprintf("Entrez votre ID : ");
+    // do{
+    //     attente(JNA);
+    // }while(JNA==2);
+    fscanf(" %[^\n]", login.id);
     viderBuffer();
-    mdp = getpass("Entrez votre mot de passe : ");
+    mdp = fgetpass("Entrez votre mot de passe : ");
     // on voit le mot de passe
   //  printf("Enter mot de passe : ");
   //  scanf(" %[^\n]", login.mdp);
