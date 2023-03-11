@@ -573,7 +573,7 @@ public class MAE
                         this.typeRequete=this.cheminFichierRecherche;
                         this.erreur = 0; this.nombreElemetTab = 0;
                         READ_WRITE_FICHIER.write(this.nomFichierWrite,"recup_CheminPour_Affichage(\"texte\", &cheminFichierRecherche)");
-                        tabResultatIMG = Comparaison_descripteur_image(this.erreur, this.cheminDescripteurIMG, this.cheminFichierRecherche, config.Nb_Bit_Fort, &nombreElemetTab);
+                        //tabResultatIMG = Comparaison_descripteur_image(this.erreur, this.cheminDescripteurIMG, this.cheminFichierRecherche, config.Nb_Bit_Fort, &nombreElemetTab); A VOIR
                         if (this.erreur != 0)
                         {
                             READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");

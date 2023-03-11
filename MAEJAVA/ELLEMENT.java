@@ -1,16 +1,18 @@
 
-public class Element{
+public class ELLEMENT{
 
-    public Integer ID;
+    public String ID;
     public String chemin;
 
-    public ELLEMENT ()
-    {
-        super();
-    }
-    public ELLEMENT (Integer ID, String chemin)
+    public ELLEMENT (String ID, String chemin)
     {
         this.ID=ID;
         this.chemin=chemin;
+    }
+    public String toString()
+    {
+        String text="";
+        text="ID "+ID+" Chemin "+chemin;
+        return text;
     }
 }

@@ -8,8 +8,9 @@
 import java.io.*;
 import java.util.*;
 
+
 public class LireResultat {
-    NavigableSet tabResultat = new TreeSet<Integer, Integer>();
+   // NavigableSet<Integer, Integer> tabResultat = new TreeSet<>();
     int nbElement;
     String type;
     String requete;
@@ -17,7 +18,11 @@ public class LireResultat {
     int nombre_mot_cle;
     int similarite;
 
-    public LireResultat(TreeSet tableauResultat, int nombreElement, String typeRequete, ArrayList fileName,
+    public LireResultat() {
+        super();
+    }
+
+    /*public LireResultat(TreeSet tableauResultat, int nombreElement, String typeRequete, ArrayList fileName,
             int nbMotCle, int similaritee) {
         this.tabResultat = tableauResultat;
         this.nbElement = nombreElement;
@@ -86,36 +91,35 @@ public class LireResultat {
             }
         }
         return element_tableauRes;
-    }
+    }*/
 
     public ArrayList<ELLEMENT> lireChemin(String type)
     {
+        ArrayList<ELLEMENT> listeElement = new ArrayList<>();
         String chaine="";
-        if(type.equals(nb))
+        if(type.equals("nb"))
             {
                 chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/NB");
             }
-        if(type.equals(rgb))
+        if(type.equals("rgb"))
         {
                 chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/RGB");
         }
-        if(type.equals(audio))
+        if(type.equals("audio"))
         {
                 chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_audio");
         }
-        if(type.equals(image))
+        if(type.equals("texte"))
         {
                 chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_texte");
         }
         String[] ligne = chaine.split("\n");
-        String[] cases;
-        ELLEMENT element = new ELLEMENT();
         for( String lig : ligne)
         {
-             cases = lig.split(" ");
-             
+            String[] cases = lig.split(" ");
+            listeElement.add(new ELLEMENT(cases[0],cases[1]));
         }
-         
+         return listeElement;
     }
     
 
