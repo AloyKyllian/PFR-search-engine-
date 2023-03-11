@@ -5,10 +5,21 @@ import java.io.IOException;
 
 public class READ_WRITE_FICHIER {
 
-    //deux methodes
+    //rajoute les partie
     public  static void write(String nomFichier, String texte) {
     	  try {
               FileWriter writer = new FileWriter(nomFichier, true);
+              writer.write(texte);   // write new line
+              writer.close();
+          } catch (IOException e) {
+        	  System.out.println("An error occurred.");
+              e.printStackTrace();
+          }
+    }
+    // ecrase le texte existant
+    public  static void writeOn(String nomFichier, String texte) {
+    	  try {
+              FileWriter writer = new FileWriter(nomFichier, false);
               writer.write(texte);   // write new line
               writer.close();
           } catch (IOException e) {
