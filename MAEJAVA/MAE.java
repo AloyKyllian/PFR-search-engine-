@@ -1,18 +1,22 @@
+import javax.security.auth.x500.X500Principal;
+
 public class MAE 
 {
 
-    private String nomFichierWrite = "tst.txt";
-    private String nomfichierRead = "tst.txt";
+    private String nomFichierWrite ;
+    private String nomfichierRead ;
 
     private String strERREUR;
     private Etat etat_courant = Etat.Menu_general;
 
     // variables a utiliser au cours du programme
     private char choix;
+    private Config config;
 
     private String cheminFichierRecherche;
     private String typeRequete;
     private int erreur = 0;
+    private int Erreur = 0;
     private int nbTentativeConnexion = 1;
     private String motCleRecherche;
     private int nombreElemetTab = 0;
@@ -23,6 +27,13 @@ public class MAE
     private final String cheminDescripteurTxt = "../base_descripteur/base_descripteur_texte";
     private final String cheminDescripteurIMG = "../base_descripteur/base_descripteur_image";
     private final String cheminDescripteurAudio = "../base_descripteur/base_descripteur_audio";
+
+    public MAE(String nomFichierWrite , String nomfichierRead)
+    {
+        this.nomFichierWrite= nomFichierWrite;
+        this.nomfichierRead=nomfichierRead;
+        config = new Config( "10","50","4","300","2048");
+    }
 
     public void lancerMAE() 
     {
@@ -101,8 +112,8 @@ public class MAE
                     default:
                     {
                         this.erreur = 11;
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
+                        Erreur.afficherErreur(this.erreur);
+                         
                         this.etat_courant = Etat.Menu_general;
                     }break;
             }break;
@@ -120,7 +131,7 @@ public class MAE
                 {
                     case '1':
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"indexation_generale_ferme(" + Config.get_Nb_Mots_Cle +"," + Config.getSimilariter + "," + Config.getNb_Bit_Fort + "," + Config.getNb_Fenetre + "," + Config.getIntervale + ", erreurImage, erreurAudio, erreurTexte, erreurIndex)");
+                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"indexation_generale_ferme(" + config.get_Nb_Mots_Cle() +"," + config.getSimilariter() + "," + config.getNb_Bit_Fort() + "," + config.getNb_Fenetre() + "," + config.getIntervale() + ", erreurImage, erreurAudio, erreurTexte, erreurIndex)");
                         // si ya une erreur j'arrete tt
                     }break;
                     case '2':
@@ -139,8 +150,8 @@ public class MAE
                     default:
                     {
                         this.erreur = 11;
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
+                        Erreur.afficherErreur(this.erreur);
+                         
                         this.etat_courant = Etat.Menu_Admin;
                     }break;
                 }
@@ -149,11 +160,11 @@ public class MAE
             case Etat.Menu_Configuration:
             {
                 System.out.println("\n__________________________Configuration__________________________\n");
-                int Erreur = 0;
-                READ_WRITE_FICHIER.write(this.nomfichier,"Lire_CONFIG(&Erreur)");
-                //// A voir
-                READ_WRITE_FICHIER.read(this.nomfichier);
-                READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_CONFIG(" + Config.get_Nb_Mots_Cle +"," + Config.getSimilariter + "," + Config.getNb_Bit_Fort + "," + Config.getNb_Fenetre + "," + Config.getIntervale + ")");
+                int  erreur = 0;
+                String configstr="";
+                config.Lire_config();
+                configstr= config.afficher_config();
+                System.out.println(configstr);
 
                 System.out.println("\nSi vous voulez changer une valeur, veuillez faire votre choix  : \n");
                 System.out.println("\n[1] Nombre de mots-clé \t supérieur à 0\n[2] Similarité         \t entre 1 et 100\n[3] Nombre de bits     \t entre 1 et 8 \n[4] Nombre de fenetre  \t supeieur a 256 et une puissance de 2\n[5] Intervalle de temps\t superieur a 0 \n[R] Retour\n[Q] Déconnexion\n");
@@ -165,17 +176,16 @@ public class MAE
                     System.out.println("Entrez le nombre de mot-clé voulu :\n");
                     config.setNb_Mots_Cle();
                     config.Ecrire_CONFIG();
-                    if (this.Erreur != 0)
+                    if (this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur(this.erreur);
+                         
+                        this.erreur = 0;
                     }
-                    if (this.Erreur != 0)
+                    if (this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);                      
+                        this.erreur = 0;
                     }
                     System.out.println("\nSi vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications\n");
                 }break;
@@ -185,18 +195,17 @@ public class MAE
                     System.out.println("Entrez la valeur de similarité voulu :\n");
                     config.setSimilariter();
                     config.Ecrire_CONFIG();
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         this.erreur = 0;
                     }
 
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         
+                         this.erreur = 0;
                     }
                     System.out.println("\nSi vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications\n");
                 }break;
@@ -206,17 +215,17 @@ public class MAE
                     System.out.println("Entrez le nombre de bits voulu :\n");
                     config.setNb_Bit_Fort();
                     config.Ecrire_CONFIG();
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         
+                         this.erreur = 0;
                     }
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         
+                         this.erreur = 0;
                     }
                     System.out.println("\nSi vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications\n");
                 }break;
@@ -225,17 +234,17 @@ public class MAE
                     System.out.println("Entrez le nombre de fenetres voulu :\n");
                     config.setNb_Fenetre();
                     config.Ecrire_CONFIG();
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         
+                         this.erreur = 0;
                     }
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         
+                         this.erreur = 0;
                     }
                     System.out.println("\nSi vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications\n");
                 }break;
@@ -245,17 +254,17 @@ public class MAE
                     System.out.println("Entrez l'intervalle de temps voulue :\n");
                     config.setIntervale();
                     config.Ecrire_CONFIG();
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         
+                         this.erreur = 0;
                     }
-                    if (this.Erreur != 0)
+                    if ( this.erreur != 0)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(Erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
-                        this.Erreur = 0;
+                        Erreur.afficherErreur( this.erreur);
+                         
+                         this.erreur = 0;
                     }
                     System.out.println("\nSi vous avez changé votre configuration veuillez lancer l'indexation pour appliquer vos modifications\n");
                 }break;
@@ -280,8 +289,8 @@ public class MAE
                             break;
                         default:
                             this.erreur = 11;
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                            System.out.println(this.strERREUR);
+                            Erreur.afficherErreur(this.erreur);
+                             
                             this.etat_courant = Etat.Menu_Configuration;
                             break;
                         }
@@ -290,8 +299,8 @@ public class MAE
                 default:
                 {
                     this.erreur = 11;
-                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                    System.out.println(this.strERREUR);
+                    Erreur.afficherErreur(this.erreur);
+                     
                     this.etat_courant = Etat.Menu_Configuration;
                 }break;
                 }
@@ -356,8 +365,8 @@ public class MAE
                 default:
                 {
                     this.erreur = 11;
-                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                    System.out.println(this.strERREUR);
+                    Erreur.afficherErreur(this.erreur);
+                     
                     this.etat_courant = Etat.Menu_Visualisation;
                 }break;
                 }
@@ -395,8 +404,8 @@ public class MAE
                 default:
                 {
                     this.erreur = 11;
-                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                    System.out.println(this.strERREUR);
+                    Erreur.afficherErreur(this.erreur);
+                     
                     this.etat_courant = Etat.Menu_Utilisateur;
                 }break;
                 }
@@ -420,8 +429,8 @@ public class MAE
                     READ_WRITE_FICHIER.write(this.nomFichierWrite,"rechercheMot(motCleRecherche, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur)");
                     if (this.erreur == 7)
                     {
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                        System.out.println(this.strERREUR);
+                        Erreur.afficherErreur(this.erreur);
+                         
                     }
                     else
                     {
@@ -484,8 +493,8 @@ public class MAE
                         
                         if (this.erreur == 7 || this.erreur == 1)
                         {
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                            System.out.println(this.strERREUR);
+                            Erreur.afficherErreur(this.erreur);
+                             
                         }
                         //this.nombreElementTabFIN = LireResultat(tabResultatTexte, this.nombreElemetTab, "texte", this.cheminFichierRecherche, tabFileNameTEXTE, config.Nb_Mots_Cle, config.Similariter); A GERER en JAVA
                         READ_WRITE_FICHIER.write(nomFichierWrite,"free(tabResultatTexte)");
@@ -494,7 +503,7 @@ public class MAE
                             System.out.println("[R] Retour\n\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité\n");
                             //this.choix= visualiser_fichier(tabFileNameTEXTE, this.nombreElementTabFIN, "texte"); // A gerer en JAVA
                         }
-                        if (strcmp(choix, "Q") == 0)
+                        if (choix=='Q')
                         {
                             System.out.println("\n\t\033[0;31mVous avez quitté le programme\033[0m\n\n\n\n");
                             READ_WRITE_FICHIER.write(this.nomFichierWrite,"exit(EXIT_SUCCESS)");
@@ -513,8 +522,8 @@ public class MAE
                 default:
                 {
                     this.erreur = 11;
-                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                    System.out.println(this.strERREUR);
+                    Erreur.afficherErreur(this.erreur);
+                     
                     this.etat_courant = Etat.Menu_texte;
                 }break;
                 }
@@ -530,12 +539,13 @@ public class MAE
                 switch (choix)
                 {
                 case '1':
+                {
                     // verification si le fichier existe
                     this.testExtensionFichier = -1;
                     while (this.testExtensionFichier == -1)
                     {
                         System.out.println("\nEntrez le chemin de votre fichier\n");
-                        scanf("%s", this.cheminFichierRecherche);
+                        this.cheminFichierRecherche=Clavier.entrerClavierString();
                         this.testExtensionFichier = FichierExist(this.cheminFichierRecherche);
                         if (this.testExtensionFichier == -1)
                         {
@@ -576,8 +586,8 @@ public class MAE
                         //tabResultatIMG = Comparaison_descripteur_image(this.erreur, this.cheminDescripteurIMG, this.cheminFichierRecherche, config.Nb_Bit_Fort, &nombreElemetTab); A VOIR
                         if (this.erreur != 0)
                         {
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                            System.out.println(this.strERREUR);
+                            Erreur.afficherErreur(this.erreur);
+                             
                         }
                         else
                         {
@@ -608,8 +618,8 @@ public class MAE
                 default:
                 {
                     this.erreur = 11;
-                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                    System.out.println(this.strERREUR);
+                    Erreur.afficherErreur(this.erreur);
+                     
                     this.etat_courant = Etat.Menu_image;
                 }break;
                 }
@@ -667,8 +677,8 @@ public class MAE
                         this.erreur = 0;
                         if (this.erreur != 0)
                         {
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                            System.out.println(this.strERREUR);
+                            Erreur.afficherErreur(this.erreur);
+                             
                         }
                         else
                         {
@@ -703,8 +713,8 @@ public class MAE
                 default:
                 {
                     this.erreur = 11;
-                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
-                    System.out.println(this.strERREUR);
+                    Erreur.afficherErreur(this.erreur);
+                     
                     this.etat_courant = Etat.Menu_audio;
                 }break;
                 }
@@ -716,12 +726,12 @@ public class MAE
                 this.erreur = 14;
                 if (this.erreur != 0)
                 {
-                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"Afficher_Erreur(erreur, \"../Gestion-Erreur/Erreur.txt\", strERREUR)");
+                    Erreur.afficherErreur(this.erreur);
                     
-                    System.out.println(this.strERREUR);
+                     
                 }
                 this.etat_courant = Etat.Menu_general;
             }break;
-        }   
+        } 
     }
 }

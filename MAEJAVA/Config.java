@@ -28,7 +28,7 @@ public class Config {
         texte= "[1] Nombre de mots-clé : "+Nb_Mots_Cle+"\n[2] Similarité : "+Similariter+"\n[3] Nombre de bits de poids fort : "+Nb_Bit_Fort+"\n[4] Nombre de fenetres : "+Nb_Fenetre+"\n[5] Intervale de temps : "+Intervale;
         return texte;
     }
-    public void ecrire_config() 
+    public void Ecrire_CONFIG() 
     {
         String chaine=this.afficher_config();
         READ_WRITE_FICHIER.writeOn("../MoteurC/Gestion-Config/Config.txt",chaine); 
