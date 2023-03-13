@@ -8,63 +8,88 @@
 import java.io.*;
 import java.util.*;
 
-
 public class LireResultat {
-   // NavigableSet<Integer, Integer> tabResultat = new TreeSet<>();
     int nbElement;
     String type;
     String requete;
-    ArrayList tabFileName;
     int nombre_mot_cle;
     int similarite;
+    String pontJavaC = "../pontJavaC.txt";
 
     public LireResultat() {
         super();
     }
 
-     public ArrayList<ELLEMENT> lireChemin(String type)
-    {
-        ArrayList<ELLEMENT> listeElement = new ArrayList<>();
-        String chaine="";
-        if(type.equals("nb"))
-            {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/NB");
+    public static List<String[]> lirePont(String filename) {
+
+        List<String[]> pont = new ArrayList<>();
+
+        try {
+            File file = new File(filename);
+            Scanner scanner = new Scanner(file);
+
+            // Lit chaque ligne du fichier et stocke les données dans le tableau
+            while (scanner.hasNextLine()) {
+                String[] line = scanner.nextLine().split(" ");
+                pont.add(line);
             }
-        if(type.equals("rgb"))
-        {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/RGB");
+
+            scanner.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        if(type.equals("audio"))
-        {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_audio");
-        }
-        if(type.equals("texte"))
-        {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_texte");
-        }
-        String[] ligne = chaine.split("\n");
-        for( String lig : ligne)
-        {
-            String[] cases = lig.split(" ");
-            listeElement.add(new ELLEMENT(cases[0],cases[1]));
-        }
-         return listeElement;
+
+        return pont;
     }
 
+    public ArrayList<ELLEMENT> lireChemin(List<String[]> pont, String type) {
+        ArrayList<ELLEMENT> listeElement = new ArrayList<>();
 
-    
-    /*public LireResultat(TreeSet tableauResultat, int nombreElement, String typeRequete, ArrayList fileName,
-            int nbMotCle, int similaritee) {
-        this.tabResultat = tableauResultat;
-        this.nbElement = nombreElement;
-        this.type = typeRequete;
-        this.tabFileName = fileName;
-        this.nombre_mot_cle = nbMotCle;
-        this.similarite = similaritee;
-    }*/
+        String chaine = "";
+        if (type.equals("nb")) {
+            chaine = READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/NB");
+        }
+        if (type.equals("rgb")) {
+            chaine = READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/RGB");
+        }
+        if (type.equals("audio")) {
+            chaine = READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_audio");
+        }
+        if (type.equals("texte")) {
+            chaine = READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_texte");
+        }
+        String[] ligne = chaine.split("\n");
+        for (String lig : ligne) {
+            String[] cases = lig.split(" ");
+            listeElement.add(new ELLEMENT(cases[0], cases[1]));
+        }
+
+        for (String[] premiereCase : pont) {
+            String id = premiereCase[0];
+            String nombreOccurence = premiereCase[1];
+            for (ELLEMENT element : listeElement) {
+                if (element.ID.equals(id)) {
+                    System.out.println(element.chemin + " : " + nombreOccurence + "%");
+                }
+            }
+        }
+        return listeElement;
+    }
+    /*
+     * public LireResultat(TreeSet tableauResultat, int nombreElement, String
+     * typeRequete, ArrayList fileName,
+     * int nbMotCle, int similaritee) {
+     * this.tabResultat = tableauResultat;
+     * this.nbElement = nombreElement;
+     * this.type = typeRequete;
+     * this.tabFileName = fileName;
+     * this.nombre_mot_cle = nbMotCle;
+     * this.similarite = similaritee;
+     * }
+     */
 
     public int lireResultatFinale() {
-        int erreur;
         int element_tableauRes = 0;
         // affichage des resultat de recherche par mot cle :
         System.out.println("\nLes resultats pour votre recherche :");
@@ -76,57 +101,48 @@ public class LireResultat {
             } else {
                 // Appel de la fonction lire_chemin pour afficher les résultats de recherche par
                 // mot clé
-                element_tableauRes = lireChemin(this.tabResultat, this.tabFileName, this.nbElement, this.type,
-                        this.nombre_mot_cle, this.similarite, this.erreur);
+                lireChemin(lirePont(this.pontJavaC), "texte");
             }
         }
 
         // affichage des resultat de comparaison texte :
         if (type.contains("texte")) {
-            System.out.printf("\nRequete mot-clé :" + this.requete + "\n");
+            System.out.printf("\nRequete texte :" + this.requete + "\n");
             System.out.println("\nRésultats (fichier -> nombre de mots-clés communs) :");
             if (nbElement == 0) {
                 System.out.println("\nAucun mot en communs n'a été trouvé dans notre base de données\n");
             } else {
                 // Appel de la fonction lire_chemin pour afficher les résultats de comparaison
                 // de texte
-                element_tableauRes = lireChemin(this.tabResultat, this.tabFileName, this.nbElement, this.type,
-                        this.nombre_mot_cle, this.similarite, this.erreur);
+                lireChemin(lirePont(this.pontJavaC), "texte");
             }
         }
 
         // affichage des resultat de comparaison Image :
         if (type.contains("image")) {
-            System.out.printf("\nRequete mot-clé :" + this.requete + "\n");
+            System.out.printf("\nRequete image :" + this.requete + "\n");
             System.out.println("\nRésultats :");
             if (nbElement == 0) {
                 System.out.println("\nAucune image similaire n'a été trouvé dans notre base de données\n");
             } else {
                 // Appel de la fonction lire_chemin pour afficher les résultats de comparaison
                 // d'image
-                element_tableauRes = lireChemin(this.tabResultat, this.tabFileName, this.nbElement, this.type,
-                        this.nombre_mot_cle, this.similarite, this.erreur);
+                lireChemin(lirePont(this.pontJavaC), "image");
             }
         }
         // affichage des resultat de comparaison Audio :
         if (type.contains("audio")) {
-            System.out.printf("\nRequete mot-clé :" + this.requete + "\n");
+            System.out.printf("\nRequete audio :" + this.requete + "\n");
             System.out.println("\nRésultats :");
             if (nbElement == 0) {
                 System.out.println("\nAucun mot en communs n'a été trouvé dans notre base de données\n");
             } else {
                 // Appel de la fonction lire_chemin pour afficher les résultats de comparaison
                 // d'audio
-                element_tableauRes = lireChemin(tabResultat, tabFileName, nbElement, type, nombre_mot_cle, similarite,
-                        erreur);
+                lireChemin(lirePont(this.pontJavaC), "audio");
             }
         }
         return element_tableauRes;
     }
 
-   
-
 }
-
-
-

@@ -21,7 +21,7 @@ void ecrireCJava(tab_similaire tabResultat[], int nombreElement){
     if (fichierCJava != NULL)
     {
         for(int i = 0; i < nombreElement; i++){
-            fprintf(fichierCJava, "%d %.2f\n", tabResultat[i].id, tabResultat[i].pourcentage);
+            fprintf(fichierCJava, "%d %d\n", tabResultat[i].id, tabResultat[i].pourcentage);
         }
         fclose(fichierCJava);
     }
