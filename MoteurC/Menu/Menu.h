@@ -14,6 +14,7 @@
 #include "../comparaison/comparaison.h"
 #include "../LireResultatRecherche/LireResultat.h"
 #include "../Gestion-Erreur/Erreur.h"
+#include "../../JNA/JNA.h"
 
 /**
  * @brief

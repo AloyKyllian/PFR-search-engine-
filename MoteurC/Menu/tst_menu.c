@@ -9,8 +9,22 @@
 #include "Menu.h"
 
 int main()
-{   
-    
+{
+
+    do
+    {
+        int JNA=0;
+        
+        if (JNA == 1)
+        {
+            choixfonction();
+            passerLaMain(JNA);
+        }
+
+    } while (1);
+
+    /*
+
     char choix[100];  // variable pour stocker le choix de l'utilisateur
     CONFIG config;    // variable pour stocker les informations de configuration
     char ERREUR[100]; // variable pour stocker le message d'erreur
@@ -50,11 +64,12 @@ int main()
         else
         {
             fprintf("\nFin de la Phase d'initialisation\n");
-           
+
             do
-            { 
+            {
                 MAE(&config, choix, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex); // appeler la fonction pour afficher le menu principal et traiter les choix de l'utilisateur ainsi que l'administrateur
             } while (1);
         }
     }
+    */
 }
