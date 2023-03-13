@@ -2,12 +2,32 @@ package MAEJAVA;
 
 public class traitementChemin
 {
-    public static void recupCheminPourAffichage(String type, String chemin)
+    public static String recupCheminPourAffichage(TypeFichier type, String chemin)
     {
-        
+        String[] chemins = chemin.split(".");
+        switch(type)
+         { 
+            case TEXTE:
+            {
+                chemins[0]=chemins[0]+".txt";
+            }break;
+            case AUDIO: 
+            {
+                chemins[0]=chemins[0]+".wav";
+            }break;
+            case NB: 
+            {
+                chemins[0]=chemins[0]+".bmp";
+            }break;
+            case RGB: 
+            {
+                chemins[0]=chemins[0]+".jpg";
+            }break;
+         }  
+         return chemins[0];
+            
     }
 }
-
 
 
 

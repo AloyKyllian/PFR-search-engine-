@@ -79,6 +79,7 @@ void choixfonction()
         erreur = 0;
         tab_similaire *tabResultatMot = malloc(100 * sizeof(tab_similaire));
         rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
+        ecrireCJava(tabResultatMot, nombreElemetTab);
         // ecrire tabResultatMot
         free(tabResultatMot);
     }
@@ -90,6 +91,7 @@ void choixfonction()
         tab_similaire *tabResultatTexte = malloc(100 * sizeof(tab_similaire));
         char *tabFileNameTEXTE[700];
         tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
+        ecrireCJava(tabResultatTexte, nombreElemetTab);
         // ecrire tabResultatTexte erreur
         free(tabResultatTexte);
     }
@@ -100,6 +102,7 @@ void choixfonction()
         tab_similaire *tabResultatIMG;
         char *tabFileNameIMG[700];
         tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
+        ecrireCJava(tabResultatIMG, nombreElemetTab);
         
         // ecrire tabResultatIMG
         free(tabResultatIMG);
@@ -113,6 +116,7 @@ void choixfonction()
         tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
         char *tabFileNameAUDIO[700];
         tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
+        ecrireCJava(tabResultatAudio, nombreElemetTab);
         // ecrire tabResultatIMG
         free(tabResultatAudio);
     }

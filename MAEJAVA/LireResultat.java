@@ -22,6 +22,37 @@ public class LireResultat {
         super();
     }
 
+     public ArrayList<ELLEMENT> lireChemin(String type)
+    {
+        ArrayList<ELLEMENT> listeElement = new ArrayList<>();
+        String chaine="";
+        if(type.equals("nb"))
+            {
+                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/NB");
+            }
+        if(type.equals("rgb"))
+        {
+                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/RGB");
+        }
+        if(type.equals("audio"))
+        {
+                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_audio");
+        }
+        if(type.equals("texte"))
+        {
+                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_texte");
+        }
+        String[] ligne = chaine.split("\n");
+        for( String lig : ligne)
+        {
+            String[] cases = lig.split(" ");
+            listeElement.add(new ELLEMENT(cases[0],cases[1]));
+        }
+         return listeElement;
+    }
+
+
+    
     /*public LireResultat(TreeSet tableauResultat, int nombreElement, String typeRequete, ArrayList fileName,
             int nbMotCle, int similaritee) {
         this.tabResultat = tableauResultat;
@@ -30,7 +61,7 @@ public class LireResultat {
         this.tabFileName = fileName;
         this.nombre_mot_cle = nbMotCle;
         this.similarite = similaritee;
-    }
+    }*/
 
     public int lireResultatFinale() {
         int erreur;
@@ -91,37 +122,9 @@ public class LireResultat {
             }
         }
         return element_tableauRes;
-    }*/
-
-    public ArrayList<ELLEMENT> lireChemin(String type)
-    {
-        ArrayList<ELLEMENT> listeElement = new ArrayList<>();
-        String chaine="";
-        if(type.equals("nb"))
-            {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/NB");
-            }
-        if(type.equals("rgb"))
-        {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_image/RGB");
-        }
-        if(type.equals("audio"))
-        {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_audio");
-        }
-        if(type.equals("texte"))
-        {
-                chaine=READ_WRITE_FICHIER.read("../MoteurC/liste_base/liste_base_texte");
-        }
-        String[] ligne = chaine.split("\n");
-        for( String lig : ligne)
-        {
-            String[] cases = lig.split(" ");
-            listeElement.add(new ELLEMENT(cases[0],cases[1]));
-        }
-         return listeElement;
     }
-    
+
+   
 
 }
 

@@ -1,5 +1,4 @@
 package test.java;
-import MAEJAVA.*;
 import java.lang.Thread;
 import com.sun.jna.Library;
 import com.sun.jna.Native;

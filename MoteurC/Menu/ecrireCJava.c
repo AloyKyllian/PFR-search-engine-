@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "comparaison.h"
 
 typedef struct
 {
@@ -16,24 +15,24 @@ typedef struct
 } tab_similaire;
 
 void ecrireCJava(tab_similaire tabResultat[], int nombreElement){
-    char chemin[100] = ""; 
+    char chemin[100] = "../../pontJavaC.txt"; 
     FILE *fichierCJava=NULL;
     fichierCJava=fopen(chemin,"w");
     if (fichierCJava != NULL)
     {
         for(int i = 0; i < nombreElement; i++){
-            fprintf(fichierCJava, "id=%d, pourcentage=%.2f\n", tabResultat[i].id, tabResultat[i].pourcentage);
+            fprintf(fichierCJava, "%d %.2f\n", tabResultat[i].id, tabResultat[i].pourcentage);
         }
         fclose(fichierCJava);
     }
 }
 
-int main(){
-    tab_similaire tabResultat[3];
-    tabResultat[0].id=-1;
-    tabResultat[0].pourcentage=20;
-    tabResultat[1].id=-12;
-    tabResultat[1].pourcentage=12;
-    ecrireCJava(tabResultat,2);
-    return 0;
-}
+// int main(){
+//     tab_similaire tabResultat[3];
+//     tabResultat[0].id=-1;
+//     tabResultat[0].pourcentage=20;
+//     tabResultat[1].id=-12;
+//     tabResultat[1].pourcentage=12;
+//     ecrireCJava(tabResultat,2);
+//     return 0;
+// }

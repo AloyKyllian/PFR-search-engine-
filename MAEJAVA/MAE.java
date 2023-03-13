@@ -43,6 +43,7 @@ public class MAE
             {
                 case Etat.Menu_general:
                 {
+
                     System.out.println("\n__________________________Menu General__________________________\n");
                     System.out.println("\nVeuillez faire votre choix : \n");
                     System.out.println("\n[1] Administrateur \n[2] Utilisateur \n[Q] Quitter\n");

@@ -30,7 +30,7 @@ java{
 
 [] 1 JNA recuperer la valeur la lire en permanence et creer les fonctions pour la mettre a 1 et a 0 
 [x] 2 recuperer les valeur dans les parenthese envoyer par le JAVA pour les mettre dans la fonction appeler 
-[] 3 faire une fonction pour reecrire dans le fichier 
+[x] 3 faire une fonction pour reecrire dans le fichier 
 
 
 
@@ -41,4 +41,4 @@ un typedef
 faire une variable interne a la fonction qui est return ca marche peut etre ?
 
 fichier a la place de la variable JNA et si le fichier est creer on passe la main au C, si il existe pas on reste sur JAVA 
-pb avoir la verification 
+pb avoir la verification
