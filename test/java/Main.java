@@ -7,7 +7,8 @@ public class Main {
 
 public interface MyLibrary extends Library {
 
-  MyLibrary INSTANCE = (MyLibrary) Native.loadLibrary("../C/JNA.so", MyLibrary.class); 
+  MyLibrary INSTANCE = (MyLibrary) Native.load("JNA.so", MyLibrary.class); 
+
   void passerLaMain();
 
   int getMain();
