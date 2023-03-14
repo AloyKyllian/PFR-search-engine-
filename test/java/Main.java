@@ -3,11 +3,11 @@ import java.lang.Thread;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
-public class main {
+public class Main {
 
 public interface MyLibrary extends Library {
 
-  MyLibrary INSTANCE = (MyLibrary) Native.loadLibrary("mylibrary", MyLibrary.class); 
+  MyLibrary INSTANCE = (MyLibrary) Native.loadLibrary("../C/JNA.so", MyLibrary.class); 
   void passerLaMain();
 
   int getMain();
@@ -25,7 +25,12 @@ public interface MyLibrary extends Library {
                 else
                 {  
                     System.out.println("JAVA na pas la main "); 
-                    Thread.sleep(2000);
+                    try{
+                       Thread.sleep(2000); 
+                    }
+                    catch(InterruptedException e){
+                        e.printStackTrace();
+                    }
                     Main=MyLibrary.INSTANCE.getMain();
                     System.out.println("apres appel de getMain :  "+Main);
                 }
