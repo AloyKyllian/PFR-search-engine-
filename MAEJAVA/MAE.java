@@ -1,4 +1,4 @@
-package MAEJAVA;
+
 import javax.security.auth.x500.X500Principal;
 
 public class MAE 
@@ -24,24 +24,35 @@ public class MAE
     private boolean result = false;
     private LOGIN testlogin;
     private int testExtensionFichier, testExtensionFichierBMP;
+    private boolean bmp;
+    private boolean isfichierExist;
+    private boolean isverifext;
     private final String cheminDescripteurTxt = "../base_descripteur/base_descripteur_texte";
     private final String cheminDescripteurIMG = "../base_descripteur/base_descripteur_image";
     private final String cheminDescripteurAudio = "../base_descripteur/base_descripteur_audio";
+    private final LancerExecutable LancerExe = new LancerExecutable();
+    private String stringLue; 
 
     public MAE(String nomFichierWrite , String nomfichierRead)
     {
         this.nomFichierWrite= nomFichierWrite;
         this.nomfichierRead=nomfichierRead;
-        this.config = new Config( "10","50","4","300","2048");
+        this.config = new Config();
+        this.config.Lire_config();
+    }
+    public static void main(String[] args)
+    {   
+        MAE mae= new MAE("Write.txt","Read.txt");
+        mae.lancerMAE();
     }
 
     public void lancerMAE() 
     {
-        while(1)
+        while(true)
         {
             switch (this.etat_courant)
             {
-                case Etat.Menu_general:
+                case Menu_general:
                 {
 
                     System.out.println("\n__________________________Menu General__________________________\n");
@@ -86,7 +97,13 @@ public class MAE
                                         case '2' :
                                         {
                                             System.out.println("\nVous devez attendre 30 secondes pour réessayer\n");
-                                            Thread.sleep(30000);
+                                            try{
+                                               Thread.sleep(30000); 
+                                            }catch(InterruptedException e)
+                                            {
+                                                e.printStackTrace();
+                                            }
+                                            
                                             System.out.println("\nFin des 30 secondes, Vous pouvez réessayer maintenant\n");
                                             this.nbTentativeConnexion = 0;      
                                         }break;
@@ -107,9 +124,6 @@ public class MAE
                         case 'Q':
                         {
                             System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                            //donner la permission au c de lire
-                            //read -- ( le c nous as donner permission de lire)
                             System.exit(1);
                         }break;
                         default:
@@ -121,7 +135,7 @@ public class MAE
                 }break;
                 }
 
-                case Etat.Menu_Admin:
+                case Menu_Admin:
                 {
                     System.out.println("\n__________________________Menu Administrateur__________________________\n");
                     System.out.println("\nVeuillez faire votre choix  : \n");
@@ -133,9 +147,10 @@ public class MAE
                     {
                         case '1':
                         {
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"indexationGeneraleFerme");
-                            //donner la permission au c de lire
-                            //read -- ( le c nous as donner permission de lire)
+                            READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"indexationGeneraleFerme()");
+                            LancerExe.lancerOut();
+                            this.stringLue = READ_WRITE_FICHIER.read(this.nomfichierRead);
+                            System.out.println(this.stringLue);
                             // si ya une erreur j'arrete tt
                         }break;
                         case '2':
@@ -161,7 +176,7 @@ public class MAE
                     }
                 }break;
 
-                case Etat.Menu_Configuration:
+                case Menu_Configuration:
                 {
                     System.out.println("\n__________________________Configuration__________________________\n");
                     int  erreur = 0;
@@ -178,8 +193,9 @@ public class MAE
                     case '1':
                     {
                         System.out.println("Entrez le nombre de mot-clé voulu :\n");
+                        
                         config.setNb_Mots_Cle();
-                        config.Ecrire_CONFIG();
+                        config.ecrire_config();
                         if (this.erreur != 0)
                         {
                             Erreur.afficherErreur(this.erreur);
@@ -198,7 +214,7 @@ public class MAE
                         // pour changer similarité
                         System.out.println("Entrez la valeur de similarité voulu :\n");
                         config.setSimilariter();
-                        config.Ecrire_CONFIG();
+                        config.ecrire_config();
                         if ( this.erreur != 0)
                         {
                             Erreur.afficherErreur( this.erreur);
@@ -218,7 +234,7 @@ public class MAE
                         // pour changer niveau
                         System.out.println("Entrez le nombre de bits voulu :\n");
                         config.setNb_Bit_Fort();
-                        config.Ecrire_CONFIG();
+                        config.ecrire_config();
                         if ( this.erreur != 0)
                         {
                             Erreur.afficherErreur( this.erreur);                            
@@ -235,7 +251,7 @@ public class MAE
                     {
                         System.out.println("Entrez le nombre de fenetres voulu :\n");
                         config.setNb_Fenetre();
-                        config.Ecrire_CONFIG();
+                        config.ecrire_config();
                         if ( this.erreur != 0)
                         {
                             Erreur.afficherErreur( this.erreur);
@@ -255,7 +271,7 @@ public class MAE
                         // fct pour changer l'intervalle de temps
                         System.out.println("Entrez l'intervalle de temps voulue :\n");
                         config.setIntervale();
-                        config.Ecrire_CONFIG();
+                        config.ecrire_config();
                         if ( this.erreur != 0)
                         {
                             Erreur.afficherErreur( this.erreur);
@@ -287,9 +303,7 @@ public class MAE
                                 break;
                             case 2:
                                 System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                                READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                                //donner la permission au c de lire
-                                 //read -- ( le c nous as donner permission de lire)
+
                                  System.exit(1);
                             default:
                                 this.erreur = 11;
@@ -308,7 +322,7 @@ public class MAE
                     }
                 }break;
 
-                case Etat.Menu_Visualisation:
+                case Menu_Visualisation:
                 {
                     System.out.println("\n__________________________Visualisation des recueils des descripteurs__________________________\n");
                     System.out.println("\nVeuillez faire votre choix  : \n");
@@ -319,23 +333,25 @@ public class MAE
                     case '1':
                     {
                         System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"systemTexte");
-                        //donner la permission au c de lire
-                        //read -- ( le c nous as donner permission de lire)
+                        READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"systemTexte()");
+                        LancerExe.lancerOut();
+                        //recuperer dans le fichier xecutabe
                     }break;
                     case '2':
                     {
                         System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"systemImage");
-                        //donner la permission au c de lire
-                        //read -- ( le c nous as donner permission de lire)
+                        READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"systemImage()");
+                        LancerExe.lancerOut();
+                        this.stringLue = READ_WRITE_FICHIER.read(this.nomfichierRead);
+                        System.out.println(this.stringLue);
                     }break;
                     case '3':
                     {
                         System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"systemAudio");
-                        //donner la permission au c de lire
-                        //read -- ( le c nous as donner permission de lire)
+                        READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"systemAudio()");
+                        LancerExe.lancerOut();
+                        this.stringLue = READ_WRITE_FICHIER.read(this.nomfichierRead);
+                        System.out.println(this.stringLue);
                     }break;
                     case 'R':
                     {
@@ -354,9 +370,6 @@ public class MAE
                                 break;
                             case 2:
                                 System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                                READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                                //donner la permission au c de lire
-                                //read -- ( le c nous as donner permission de lire)
                                 System.exit(1);
                                 break;
                             default:
@@ -376,7 +389,7 @@ public class MAE
                     }
                 }break;
 
-                case Etat.Menu_Utilisateur:
+                case Menu_Utilisateur:
                 {
                     System.out.println("\n__________________________Menu utilisateur__________________________\n");
                     System.out.println("\nVeuillez faire votre choix  : \n");
@@ -403,9 +416,6 @@ public class MAE
                     case 'Q':
                     {
                         System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                        //donner la permission au c de lire
-                            //read -- ( le c nous as donner permission de lire)
                             System.exit(1);
                     }break;
                     default:
@@ -418,7 +428,7 @@ public class MAE
                     }
                 }break;
 
-                case Etat.Menu_texte:
+                case Menu_texte:
                 {
 
                     System.out.println("\n__________________________Recherche fichier texte__________________________\n");
@@ -433,28 +443,26 @@ public class MAE
                         this.erreur = 0;
                         System.out.println("\nEntrez votre mot-clé\n");
                         this.motCleRecherche=Clavier.entrerClavierString();
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"rechercheMot(motCleRecherche, cheminDescripteurTxt, tabResultatMot)");
-                        //donner la permission au c de lire
-                        //read -- ( le c nous as donner permission de lire)
+                        READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"rechercheMot(motCleRecherche, cheminDescripteurTxt, tabResultatMot)");
+                        LancerExe.lancerOut();
+                        this.stringLue = READ_WRITE_FICHIER.read(this.nomfichierRead);
+                        System.out.println(this.stringLue);
                         if (this.erreur == 7)
                         {
                             Erreur.afficherErreur(this.erreur);          
                         }
                         else
                         {
-                            this.nombreElementTabFIN = LireResultat(tabResultatMot, this.nombreElemetTab, "rechercheMot", this.motCleRecherche, tabFileNameMOT, config.Nb_Mots_Cle, config.Similariter); A gerer en JAVA
+                            //this.nombreElementTabFIN = LireResultat(tabResultatMot, this.nombreElemetTab, "rechercheMot", this.motCleRecherche, tabFileNameMOT, config.Nb_Mots_Cle, config.Similariter); A gerer en JAVA
                             if (this.nombreElementTabFIN > 0)
                             {
 
                                 System.out.println("[R] Retour\n\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activite\n");
-                                this.choix = visualiser_fichier(tabFileNameMOT, this.nombreElementTabFIN, "texte"); A gerer en JAVA
+                                //this.choix = visualiser_fichier(tabFileNameMOT, this.nombreElementTabFIN, "texte"); A gerer en JAVA
                             }
                             if (choix== 'Q')
                             {
                                 System.out.println("\n\t\033[0;31mVous avez quitte le programme\033[0m\n\n\n\n");
-                                READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                                //donner la permission au c de lire
-                                //read -- ( le c nous as donner permission de lire)
                                 System.exit(1);
                             }
                         }
@@ -468,8 +476,8 @@ public class MAE
                         {
                             System.out.println("\nEntrez le chemin de votre fichier\n");
                             this.cheminFichierRecherche = Clavier.entrerClavierString();
-                            this.testExtensionFichier = FichierExist(this.cheminFichierRecherche); //A gerer en JAVA
-                            if (this.testExtensionFichier == -1)
+                            this.isfichierExist = traitementChemin.fichierExist(this.cheminFichierRecherche); //A gerer en JAVA
+                            if (this.isfichierExist == false)
                             {
                                 System.out.println("\nLe fichier n'existe pas\n");
                                 System.out.println("\nVeuillez faire un choix pour continuer\n[1] Entrer un autre fichier\n[2] Retour \"Menu General\"\n");
@@ -490,8 +498,8 @@ public class MAE
                             }
                         }
                         // verification si le fichier passer est un fichier texte
-                        this.testExtensionFichier = VerifExtension(this.cheminFichierRecherche, "xml"); A gerer en JAVA
-                        if (this.testExtensionFichier == -1)
+                        this.isverifext = traitementChemin.verifExtension(this.cheminFichierRecherche, "xml"); 
+                        if (this.isverifext == false)
                         {
                             System.out.println("\nCe fichier n'est pas de type texte\nVeuiller mettre un fichier texte\n");
                             this.etat_courant = Etat.Menu_texte;
@@ -499,9 +507,10 @@ public class MAE
                         else
                         {
                             this.erreur = 0; this.nombreElemetTab = 0;
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"comparaison_texte(config.Nb_Mots_Cle, this.cheminFichierRecherche)");
-                            //donner la permission au c de lire
-                            //read -- ( le c nous as donner permission de lire)
+                            READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"comparaison_texte(config.Nb_Mots_Cle, this.cheminFichierRecherche)");
+                            LancerExe.lancerOut();
+                            this.stringLue = READ_WRITE_FICHIER.read(this.nomfichierRead);
+                            System.out.println(this.stringLue);
                             String recuperationResultat = READ_WRITE_FICHIER.read(this.nomfichierRead);
                             
                             if (this.erreur == 7 || this.erreur == 1)
@@ -509,21 +518,19 @@ public class MAE
                                 Erreur.afficherErreur(this.erreur);
                                 
                             }
-                            this.nombreElementTabFIN = LireResultat(tabResultatTexte, this.nombreElemetTab, "texte", this.cheminFichierRecherche, tabFileNameTEXTE, config.Nb_Mots_Cle, config.Similariter); A GERER en JAVA
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"freeTabResultatTexte)");
-                            //donner la permission au c de lire
-                            //read -- ( le c nous as donner permission de lire)
+                            //this.nombreElementTabFIN = LireResultat(tabResultatTexte, this.nombreElemetTab, "texte", this.cheminFichierRecherche, tabFileNameTEXTE, config.Nb_Mots_Cle, config.Similariter); A GERER en JAVA
+                            //READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"freeTabResultatTexte)");
+                            LancerExe.lancerOut();
+                            this.stringLue = READ_WRITE_FICHIER.read(this.nomfichierRead);
+                            System.out.println(this.stringLue);
                             if (this.nombreElementTabFIN > 0)
                             {
                                 System.out.println("[R] Retour\n\nPensez à fermer l'editeur de texte apres l'avoir consulté pour poursuivre votre activité\n");
-                                this.choix= visualiser_fichier(tabFileNameTEXTE, this.nombreElementTabFIN, "texte"); // A gerer en JAVA
+                                //this.choix= visualiser_fichier(tabFileNameTEXTE, this.nombreElementTabFIN, "texte"); // A gerer en JAVA
                             }
                             if (choix=='Q')
                             {
                                 System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                                READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                                //donner la permission au c de lire
-                                //read -- ( le c nous as donner permission de lire)
                                 System.exit(1);
                             }
                         }
@@ -535,9 +542,6 @@ public class MAE
                     case 'Q':
                     {
                         System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                        //donner la permission au c de lire
-                                //read -- ( le c nous as donner permission de lire)
                         System.exit(1);
                     }break;
                     default:
@@ -550,7 +554,7 @@ public class MAE
                     }
                 }break;
 
-                case Etat.Menu_image:
+                case Menu_image:
                 {
 
                     System.out.println("\n__________________________Recherche fichier image__________________________\n");
@@ -561,14 +565,14 @@ public class MAE
                     {
                     case '1':
                     {
-                        // verification si le fichier existe
+
                         this.testExtensionFichier = -1;
                         while (this.testExtensionFichier == -1)
                         {
                             System.out.println("\nEntrez le chemin de votre fichier\n");
                             this.cheminFichierRecherche=Clavier.entrerClavierString();
-                            this.testExtensionFichier = FichierExist(this.cheminFichierRecherche);
-                            if (this.testExtensionFichier == -1)
+                            this.isfichierExist = traitementChemin.fichierExist(this.cheminFichierRecherche);
+                            if (this.isfichierExist == false)
                             {
                                 System.out.println("\nLe fichier n'existe pas\n");
                                 System.out.println("\nVeuillez faire un choix pour continuer\n[1] Entrez un autre fichier\n[2] Retour \"Menu Général\"\n");
@@ -592,9 +596,9 @@ public class MAE
                             }
                         }
                         // verification si le fichier passer est un fichier texte
-                        this.testExtensionFichier = VerifExtension(this.cheminFichierRecherche, "jpg");
-                        this.testExtensionFichierBMP = VerifExtension(this.cheminFichierRecherche, "bmp");
-                        if (this.testExtensionFichier == -1 && this.testExtensionFichierBMP == -1)
+                        this.isverifext = traitementChemin.verifExtension(this.cheminFichierRecherche, "jpg");
+                        this.bmp = traitementChemin.verifExtension(this.cheminFichierRecherche, "bmp");
+                        if (this.isverifext == false && this.bmp == false)
                         {
                             System.out.println("\nCe fichier n'est pas de type image\nVeuillez mettre un fichier .jpg ou .bmp\n");
                             this.etat_courant = Etat.Menu_image;
@@ -603,7 +607,7 @@ public class MAE
                         {
                             this.typeRequete=this.cheminFichierRecherche;
                             this.erreur = 0; this.nombreElemetTab = 0;
-                            READ_WRITE_FICHIER.write(this.nomFichierWrite,"recup_CheminPour_Affichage(\"texte\", &cheminFichierRecherche)");
+                            traitementChemin.recupCheminPourAffichage(TypeFichier.TEXTE, this.cheminFichierRecherche);
                             //tabResultatIMG = Comparaison_descripteur_image(this.erreur, this.cheminDescripteurIMG, this.cheminFichierRecherche, config.Nb_Bit_Fort, &nombreElemetTab); A VOIR
                             if (this.erreur != 0)
                             {
@@ -612,22 +616,19 @@ public class MAE
                             }
                             else
                             {
-                                this.nombreElementTabFIN = LireResultat(tabResultatIMG, this.nombreElemetTab, "image", this.typeRequete, tabFileNameIMG, config->Nb_Mots_Cle, config->Similariter);
+                                //this.nombreElementTabFIN = LireResultat(tabResultatIMG, this.nombreElemetTab, "image", this.typeRequete, tabFileNameIMG, config->Nb_Mots_Cle, config->Similariter);
                                 if (this.nombreElementTabFIN > 0)
                                 {
                                     System.out.println("[R] Retour\n\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
-                                    this.choix = visualiser_fichier(tabFileNameIMG, this.nombreElementTabFIN, "image");
+                                    //this.choix = visualiser_fichier(tabFileNameIMG, this.nombreElementTabFIN, "image");
                                 }
-                                if (this.choix == "Q")
+                                if (this.choix=='Q')
                                 {
                                     System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                                    //donner la permission au c de lire
-                                    //read -- ( le c nous as donner permission de lire)
                                     System.exit(1);
                                 }
                             }
-                            free(tabResultatIMG);
+                            //free(tabResultatIMG);
                         }
                     }break;
                     case 'R':
@@ -637,9 +638,6 @@ public class MAE
                     case 'Q':
                     {
                         System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                        //donner la permission au c de lire
-                        //read -- ( le c nous as donner permission de lire)
                         System.exit(1);
                     }break;
                     default:
@@ -651,7 +649,7 @@ public class MAE
                     }
                 }break;
 
-                case Etat.Menu_audio:
+                case Menu_audio:
                 {
                     System.out.println("\n__________________________Recherche fichier audio__________________________\n");
                     System.out.println("\nVeuillez faire votre choix  : \n");
@@ -666,9 +664,9 @@ public class MAE
                         while (this.testExtensionFichier == -1)
                         {
                             System.out.println("\nEntrez le chemin de votre fichier\n");
-                            this.cheminFichierRecherche = Clavier.entrerClavierChar();
-                            this.testExtensionFichier = FichierExist(cheminFichierRecherche);
-                            if (this.testExtensionFichier == -1)
+                            this.cheminFichierRecherche = Clavier.entrerClavierString();
+                             this.isfichierExist = traitementChemin.fichierExist(this.cheminFichierRecherche);
+                            if (this.isfichierExist == false)
                             {
                                 System.out.println("\nLe fichier n'existe pas\n");
                                 System.out.println("\nVeuillez faire un choix pour continuer\n[1] Entrez un autre fichier\n[2] Retour \"Menu Général\"\n");
@@ -692,8 +690,8 @@ public class MAE
                             }
                         }
                         // verification si le fichier passer est un fichier texte
-                        this.testExtensionFichier = VerifExtension(this.cheminFichierRecherche, "wav");
-                        if (this.testExtensionFichier == -1)
+                        this.isverifext = traitementChemin.verifExtension(this.cheminFichierRecherche, "wav");
+                        if (this.isverifext == false)
                         {
                             System.out.println("\nCe fichier n'est pas de type audio\nVeuillez faire le choix de recherche qui vous correspond\n");
                             this.etat_courant = Etat.Menu_Utilisateur;
@@ -708,27 +706,26 @@ public class MAE
                             }
                             else
                             {
-                                READ_WRITE_FICHIER.write(this.nomFichierWrite,"recup_CheminPour_Affichage(\"texte\", &cheminFichierRecherche)");
-                                READ_WRITE_FICHIER.write(this.nomfichier,"comparaison_audio(config->Nb_Fenetre, config->Intervale, cheminFichierRecherche, cheminDescripteurAudio, &erreur, &nombreElemetTab)");
-                                //donner la permission au c de lire
-                                    //read -- ( le c nous as donner permission de lire)
-                                this.nombreElementTabFIN = LireResultat(tabResultatAudio, this.nombreElemetTab, "audio", this.cheminFichierRecherche, tabFileNameAUDIO, config->Nb_Mots_Cle, config->Similariter);
+                                traitementChemin.recupCheminPourAffichage(TypeFichier.TEXTE, cheminFichierRecherche);
+                                READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"comparaison_audio(config->Nb_Fenetre, config->Intervale, cheminFichierRecherche, cheminDescripteurAudio, &erreur, &nombreElemetTab)");
+                                LancerExe.lancerOut();
+                                this.stringLue = READ_WRITE_FICHIER.read(this.nomfichierRead);
+                                System.out.println(this.stringLue);
+                                //this.nombreElementTabFIN = LireResultat(tabResultatAudio, this.nombreElemetTab, "audio", this.cheminFichierRecherche, tabFileNameAUDIO, config->Nb_Mots_Cle, config->Similariter);
 
                                 if (this.nombreElementTabFIN > 0)
                                 {
                                     System.out.println("[R] Retour\n\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
-                                    READ_WRITE_FICHIER.write(this.nomfichier,"visualiser_fichier(tabFileNameAUDIO, nombreElementTabFIN, \"audio\")");
-                                    this.choix = ; // A voir
+                                    READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"visualiser_fichier(tabFileNameAUDIO, nombreElementTabFIN, \"audio\")");
+                                    //this.choix = ; // A voir
                                 }
-                                if (this.choix == "Q")
+                                if (this.choix == 'Q')
                                 {
                                     System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                                    READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                                    //donner la permission au c de lire
-                                    //read -- ( le c nous as donner permission de lire)
+                                    
                                     System.exit(1);
                                 }
-                                READ_WRITE_FICHIER.write(this.nomFichierWrite,"free(tabResultatAudio)");
+                                //READ_WRITE_FICHIER.writeOn(this.nomFichierWrite,"free(tabResultatAudio)");
                             }
                         }
                     }break;
@@ -739,9 +736,6 @@ public class MAE
                     case 'Q':
                     {
                         System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
-                        READ_WRITE_FICHIER.write(this.nomFichierWrite,"quitter");
-                        //donner la permission au c de lire
-                        //read -- ( le c nous as donner permission de lire)
                         System.exit(1);
 
                     }break;

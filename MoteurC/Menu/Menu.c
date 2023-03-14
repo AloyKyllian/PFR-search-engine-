@@ -5,27 +5,29 @@
 //    22/01/2023
 //
 #include "Menu.h"
-
-typedef struct
-{
-    char entiere[100];
-    char fonction[100];
-} chaine_typ;
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 chaine_typ lire_fichier()
 {
     char *ptr;
     chaine_typ chaine;
+    char Chaine[] = {'\0'};
     FILE *fichier = NULL;
-    fichier = fopen("../MoteurC/fichierJavaC.txt", "r");
+    fichier = fopen("../../MAEJAVA/Write.txt", "r");
     if (fichier != NULL)
     {
-        while (fscanf(fichier, "%s", chaine.entiere) != EOF)
+        while (fscanf(fichier, "%s\n", chaine.entiere) != EOF)
         {
+
             if (chaine.entiere != NULL)
             {
                 ptr = strchr(chaine.entiere, '(');
-                strcpy(chaine.fonction, chaine.entiere[0, strlen(ptr)]);
+                char temp[100];
+                strcpy(temp, chaine.entiere);
+                strcpy(&temp[strlen(chaine.entiere) - strlen(ptr)], "\0");
+                strcpy(chaine.fonction, temp);
             }
         }
     }
@@ -36,21 +38,25 @@ chaine_typ lire_fichier()
 void choixfonction()
 {
     chaine_typ etat_courant = lire_fichier();
+    printf("\n%s\n", etat_courant.fonction);
+    printf("%d", strcmp(etat_courant.fonction, "systemAudio"));
     // variables a utiliser au cours du programme
     char chemin[100];
     char requete[100];
     int erreur = 0;
     int nombreElemetTab = 0;
-    CONFIG *config;
+    CONFIG config;
     char cheminDescripteurTxt[200] = "../base_descripteur/base_descripteur_texte";
     char cheminDescripteurIMG[100] = "../base_descripteur/base_descripteur_image";
     char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
-    *config = Lire_CONFIG(erreur);
+    config = Lire_CONFIG(&erreur);
     int erreurImage = 0, erreurAudio = 0, erreurTexte = 0, erreurIndex = 0;
+    strcpy(etat_courant.fonction,"indexationGeneraleFerme");
 
-    if (strcmp(etat_courant.fonction, "indexationGeneraleFerme"))
+    if (strcmp(etat_courant.fonction, "indexationGeneraleFerme") == 0)
     {
-        indexation_generale_ferme(*config, erreurImage, erreurAudio, erreurTexte, erreurIndex);
+        Afficher_CONFIG(config);
+        indexation_generale_ferme(config, erreurImage, erreurAudio, erreurTexte, erreurIndex);
     }
     else if (strcmp(etat_courant.fonction, "systemTexte") == 0)
     {
@@ -60,12 +66,14 @@ void choixfonction()
     }
     else if (strcmp(etat_courant.fonction, "systemImage") == 0)
     {
+
         system("chmod a-w ../base_descripteur/base_descripteur_image");
         system("gedit ../base_descripteur/base_descripteur_image");
         system("chmod 777 ../base_descripteur/base_descripteur_image");
     }
     else if (strcmp(etat_courant.fonction, "systemAudio") == 0)
     {
+        printf("la");
         system("chmod a-w ../base_descripteur/base_descripteur_audio");
         system("gedit ../base_descripteur/base_descripteur_audio");
         system("chmod 777 ../base_descripteur/base_descripteur_audio");
@@ -74,11 +82,11 @@ void choixfonction()
     else if (strcmp(etat_courant.fonction, "rechercheMot") == 0)
     {
         char motCle[27];
-        sscanf(etat_courant.entiere,"%s(\"%s\")",etat_courant.fonction,motCle);
+        sscanf(etat_courant.entiere, "%s(\"%s\")", etat_courant.fonction, motCle);
         char *tabFileNameMOT[700];
         erreur = 0;
         tab_similaire *tabResultatMot = malloc(100 * sizeof(tab_similaire));
-        rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config->Nb_Mots_Cle, &nombreElemetTab, &erreur);
+        rechercheMot(motCle, cheminDescripteurTxt, tabResultatMot, config.Nb_Mots_Cle, &nombreElemetTab, &erreur);
         ecrireCJava(tabResultatMot, nombreElemetTab);
         // ecrire tabResultatMot
         free(tabResultatMot);
@@ -86,45 +94,41 @@ void choixfonction()
     //"comparaisonTexte()"
     else if (strcmp(etat_courant.fonction, "comparaisonTexte") == 0)
     {
-        sscanf(etat_courant.entiere,"%s(\"%s\")",etat_courant.fonction,chemin);
+        sscanf(etat_courant.entiere, "%s(\"%s\")", etat_courant.fonction, chemin);
         erreur = 0, nombreElemetTab = 0;
         tab_similaire *tabResultatTexte = malloc(100 * sizeof(tab_similaire));
         char *tabFileNameTEXTE[700];
-        tabResultatTexte = comparaison_texte(config->Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
-        ecrireCJava(tabResultatTexte, nombreElemetTab);
-        // ecrire tabResultatTexte erreur
+        tabResultatTexte = comparaison_texte(config.Nb_Mots_Cle, chemin, cheminDescripteurTxt, &erreur, &nombreElemetTab);
+        // ecrireCJava(tabResultatTexte, nombreElemetTab);
+        //  ecrire tabResultatTexte erreur
         free(tabResultatTexte);
     }
     else if (strcmp(etat_courant.fonction, "ComparaisonDescripteurImage") == 0)
     {
-        sscanf(etat_courant.entiere,"%s(\"%s\")",etat_courant.fonction,chemin);
+        sscanf(etat_courant.entiere, "%s(\"%s\")", etat_courant.fonction, chemin);
         erreur = 0, nombreElemetTab = 0;
         tab_similaire *tabResultatIMG;
         char *tabFileNameIMG[700];
-        tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config->Nb_Bit_Fort, &nombreElemetTab);
-        ecrireCJava(tabResultatIMG, nombreElemetTab);
-        
+        tabResultatIMG = Comparaison_descripteur_image(&erreur, cheminDescripteurIMG, chemin, config.Nb_Bit_Fort, &nombreElemetTab);
+        // ecrireCJava(tabResultatIMG, nombreElemetTab);
+
         // ecrire tabResultatIMG
         free(tabResultatIMG);
     }
 
     else if (strcmp(etat_courant.fonction, "comparaisonAudio") == 0)
     {
-        sscanf(etat_courant.entiere,"%s(\"%s\")",etat_courant.fonction,chemin);
+        sscanf(etat_courant.entiere, "%s(\"%s\")", etat_courant.fonction, chemin);
         erreur = 0;
         nombreElemetTab = 0;
         tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
         char *tabFileNameAUDIO[700];
-        tabResultatAudio = comparaison_audio(config->Nb_Fenetre, config->Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
-        ecrireCJava(tabResultatAudio, nombreElemetTab);
-        // ecrire tabResultatIMG
+        tabResultatAudio = comparaison_audio(config.Nb_Fenetre, config.Intervale, chemin, cheminDescripteurAudio, &erreur, &nombreElemetTab);
+        // ecrireCJava(tabResultatAudio, nombreElemetTab);
+        //  ecrire tabResultatIMG
         free(tabResultatAudio);
     }
 
-    else if (strcmp(etat_courant.fonction, "quitter") == 0)
-    {
-        exit(EXIT_SUCCESS);
-    }
     // else if (strcmp(etat_courant.fonction, "Lire_mot_cle") == 0)
     // {
 
@@ -157,5 +161,4 @@ void choixfonction()
     //     *config = Lire_intervale(*config, &Erreur);
     //     Ecrire_CONFIG(*config, &Erreur);
     // }
-
 }

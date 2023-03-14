@@ -510,8 +510,10 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
+      printf("hello ");
+      fflush(stdout);
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
-
+      
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);

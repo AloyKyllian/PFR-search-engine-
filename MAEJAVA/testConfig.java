@@ -4,7 +4,7 @@ public class testConfig {
        Config config = new Config();
        config.Lire_config();
        System.out.println(config.afficher_config());
-       config.setNb_Bit_Fort("6");
+       config.setNb_Bit_Fort();
        config.ecrire_config();
     }
 }

@@ -7,12 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-typedef struct
-{
-    int id;
-    float pourcentage;
-} tab_similaire;
+#include "ecrireCJava.h"
 
 void ecrireCJava(tab_similaire tabResultat[], int nombreElement){
     char chemin[100] = "../../pontJavaC.txt"; 
@@ -21,6 +16,7 @@ void ecrireCJava(tab_similaire tabResultat[], int nombreElement){
     if (fichierCJava != NULL)
     {
         for(int i = 0; i < nombreElement; i++){
+            printf("%d %d\n", tabResultat[i].id, tabResultat[i].pourcentage);
             fprintf(fichierCJava, "%d %d\n", tabResultat[i].id, tabResultat[i].pourcentage);
         }
         fclose(fichierCJava);

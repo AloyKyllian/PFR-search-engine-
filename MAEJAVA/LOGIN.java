@@ -17,7 +17,7 @@ public class LOGIN{
         logins = new HashMap<>();
         logins.put("kyllian","aloy");
         logins.put("achachera","youssera");
-        logins.put("maignan","loic");
+        logins.put("m","l");
         logins.put("allal","yasmine");
         logins.put("lestrade","hugo");
     }

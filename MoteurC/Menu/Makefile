@@ -1,7 +1,7 @@
  # Fait par YASMINE ALLAL YOUSSERA ACHACHERA LOIC MAIGNAN HUGO LESTRADE KYLLIAN ALOY
  # Le 23/01/2023
-PFResearch : Global.o Erreur.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o
-	gcc -o PFResearch.out Global.o Erreur.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
+PFResearch : ecrireCJava.o Global.o Erreur.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o
+	gcc -o PFResearch.out ecrireCJava.o Global.o Erreur.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
 
 Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
 	gcc -c -g ../Gestion-Config/Global.c
@@ -9,6 +9,9 @@ Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h
 Erreur.o : ../Gestion-Erreur/Erreur.c ../Gestion-Erreur/Erreur.h
 	gcc -c ../Gestion-Erreur/Erreur.c
 
+ecrireCJava.o : ecrireCJava.c ecrireCJava.h ../comparaison/comparaison.h
+	gcc -c ecrireCJava.c
+	
 Config.o : ../Gestion-Config/Config.c ../Gestion-Config/Config.h 
 	gcc -c -g ../Gestion-Config/Config.c
 

@@ -1,7 +1,7 @@
  # Fait par YASMINE ALLAL YOUSSERA ACHACHERA LOIC MAIGNAN HUGO LESTRADE KYLLIAN ALOY
  # Le 23/01/2023
-PFResearch : Global.o Erreur.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o  Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o
-	gcc -o PFResearch.out Global.o Erreur.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o  Descripteur_image.o  Pile.o -lm
+PFResearch : Global.o Erreur.o Config.o element.o Pile.o descripteur_texte.o  descripteur_audio.o ecrireCJava.o Descripteur_image.o indexation_gene.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o
+	gcc -o PFResearch.out Global.o Erreur.o Config.o Login.o Connexion.o FichierExist.o rechercheMot.o comparaison.o LireResultat.o Menu.o tst_menu.o indexation_gene.o element.o  descripteur_texte.o  descripteur_audio.o ecrireCJava.o Descripteur_image.o  Pile.o -lm
 
 Global.o : ../Gestion-Config/Global.c ../Gestion-Config/Global.h 
 	gcc -c -g ../Gestion-Config/Global.c
@@ -20,6 +20,9 @@ Connexion.o : ../Connexion/Connexion.c ../Connexion/Connexion.h
 
 FichierExist.o : ../Menu/FichierExist.c ../Menu/FichierExist.h 
 	gcc -c -g ../Menu/FichierExist.c
+
+ecrireCJava.o : ../Menu/ecrireCJava.c ../Menu/ecrireCJava.c.h 
+	gcc -c -g ../Menu/ecrireCJava.c
 
 rechercheMot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h
 	gcc -c -g -Wall ../RechercheMot/rechercheMot.c
