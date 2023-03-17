@@ -21,7 +21,7 @@ Connexion.o : ../Connexion/Connexion.c ../Connexion/Connexion.h
 FichierExist.o : ../Menu/FichierExist.c ../Menu/FichierExist.h 
 	gcc -c -g ../Menu/FichierExist.c
 
-ecrireCJava.o : ../Menu/ecrireCJava.c ../Menu/ecrireCJava.c.h 
+ecrireCJava.o : ../Menu/ecrireCJava.c ../Menu/ecrireCJava.h 
 	gcc -c -g ../Menu/ecrireCJava.c
 
 rechercheMot.o : ../RechercheMot/rechercheMot.c ../RechercheMot/rechercheMot.h

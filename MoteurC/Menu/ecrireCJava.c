@@ -10,7 +10,8 @@
 #include "ecrireCJava.h"
 
 void ecrireCJava(tab_similaire tabResultat[], int nombreElement){
-    char chemin[100] = "../../pontJavaC.txt"; 
+    //system("cat fichiertest.txt");
+    char chemin[100] = "../MAEJAVA/pontJavaC.txt"; 
     FILE *fichierCJava=NULL;
     fichierCJava=fopen(chemin,"w");
     if (fichierCJava != NULL)

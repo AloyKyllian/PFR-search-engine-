@@ -4,10 +4,10 @@
 // DERNIERE VERSION :
 //    22/01/2023
 //
-#include "Menu.h"
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "Menu.h"
 
 chaine_typ lire_fichier()
 {
@@ -15,7 +15,7 @@ chaine_typ lire_fichier()
     chaine_typ chaine;
     char Chaine[] = {'\0'};
     FILE *fichier = NULL;
-    fichier = fopen("../../MAEJAVA/Write.txt", "r");
+    fichier = fopen("Write.txt", "r");
     if (fichier != NULL)
     {
         while (fscanf(fichier, "%s\n", chaine.entiere) != EOF)
@@ -39,9 +39,10 @@ void choixfonction()
 {
     chaine_typ etat_courant = lire_fichier();
     printf("\n%s\n", etat_courant.fonction);
-    printf("%d", strcmp(etat_courant.fonction, "systemAudio"));
-    // variables a utiliser au cours du programme
+    // printf("%d", strcmp(etat_courant.fonction, "systemAudio"));
+    //  variables a utiliser au cours du programme
     char chemin[100];
+    tab_similaire tabResultat[3];
     char requete[100];
     int erreur = 0;
     int nombreElemetTab = 0;
@@ -51,15 +52,20 @@ void choixfonction()
     char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
     config = Lire_CONFIG(&erreur);
     int erreurImage = 0, erreurAudio = 0, erreurTexte = 0, erreurIndex = 0;
-    strcpy(etat_courant.fonction,"indexationGeneraleFerme");
 
     if (strcmp(etat_courant.fonction, "indexationGeneraleFerme") == 0)
     {
-        Afficher_CONFIG(config);
-        indexation_generale_ferme(config, erreurImage, erreurAudio, erreurTexte, erreurIndex);
+        //Afficher_CONFIG(config);
+        indexation_generale_ferme(config, &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
     }
     else if (strcmp(etat_courant.fonction, "systemTexte") == 0)
     {
+        
+        tabResultat[0].id = -1;
+        tabResultat[0].pourcentage = 20;
+        tabResultat[1].id = -12;
+        tabResultat[1].pourcentage = 12;
+        ecrireCJava(tabResultat, 2);
         system("chmod a-w ../base_descripteur/base_descripteur_texte");
         system("gedit ../base_descripteur/base_descripteur_texte");
         system("chmod 777 ../base_descripteur/base_descripteur_texte");

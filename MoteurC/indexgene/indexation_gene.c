@@ -495,7 +495,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("< ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              Supprimer_Descripteur(Erreur, val, type,config.Intervale);
+                              Supprimer_Descripteur(Erreur, val, type, config.Intervale);
                               //  appeler fonction pour supprimer
                         }
                   }
@@ -510,18 +510,13 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
-      printf("hello ");
-      fflush(stdout);
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
-      
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
-
       PILE_audio descripteur_audio = NULL;
       descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
       depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
-
       PILE_texte piletexte = NULL;
       piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);
       depiler_descripteur_texte(piletexte, Erreurtexte, config);
@@ -1229,7 +1224,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             *Erreur = 7;
       }
 
-      //TEXTE
+      // TEXTE
       fichier_texte = fopen("../liste_base/liste_base_texte", "r");
       if (fichier_texte != NULL)
       {
@@ -1328,5 +1323,4 @@ void indexation_image(CONFIG config, int *Erreur, int *Erreurimage)
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
-
 }

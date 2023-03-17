@@ -42,3 +42,10 @@ faire une variable interne a la fonction qui est return ca marche peut etre ?
 
 fichier a la place de la variable JNA et si le fichier est creer on passe la main au C, si il existe pas on reste sur JAVA 
 pb avoir la verification
+
+
+
+
+requete complexe 
+retour changer fichier nom
+tester lire resultat 
