@@ -30,9 +30,7 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	{ // on lit ligne par ligne le fichier descripteur texte passer en parametre et si on rencontre un numero negatif on le stock comme ID
 		while (fscanf(fp, "%s", chaine) != EOF && atoi(chaine) < 0)
 		{
-
 			strcpy(IDstring, chaine);
-
 			for (int i = 0; i < nb_mot; i++)
 			{ // on commence a parcourir les mots du descripteur ainsi que leurs nombre d'occurence
 				fscanf(fp, "%s    |    %s", chaine, nb_occu);
@@ -66,7 +64,6 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	// Suppression du fichier temporaire de résultats
 	strcpy(commande3, "rm fichierRes.txt");
 	system(commande3);
-
 	fres = fopen("fichierRestrie.txt", "rt");
 	if (fres != NULL)
 	{
@@ -76,6 +73,7 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 			tabResultat[l].id = ID;
 			tabResultat[l].pourcentage = nombre_occurence;
 			l++;
+			
 		}
 	}
 	else
@@ -94,5 +92,5 @@ void rechercheMot(char *mot, char *chemin, tab_similaire *tabResultat, int nb_mo
 	free(commande3);
 	free(commande2);
 	free(commande1);
-	free(commande);
+	free(commande);	
 }

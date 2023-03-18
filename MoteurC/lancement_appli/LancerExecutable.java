@@ -5,7 +5,7 @@ import java.lang.ProcessBuilder;
 
 public class LancerExecutable {
 
-  private String pathOut = "./PFResearch.out";
+  private String pathOut = ListCheminFichier.cheminExeC;
 
   public void lancerOut() {
     try {

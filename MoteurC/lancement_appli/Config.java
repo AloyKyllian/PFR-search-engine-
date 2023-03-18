@@ -31,13 +31,13 @@ public class Config {
     public void ecrire_config() 
     {
         String chaine=this.afficher_config();
-        READ_WRITE_FICHIER.writeOn("../Gestion-Config/Config.txt",chaine); 
+        READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminConfig,chaine); 
     }
 
     public void Lire_config()
     {
         String chaine="";
-        chaine=READ_WRITE_FICHIER.read("../Gestion-Config/Config.txt");
+        chaine=READ_WRITE_FICHIER.read(ListCheminFichier.cheminConfig);
         String[] premier = chaine.split("\n");
         String cle = premier[0].substring(25,premier[0].length());
         this.Nb_Mots_Cle=cle;
@@ -53,7 +53,6 @@ public class Config {
     public void Lire_motCle()
     {
         String chaine="";
-        System.out.println("../Gestion-Config/Config.txt");
         String[] premier = chaine.split("\n");
         String cle = premier[0].substring(25,premier[0].length());
         this.Nb_Mots_Cle=cle;

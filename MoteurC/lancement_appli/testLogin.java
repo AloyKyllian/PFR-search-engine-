@@ -1,5 +1,6 @@
 public class testLogin {
     public static void main(String[] args) {
+        System.out.println(ListCheminFichier.cheminAudio);
         boolean result;
         result= LOGIN.connexion();
         if(result) 

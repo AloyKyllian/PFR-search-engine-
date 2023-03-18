@@ -12,6 +12,10 @@ public class Clavier {
         return scanner.next();
     }
 
+    public static String entrerClavierLine() {
+        return scanner.nextLine();
+    }
+
     public static char entrerClavierChar() {
         return scanner.next().charAt(0);
     }

@@ -9,6 +9,6 @@
 
 #include "../comparaison/comparaison.h"
 
-void ecrireCJava(tab_similaire tabResultat[], int nombreElement);
+void ecrireCJava(tab_similaire tabResultat[], int nombreElement, int erreurImage, int erreurAudio, int erreurTexte, int erreurIndex);
 
 #endif

@@ -57,5 +57,10 @@ Pile.o : ../Pile/Pile.c ../Pile/Pile.h
 indexation_gene.o : ../indexgene/indexation_gene.c ../indexgene/indexation_gene.h
 	gcc -c -g ../indexgene/indexation_gene.c
 
+JAVA: 
+	javac LireResultatTest.java
+	java LireResultatTest 
+
+
 clean :
 	rm -rf *.o

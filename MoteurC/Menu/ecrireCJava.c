@@ -9,16 +9,24 @@
 #include <string.h>
 #include "ecrireCJava.h"
 
-void ecrireCJava(tab_similaire tabResultat[], int nombreElement){
-    //system("cat fichiertest.txt");
-    char chemin[100] = "../MAEJAVA/pontJavaC.txt"; 
-    FILE *fichierCJava=NULL;
-    fichierCJava=fopen(chemin,"w");
+void ecrireCJava(tab_similaire tabResultat[], int nombreElement, int erreurImage, int erreurAudio, int erreurTexte, int erreurIndex)
+{
+    // system("cat fichiertest.txt");
+    char chemin[100] = "../../pont/pontCJava.txt";
+    FILE *fichierCJava = NULL;
+    fichierCJava = fopen(chemin, "w");
     if (fichierCJava != NULL)
     {
-        for(int i = 0; i < nombreElement; i++){
-            printf("%d %d\n", tabResultat[i].id, tabResultat[i].pourcentage);
-            fprintf(fichierCJava, "%d %d\n", tabResultat[i].id, tabResultat[i].pourcentage);
+                if (erreurImage != 0 || erreurAudio != 0 || erreurTexte != 0 || erreurIndex != 0)
+                {        fprintf(fichierCJava, "ERREUR : img :%d aud :%d txt:%d ind:%d\n", erreurImage, erreurAudio, erreurTexte, erreurIndex);}
+
+        if (tabResultat != NULL)
+        {
+            for (int i = 0; i < nombreElement; i++)
+            {
+                //printf("%d %d\n", tabResultat[i].id, (int)tabResultat[i].pourcentage);
+                fprintf(fichierCJava, "%d %d\n", tabResultat[i].id, (int)tabResultat[i].pourcentage);
+            }
         }
         fclose(fichierCJava);
     }

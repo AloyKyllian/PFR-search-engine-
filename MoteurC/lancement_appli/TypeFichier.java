@@ -1,5 +1,5 @@
 
 
 public enum TypeFichier{
-    TEXTE, AUDIO, NB, RGB
+    TEXTE, AUDIO, NB, RGB, IMAGE
 }
