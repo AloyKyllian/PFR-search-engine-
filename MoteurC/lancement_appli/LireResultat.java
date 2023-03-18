@@ -48,36 +48,33 @@ public class LireResultat {
 
     String chaine = "";
     if (type.equals("nb")) {
-      chaine =
-        READ_WRITE_FICHIER.read("../liste_base/liste_base_image/NB");
+      chaine = READ_WRITE_FICHIER.read("../liste_base/liste_base_image/NB");
     }
     if (type.equals("rgb")) {
-      chaine =
-        READ_WRITE_FICHIER.read("../liste_base/liste_base_image/RGB");
+      chaine = READ_WRITE_FICHIER.read("../liste_base/liste_base_image/RGB");
     }
     if (type.equals("audio")) {
-      chaine =
-        READ_WRITE_FICHIER.read("../liste_base/liste_base_audio");
+      chaine = READ_WRITE_FICHIER.read("../liste_base/liste_base_audio");
     }
     if (type.equals("texte")) {
-      chaine =
-        READ_WRITE_FICHIER.read("../liste_base/liste_base_texte");
+      chaine = READ_WRITE_FICHIER.read("../liste_base/liste_base_texte");
     }
     String[] ligne = chaine.split("\n");
     for (String lig : ligne) {
       String[] cases = lig.split(" ");
-      listeElement.add(new ELLEMENT(cases[0], cases[1]));
+      String premiereSousChaine = cases[1].replace("|", "");
+      System.out.println(premiereSousChaine);
+      listeElement.add(new ELLEMENT(cases[0], premiereSousChaine));
     }
 
     return listeElement;
   }
 
-
   public void lireResultatFinale(String type) {
     ArrayList<ELLEMENT> listeElement = new ArrayList<>();
     List<String[]> pont = new ArrayList<>();
     List<String> nomFichier = new ArrayList<>();
-    pont=LireResultat.lirePont(this.pontJavaC);
+    pont = LireResultat.lirePont(this.pontJavaC);
     String fileName;
 
     // affichage des resultat de recherche par mot cle :
@@ -85,7 +82,7 @@ public class LireResultat {
     if (this.type.contains("rechercheMot")) {
       System.out.println("Requete mot-clé : " + this.requete);
       System.out.println("Résultats (fichier -> occurrences) :");
-      if (pont.size()==0) {
+      if (pont.size() == 0) {
         System.out.println("Ce mot ne figure pas dans notre base de données");
       } else {
         // Appel de la fonction lire_chemin pour afficher les résultats de recherche par
@@ -96,13 +93,14 @@ public class LireResultat {
           String nombreOccurence = premiereCase[1];
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
-              fileName=traitementChemin.recupCheminPourAffichage(TypeFichier.TEXTE, element.chemin);
-              System.out.println( fileName+ " : " + nombreOccurence + "%");
+              System.out.println("element.chemin"+element.chemin);
+              fileName = traitementChemin.recupCheminPourAffichage(TypeFichier.TEXTE, element.chemin);
+              System.out.println(fileName + " : " + nombreOccurence + "%");
               nomFichier.add(element.chemin);
             }
           }
         }
-         
+
       }
     }
 
@@ -110,19 +108,19 @@ public class LireResultat {
     if (type.contains("texte")) {
       System.out.println("Requete texte : " + this.requete);
       System.out.println("Résultats (fichier -> nombre de mots-clés communs) :");
-      if (pont.size()==0) {
+      if (pont.size() == 0) {
         System.out.println("Aucun texte en communs n'a été trouvé dans notre base de données");
       } else {
         // Appel de la fonction lire_chemin pour afficher les résultats de comparaison
         // de texte
-         listeElement =  LireResultat.lireChemin("texte");
+        listeElement = LireResultat.lireChemin("texte");
         for (String[] premiereCase : pont) {
           String id = premiereCase[0];
           String nombreOccurence = premiereCase[1];
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
-              fileName=traitementChemin.recupCheminPourAffichage(TypeFichier.TEXTE, element.chemin);
-              System.out.println( fileName+ " : " + nombreOccurence + "%");
+              fileName = traitementChemin.recupCheminPourAffichage(TypeFichier.TEXTE, element.chemin);
+              System.out.println(fileName + " : " + nombreOccurence + "%");
               nomFichier.add(element.chemin);
 
             }
@@ -135,19 +133,19 @@ public class LireResultat {
     if (type.contains("image")) {
       System.out.println("Requete image : " + this.requete);
       System.out.println("Résultats :");
-      if (pont.size()==0) {
+      if (pont.size() == 0) {
         System.out.println("Aucune image similaire n'a été trouvé dans notre base de données");
       } else {
         // Appel de la fonction lire_chemin pour afficher les résultats de comparaison
         // d'image
-        listeElement =  LireResultat.lireChemin("image");
+        listeElement = LireResultat.lireChemin("image");
         for (String[] premiereCase : pont) {
           String id = premiereCase[0];
           String nombreOccurence = premiereCase[1];
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
-              fileName=traitementChemin.recupCheminPourAffichage(TypeFichier.RGB, element.chemin);
-              System.out.println( fileName+ " : " + nombreOccurence + "%");
+              fileName = traitementChemin.recupCheminPourAffichage(TypeFichier.RGB, element.chemin);
+              System.out.println(fileName + " : " + nombreOccurence + "%");
               nomFichier.add(element.chemin);
             }
           }
@@ -158,24 +156,23 @@ public class LireResultat {
     if (type.contains("audio")) {
       System.out.println("Requete audio : " + this.requete);
       System.out.println("Résultats :");
-      if (pont.size()==0) {
+      if (pont.size() == 0) {
         System.out.println("Aucun audio en communs n'a été trouvé dans notre base de données");
       } else {
-        
+
         // Appel de la fonction lire_chemin pour afficher les résultats de comparaison
         // d'audio
-        listeElement =  LireResultat.lireChemin(type);
+        listeElement = LireResultat.lireChemin(type);
 
-        //separer le nom du fichier du chemin 
-        
+        // separer le nom du fichier du chemin
 
         for (String[] premiereCase : pont) {
           String id = premiereCase[0];
           String nombreOccurence = premiereCase[1];
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
-              fileName=traitementChemin.recupCheminPourAffichage(TypeFichier.AUDIO, element.chemin);
-              System.out.println( fileName+ " : " + nombreOccurence + "%");
+              fileName = traitementChemin.recupCheminPourAffichage(TypeFichier.AUDIO, element.chemin);
+              System.out.println(fileName + " : " + nombreOccurence + "%");
               nomFichier.add(element.chemin);
             }
           }
@@ -183,22 +180,21 @@ public class LireResultat {
         LireResultat.visualiserFichier(nomFichier.get(0));
       }
     }
-    
-     
+
   }
 
   public static void visualiserFichier(String chemin) {
-      File file = new File(chemin+".geddit");
-        if (Desktop.isDesktopSupported()) {
-            Desktop desktop = Desktop.getDesktop();
-            if (file.exists()) {
-                try {
-                    desktop.open(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    File file = new File(chemin + ".geddit");
+    if (Desktop.isDesktopSupported()) {
+      Desktop desktop = Desktop.getDesktop();
+      if (file.exists()) {
+        try {
+          desktop.open(file);
+        } catch (IOException e) {
+          e.printStackTrace();
         }
+      }
+    }
 
   }
 
