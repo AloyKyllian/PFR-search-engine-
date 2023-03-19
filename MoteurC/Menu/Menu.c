@@ -3,16 +3,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Menu.h"
+#include "../chemin.h"
 
 chaine_typ lire_fichier()
 {
     char *ptr;
     chaine_typ chaine;
-    char Chaine[] = {'\0'};
     FILE *fichier = NULL;
     fichier = fopen("../../pont/pontJavaC.txt", "r");
     if (fichier != NULL)
     {
+
         while (fscanf(fichier, "%s\n", chaine.entiere) != EOF)
         {
 
@@ -40,9 +41,9 @@ void choixfonction()
     int erreur = 0;
     int nombreElemetTab = 0;
     CONFIG config;
-    char cheminDescripteurTxt[200] = "../base_descripteur/base_descripteur_texte";
-    char cheminDescripteurIMG[100] = "../base_descripteur/base_descripteur_image";
-    char cheminDescripteurAudio[100] = "../base_descripteur/base_descripteur_audio";
+    char cheminDescripteurTxt[200] = BASE_TXT;
+    char cheminDescripteurIMG[100] = BASE_IMG;
+    char cheminDescripteurAudio[100] = BASE_AUD;
     config = Lire_CONFIG(&erreur);
     int erreurImage = 0, erreurAudio = 0, erreurTexte = 0, erreurIndex = 0;
 
@@ -53,23 +54,39 @@ void choixfonction()
     }
     else if (strcmp(etat_courant.fonction, "systemTexte") == 0)
     {
-        system("chmod a-w ../base_descripteur/base_descripteur_texte");
-        system("gedit ../base_descripteur/base_descripteur_texte");
-        system("chmod 777 ../base_descripteur/base_descripteur_texte");
+        strcpy(requete, "chmod a-w ");
+        strcat(requete, BASE_TXT);
+        system(requete);
+        strcpy(requete, "gedit ");
+        strcat(requete, BASE_TXT);
+        system(requete);
+        strcpy(requete, "chmod 777 ");
+        strcat(requete, BASE_TXT);
+        system(requete);
     }
     else if (strcmp(etat_courant.fonction, "systemImage") == 0)
     {
-
-        system("chmod a-w ../base_descripteur/base_descripteur_image");
-        system("gedit ../base_descripteur/base_descripteur_image");
-        system("chmod 777 ../base_descripteur/base_descripteur_image");
+        strcpy(requete, "chmod a-w ");
+        strcat(requete, BASE_IMG);
+        system(requete);
+        strcpy(requete, "gedit ");
+        strcat(requete, BASE_IMG);
+        system(requete);
+        strcpy(requete, "chmod 777 ");
+        strcat(requete, BASE_IMG);
+        system(requete);
     }
     else if (strcmp(etat_courant.fonction, "systemAudio") == 0)
     {
-        printf("la");
-        system("chmod a-w ../base_descripteur/base_descripteur_audio");
-        system("gedit ../base_descripteur/base_descripteur_audio");
-        system("chmod 777 ../base_descripteur/base_descripteur_audio");
+        strcpy(requete, "chmod a-w ");
+        strcat(requete, BASE_AUD);
+        system(requete);
+        strcpy(requete, "gedit ");
+        strcat(requete, BASE_AUD);
+        system(requete);
+        strcpy(requete, "chmod 777 ");
+        strcat(requete, BASE_AUD);
+        system(requete);
     }
     else if (strcmp(etat_courant.fonction, "rechercheMot") == 0)
     {

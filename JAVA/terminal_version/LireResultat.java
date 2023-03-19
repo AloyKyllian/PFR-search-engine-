@@ -20,7 +20,7 @@ public class LireResultat {
   public LireResultat() {
   }
 
-  public ArrayList<String[]> lirePont() { 
+  public ArrayList<String[]> lirePont() {
     ArrayList<String[]> pont = new ArrayList<>();
 
     try {
@@ -41,7 +41,7 @@ public class LireResultat {
     return pont;
   }
 
-   public ArrayList<String> lirePontComplexe() { 
+  public ArrayList<String> lirePontComplexe() {
     ArrayList<String> pont = new ArrayList<>();
 
     try {
@@ -61,6 +61,7 @@ public class LireResultat {
 
     return pont;
   }
+
   public static ArrayList<ELLEMENT> lireChemin(String type) {
     ArrayList<ELLEMENT> listeElement = new ArrayList<>();
 
@@ -86,10 +87,8 @@ public class LireResultat {
 
     return listeElement;
   }
-   
 
-
-  public char lireResultatFinale(String type, List<String> requeteComplexe ) {
+  public char lireResultatFinale(String type, List<String> requeteComplexe) {
     ArrayList<ELLEMENT> listeElement = new ArrayList<>();
     ArrayList<ELLEMENT> listeElementRGB = new ArrayList<>();
     ArrayList<ELLEMENT> listeElementNB = new ArrayList<>();
@@ -101,7 +100,7 @@ public class LireResultat {
     int numero;
     String chaineNB = "";
     String chaineRGB = "";
-    char choix='R';
+    char choix = 'R';
     // affichage des resultat de recherche par mot cle :
     System.out.println("\nLes resultats pour votre recherche :");
     if (type.contains("requeteComplexe")) {
@@ -113,13 +112,13 @@ public class LireResultat {
         // Appel de la fonction lire_chemin pour afficher les résultats de recherche par
         // mot clé
         listeElement = LireResultat.lireChemin("texte");
-         numero = 1;
+        numero = 1;
         for (String premiereCase : requeteComplexe) {
           String id = premiereCase;
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
               fileName = traitementChemin.extension(TypeFichier.TEXTE, element.chemin);
-              cheminFileName = fileName;
+              cheminFileName = element.chemin;
               System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1));
               numero++;
               nomFichier.add(cheminFileName);
@@ -127,7 +126,7 @@ public class LireResultat {
           }
         }
         LireResultat.visualiserFichier(nomFichier.get(0));
-        choix=LireResultat.visualiserToutFichier(nomFichier);
+        choix = LireResultat.visualiserToutFichier(nomFichier);
       }
     }
     if (type.contains("rechercheMot")) {
@@ -139,23 +138,25 @@ public class LireResultat {
         // Appel de la fonction lire_chemin pour afficher les résultats de recherche par
         // mot clé
         listeElement = LireResultat.lireChemin("texte");
-         numero = 1;
+        numero = 1;
         for (String[] premiereCase : pont) {
           String id = premiereCase[0];
           String nombreOccurence = premiereCase[1];
           for (ELLEMENT element : listeElement) {
+            // System.out.println(element.toString());
             if (element.ID.equals(id)) {
               fileName = traitementChemin.extension(TypeFichier.TEXTE, element.chemin);
-              cheminFileName = fileName;
+              cheminFileName = element.chemin;
+              System.out.println(fileName);
               System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
-                  + nombreOccurence );
+                  + nombreOccurence);
               numero++;
               nomFichier.add(cheminFileName);
             }
           }
         }
         LireResultat.visualiserFichier(nomFichier.get(0));
-        choix=LireResultat.visualiserToutFichier(nomFichier);
+        choix = LireResultat.visualiserToutFichier(nomFichier);
       }
     }
 
@@ -176,7 +177,7 @@ public class LireResultat {
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
               fileName = traitementChemin.extension(TypeFichier.TEXTE, element.chemin);
-              cheminFileName = fileName;
+              cheminFileName = element.chemin;
               System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
                   + nombreOccurence + "%");
               numero++;
@@ -186,7 +187,7 @@ public class LireResultat {
           }
         }
         LireResultat.visualiserFichier(nomFichier.get(0));
-        choix=LireResultat.visualiserToutFichier(nomFichier);
+        choix = LireResultat.visualiserToutFichier(nomFichier);
       }
     }
 
@@ -212,7 +213,7 @@ public class LireResultat {
             for (ELLEMENT element : listeElementNB) {
               if (element.ID.equals(id)) {
                 fileName = traitementChemin.extension(TypeFichier.NB, element.chemin);
-                cheminFileName = fileName;
+                cheminFileName = element.chemin;
                 System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
                     + nombreOccurence + "%");
                 numero++;
@@ -234,7 +235,7 @@ public class LireResultat {
             for (ELLEMENT element : listeElementRGB) {
               if (element.ID.equals(id)) {
                 fileName = traitementChemin.extension(TypeFichier.RGB, element.chemin);
-                cheminFileName = fileName;
+                cheminFileName = element.chemin;
                 System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
                     + nombreOccurence + "%");
                 numero++;
@@ -243,12 +244,12 @@ public class LireResultat {
             }
           }
           LireResultat.visualiserFichier(nomFichier.get(0));
-          choix=LireResultat.visualiserToutFichier(nomFichier);
+          choix = LireResultat.visualiserToutFichier(nomFichier);
         }
       }
     }
     // affichage des resultat de comparaison Audio :
-    else if (type.contains("audio")){
+    else if (type.contains("audio")) {
       System.out.println("Requete audio : " + this.requete);
       System.out.println("Résultats :");
       if (pont.size() == 0) {
@@ -267,7 +268,7 @@ public class LireResultat {
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
               fileName = traitementChemin.extension(TypeFichier.AUDIO, element.chemin);
-              cheminFileName = fileName;
+              cheminFileName = element.chemin;
               System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
                   + nombreOccurence + "%");
               numero++;
@@ -276,7 +277,7 @@ public class LireResultat {
           }
         }
         LireResultat.visualiserFichier(nomFichier.get(0));
-        choix=LireResultat.visualiserToutFichier(nomFichier);
+        choix = LireResultat.visualiserToutFichier(nomFichier);
       }
     }
     return choix;
@@ -284,45 +285,46 @@ public class LireResultat {
 
   public static void visualiserFichier(String chemin) {
     try {
-        File file = new File(chemin);
-        if (!file.exists()) {
-            System.out.println("Le fichier n'existe pas.");
-            return;
-        }
-        String extension = chemin.substring(chemin.lastIndexOf('.') + 1);
-        if (extension.equalsIgnoreCase("xml")) {
-            ProcessBuilder pb = new ProcessBuilder();
-            pb.command("gedit", chemin);
-            pb.start();
-        } else {
-            ProcessBuilder pb = new ProcessBuilder();
-            pb.command("xdg-open", chemin);
-            pb.start();
-        }
+      File file = new File(chemin);
+      if (!file.exists()) {
+        System.out.println("Le fichier n'existe pas.");
+        return;
+      }
+      String extension = chemin.substring(chemin.lastIndexOf('.') + 1);
+      if (extension.equalsIgnoreCase("xml")) {
+        ProcessBuilder pb = new ProcessBuilder();
+        pb.command("gedit", chemin);
+        pb.start();
+      } else {
+        ProcessBuilder pb = new ProcessBuilder();
+        pb.command("xdg-open", chemin);
+        pb.start();
+      }
     } catch (IOException e) {
-        e.printStackTrace();
+      e.printStackTrace();
     }
-}
+  }
+
   public static char visualiserToutFichier(List<String> nomFichier) {
     char choix = '1';
     int numeroFichier;
-    while (choix != 'Q' && choix != 'R') {  
+    while (choix != 'Q' && choix != 'R') {
       switch (choix) {
         case '1':
           System.out.println("Voulez vous revoir un autre fichier ?");
           System.out.println("[1] Oui\n[2] Non");
           choix = Clavier.entrerClavierChar();
-          if(choix!='2'){
-          System.out.println("Entrer le numero de fichier que vous voulez visualiser");
-          numeroFichier = Clavier.entrerClavierInt();
-          if (numeroFichier < nomFichier.size()+1) {
-            visualiserFichier(nomFichier.get(numeroFichier - 1));
+          if (choix != '2') {
+            System.out.println("Entrer le numero de fichier que vous voulez visualiser");
+            numeroFichier = Clavier.entrerClavierInt();
+            if (numeroFichier < nomFichier.size() + 1) {
+              visualiserFichier(nomFichier.get(numeroFichier - 1));
+            } else {
+              System.out.println("Ce fichier ne figure pas sur la liste");
+              choix = '1';
+            }
           } else {
-            System.out.println("Ce fichier ne figure pas sur la liste");
-            choix = '1';
-          }}
-          else {
-            choix='2';
+            choix = '2';
           }
           break;
 

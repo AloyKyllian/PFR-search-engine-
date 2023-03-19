@@ -46,7 +46,7 @@ public class SimuRechercheCouleur
                 cpt++;
                 System.out.println("["+cpt+"] " + chaine );
             }
-            READ_WRITE_FICHIER.ouvertureFichier("../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/16.jpg");
+            READ_WRITE_FICHIER.ouvertureFichier("../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/16.jpg");
             System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
             
         }
@@ -58,7 +58,7 @@ public class SimuRechercheCouleur
                 cpt++;
                 System.out.println("["+cpt+"] " + chaine );
             }
-            READ_WRITE_FICHIER.ouvertureFichier("../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/32.jpg");
+            READ_WRITE_FICHIER.ouvertureFichier("../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/32.jpg");
             System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
         }
         else if(couleur.equals("bleu"))
@@ -69,7 +69,7 @@ public class SimuRechercheCouleur
                 cpt++;
                 System.out.println("["+cpt+"] " + chaine );
             }
-            READ_WRITE_FICHIER.ouvertureFichier("../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/07.jpg");
+            READ_WRITE_FICHIER.ouvertureFichier("../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/07.jpg");
             System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
         }
 

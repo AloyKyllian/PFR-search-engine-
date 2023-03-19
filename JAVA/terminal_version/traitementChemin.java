@@ -4,27 +4,22 @@ public class traitementChemin {
     public static String extension(TypeFichier type, String chemin) {
         String[] tmp1;
         if (chemin.charAt(0) == '.') {
-            tmp1 = chemin.split("\\.\\./");
-            chemin = tmp1[1];
+            tmp1 = chemin.split("/");
+            chemin = tmp1[4];
         }
         String[] chemins = chemin.split("\\.");
         switch (type) {
-            case TEXTE: {
+            case TEXTE:
                 chemins[0] = chemins[0] + ".xml";
-            }
                 break;
-            case AUDIO: {
+            case AUDIO:
                 chemins[0] = chemins[0] + ".wav";
-            }
                 break;
-
-            case NB: {
+            case NB:
                 chemins[0] = chemins[0] + ".bmp";
-            }
                 break;
-            case RGB: {
+            case RGB:
                 chemins[0] = chemins[0] + ".jpg";
-            }
                 break;
         }
         chemins[0] = "../" + chemins[0];
