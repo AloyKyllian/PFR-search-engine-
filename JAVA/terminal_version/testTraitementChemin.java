@@ -19,7 +19,7 @@ public class testTraitementChemin {
         
         test= traitementChemin.verifExtension("../MoteurC/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/lol.wav", "wav");
         System.out.println("verif\n on doit avoir un true : resultat :"+ test);
-        test = traitementChemin.verif("/MoteurC/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/lol.wav", "txt");
+        test = traitementChemin.verifExtension("/MoteurC/DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/lol.wav", "txt");
         System.out.println("verif\n on doit avoir un false : resultat :"+ test);
     }
 }

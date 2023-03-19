@@ -7,6 +7,11 @@ public abstract class ListCheminFichier
     
     public static String cheminConfig = "../../Config.txt";
     public static String cheminErreur = "../../Erreur.txt";
+
+    public static String cheminTexte =   "../../DATA_FIL_ROUGE_DEV/Textes/";
+    public static String cheminAudio =    "../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/";
+    public static String cheminNB = "../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/";
+    public static String cheminRGB = "../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/";
     
     public static String cheminBaseTexte =   "../../DATA_FIL_ROUGE_DEV/liste_base/liste_base_texte";
     public static String cheminBaseAudio =    "../../DATA_FIL_ROUGE_DEV/liste_base/liste_base_audio";
