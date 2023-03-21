@@ -7,7 +7,6 @@
 
 import java.io.*;
 import java.util.*;
-import java.awt.Desktop;
 
 public class LireResultat {
 
@@ -88,7 +87,7 @@ public class LireResultat {
     return listeElement;
   }
 
-  public char lireResultatFinale(String type, List<String> requeteComplexe) {
+  public char lireResultatFinale(String type, List<String> requeteComplexe, String typeImage) {
     ArrayList<ELLEMENT> listeElement = new ArrayList<>();
     ArrayList<ELLEMENT> listeElementRGB = new ArrayList<>();
     ArrayList<ELLEMENT> listeElementNB = new ArrayList<>();
@@ -147,11 +146,12 @@ public class LireResultat {
             if (element.ID.equals(id)) {
               fileName = traitementChemin.extension(TypeFichier.TEXTE, element.chemin);
               cheminFileName = element.chemin;
-              System.out.println(fileName);
-              System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
-                  + nombreOccurence);
-              numero++;
-              nomFichier.add(cheminFileName);
+              if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
+                System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
+                    + nombreOccurence);
+                numero++;
+                nomFichier.add(cheminFileName);
+              }
             }
           }
         }
@@ -178,11 +178,12 @@ public class LireResultat {
             if (element.ID.equals(id)) {
               fileName = traitementChemin.extension(TypeFichier.TEXTE, element.chemin);
               cheminFileName = element.chemin;
-              System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
-                  + nombreOccurence + "%");
-              numero++;
-              nomFichier.add(cheminFileName);
-
+              if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
+                System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
+                    + nombreOccurence + "%");
+                numero++;
+                nomFichier.add(cheminFileName);
+              }
             }
           }
         }
@@ -200,51 +201,52 @@ public class LireResultat {
       } else {
         // Appel de la fonction lire_chemin pour afficher les résultats de comparaison
         // d'image
-        chaineNB = READ_WRITE_FICHIER.read(ListCheminFichier.cheminBaseNB);
-        String[] ligneNB = chaineNB.split("\n");
-        for (String lig : ligneNB) {
-          String[] cases = lig.split(" ");
-          String premiereSousChaineNB = cases[1].replace("|", "");
-          listeElementNB.add(new ELLEMENT(cases[0], premiereSousChaineNB));
+        if (typeImage.contains("bmp")) {
+
+          listeElement = LireResultat.lireChemin("nb");
           numero = 1;
           for (String[] premiereCase : pont) {
             String id = premiereCase[0];
             String nombreOccurence = premiereCase[1];
-            for (ELLEMENT element : listeElementNB) {
+            for (ELLEMENT element : listeElement) {
               if (element.ID.equals(id)) {
                 fileName = traitementChemin.extension(TypeFichier.NB, element.chemin);
-                cheminFileName = element.chemin;
-                System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
-                    + nombreOccurence + "%");
-                numero++;
-                nomFichier.add(cheminFileName);
-              }
-            }
-          }
-        }
-        chaineRGB = READ_WRITE_FICHIER.read(ListCheminFichier.cheminBaseRGB);
-        String[] ligneRGB = chaineRGB.split("\n");
-        for (String lig : ligneRGB) {
-          String[] cases = lig.split(" ");
-          String premiereSousChaineRGB = cases[1].replace("|", "");
-          listeElementRGB.add(new ELLEMENT(cases[0], premiereSousChaineRGB));
-          numero = 1;
-          for (String[] premiereCase : pont) {
-            String id = premiereCase[0];
-            String nombreOccurence = premiereCase[1];
-            for (ELLEMENT element : listeElementRGB) {
-              if (element.ID.equals(id)) {
-                fileName = traitementChemin.extension(TypeFichier.RGB, element.chemin);
-                cheminFileName = element.chemin;
-                System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
-                    + nombreOccurence + "%");
-                numero++;
-                nomFichier.add(cheminFileName);
+                cheminFileName = element.chemin.replace("txt", "bmp");
+                if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
+                  System.out
+                      .println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
+                          + nombreOccurence + "%");
+                  numero++;
+                  nomFichier.add(cheminFileName);
+                }
               }
             }
           }
           LireResultat.visualiserFichier(nomFichier.get(0));
           choix = LireResultat.visualiserToutFichier(nomFichier);
+        }
+
+        if (typeImage.contains("jpg")) {
+          System.out.println("parrtie jpg");
+          listeElement = LireResultat.lireChemin("rgb");
+          numero = 1;
+          for (String[] premiereCase : pont) {
+            String id = premiereCase[0];
+            String nombreOccurence = premiereCase[1];
+            for (ELLEMENT element : listeElement) {
+              if (element.ID.equals(id)) {
+                fileName = traitementChemin.extension(TypeFichier.NB, element.chemin);
+                cheminFileName = element.chemin.replace("txt", "jpg");
+                if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
+                  System.out
+                      .println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
+                          + nombreOccurence + "%");
+                  numero++;
+                  nomFichier.add(cheminFileName);
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -268,11 +270,13 @@ public class LireResultat {
           for (ELLEMENT element : listeElement) {
             if (element.ID.equals(id)) {
               fileName = traitementChemin.extension(TypeFichier.AUDIO, element.chemin);
-              cheminFileName = element.chemin;
-              System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
-                  + nombreOccurence + "%");
-              numero++;
-              nomFichier.add(cheminFileName);
+              cheminFileName = element.chemin.replace("txt", "wav");
+              if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
+                System.out.println("[" + numero + "]" + " " + fileName.substring(fileName.lastIndexOf('/') + 1) + " : "
+                    + nombreOccurence + "%");
+                numero++;
+                nomFichier.add(cheminFileName);
+              }
             }
           }
         }

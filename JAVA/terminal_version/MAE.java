@@ -31,6 +31,8 @@ public class MAE {
     private final String cheminDescripteurAudio = ListCheminFichier.cheminDescripteurAudio;
     private final LancerExecutable LancerExe;
     private String stringLue;
+    static String string;
+    String BmpJpg;
 
     public MAE() {
         this.config = new Config();
@@ -41,13 +43,19 @@ public class MAE {
 
     public static void main(String[] args) {
         MAE mae = new MAE();
+        
+        LancerExecutable LancerExe = new LancerExecutable();
+        READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "indexationGeneraleFerme()");
+        LancerExe.lancerOut();
+        string = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
+        System.out.println(string);
         mae.lancerMAE();
     }
 
     public void lancerMAE() {
         while (true) {
-            READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "indexationOuverte()");
-            LancerExe.lancerOut();
+           READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "indexation()");
+           LancerExe.lancerOut();
             this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
             System.out.println(this.stringLue);
             // System.out.println(ListCheminFichier.cheminAudio);
@@ -133,8 +141,7 @@ public class MAE {
                 case Menu_Admin: {
                     System.out.println("\n__________________________Menu Administrateur__________________________\n");
                     System.out.println("\nVeuillez faire votre choix  : \n");
-                    System.out.println(
-                            "\n[1] Indexation\n[2] Configuration\n[3] Visualisation des recueils des descripteurs\n[4] Retour \"Mode Utilisateur\"\n");
+                    System.out.println("\n[1] Indexation\n[2] Configuration\n[3] Visualisation des recueils des descripteurs\n[R] Retour \"Mode Utilisateur\"\n");
 
                     this.choix = Clavier.entrerClavierChar();
 
@@ -156,7 +163,7 @@ public class MAE {
                             this.etat_courant = Etat.Menu_Visualisation;
                         }
                             break;
-                        case '4': {
+                        case 'R': {
                             this.etat_courant = Etat.Menu_Utilisateur;
                         }
                             break;
@@ -457,7 +464,7 @@ public class MAE {
                                         // "rechercheMot", this.motCleRecherche, tabFileNameMOT, config.Nb_Mots_Cle,
                                         // config.Similariter); A gerer en JAVA
                                         lireResultat.requete = motCleRecherche;
-                                        choix = lireResultat.lireResultatFinale("rechercheMot", null);
+                                        choix = lireResultat.lireResultatFinale("rechercheMot", null,null);
                                         // this.choix = visualiser_fichier(tabFileNameMOT, this.nombreElementTabFIN,
                                         // "texte"); A gerer en JAVA
                                         if (choix == 'Q') {
@@ -469,7 +476,7 @@ public class MAE {
                                     break;
                                 }
                                 case '1': {
-                                    int repere=0;
+                                    int repere = 0;
                                     int nombreMot;
                                     ArrayList<String> pont = new ArrayList<>();
                                     ArrayList<String> recup = new ArrayList<>();
@@ -481,7 +488,7 @@ public class MAE {
                                     ArrayList<String> motsPlusAuMoins = new ArrayList<>();
                                     System.out.println(
                                             "Veuillez ecrire les mots clés que vous voulez rechercher sous cette forme :\nFootball Mondial Argentine Equivaut à \n+football\n+fondial\n+argentine");
-                                            System.out.println();
+                                    System.out.println();
                                     for (int i = 0; i < nombreMot; i++) {
                                         motsPlusAuMoins.add(Clavier.entrerClavierString());
                                         // motsCles.add(motsPlusAuMoins.get(i).replace("+", "").replace("-", ""));
@@ -495,9 +502,9 @@ public class MAE {
                                             if (this.erreur == 7) {
                                                 Erreur.afficherErreur(this.erreur);
                                             }
-                                            if (pont.size() == 0 && repere==0) {
+                                            if (pont.size() == 0 && repere == 0) {
                                                 pont = lireResultat.lirePontComplexe();
-                                                repere=1;
+                                                repere = 1;
                                                 System.out.println("pont debut" + pont.toString());
 
                                             } else {
@@ -505,8 +512,8 @@ public class MAE {
                                                 recup = lireResultat.lirePontComplexe();
                                                 System.out.println("recup +" + recup.toString());
                                                 pont.retainAll(recup);
-                                            System.out.println("pont intersection" + pont.toString());
-                                            }   
+                                                System.out.println("pont intersection" + pont.toString());
+                                            }
                                         }
                                     }
 
@@ -525,9 +532,9 @@ public class MAE {
                                             System.out.println("pont -" + pont.toString());
                                         }
                                     }
-                                    
+
                                     lireResultat.requete = motCleRecherche;
-                                    choix = lireResultat.lireResultatFinale("requeteComplexe", pont);
+                                    choix = lireResultat.lireResultatFinale("requeteComplexe", pont,null);
                                     // this.choix = visualiser_fichier(tabFileNameMOT, this.nombreElementTabFIN,
                                     // "texte"); A gerer en JAVA
                                     if (choix == 'Q') {
@@ -588,7 +595,7 @@ public class MAE {
                                     this.erreur = 0;
                                     this.nombreElemetTab = 0;
                                     READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC,
-                                            "comparaison_texte(" + this.cheminFichierRecherche + ")");
+                                            "comparaisonTexte(" + this.cheminFichierRecherche + ")");
                                     LancerExe.lancerOut();
                                     this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
                                     System.out.println(this.stringLue);
@@ -607,7 +614,7 @@ public class MAE {
                                     lireResultat.requete = this.cheminFichierRecherche;
                                     // this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
                                     // System.out.println(this.stringLue);
-                                    choix = lireResultat.lireResultatFinale("texte", null);
+                                    choix = lireResultat.lireResultatFinale("texte", null,null);
                                     // this.choix= visualiser_fichier(tabFileNameTEXTE, this.nombreElementTabFIN,
                                     // "texte"); // A gerer en JAVA
                                     if (choix == 'Q') {
@@ -651,6 +658,8 @@ public class MAE {
 
                             this.testExtensionFichier = -1;
                             while (this.testExtensionFichier == -1) {
+                                
+                                
                                 System.out.println("\nEntrez le chemin de votre fichier\n");
                                 this.cheminFichierRecherche = Clavier.entrerClavierString();
                                 this.isfichierExist = traitementChemin.fichierExist(this.cheminFichierRecherche);
@@ -689,25 +698,27 @@ public class MAE {
                                             "\nCe fichier n'est pas de type image\nVeuillez mettre un fichier .jpg ou .bmp\n");
                                     this.etat_courant = Etat.Menu_image;
                                 } else {
-                                    this.cheminFichierRecherche = traitementChemin
-                                            .recupCheminPourAffichage(this.cheminFichierRecherche);
+                                    String cheminImageTXT=this.cheminFichierRecherche.replace("bmp", "txt").replace("jpg", "txt");
                                     READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC,
-                                            "Comparaison_descripteur_image(" + this.cheminFichierRecherche + ")");
+                                            "comparaisonDescripteurImage(" + cheminImageTXT + ")");
                                     LancerExe.lancerOut();
                                     // this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
                                     // System.out.println(this.stringLue);
                                     // read + traitement retour
-
                                     if (this.erreur != 0) {
                                         Erreur.afficherErreur(this.erreur);
                                     } else {
                                         // this.nombreElementTabFIN = LireResultat(tabResultatIMG, this.nombreElemetTab,
                                         // "image", this.typeRequete, tabFileNameIMG, config->Nb_Mots_Cle,
                                         // config->Similariter);
+                                        if(cheminFichierRecherche.contains("bmp")){
+                                            BmpJpg="bmp";
+                                        }
+                                        else{
+                                            BmpJpg="jpg";
+                                        }
                                         lireResultat.requete = this.cheminFichierRecherche;
-                                        choix = lireResultat.lireResultatFinale("image", null);
-                                        System.out.println(
-                                                "\n\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
+                                        choix = lireResultat.lireResultatFinale("image", null,BmpJpg);
                                         // this.choix = visualiser_fichier(tabFileNameIMG, this.nombreElementTabFIN,
                                         // "image");
                                         if (this.choix == 'Q') {
@@ -802,25 +813,21 @@ public class MAE {
                                         Erreur.afficherErreur(this.erreur);
 
                                     } else {
-                                        this.cheminFichierRecherche = traitementChemin
-                                                .recupCheminPourAffichage(this.cheminFichierRecherche);
+                                        //this.cheminFichierRecherche = traitementChemin.recupCheminPourAffichage(this.cheminFichierRecherche);
+                                        String cheminAudioTXT=this.cheminFichierRecherche.replace("wav", "txt");
                                         READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC,
-                                                "comparaison_audio(" + this.cheminFichierRecherche + ")");
+                                                "comparaisonAudio(" + cheminAudioTXT + ")");
                                         LancerExe.lancerOut();
                                         // this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
                                         // System.out.println(this.stringLue);
                                         // this.nombreElementTabFIN = LireResultat(tabResultatAudio,
                                         // this.nombreElemetTab, "audio", this.cheminFichierRecherche, tabFileNameAUDIO,
                                         // config->Nb_Mots_Cle, config->Similariter);
-
-                                        if (this.nombreElementTabFIN > 0) {
-                                            System.out.println(
-                                                    "\n\nPensez à fermer la fenetre apres l'avoir consulté pour poursuivre votre activité\n");
+                                           
                                             lireResultat.requete = this.cheminFichierRecherche;
-                                            choix = lireResultat.lireResultatFinale("audio", null);
+                                            choix = lireResultat.lireResultatFinale("audio", null,null);
                                             // READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC,"visualiser_fichier(tabFileNameAUDIO,nombreElementTabFIN,\"audio\")");
                                             // this.choix = ; // A voir
-                                        }
                                         if (this.choix == 'Q') {
                                             System.out.println("\n\tVous avez quitté le programme\n\n\n\n");
 
