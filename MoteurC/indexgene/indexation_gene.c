@@ -331,7 +331,7 @@ PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFI
             while (!feof(ptr_fic))
             {
                   // recupere ID et CHEMIN
-                  
+
                   fscanf(ptr_fic, "-%d |%s\n", &element_temp.id, cheminfichier);
                   // recupere le descripteur avec la fonction developpé par Hugo Lestrade
                   element_temp.descripteur_texte = descripteur_texte_finale(cheminfichier, config.Nb_Mots_Cle, element_temp.descripteur_texte);
@@ -439,7 +439,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       {
             strcpy(cheminliste, LISTE_BASE_TXT);
             strcpy(cheminDATA, PATH_TEXTE);
-            strcat(cheminDATA, "*.txt");
+            strcat(cheminDATA, "*.xml");
       }
       if (strcmp(type, "audio") == 0)
       {
@@ -450,31 +450,45 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 
       strcpy(commande, "ls -ltur ");
       strcat(commande, cheminDATA);
-      strcat(commande, "> ../traitement/fic_temp");
+      strcat(commande, "> ");
+      strcat(commande, FIC_TEMP);
       system(commande);
 
       if (strcmp(type, "texte") == 0)
       {
-            strcpy(commande, "cut -d '/' -f 4 ../traitement/fic_temp > ../traitement/fic");
-            system(commande);
-
-            strcpy(commande, "cut -d '/' -f 4 ");
-            strcat(commande, cheminliste);
-            strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
-            system(commande);
-      }
-      if (strcmp(type, "nb") == 0 || strcmp(type, "rgb") == 0 || strcmp(type, "audio") == 0)
-      {
-            strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
+            strcpy(commande, "cut -d '/' -f 5 ");
+            strcat(commande, FIC_TEMP);
+            strcat(commande, " > ");
+            strcat(commande, FIC);
             system(commande);
 
             strcpy(commande, "cut -d '/' -f 5 ");
             strcat(commande, cheminliste);
-            strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
+            strcat(commande, " > ");
+            strcat(commande, LISTE_DEJA_INDEXE_TEMP);
+            system(commande);
+      }
+      if (strcmp(type, "nb") == 0 || strcmp(type, "rgb") == 0 || strcmp(type, "audio") == 0)
+      {
+            strcpy(commande, "cut -d '/' -f 6 ");
+            strcat(commande, FIC_TEMP);
+            strcat(commande, " > ");
+            strcat(commande, FIC);
+            system(commande);
+
+            strcpy(commande, "cut -d '/' -f 6 ");
+            strcat(commande, cheminliste);
+            strcat(commande, " > ");
+            strcat(commande, LISTE_DEJA_INDEXE_TEMP);
             system(commande);
       }
 
-      strcpy(commande, "diff ../traitement/ListeDejaIndexeTemp ../traitement/fic  > ../traitement/diff");
+      strcpy(commande, "diff  ");
+      strcat(commande, LISTE_DEJA_INDEXE_TEMP);
+      strcat(commande, " ");
+      strcat(commande, FIC);
+      strcat(commande, " > ");
+      strcat(commande, DIFF);
       system(commande);
 
       FILE *fichier_first = NULL;
@@ -482,7 +496,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       ELEMENT element_temp;
       String val;
 
-      fichier_first = fopen("../traitement/diff", "r");
+      fichier_first = fopen(DIFF, "r");
       if (fichier_first != NULL)
       {
             if (fscanf(fichier_first, "%s", val) == EOF)
@@ -561,7 +575,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
       FILE *fichier = NULL;
       String temp;
 
-      fichier = fopen("../traitement/fic", "w");
+      fichier = fopen(FIC, "w");
       ELEMENT elementsupp;
 
       // temp contient le chemin du fichier obtenue en concatenant le path et son titre
@@ -581,7 +595,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
       String commande;
 
-      strcpy(commande, "cat ../traitement/fic >> ");
+      strcpy(commande, "cat ");
+      strcat(commande, FIC);
+      strcat(commande, " >> ");
       strcat(commande, cheminliste);
       system(commande);
       //__________________________________
@@ -597,7 +613,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichier2 = NULL;
 
-            fichier2 = fopen("../traitement/fic", "w");
+            fichier2 = fopen(FIC, "w");
             if (fichier2 != NULL)
             {
 
@@ -622,7 +638,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   free(descripteur_image.Bilan);
             }
             fclose(fichier2);
-            strcpy(commande, "cat ../traitement/fic >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_image");
+            strcpy(commande, "cat ");
+            strcat(commande, FIC);
+            strcat(commande, " >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_image");
             system(commande);
       }
 
@@ -633,7 +651,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichier = NULL;
 
-            fichier = fopen("../traitement/fic", "w");
+            fichier = fopen(FIC, "w");
             if (fichier != NULL)
             {
                   fprintf(fichier, "\n-%d", id);
@@ -647,7 +665,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   free(descripteur_texte.tab_app);
             }
             fclose(fichier);
-            strcpy(commande, "cat ../traitement/fic >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_texte");
+            strcpy(commande, "cat ");
+            strcat(commande, FIC);
+            strcat(commande, " >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_texte");
             system(commande);
       }
 
@@ -660,7 +680,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichieraudio = NULL;
 
-            fichieraudio = fopen("../traitement/fic", "w");
+            fichieraudio = fopen(FIC, "w");
             if (fichieraudio != NULL)
             {
 
@@ -683,7 +703,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             }
             free(descripteur.tab);
 
-            strcpy(commande, "cat ../traitement/fic >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_audio");
+            strcpy(commande, "cat ");
+            strcat(commande, FIC);
+            strcat(commande, " >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_audio");
             system(commande);
       }
 }
@@ -718,11 +740,11 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
 
             FILE *nvfile = NULL;
             // Creation d'un fichier temporaire
-            nvfile = fopen("../liste_base/tmp.txt", "w");
+            nvfile = fopen(LISTE_BASE_TMP, "w");
             if (nvfile != NULL)
             {
                   bool a_faire_une_fois = false;
-                  while (fscanf(fichier, "-%d %s\n", &tmp, &path) != EOF)
+                  while (fscanf(fichier, "-%d |%s\n", &tmp, &path) != EOF)
                   {
                         if (strstr(path, Nom_Fichier) != NULL)
                         {
@@ -733,12 +755,12 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                         {
                               if (a_faire_une_fois == false)
                               {
-                                    fprintf(nvfile, "-%d %s", tmp, path);
+                                    fprintf(nvfile, "-%d |%s", tmp, path);
                                     a_faire_une_fois = true;
                               }
                               else
                               {
-                                    fprintf(nvfile, "\n-%d %s", tmp, path);
+                                    fprintf(nvfile, "\n-%d |%s", tmp, path);
                               }
                         }
                   }
@@ -752,9 +774,9 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   {
                         // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
                         remove(LISTE_BASE_TXT);
-                        rename("../liste_base/tmp.txt", LISTE_BASE_TXT);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_TXT);
 
-                        fichier = fopen(PATH_TEXTE, "r");
+                        fichier = fopen(BASE_TXT, "r");
                         nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
@@ -811,8 +833,8 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                               }
                               fclose(fichier);
                               fclose(nvfile);
-                              remove(PATH_TEXTE);
-                              rename("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", PATH_TEXTE);
+                              remove(BASE_TXT);
+                              rename("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", BASE_TXT);
                         }
                         else
                         {
@@ -824,7 +846,7 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   {
                         // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
                         remove(LISTE_BASE_AUD);
-                        rename("../liste_base/tmp.txt", LISTE_BASE_AUD);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_AUD);
 
                         fichier = fopen(BASE_AUD, "r");
                         nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");
@@ -870,14 +892,14 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                                     {
                                           if (cpt_aff == 0)
                                           {
-                                                fprintf(nvfile, "\n%d  ", val_lue);
+                                                fprintf(nvfile, "\n %d ", val_lue);
                                                 cpt_aff++;
                                           }
                                           else if (cpt_aff < intervale)
                                           {
-                                                fprintf(nvfile, "%d  ", val_lue);
+                                                fprintf(nvfile, " %d ", val_lue);
                                                 cpt_aff++;
-                                                if (cpt_aff == 32)
+                                                if (cpt_aff >= intervale)
                                                 {
                                                       cpt_aff = 0;
                                                 }
@@ -899,7 +921,7 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   {
 
                         remove(LISTE_BASE_NB);
-                        rename("../liste_base/tmp.txt", LISTE_BASE_NB);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_NB);
 
                         fichier = fopen(BASE_IMG, "r");
                         nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");
@@ -967,7 +989,7 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   {
                         // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
                         remove(LISTE_BASE_RGB);
-                        rename("../liste_base/tmp.txt", LISTE_BASE_RGB);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_RGB);
 
                         fichier = fopen(BASE_IMG, "r");
                         nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");

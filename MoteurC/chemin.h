@@ -27,4 +27,12 @@
 #define LISTE_BASE_RGB "../../DATA_FIL_ROUGE_DEV/liste_base/liste_base_image/RGB"
 
 #define MOT_BANNI "../../MoteurC/descripteur_texte/MotBanni.txt"
+
+#define LISTE_BASE_TMP "../../DATA_FIL_ROUGE_DEV/liste_base/tmp.txt"
+
+#define FIC_TEMP "../../DATA_FIL_ROUGE_DEV/traitement/fic_temp"
+#define FIC "../../DATA_FIL_ROUGE_DEV/traitement/fic"
+#define LISTE_DEJA_INDEXE_TEMP "../../DATA_FIL_ROUGE_DEV/traitement/ListeDejaIndexeTemp"
+#define DIFF "../../DATA_FIL_ROUGE_DEV/traitement/diff"
+
 #endif
