@@ -34,6 +34,7 @@ public class MAE {
     static String string;
     String BmpJpg;
 
+
     public MAE() {
         this.config = new Config();
         this.config.Lire_config();
@@ -57,7 +58,7 @@ public class MAE {
            READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "indexation()");
            LancerExe.lancerOut();
             this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
-            System.out.println(this.stringLue);
+            //System.out.println(this.stringLue);
             // System.out.println(ListCheminFichier.cheminAudio);
             switch (this.etat_courant) {
                 case Menu_general: {
@@ -150,7 +151,7 @@ public class MAE {
                             READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "indexationGeneraleFerme()");
                             LancerExe.lancerOut();
                             this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
-                            System.out.println(this.stringLue);
+                            //System.out.println(this.stringLue);
                             // si ya une erreur j'arrete tt
                         }
                             break;
@@ -331,7 +332,7 @@ public class MAE {
                             READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "systemTexte()");
                             LancerExe.lancerOut();
                             this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
-                            System.out.println(this.stringLue);
+                            //System.out.println(this.stringLue);
                             // recuperer dans le fichier xecutabe
                         }
                             break;
@@ -341,7 +342,7 @@ public class MAE {
                             READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "systemImage()");
                             LancerExe.lancerOut();
                             this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
-                            System.out.println(this.stringLue);
+                            //System.out.println(this.stringLue);
                         }
                             break;
                         case '3': {
@@ -350,7 +351,7 @@ public class MAE {
                             READ_WRITE_FICHIER.writeOn(ListCheminFichier.cheminPontJC, "systemAudio()");
                             LancerExe.lancerOut();
                             this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
-                            System.out.println(this.stringLue);
+                            //System.out.println(this.stringLue);
                         }
                             break;
                         case 'R': {
@@ -505,14 +506,14 @@ public class MAE {
                                             if (pont.size() == 0 && repere == 0) {
                                                 pont = lireResultat.lirePontComplexe();
                                                 repere = 1;
-                                                System.out.println("pont debut" + pont.toString());
+                                                //System.out.println("pont debut" + pont.toString());
 
                                             } else {
 
                                                 recup = lireResultat.lirePontComplexe();
-                                                System.out.println("recup +" + recup.toString());
+                                                //System.out.println("recup +" + recup.toString());
                                                 pont.retainAll(recup);
-                                                System.out.println("pont intersection" + pont.toString());
+                                                //System.out.println("pont intersection" + pont.toString());
                                             }
                                         }
                                     }
@@ -526,10 +527,10 @@ public class MAE {
                                                 Erreur.afficherErreur(this.erreur);
                                             }
                                             recup = lireResultat.lirePontComplexe();
-                                            System.out.println("recup -" + recup.toString());
+                                            //System.out.println("recup -" + recup.toString());
 
                                             pont.removeAll(recup);
-                                            System.out.println("pont -" + pont.toString());
+                                            //System.out.println("pont -" + pont.toString());
                                         }
                                     }
 
@@ -598,7 +599,7 @@ public class MAE {
                                             "comparaisonTexte(" + this.cheminFichierRecherche + ")");
                                     LancerExe.lancerOut();
                                     this.stringLue = READ_WRITE_FICHIER.read(ListCheminFichier.cheminPontCJ);
-                                    System.out.println(this.stringLue);
+                                    //System.out.println(this.stringLue);
                                     String recuperationResultat = READ_WRITE_FICHIER
                                             .read(ListCheminFichier.cheminPontCJ);
 

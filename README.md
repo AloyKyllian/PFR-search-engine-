@@ -67,3 +67,10 @@ tester lire resultat
 
 
 qustion yasmine recupechemin affichage est ce que elle peut laisser les ../ avant data fil rouge dev enleve juste le split au tout debut
+
+
+
+
+
+ATTENTION pour les comparaisons il faut le chemin ../../JAVA/terminal_version/29-Ligue_des_champions___Lyoncopy.xml 
+               et non avec /home/pandou/Documents/t/PFR/JAVA/terminal_version/29-Ligue_des_champions___Lyoncopy.xml
