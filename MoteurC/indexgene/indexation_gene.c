@@ -7,6 +7,7 @@
 // Fonction Supprimer_Descripteur developpe par Loic Maignan
 
 #include "indexation_gene.h"
+#include "../chemin.h"
 
 void recup_path(PILE *pourchemin, int deb, String path, String type, int *erreur)
 {
@@ -103,7 +104,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
       ELEMENT_audio element_temp;
 
       // le chemin du fichier pour recuperer lid et son chemin
-      char CHEMIN[100] = "../liste_base/liste_base_audio";
+      char CHEMIN[100] = LISTE_BASE_AUD;
       char cheminfichier[200];
 
       ptr_fic = fopen(CHEMIN, "r");
@@ -112,7 +113,7 @@ PILE_audio base_descript_empiler_audio(PILE_audio dscr_audio, int *erreur, int *
             while (!feof(ptr_fic))
             {
                   // recuperer lid et son chemin
-                  fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
+                  fscanf(ptr_fic, "-%d |%s\n", &element_temp.id, cheminfichier);
                   // recupere le descripteur avec la fonction developpé par Aloy Kyllian
                   element_temp.descripteur = Descripteur_audio(config.Nb_Fenetre, config.Intervale, cheminfichier, erreur_audio);
                   // si elle ne renvoie pas d'erreur on empile l'element
@@ -138,7 +139,7 @@ void depiler_descripteur_audio(PILE_audio dscr_audio, int *erreur, int erreur_au
       bool first = true;
 
       // chemin ou depiler le fichier
-      fichier = fopen("../base_descripteur/base_descripteur_audio", "w");
+      fichier = fopen(BASE_AUD, "w");
 
       // si la fonction empiler descripteur audio s'est  bien passé, on le depile sur le fichier base_descripteur
       if (erreur_audio == 0)
@@ -198,7 +199,7 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
       ELEMENT_image element_temp;
 
       // le chemin du fichier pour recuperer lid et son chemin dans le dossier NB
-      char CHEMIN[100] = "../liste_base/liste_base_image/NB";
+      char CHEMIN[100] = LISTE_BASE_NB;
       char cheminfichier[200];
 
       ptr_fic = fopen(CHEMIN, "r");
@@ -208,7 +209,7 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
             while (!feof(ptr_fic))
             {
                   // lire lid et son chemin
-                  fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
+                  fscanf(ptr_fic, "-%d |%s\n", &element_temp.id, cheminfichier);
                   // recupere le descripteur avec la fonction developpé par Loic Maignan
                   element_temp.descripteur_image = Pack_Descripteur_image(erreur_image, cheminfichier, config.Nb_Bit_Fort);
                   if (*erreur_image == 0)
@@ -227,7 +228,7 @@ PILE_image base_descript_empiler_image(PILE_image dscr_image, int *erreur, int *
       fclose(ptr_fic);
 
       // le chemin du fichier pour recuperer lid et son chemin dans le dossier RGB
-      strcpy(CHEMIN, "../liste_base/liste_base_image/RGB");
+      strcpy(CHEMIN, LISTE_BASE_RGB);
       FILE *fichier = NULL;
       fichier = fopen(CHEMIN, "r");
 
@@ -260,7 +261,7 @@ void depiler_descripteur_image(PILE_image dscr_image, int erreur_image, int *err
       ELEMENT_image elementsupp;
       FILE *fichier = NULL;
       bool first = true;
-      fichier = fopen("../base_descripteur/base_descripteur_image", "w");
+      fichier = fopen(BASE_IMG, "w");
       int total = 0;
       if (erreur_image == 0)
       {
@@ -320,7 +321,7 @@ PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFI
       FILE *ptr_fic = NULL;
       ELEMENT_texte element_temp;
       IMAGE img;
-      char CHEMIN[100] = "../liste_base/liste_base_texte";
+      char CHEMIN[100] = LISTE_BASE_TXT;
       char cheminfichier[200];
 
       ptr_fic = fopen(CHEMIN, "r");
@@ -330,7 +331,8 @@ PILE_texte base_descript_empiler_texte(PILE_texte dscr_texte, int *erreur, CONFI
             while (!feof(ptr_fic))
             {
                   // recupere ID et CHEMIN
-                  fscanf(ptr_fic, "-%d | %s\n", &element_temp.id, cheminfichier);
+
+                  fscanf(ptr_fic, "-%d |%s\n", &element_temp.id, cheminfichier);
                   // recupere le descripteur avec la fonction developpé par Hugo Lestrade
                   element_temp.descripteur_texte = descripteur_texte_finale(cheminfichier, config.Nb_Mots_Cle, element_temp.descripteur_texte);
                   dscr_texte = emPILE_texte(dscr_texte, element_temp);
@@ -349,7 +351,7 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
       ELEMENT_texte elementsupp;
       FILE *fichier = NULL;
       bool first = true;
-      fichier = fopen("../base_descripteur/base_descripteur_texte", "w");
+      fichier = fopen(BASE_TXT, "w");
       int total = 0;
       if (fichier != NULL)
       {
@@ -360,6 +362,7 @@ void depiler_descripteur_texte(PILE_texte dscr_texte, int *erreur, CONFIG config
                   // AFFICHAGE DESCRIPTEUR ET ID DANS FICHIER
 
                   // afficher ID
+
                   fprintf(fichier, "-%d\n", elementsupp.id);
                   // affichage descripteur
                   for (int x = 0; x < config.Nb_Mots_Cle; x++)
@@ -389,27 +392,27 @@ void recuperer_path_tous_fichiers(int *Erreurtexte, int *Erreuraudio, int *Erreu
       //_________________
       // TEXTE
       //_________________
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/Textes/");
+      strcpy(path, PATH_TEXTE);
       recup_path(&piletexte_path, deb, path, "texte", Erreurtexte);
-      depiler_path(&piletexte_path, "../liste_base/liste_base_texte", Erreurtexte);
+      depiler_path(&piletexte_path, LISTE_BASE_TXT, Erreurtexte);
 
       //_________________
       // AUDIO
       //_________________
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
+      strcpy(path, PATH_AUDIO);
       recup_path(&pileaudio_path, deb, path, "audio", Erreuraudio);
-      depiler_path(&pileaudio_path, "../liste_base/liste_base_audio", Erreuraudio);
+      depiler_path(&pileaudio_path, LISTE_BASE_AUD, Erreuraudio);
 
       //_________________
       // IMAGE
       //_________________
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
+      strcpy(path, PATH_RGB);
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
       deb = (pileimage_path->element.id) + 1;
-      depiler_path(&pileimage_path, "../liste_base/liste_base_image/RGB", Erreurimage);
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
+      depiler_path(&pileimage_path, LISTE_BASE_RGB, Erreurimage);
+      strcpy(path, PATH_NB);
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
-      depiler_path(&pileimage_path, "../liste_base/liste_base_image/NB", Erreurimage);
+      depiler_path(&pileimage_path, LISTE_BASE_NB, Erreurimage);
 }
 
 void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
@@ -422,52 +425,70 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       String cheminDATA;
       if (strcmp(type, "rgb") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_image/RGB");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/*.txt");
+            strcpy(cheminliste, LISTE_BASE_RGB);
+            strcpy(cheminDATA, PATH_RGB);
+            strcat(cheminDATA, "*.txt");
       }
       if (strcmp(type, "nb") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_image/NB");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/*.txt");
+            strcpy(cheminliste, LISTE_BASE_NB);
+            strcpy(cheminDATA, PATH_NB);
+            strcat(cheminDATA, "*.txt");
       }
       if (strcmp(type, "texte") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_texte");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/Textes/*.xml");
+            strcpy(cheminliste, LISTE_BASE_TXT);
+            strcpy(cheminDATA, PATH_TEXTE);
+            strcat(cheminDATA, "*.xml");
       }
       if (strcmp(type, "audio") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_audio");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/*.txt");
+            strcpy(cheminliste, LISTE_BASE_AUD);
+            strcpy(cheminDATA, PATH_AUDIO);
+            strcat(cheminDATA, "*.txt");
       }
 
       strcpy(commande, "ls -ltur ");
       strcat(commande, cheminDATA);
-      strcat(commande, "> ../traitement/fic_temp");
+      strcat(commande, "> ");
+      strcat(commande, FIC_TEMP);
       system(commande);
 
       if (strcmp(type, "texte") == 0)
       {
-            strcpy(commande, "cut -d '/' -f 4 ../traitement/fic_temp > ../traitement/fic");
-            system(commande);
-
-            strcpy(commande, "cut -d '/' -f 4 ");
-            strcat(commande, cheminliste);
-            strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
-            system(commande);
-      }
-      if (strcmp(type, "nb") == 0 || strcmp(type, "rgb") == 0 || strcmp(type, "audio") == 0)
-      {
-            strcpy(commande, "cut -d '/' -f 5 ../traitement/fic_temp > ../traitement/fic");
+            strcpy(commande, "cut -d '/' -f 5 ");
+            strcat(commande, FIC_TEMP);
+            strcat(commande, " > ");
+            strcat(commande, FIC);
             system(commande);
 
             strcpy(commande, "cut -d '/' -f 5 ");
             strcat(commande, cheminliste);
-            strcat(commande, " > ../traitement/ListeDejaIndexeTemp");
+            strcat(commande, " > ");
+            strcat(commande, LISTE_DEJA_INDEXE_TEMP);
+            system(commande);
+      }
+      if (strcmp(type, "nb") == 0 || strcmp(type, "rgb") == 0 || strcmp(type, "audio") == 0)
+      {
+            strcpy(commande, "cut -d '/' -f 6 ");
+            strcat(commande, FIC_TEMP);
+            strcat(commande, " > ");
+            strcat(commande, FIC);
+            system(commande);
+
+            strcpy(commande, "cut -d '/' -f 6 ");
+            strcat(commande, cheminliste);
+            strcat(commande, " > ");
+            strcat(commande, LISTE_DEJA_INDEXE_TEMP);
             system(commande);
       }
 
-      strcpy(commande, "diff ../traitement/ListeDejaIndexeTemp ../traitement/fic  > ../traitement/diff");
+      strcpy(commande, "diff  ");
+      strcat(commande, LISTE_DEJA_INDEXE_TEMP);
+      strcat(commande, " ");
+      strcat(commande, FIC);
+      strcat(commande, " > ");
+      strcat(commande, DIFF);
       system(commande);
 
       FILE *fichier_first = NULL;
@@ -475,7 +496,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
       ELEMENT element_temp;
       String val;
 
-      fichier_first = fopen("../traitement/diff", "r");
+      fichier_first = fopen(DIFF, "r");
       if (fichier_first != NULL)
       {
             if (fscanf(fichier_first, "%s", val) == EOF)
@@ -495,7 +516,7 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
                         if (strstr("< ", val))
                         {
                               fscanf(fichier_first, "%s", val);
-                              Supprimer_Descripteur(Erreur, val, type,config.Intervale);
+                              Supprimer_Descripteur(Erreur, val, type, config.Intervale);
                               //  appeler fonction pour supprimer
                         }
                   }
@@ -511,15 +532,12 @@ void indexation_ouverte(CONFIG config, String type, int *Erreurimage, int *Erreu
 void indexation_generale_ferme(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurtexte, int *Erreur)
 {
       recuperer_path_tous_fichiers(Erreurtexte, Erreuraudio, Erreurimage);
-
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
-
       PILE_audio descripteur_audio = NULL;
       descripteur_audio = base_descript_empiler_audio(descripteur_audio, Erreur, Erreuraudio, config);
       depiler_descripteur_audio(descripteur_audio, Erreur, *Erreuraudio);
-
       PILE_texte piletexte = NULL;
       piletexte = base_descript_empiler_texte(piletexte, Erreurtexte, config);
       depiler_descripteur_texte(piletexte, Erreurtexte, config);
@@ -532,23 +550,23 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
       String cheminDATA;
       if (strcmp(type, "rgb") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_image/RGB");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
+            strcpy(cheminliste, LISTE_BASE_RGB);
+            strcpy(cheminDATA, PATH_RGB);
       }
       if (strcmp(type, "nb") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_image/NB");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
+            strcpy(cheminliste, LISTE_BASE_NB);
+            strcpy(cheminDATA, PATH_NB);
       }
       if (strcmp(type, "texte") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_texte");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/Textes/");
+            strcpy(cheminliste, LISTE_BASE_TXT);
+            strcpy(cheminDATA, PATH_TEXTE);
       }
       if (strcmp(type, "audio") == 0)
       {
-            strcpy(cheminliste, "../liste_base/liste_base_audio");
-            strcpy(cheminDATA, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
+            strcpy(cheminliste, LISTE_BASE_AUD);
+            strcpy(cheminDATA, PATH_AUDIO);
       }
 
       // ajout fichier dans liste_base
@@ -557,7 +575,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
       FILE *fichier = NULL;
       String temp;
 
-      fichier = fopen("../traitement/fic", "w");
+      fichier = fopen(FIC, "w");
       ELEMENT elementsupp;
 
       // temp contient le chemin du fichier obtenue en concatenant le path et son titre
@@ -577,7 +595,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
       String commande;
 
-      strcpy(commande, "cat ../traitement/fic >> ");
+      strcpy(commande, "cat ");
+      strcat(commande, FIC);
+      strcat(commande, " >> ");
       strcat(commande, cheminliste);
       system(commande);
       //__________________________________
@@ -593,7 +613,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichier2 = NULL;
 
-            fichier2 = fopen("../traitement/fic", "w");
+            fichier2 = fopen(FIC, "w");
             if (fichier2 != NULL)
             {
 
@@ -618,7 +638,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   free(descripteur_image.Bilan);
             }
             fclose(fichier2);
-            strcpy(commande, "cat ../traitement/fic >> ../base_descripteur/base_descripteur_image");
+            strcpy(commande, "cat ");
+            strcat(commande, FIC);
+            strcat(commande, " >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_image");
             system(commande);
       }
 
@@ -629,7 +651,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichier = NULL;
 
-            fichier = fopen("../traitement/fic", "w");
+            fichier = fopen(FIC, "w");
             if (fichier != NULL)
             {
                   fprintf(fichier, "\n-%d", id);
@@ -643,7 +665,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
                   free(descripteur_texte.tab_app);
             }
             fclose(fichier);
-            strcpy(commande, "cat ../traitement/fic >> ../base_descripteur/base_descripteur_texte");
+            strcpy(commande, "cat ");
+            strcat(commande, FIC);
+            strcat(commande, " >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_texte");
             system(commande);
       }
 
@@ -656,7 +680,7 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
 
             FILE *fichieraudio = NULL;
 
-            fichieraudio = fopen("../traitement/fic", "w");
+            fichieraudio = fopen(FIC, "w");
             if (fichieraudio != NULL)
             {
 
@@ -679,7 +703,9 @@ void ajoutfichier(CONFIG config, String type, String chemin, int *Erreur)
             }
             free(descripteur.tab);
 
-            strcpy(commande, "cat ../traitement/fic >> ../base_descripteur/base_descripteur_audio");
+            strcpy(commande, "cat ");
+            strcat(commande, FIC);
+            strcat(commande, " >> ../../DATA_FIL_ROUGE_DEV/base_descripteur/base_descripteur_audio");
             system(commande);
       }
 }
@@ -691,19 +717,19 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
 
       if (strcmp("texte", type_fichier) == 0)
       {
-            fichier = fopen("../liste_base/liste_base_texte", "r");
+            fichier = fopen(LISTE_BASE_TXT, "r");
       }
       else if (strcmp("audio", type_fichier) == 0)
       {
-            fichier = fopen("../liste_base/liste_base_audio", "r");
+            fichier = fopen(LISTE_BASE_AUD, "r");
       }
       else if (strcmp("nb", type_fichier) == 0)
       {
-            fichier = fopen("../liste_base/liste_base_image/NB", "r");
+            fichier = fopen(LISTE_BASE_NB, "r");
       }
       else if (strcmp("rgb", type_fichier) == 0)
       {
-            fichier = fopen("../liste_base/liste_base_image/RGB", "r");
+            fichier = fopen(LISTE_BASE_RGB, "r");
       }
       // Recopiage de l'ancienne liste_base mais sans le fichier à supprimer
       if (fichier != NULL)
@@ -714,11 +740,11 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
 
             FILE *nvfile = NULL;
             // Creation d'un fichier temporaire
-            nvfile = fopen("../liste_base/tmp.txt", "w");
+            nvfile = fopen(LISTE_BASE_TMP, "w");
             if (nvfile != NULL)
             {
                   bool a_faire_une_fois = false;
-                  while (fscanf(fichier, "-%d %s\n", &tmp, &path) != EOF)
+                  while (fscanf(fichier, "-%d |%s\n", &tmp, &path) != EOF)
                   {
                         if (strstr(path, Nom_Fichier) != NULL)
                         {
@@ -729,12 +755,12 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                         {
                               if (a_faire_une_fois == false)
                               {
-                                    fprintf(nvfile, "-%d %s", tmp, path);
+                                    fprintf(nvfile, "-%d |%s", tmp, path);
                                     a_faire_une_fois = true;
                               }
                               else
                               {
-                                    fprintf(nvfile, "\n-%d %s", tmp, path);
+                                    fprintf(nvfile, "\n-%d |%s", tmp, path);
                               }
                         }
                   }
@@ -747,11 +773,11 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   if (strcmp("texte", type_fichier) == 0)
                   {
                         // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
-                        remove("../liste_base/liste_base_texte");
-                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_texte");
+                        remove(LISTE_BASE_TXT);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_TXT);
 
-                        fichier = fopen("../base_descripteur/base_descripteur_texte", "r");
-                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        fichier = fopen(BASE_TXT, "r");
+                        nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
                               char val_lue[50];
@@ -807,8 +833,8 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                               }
                               fclose(fichier);
                               fclose(nvfile);
-                              remove("../base_descripteur/base_descripteur_texte");
-                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_texte");
+                              remove(BASE_TXT);
+                              rename("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", BASE_TXT);
                         }
                         else
                         {
@@ -819,11 +845,11 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   else if (strcmp("audio", type_fichier) == 0)
                   {
                         // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
-                        remove("../liste_base/liste_base_audio");
-                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_audio");
+                        remove(LISTE_BASE_AUD);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_AUD);
 
-                        fichier = fopen("../base_descripteur/base_descripteur_audio", "r");
-                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        fichier = fopen(BASE_AUD, "r");
+                        nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
                               int val_lue;
@@ -866,14 +892,14 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                                     {
                                           if (cpt_aff == 0)
                                           {
-                                                fprintf(nvfile, "\n%d  ", val_lue);
+                                                fprintf(nvfile, "\n %d ", val_lue);
                                                 cpt_aff++;
                                           }
                                           else if (cpt_aff < intervale)
                                           {
-                                                fprintf(nvfile, "%d  ", val_lue);
+                                                fprintf(nvfile, " %d ", val_lue);
                                                 cpt_aff++;
-                                                if (cpt_aff == 32)
+                                                if (cpt_aff >= intervale)
                                                 {
                                                       cpt_aff = 0;
                                                 }
@@ -882,8 +908,8 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                               }
                               fclose(fichier);
                               fclose(nvfile);
-                              remove("../base_descripteur/base_descripteur_audio");
-                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_audio");
+                              remove(BASE_AUD);
+                              rename("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", BASE_AUD);
                         }
                         else
                         {
@@ -894,11 +920,11 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   else if (strcmp("nb", type_fichier) == 0)
                   {
 
-                        remove("../liste_base/liste_base_image/NB");
-                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/NB");
+                        remove(LISTE_BASE_NB);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_NB);
 
-                        fichier = fopen("../base_descripteur/base_descripteur_image", "r");
-                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        fichier = fopen(BASE_IMG, "r");
+                        nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
                               bool a_faire_une_fois = false;
@@ -950,8 +976,8 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                               }
                               fclose(fichier);
                               fclose(nvfile);
-                              remove("../base_descripteur/base_descripteur_image");
-                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_image");
+                              remove(BASE_IMG);
+                              rename("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", BASE_IMG);
                         }
                         else
                         {
@@ -962,11 +988,11 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                   else if (strcmp("rgb", type_fichier) == 0)
                   {
                         // Remplace l'ancienne liste base par la nouvelle avec le descripteur supprimer
-                        remove("../liste_base/liste_base_image/RGB");
-                        rename("../liste_base/tmp.txt", "../liste_base/liste_base_image/RGB");
+                        remove(LISTE_BASE_RGB);
+                        rename(LISTE_BASE_TMP, LISTE_BASE_RGB);
 
-                        fichier = fopen("../base_descripteur/base_descripteur_image", "r");
-                        nvfile = fopen("../base_descripteur/tmp.txt", "w");
+                        fichier = fopen(BASE_IMG, "r");
+                        nvfile = fopen("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", "w");
                         if (fichier != NULL && nvfile != NULL)
                         {
                               bool a_faire_une_fois = false;
@@ -1018,8 +1044,8 @@ void Supprimer_Descripteur(int *Erreur, char Nom_Fichier[], char type_fichier[],
                               }
                               fclose(fichier);
                               fclose(nvfile);
-                              remove("../base_descripteur/base_descripteur_image");
-                              rename("../base_descripteur/tmp.txt", "../base_descripteur/base_descripteur_image");
+                              remove(BASE_IMG);
+                              rename("../../DATA_FIL_ROUGE_DEV/base_descripteur/tmp.txt", BASE_IMG);
                         }
                         else
                         {
@@ -1051,7 +1077,7 @@ int recupererDernierID(String type, int *Erreur)
       if (strcmp(type, "rgb") == 0 || strcmp(type, "nb") == 0)
       {
             FILE *fichier1;
-            fichier1 = fopen("../liste_base/liste_base_image/RGB", "r");
+            fichier1 = fopen(LISTE_BASE_RGB, "r");
             if (fichier1 != NULL)
             {
                   while (fscanf(fichier1, "-%d |%*s\n", &id_temp) != EOF)
@@ -1070,7 +1096,7 @@ int recupererDernierID(String type, int *Erreur)
             fclose(fichier1);
 
             FILE *fichier2;
-            fichier2 = fopen("../liste_base/liste_base_image/NB", "r");
+            fichier2 = fopen(LISTE_BASE_NB, "r");
             if (fichier2 != NULL)
             {
                   while (fscanf(fichier2, "-%d |%*s\n", &id_temp) != EOF)
@@ -1093,7 +1119,7 @@ int recupererDernierID(String type, int *Erreur)
       if (strcmp(type, "texte") == 0)
       {
             FILE *fichier;
-            fichier = fopen("../liste_base/liste_base_texte", "r");
+            fichier = fopen(LISTE_BASE_TXT, "r");
             if (fichier != NULL)
             {
                   while (fscanf(fichier, "-%d |%*s\n", &id_temp) != EOF)
@@ -1116,7 +1142,7 @@ int recupererDernierID(String type, int *Erreur)
       if (strcmp(type, "audio") == 0)
       {
             FILE *fichier3;
-            fichier3 = fopen("../liste_base/liste_base_audio", "r");
+            fichier3 = fopen(LISTE_BASE_AUD, "r");
             if (fichier3 != NULL)
             {
                   while (fscanf(fichier3, "-%d |%*s\n", &id_temp) != EOF)
@@ -1159,7 +1185,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       String commande;
       int a = 0;
 
-      fichier_nb = fopen("../liste_base/liste_base_image/NB", "r");
+      fichier_nb = fopen(LISTE_BASE_NB, "r");
       if (fichier_nb != NULL)
       {
             if (fscanf(fichier_nb, "%s", val) == EOF)
@@ -1184,7 +1210,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             FILE *fichier_rgb = NULL;
             deb = 0;
 
-            fichier_rgb = fopen("../liste_base/liste_base_image/RGB", "r");
+            fichier_rgb = fopen(LISTE_BASE_RGB, "r");
             if (fichier_rgb != NULL)
             {
                   if (fscanf(fichier_rgb, "%s", val) == EOF)
@@ -1208,7 +1234,7 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
       FILE *fichier_son = NULL;
       deb = 0;
 
-      fichier_son = fopen("../liste_base/liste_base_audio", "r");
+      fichier_son = fopen(LISTE_BASE_AUD, "r");
       if (fichier_son != NULL)
       {
             if (fscanf(fichier_son, "%s", val) == EOF)
@@ -1227,8 +1253,8 @@ void indexation(CONFIG config, int *Erreurimage, int *Erreuraudio, int *Erreurte
             *Erreur = 7;
       }
 
-      //TEXTE
-      fichier_texte = fopen("../liste_base/liste_base_texte", "r");
+      // TEXTE
+      fichier_texte = fopen(LISTE_BASE_TXT, "r");
       if (fichier_texte != NULL)
       {
             if (fscanf(fichier_texte, "%s", val) == EOF)
@@ -1270,9 +1296,9 @@ void indexation_audio(CONFIG config, int *Erreur, int *Erreuraudio)
       //___________________________________________________
       // remplier liste_base_audio
       //___________________________________________________
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/");
+      strcpy(path, PATH_AUDIO);
       recup_path(&pileaudio_path, deb, path, "audio", Erreuraudio);
-      depiler_path(&pileaudio_path, "../liste_base/liste_base_audio", Erreuraudio);
+      depiler_path(&pileaudio_path, LISTE_BASE_AUD, Erreuraudio);
       //___________________________________________________
       // remplier base_descripteur_audio
       //___________________________________________________
@@ -1291,9 +1317,9 @@ void indexation_texte(CONFIG config, int *Erreur, int *Erreurtexte)
       //___________________________________________________
       // remplier liste_base_texte
       //___________________________________________________
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/Textes/");
+      strcpy(path, PATH_TEXTE);
       recup_path(&piletexte_path, deb, path, "texte", Erreurtexte);
-      depiler_path(&piletexte_path, "../liste_base/liste_base_texte", Erreurtexte);
+      depiler_path(&piletexte_path, LISTE_BASE_TXT, Erreurtexte);
       //___________________________________________________
       // remplier base_descripteur_texte
       //___________________________________________________
@@ -1313,18 +1339,17 @@ void indexation_image(CONFIG config, int *Erreur, int *Erreurimage)
       // remplier liste_base_image
       //___________________________________________________
       PILE pileimage_path = init_PILE();
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/");
+      strcpy(path, PATH_RGB);
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
       deb = (pileimage_path->element.id) + 1;
-      depiler_path(&pileimage_path, "../liste_base/liste_base_image/RGB", Erreurimage);
-      strcpy(path, "../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/");
+      depiler_path(&pileimage_path, LISTE_BASE_RGB, Erreurimage);
+      strcpy(path, PATH_NB);
       recup_path(&pileimage_path, deb, path, "image", Erreurimage);
-      depiler_path(&pileimage_path, "../liste_base/liste_base_image/NB", Erreurimage);
+      depiler_path(&pileimage_path, LISTE_BASE_NB, Erreurimage);
       //___________________________________________________
       // remplier base_descripteur_image
       //___________________________________________________
       PILE_image pileimage = NULL;
       pileimage = base_descript_empiler_image(pileimage, Erreur, Erreurimage, config);
       depiler_descripteur_image(pileimage, *Erreurimage, Erreur);
-
 }

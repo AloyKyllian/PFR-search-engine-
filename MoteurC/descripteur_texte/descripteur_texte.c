@@ -5,6 +5,7 @@
  * 
 */
 #include "descripteur_texte.h"
+#include "../chemin.h"
 
 
 char *nettoyage(char mot_lu[100])
@@ -83,8 +84,9 @@ bool filtrage(char* mot)
     String tab_p[10000];
     int cpt=0;
     FILE* fichierBanni = NULL;
-    fichierBanni = fopen("../descripteur_texte/MotBanni.txt", "r");
+    fichierBanni = fopen(MOT_BANNI, "r");
     if(fichierBanni==NULL){
+        printf("erreur ouverture fichier mot banni");
         exit(1);
     }
 

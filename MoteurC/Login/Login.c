@@ -33,13 +33,13 @@ LOGIN saisir_login()
     // do{
     //     attente(JNA);
     // }while(JNA==2);
-    fprintf("Entrez votre ID : ");
+    //fprintf("Entrez votre ID : ");
     // do{
     //     attente(JNA);
     // }while(JNA==2);
     fscanf(" %[^\n]", login.id);
     viderBuffer();
-    mdp = fgetpass("Entrez votre mot de passe : ");
+   // mdp = fgetpass("Entrez votre mot de passe : ");
     // on voit le mot de passe
   //  printf("Enter mot de passe : ");
   //  scanf(" %[^\n]", login.mdp);

@@ -13,14 +13,13 @@ IMAGE Lire_image(int *Erreur, char Path[])
     FILE *fichier = NULL;
 
     // Ouvre le .txt
+
     fichier = fopen(Path, "r");
     if (fichier != NULL)
     {
-        *Erreur = 0;
-
+        (*Erreur) = 0;
         // Recupere le nb de ligne, de collone et de composante de la matrice image
         fscanf(fichier, "%d %d %d", &img.Nb_Ligne, &img.Nb_Colonne, &img.Nb_composante);
-
         // Allocation mémoire du tableau 2D
         img.adr_Matrice = malloc(img.Nb_Ligne * img.Nb_composante * sizeof(*img.adr_Matrice));
         for (int i = 0; i < img.Nb_Ligne * img.Nb_composante; i++)
@@ -169,6 +168,7 @@ DESCRIPTEUR_IMAGE Pack_Descripteur_image(int *Erreur, char Path[],int Nb_Bits_Fo
     // Variable
     IMAGE img;
     DESCRIPTEUR_IMAGE di;
+
     // Lis un image et verifie si tout est ok
     img = Lire_image(Erreur,Path);
     if(*Erreur == 0)

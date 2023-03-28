@@ -5,7 +5,7 @@
  * 
 */
 #include "Config.h"
-const char PATH_CONFIG[] = "../Gestion-Config/Config.txt";
+#include "../chemin.h"
 
 CONFIG Lire_CONFIG(int *Erreur)
 {

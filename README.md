@@ -1,3 +1,19 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 nomenclature en JAVA donc exemple systemeTexte
 
 une variable commune en JNA 
@@ -27,10 +43,9 @@ java{
 }
 
 
-
-[] 1 JNA recuperer la valeur la lire en permanence et creer les fonctions pour la mettre a 1 et a 0 
 [x] 2 recuperer les valeur dans les parenthese envoyer par le JAVA pour les mettre dans la fonction appeler 
 [x] 3 faire une fonction pour reecrire dans le fichier 
+[] 4 faire le lire pontCjava en JAVA
 
 
 
@@ -42,3 +57,20 @@ faire une variable interne a la fonction qui est return ca marche peut etre ?
 
 fichier a la place de la variable JNA et si le fichier est creer on passe la main au C, si il existe pas on reste sur JAVA 
 pb avoir la verification
+
+
+
+
+requete complexe 
+retour changer fichier nom
+tester lire resultat 
+
+
+qustion yasmine recupechemin affichage est ce que elle peut laisser les ../ avant data fil rouge dev enleve juste le split au tout debut
+
+
+
+
+
+ATTENTION pour les comparaisons il faut le chemin ../../JAVA/terminal_version/29-Ligue_des_champions___Lyoncopy.xml 
+               et non avec /home/pandou/Documents/t/PFR/JAVA/terminal_version/29-Ligue_des_champions___Lyoncopy.xml
