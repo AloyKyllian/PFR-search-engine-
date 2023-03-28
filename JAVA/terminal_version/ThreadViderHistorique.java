@@ -36,7 +36,7 @@ public class ThreadViderHistorique extends Thread{
 			BDHistorique bdHistorique = BDHistorique.getInstance();
 			Calendar calendar = Calendar.getInstance();
 			int minute= calendar.get(Calendar.MINUTE);
-			if(minute==58)
+			if(minute==21)
 			{
 				bdHistorique.viderHistorique();
 			}

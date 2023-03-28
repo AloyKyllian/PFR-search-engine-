@@ -45,7 +45,7 @@ public class BDHistorique {
 
     public void viderHistorique()
     {
-        support.firePropertyChange(PropertyName.VIDER_HISTORIQUE.toString(), null, null);
+        this.support.firePropertyChange(PropertyName.VIDER_HISTORIQUE.toString(), null, null);
         this.mapHistorique.clear();
     }
 }

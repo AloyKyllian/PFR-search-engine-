@@ -12,9 +12,10 @@ public class BoundaryVisualiserHistorique implements PropertyChangeListener{
     }
 
     public void propertyChange(PropertyChangeEvent evt)
-    {
+    { 
         String propertyName = evt.getPropertyName();
         PropertyName choix= PropertyName.valueOf(propertyName);
+       
         switch(choix)
         {
             case ENREGISTRER_HISTORIQUE :
