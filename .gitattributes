@@ -1,3 +1,0 @@
-tmp.txt filter=lfs diff=lfs merge=lfs -text
-*.txt filter=lfs diff=lfs merge=lfs -text
-DATA_FIL_ROUGE_DEV/liste_base/tmp.txt filter=lfs diff=lfs merge=lfs -text
