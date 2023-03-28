@@ -1,1 +1,1 @@
-comparaisonTexte(../../JAVA/terminal_version/29-Ligue_des_champions___Lyoncopy.xml)
+indexation()

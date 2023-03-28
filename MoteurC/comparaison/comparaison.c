@@ -35,7 +35,7 @@ float comparaison(int val_lu, descri_audio descripteur_comparé, int ligne, int 
             max = pourcentage;
         }
     }
-
+printf("%f",max);
     return max;
 }
 
@@ -47,7 +47,7 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
     int ligne;
 
     ligne = getligne(chemin_fichier, erreur);
-
+    printf("LLLAAAAA   %s",chemin_fichier);
     descri = Descripteur_audio(fenetre, intervalle, chemin_fichier, erreur);
 
     float pourcentage;
@@ -60,12 +60,12 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
     int nbr_val;
     int val_lu;
     FILE *fichier = NULL;
+     printf("\n%s",chemin_descripteur_audio);
     fichier = fopen(chemin_descripteur_audio, "r");
     if (fichier == NULL)
     {
         *erreur = 7;
     }
-
     int nbr_ligne;
 
     int i = 0;
@@ -88,8 +88,10 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
             for (int col = 0; col < intervalle; col++)
             {
                 fscanf(fichier, "%d", &descripteur_compare.tab[lig][col]);
+                //printf("%d\n",descri.tab[lig][col]);
             }
         }
+       
         pourcentage = comparaison(val_lu, descripteur_compare, descripteur_compare.ligne, intervalle, descri, fenetre);
         tab[i].pourcentage = pourcentage;
 
@@ -101,6 +103,7 @@ tab_similaire *comparaison_audio(int fenetre, int intervalle, char *chemin_fichi
 
         i++;
         tab = (tab_similaire *)realloc(tab, (i + 1) * sizeof(tab_similaire));
+
     }
     fclose(fichier);
 

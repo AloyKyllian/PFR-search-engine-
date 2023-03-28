@@ -1,0 +1,9 @@
+19:19 TEXTE Recherche Requete simple nhjytjn
+19:19 TEXTE Recherche Requete simple zlidaz
+19:21 TEXTE Recherche Requete simple kjg
+19:25 TEXTE Recherche Requete simple frames
+19:26 IMAGE Recherche couleur  bleu
+19:35 TEXTE Recherche Requete simple frames
+19:48 AUDIO Comparaison null ../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.bin
+19:48 AUDIO Comparaison null ../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav
+19:49 AUDIO Comparaison null ../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.txt

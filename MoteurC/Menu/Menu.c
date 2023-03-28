@@ -10,13 +10,12 @@ chaine_typ lire_fichier()
     char *ptr;
     chaine_typ chaine;
     FILE *fichier = NULL;
-    fichier = fopen("../../pont/pontJavaC.txt", "r");
+    fichier = fopen(pontJC, "r");
     if (fichier != NULL)
     {
-
+        
         while (fscanf(fichier, "%s\n", chaine.entiere) != EOF)
         {
-
             if (chaine.entiere != NULL)
             {
                 ptr = strchr(chaine.entiere, '(');
@@ -125,6 +124,7 @@ void choixfonction()
     {
         sscanf(etat_courant.entiere, "%16s(%s)", etat_courant.fonction, chemin);
         strcpy(&chemin[strlen(chemin) - 1], "\0");
+        printf("%s",chemin);
         erreur = 0;
         nombreElemetTab = 0;
         tab_similaire *tabResultatAudio = malloc(100 * sizeof(tab_similaire));
@@ -140,28 +140,4 @@ void choixfonction()
             ecrireCJava(NULL, 0, erreurImage, erreurAudio, erreurTexte, erreurIndex);
         }
     }
-    /*else if (strcmp(etat_courant.fonction, "indexationOuverte") == 0)
-    {
-        ecrireCJava(NULL, 0, erreurImage, erreurAudio, erreurTexte, erreurIndex);
-        indexation_ouverte(config, "rgb", &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
-        if (erreurImage != 0 || erreurAudio != 0 || erreurTexte != 0 || erreurIndex != 0)
-        {
-            ecrireCJava(NULL, 0, erreurImage, erreurAudio, erreurTexte, erreurIndex);
-        }
-        indexation_ouverte(config, "nb", &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
-        if (erreurImage != 0 || erreurAudio != 0 || erreurTexte != 0 || erreurIndex != 0)
-        {
-            ecrireCJava(NULL, 0, erreurImage, erreurAudio, erreurTexte, erreurIndex);
-        }
-        indexation_ouverte(config, "texte", &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
-        if (erreurImage != 0 || erreurAudio != 0 || erreurTexte != 0 || erreurIndex != 0)
-        {
-            ecrireCJava(NULL, 0, erreurImage, erreurAudio, erreurTexte, erreurIndex);
-        }
-        indexation_ouverte(config, "audio", &erreurImage, &erreurAudio, &erreurTexte, &erreurIndex);
-        if (erreurImage != 0 || erreurAudio != 0 || erreurTexte != 0 || erreurIndex != 0)
-        {
-            ecrireCJava(NULL, 0, erreurImage, erreurAudio, erreurTexte, erreurIndex);
-        }
-    }*/
 }
