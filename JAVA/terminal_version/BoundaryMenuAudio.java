@@ -1,9 +1,11 @@
 public class BoundaryMenuAudio {
-	ControlLancerExecutable controlLancerExecutable;
 
-	public BoundaryMenuAudio(ControlLancerExecutable controlLancerExecutable) {
-		this.controlLancerExecutable = controlLancerExecutable ;
+	ControlMenuAudio menuAudio;
+
+	public BoundaryMenuAudio(ControlMenuAudio menuAudio) {
+		this.menuAudio=menuAudio;
 	}
+
 
 	public Etat menuAudio() {
 		int testExtensionFichier;
@@ -66,10 +68,7 @@ public class BoundaryMenuAudio {
 						// this.cheminFichierRecherche =
 						// traitementChemin.recupCheminPourAffichage(this.cheminFichierRecherche);
 						String cheminAudioTXT = cheminFichierRecherche.replace("wav", "txt");
-						ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,
-								"comparaisonAudio(" + cheminAudioTXT + ")");
-						controlLancerExecutable.lancerOut();
-						LireResultat.setRequete(cheminFichierRecherche) ;
+						menuAudio.comparaisonAudio(cheminAudioTXT, cheminFichierRecherche);
 						choix = LireResultat.lireResultatFinale("audio", null, null);
 						if (choix == 'Q') {
 							System.out.println("\n\tVous avez quitté le programme\n\n\n\n");

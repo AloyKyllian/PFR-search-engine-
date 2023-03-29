@@ -12,6 +12,7 @@ public class MAE {
 	private ControlConnexion controlConnexion;
 	private ControlLancerExecutable controlLancerExecutable;
 	private ControlVisualiserHistorique controlVisualiserHistorique;
+	private ControlMenuAudio controlMenuAudio;
 
 	private BoundaryMenuGeneral boundaryMenuGeneral;
 	private BoundaryMenuAdministrateur boundaryMenuAdministrateur;
@@ -33,6 +34,8 @@ public class MAE {
 		this.controlLancerExecutable = new ControlLancerExecutable();
 		this.controlConnexion = new ControlConnexion();
 		this.controlVisualiserHistorique = new ControlVisualiserHistorique();
+		this.controlMenuAudio = new ControlMenuAudio(controlLancerExecutable);
+
 		// boundary
 		this.boundaryMenuGeneral = new BoundaryMenuGeneral(new BoundaryConnexion(this.controlConnexion));
 		this.boundaryMenuAdministrateur = new BoundaryMenuAdministrateur();
@@ -40,7 +43,7 @@ public class MAE {
 		this.boundaryMenuUtilisateur = new BoundaryMenuUtilisateur();
 		this.boundaryMenuTexte = new BoundaryMenuTexte(this.controlLancerExecutable);
 		this.boundaryMenuImage = new BoundaryMenuImage(this.controlLancerExecutable);
-		this.boundaryMenuAudio = new BoundaryMenuAudio(this.controlLancerExecutable);
+		this.boundaryMenuAudio = new BoundaryMenuAudio(this.controlMenuAudio);
 		this.boundaryMenuConfig = new BoundaryMenuConfig(new BoundaryConfig());
 		this.boundaryVisualiserHistorique = new BoundaryVisualiserHistorique (this.controlVisualiserHistorique);
 
@@ -48,7 +51,6 @@ public class MAE {
 		this.threadViderHistorique.start();
 		
 	}
-
 	public static void main(String[] args) {
 
 		MAE mae = new MAE();
