@@ -9,3 +9,5 @@
 19:49 AUDIO Comparaison null ../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.txt
 8:45 AUDIO Comparaison null ../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav
 9:56 AUDIO Comparaison null ../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav
+19:18 TEXTE Recherche Requete simple frames
+19:22 TEXTE Recherche Requete complexe [+saison, -football]
