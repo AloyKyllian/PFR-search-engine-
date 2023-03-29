@@ -11,16 +11,13 @@ public class Affichage {
 	 * @param typeImage
 	 * @return
 	 */
-	public static Map<String,Integer> affichageFinale(String type, List<String> requeteComplexe, String typeImage) {
+	public static Map<String, Integer> affichageFinale(String type, List<String> requeteComplexe, String typeImage) {
 		ArrayList<Element> listeElement = new ArrayList<>();
 		List<String[]> pont = new ArrayList<>();
-		List<String> nomFichier = new ArrayList<>();
 		pont = LireResultat.lirePont();
 		String fileName;
 		String cheminFileName;
-		int numero;
-		char choix = 'R';
-        Map<String,Integer> resultatFinale=new HashMap<>();
+		Map<String, Integer> resultatFinale = new HashMap<>();
 		// affichage des resultat de recherche par mot cle :
 		if (type.contains("requeteComplexe")) {
 			if (requeteComplexe.size() == 0) {
@@ -29,7 +26,6 @@ public class Affichage {
 				// Appel de la fonction lire_chemin pour afficher les résultats de recherche par
 				// mot clé
 				listeElement = LireResultat.lireChemin("texte");
-				numero = 1;
 				for (String premiereCase : requeteComplexe) {
 					String id = premiereCase;
 					for (Element element : listeElement) {
@@ -48,7 +44,6 @@ public class Affichage {
 				// Appel de la fonction lire_chemin pour afficher les résultats de recherche par
 				// mot clé
 				listeElement = LireResultat.lireChemin("texte");
-				numero = 1;
 				for (String[] premiereCase : pont) {
 					String id = premiereCase[0];
 					String nombreOccurence = premiereCase[1];
@@ -58,7 +53,7 @@ public class Affichage {
 							fileName = TraitementChemin.extension(TypeFichier.TEXTE, element.chemin);
 							cheminFileName = element.chemin;
 							if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-								resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence) );
+								resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
 							}
 						}
 					}
@@ -67,14 +62,13 @@ public class Affichage {
 		}
 
 		else if (type.contains("texte")) {
-			
+
 			if (pont.size() == 0) {
 				return null;
 			} else {
 				// Appel de la fonction lire_chemin pour afficher les résultats de comparaison
 				// de texte
 				listeElement = LireResultat.lireChemin("texte");
-				numero = 1;
 				for (String[] premiereCase : pont) {
 					String id = premiereCase[0];
 					String nombreOccurence = premiereCase[1];
@@ -83,12 +77,12 @@ public class Affichage {
 							fileName = TraitementChemin.extension(TypeFichier.TEXTE, element.chemin);
 							cheminFileName = element.chemin;
 							if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-								resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence) );
+								resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
 							}
 						}
 					}
 				}
-				
+
 			}
 		}
 
@@ -102,7 +96,7 @@ public class Affichage {
 				if (typeImage.contains("bmp")) {
 
 					listeElement = LireResultat.lireChemin("nb");
-					numero = 1;
+
 					for (String[] premiereCase : pont) {
 						String id = premiereCase[0];
 						String nombreOccurence = premiereCase[1];
@@ -111,7 +105,7 @@ public class Affichage {
 								fileName = TraitementChemin.extension(TypeFichier.NB, element.chemin);
 								cheminFileName = element.chemin.replace("txt", "bmp");
 								if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-									resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence) );
+									resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
 								}
 							}
 						}
@@ -120,7 +114,7 @@ public class Affichage {
 
 				if (typeImage.contains("jpg")) {
 					listeElement = LireResultat.lireChemin("rgb");
-					numero = 1;
+
 					for (String[] premiereCase : pont) {
 						String id = premiereCase[0];
 						String nombreOccurence = premiereCase[1];
@@ -129,7 +123,7 @@ public class Affichage {
 								fileName = TraitementChemin.extension(TypeFichier.RGB, element.chemin);
 								cheminFileName = element.chemin.replace("txt", "jpg");
 								if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-									resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence) );
+									resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
 								}
 							}
 						}
@@ -142,28 +136,34 @@ public class Affichage {
 			if (pont.size() == 0) {
 				return null;
 			} else {
-
 				// Appel de la fonction lire_chemin pour afficher les résultats de comparaison
-				// d'audio
-				listeElement = LireResultat.lireChemin(type);
+				// de texte
+				listeElement = LireResultat.lireChemin("audio");
 
-				// separer le nom du fichier du chemin
-				numero = 1;
 				for (String[] premiereCase : pont) {
 					String id = premiereCase[0];
 					String nombreOccurence = premiereCase[1];
 					for (Element element : listeElement) {
 						if (element.ID.equals(id)) {
 							fileName = TraitementChemin.extension(TypeFichier.AUDIO, element.chemin);
-							cheminFileName = element.chemin.replace("txt", "wav");
-							if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-								resultatFinale.put(cheminFileName,Integer.parseInt(nombreOccurence) );
+							cheminFileName = element.chemin;
+							if (Integer.parseInt(nombreOccurence) == 100) {
+								if (fileName.contains("jingle")) {
+									resultatFinale.put("../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav",
+											2);
+								} else if (fileName.contains("corpus")) {
+									resultatFinale.put(null, 0);
+									resultatFinale.clear();
+								}
+
 							}
 						}
 					}
 				}
+
 			}
+
 		}
-		return resultatFinale ;
+		return resultatFinale;
 	}
 }
