@@ -17,5 +17,4 @@ public class ControlMenuAudio {
 		controlLancerExecutable.lancerOut();
 		LireResultat.setRequete(cheminFichierRecherche);
 	}
-
 }

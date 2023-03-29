@@ -71,4 +71,11 @@ public class Config {
     {
         this.Intervale=nb;
     }
+
+    public String getNb_Mots_Cle() {return this.Nb_Mots_Cle;}
+    public int getSimilariter() {return Integer.parseInt(this.Similariter);}
+    public int getNb_Bit_Fort() {return Integer.parseInt(this.Nb_Bit_Fort);}
+    public int getNb_Fenetre() {return Integer.parseInt(this.Nb_Fenetre);}
+    public int getIntervale(){return Integer.parseInt(this.Intervale);}
+
 }

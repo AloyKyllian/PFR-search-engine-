@@ -13,7 +13,7 @@ public class ControleMenuImage {
 
     public void comparaisonImage(String cheminAudioTXT, String cheminFichierRecherche) {
         ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,
-                "comparaisonAudio(" + cheminAudioTXT + ")");
+                "comparaisonImage(" + cheminAudioTXT + ")");
         controlLancerExecutable.lancerOut();
         LireResultat.setRequete(cheminFichierRecherche);
     }

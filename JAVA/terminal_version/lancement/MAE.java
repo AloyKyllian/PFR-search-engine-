@@ -67,7 +67,7 @@ public class MAE {
 		mae.controlLancerExecutable.lancerOut();
 		mae.stringLue = ReadWriteFichier.read(ListCheminFichier.cheminPontCJ);
 		System.out.println(mae.stringLue);
-		mae.lancerMAE();	
+		mae.lancerMAE();
 	}
 
 	public void lancerMAE() {
