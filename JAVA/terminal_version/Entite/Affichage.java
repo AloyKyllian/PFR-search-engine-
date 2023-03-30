@@ -15,7 +15,8 @@ public class Affichage {
 	 */
 	static String requete;
 	public static void setRequete(String str) {
-		requete = str;
+		LireResultat.setRequete(str);
+		requete= str;
 	}
 	public static Map<String, Integer> affichageFinale(String type, List<String> requeteComplexe, String typeImage) {
 		ArrayList<Element> listeElement = new ArrayList<>();

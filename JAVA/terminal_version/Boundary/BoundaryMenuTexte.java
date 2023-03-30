@@ -114,7 +114,7 @@ public class BoundaryMenuTexte {
 					}
 				}
 
-				LireResultat.setRequete(motCleRecherche) ;
+				LireResultat.setRequete(motsPlusAuMoins.toString()) ;
 				choix = LireResultat.lireResultatFinale("requeteComplexe", pont, null);
 				// this.choix = visualiser_fichier(tabFileNameMOT, this.nombreElementTabFIN,
 				// "texte"); A gerer en JAVA
