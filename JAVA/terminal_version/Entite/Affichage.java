@@ -13,6 +13,10 @@ public class Affichage {
 	 * @param typeImage
 	 * @return
 	 */
+	String requete;
+	public static void setRequete(String str) {
+		requete = str;
+	}
 	public static Map<String, Integer> affichageFinale(String type, List<String> requeteComplexe, String typeImage) {
 		ArrayList<Element> listeElement = new ArrayList<>();
 		List<String[]> pont = new ArrayList<>();

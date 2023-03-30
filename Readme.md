@@ -5,4 +5,4 @@ control config
 
 
 
-
+le retour des resultat finaux se fait a l'appel des comparaison et pas a part

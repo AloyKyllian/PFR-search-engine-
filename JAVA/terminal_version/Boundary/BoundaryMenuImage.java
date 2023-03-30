@@ -78,13 +78,11 @@ public class BoundaryMenuImage {
 
 						String BmpJpg;
 						if (cheminFichierRecherche.contains("bmp")) {
-							System.out.print("bmp");
 							BmpJpg = "bmp";
 						} else {
-							System.out.print("jpg");
 							BmpJpg = "jpg";
 						}
-						LireResultat.setRequete(cheminImageTXT) ;
+						LireResultat.setRequete(cheminFichierRecherche) ;
 						choix = LireResultat.lireResultatFinale("image", null, BmpJpg);
 						// this.choix = visualiser_fichier(tabFileNameIMG, this.nombreElementTabFIN,
 						// "image");

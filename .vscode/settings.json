@@ -1,5 +1,29 @@
 {
     "files.associations": {
         "jna.h": "c"
-    }
+    },
+    "java.project.sourcePaths": [
+        "demo/src/main/java/com/example",
+        "demo/src/main/java",
+        "JAVA/terminal_version",
+        "src/main/java/com/example"
+    ],
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx.graphics.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx.media.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx.base.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx.web.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx.swing.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx.controls.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx-swt.jar",
+            "/home/youss/Téléchargements/openjfx-20_linux-aarch64_bin-sdk/javafx-sdk-20/lib/javafx.fxml.jar"
+        ],
+        "exclude": [
+            
+        ]
+    },
+    "java.dependency.packagePresentation": "flat",
+    "maven.view": "flat"
 }
