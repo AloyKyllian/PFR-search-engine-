@@ -18,7 +18,6 @@ public class ControleMenuImage {
         String typeImage;
         if(cheminFichierRecherche.contains("bmp")){
             typeImage="bmp"
-
         }
         else if(cheminFichierRecherche.contains("jpg")){
             typeImage="jpg"
