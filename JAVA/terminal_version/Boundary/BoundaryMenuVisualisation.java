@@ -1,6 +1,7 @@
 package Boundary;
 
 import Controle.ControlLancerExecutable;
+import Controle.ControleVisualiserDescripteur;
 import Entite.Clavier;
 import Entite.Etat;
 import Entite.ListCheminFichier;
@@ -8,7 +9,7 @@ import Entite.ReadWriteFichier;
 
 public class BoundaryMenuVisualisation {
 	ControlLancerExecutable controlLancerExecutable;
-
+	ControleVisualiserDescripteur controleVisualiserDescripteur = new ControleVisualiserDescripteur();
 	public BoundaryMenuVisualisation(ControlLancerExecutable controlLancerExecutable) {
 		this.controlLancerExecutable = controlLancerExecutable ;
 	}
@@ -25,26 +26,20 @@ public class BoundaryMenuVisualisation {
 		switch (choix) {
 		case '1': {
 			System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-			ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "systemTexte()");
-			this.controlLancerExecutable.lancerOut();
-			stringLue = ReadWriteFichier.read(ListCheminFichier.cheminPontCJ);
+			stringLue=controleVisualiserDescripteur.controleSystemTexte();
 			System.out.println(stringLue);
 			// recuperer dans le fichier xecutabe
 		}
 			break;
 		case '2': {
 			System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-			ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "systemImage()");
-			this.controlLancerExecutable.lancerOut();
-			stringLue = ReadWriteFichier.read(ListCheminFichier.cheminPontCJ);
+			stringLue=controleVisualiserDescripteur.controleSystemImage();
 			System.out.println(stringLue);
 		}
 			break;
 		case '3': {
 			System.out.println("\nPenser a fermé la fenetre apres l'avoir consulter pour poursuivre votre activité\n");
-			ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "systemAudio()");
-			this.controlLancerExecutable.lancerOut();
-			stringLue = ReadWriteFichier.read(ListCheminFichier.cheminPontCJ);
+			stringLue=controleVisualiserDescripteur.controleSystemAudio();
 			System.out.println(stringLue);
 		}
 			break;

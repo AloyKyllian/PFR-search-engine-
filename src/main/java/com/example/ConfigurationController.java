@@ -1,8 +1,11 @@
+package com.example;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Controle.ControlConfig;
+import com.example.pfr.PFRApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,10 +49,10 @@ public class ConfigurationController {
     int nombrefenetre;
     int intervalletps;
 
+    ControlConfig controlConfig=new ControlConfig();
 
     @FXML
     void Appliquer(ActionEvent event) throws IOException {
-
         nombremot = Integer.parseInt(nbmot.getText());
         seuil = (int) similarite.getValue();
         nombrebits = (int) bitfort.getValue();
@@ -63,6 +66,7 @@ public class ConfigurationController {
         stage.setTitle("MenuAdministrateur");
         stage.setScene(scene);
         stage.show();
+        controlConfig.ModifierConfig(nombremot,seuil,nombrebits,nombrefenetre,intervalletps);
         System.out.println(nombremot);
         System.out.println(seuil);
         System.out.println(nombrebits);
@@ -85,6 +89,12 @@ public class ConfigurationController {
     }
     @FXML
     void initialize() {
+        controlConfig.lire_config();
+        nombremot = Integer.parseInt(controlConfig.getNb_Mots_Cle());
+        seuil = controlConfig.getSimilariter();
+        nombrebits = controlConfig.getNb_Bit_Fort();
+        intervalletps = controlConfig.getNb_Fenetre();
+        nombrefenetre = controlConfig.getIntervale();
         assert fenetre != null : "fx:id=\"fenetre\" was not injected: check your FXML file 'Configuration.fxml'.";
         assert nbmot != null : "fx:id=\"nbmot\" was not injected: check your FXML file 'Configuration.fxml'.";
         assert similarite != null : "fx:id=\"similarite\" was not injected: check your FXML file 'Configuration.fxml'.";

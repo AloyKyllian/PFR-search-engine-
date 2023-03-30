@@ -13,7 +13,7 @@ public class Affichage {
 	 * @param typeImage
 	 * @return
 	 */
-	String requete;
+	static String requete;
 	public static void setRequete(String str) {
 		requete = str;
 	}
