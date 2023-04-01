@@ -1,9 +1,12 @@
 package lancement;
 
 import Boundary.*;
+import Controle.ControlLireResultat;
 import Controle.ControlConnexion;
 import Controle.ControlLancerExecutable;
 import Controle.ControlMenuAudio;
+import Controle.ControlMenuTexte;
+import Controle.ControlMenuImage;
 import Controle.ControlVisualiserHistorique;
 import Entite.*;
 
@@ -18,10 +21,13 @@ public class MAE {
 	static String string;
 	String BmpJpg;
 
+	private ControlLireResultat controlLireResultat;
 	private ControlConnexion controlConnexion;
 	private ControlLancerExecutable controlLancerExecutable;
 	private ControlVisualiserHistorique controlVisualiserHistorique;
 	private ControlMenuAudio controlMenuAudio;
+	private ControlMenuTexte controlMenuTexte;
+	private ControlMenuImage controlMenuImage;
 
 	private BoundaryMenuGeneral boundaryMenuGeneral;
 	private BoundaryMenuAdministrateur boundaryMenuAdministrateur;
@@ -41,9 +47,12 @@ public class MAE {
 		this.lireResultat = new LireResultat();
 		// control
 		this.controlLancerExecutable = new ControlLancerExecutable();
+		this.controlLireResultat = new ControlLireResultat();
 		this.controlConnexion = new ControlConnexion();
 		this.controlVisualiserHistorique = new ControlVisualiserHistorique();
-		this.controlMenuAudio = new ControlMenuAudio(controlLancerExecutable);
+		this.controlMenuAudio = new ControlMenuAudio(controlLancerExecutable,controlLireResultat);
+		this.controlMenuTexte= new ControlMenuTexte(controlLancerExecutable,controlLireResultat);
+		this.controlMenuImage = new ControlMenuImage(controlLancerExecutable,controlLireResultat);
 
 		// boundary
 		this.boundaryMenuGeneral = new BoundaryMenuGeneral(new BoundaryConnexion(this.controlConnexion));

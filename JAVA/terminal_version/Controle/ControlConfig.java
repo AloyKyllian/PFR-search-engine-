@@ -28,8 +28,8 @@ public class ControlConfig {
     }
 
 
-    public void ModifierConfig( int motcle, int bits, int intervalle, int similarite, int nbFenetre){
-        this.config.setNb_Mots_Cle(String.valueOf(motcle));
+    public void ModifierConfig( String motcle, int bits, int intervalle, int similarite, int nbFenetre){
+        this.config.setNb_Mots_Cle(motcle);
         this.config.setIntervale(String.valueOf(intervalle));
         this.config.setNb_Bit_Fort(String.valueOf(bits));
         this.config.setSimilariter(String.valueOf(similarite));

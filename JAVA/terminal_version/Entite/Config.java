@@ -28,7 +28,7 @@ public class Config {
     public String toString()
     {
         String texte="";
-        texte= "[1] Nombre de mots-clé : "+Nb_Mots_Cle+"\n[2] Similarité : "+Similariter+"\n[3] Nombre de bits de poids fort : "+Nb_Bit_Fort+"\n[4] Nombre de fenetres : "+Nb_Fenetre+"\n[5] Intervale de temps : "+Intervale;
+        texte= "[1] Nombre de mots-clé :"+Nb_Mots_Cle+"\n[2] Similarité :"+Similariter+"\n[3] Nombre de bits de poids fort :"+Nb_Bit_Fort+"\n[4] Nombre de fenetres :"+Nb_Fenetre+"\n[5] Intervale de temps :"+Intervale;
         return texte;
     }
     public void lire_config()
