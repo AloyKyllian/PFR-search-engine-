@@ -5,7 +5,7 @@ import Entite.ReadWriteFichier;
 
 public class ControleVisualiserDescripteur {
 
-    private ControlLancerExecutable controlLancerExecutable;
+    private ControlLancerExecutable controlLancerExecutable = new ControlLancerExecutable();
 
     public String controleSystemTexte()
     {

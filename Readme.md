@@ -2,7 +2,17 @@ Control de recherche et comparaison texte [DONE]
 control visualiser descripteur [DONE]
 control comparaison image à checker de couleur aussi [DONE]
 control config [DONE]
+lien entre interface et JAVA Administrateur[DONE]
+lien entre interface et JAVA utilisateur
+    - recherche texte []
+        - recherche complexe []
+        - recherche simple []
+    - comparaison texte []
+    - recherche image []
+    - comparaison image []
+    - comparaison audio []
 
+pb avec l'enchainement de l'interface pour la recherche et la comparaison peut importe le type
 
 
 le retour des resultat finaux se fait a l'appel des comparaison et pas a part
