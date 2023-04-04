@@ -6,6 +6,7 @@ import Entite.LireResultat;
 import Entite.ListCheminFichier;
 import Entite.ReadWriteFichier;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +30,27 @@ public class ControlMenuTexte {
     public ArrayList<String> rechercheMot(ArrayList<String> listeMots,String type ) {
         ArrayList resultatFinale = new ArrayList<String>();
         ArrayList<String> pont = new ArrayList<>();
-        ArrayList<String> recup = new ArrayList<>();
+        ArrayList<String> recup;
+        recup = new ArrayList<>();
         int repere=0;
+        if(type.contains("simple")){
+        if(listeMots.contains("+")!=true && listeMots.contains("-")!=true){
+            System.out.println("Simpleeeee");
+            ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,"rechercheMot(" + listeMots.get(0) + ")");
+            controlLancerExecutable.lancerOut();
+            if (pont.size() == 0) {
+                pont = LireResultat.lirePontComplexe();
+            }}}
+        if(type.contains("complexe")){
+            System.out.println("compleeeeexe");
+            System.out.println( listeMots.get(0));
+            String chaine = listeMots.get(0);
+            String[] mots = chaine.split(" ");
+
+            ArrayList<String> motsPlusAuMoins = new ArrayList<String>();
+            for (String mot : mots) {
+                motsPlusAuMoins.add(mot);
+            }
         for (int i = 0; i < motsPlusAuMoins.size(); i++) {
             if (motsPlusAuMoins.get(i).contains("+")) {
                 ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,"rechercheMot(" + motsPlusAuMoins.get(i).replace("+", "") + ")");
@@ -48,6 +68,7 @@ public class ControlMenuTexte {
                     //System.out.println("pont intersection" + pont.toString());
                 }
             }
+
         }
 
         for (int k = 0; k < motsPlusAuMoins.size(); k++) {

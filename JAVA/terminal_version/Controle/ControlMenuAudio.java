@@ -5,8 +5,9 @@ import Entite.LireResultat;
 import Entite.ListCheminFichier;
 import Entite.ReadWriteFichier;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class ControlMenuAudio {
 	ControlLancerExecutable controlLancerExecutable;
@@ -17,8 +18,8 @@ public class ControlMenuAudio {
 		this.controlLireResultat=controlLireResultat;
 	}
 
-	public Map<String, Integer> comparaisonAudio(String cheminAudioTXT, String cheminFichierRecherche) {
-		Map<String, Integer> resultatFinale= new HashMap<>();
+	public ArrayList<String>  comparaisonAudio(String cheminAudioTXT, String cheminFichierRecherche) {
+		ArrayList<String> resultatFinale= new ArrayList<>();
 		Affichage.setRequete(cheminFichierRecherche);
 		return resultatFinale=controlLireResultat.affichage("audio",null,null);
 	}

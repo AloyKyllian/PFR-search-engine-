@@ -3,6 +3,8 @@ package Controle;
 import Entite.Affichage;
 import Entite.ListCheminFichier;
 import Entite.ReadWriteFichier;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +43,8 @@ public class ControlMenuImage {
         listImgBleu.add("22.jpg");
     }
 
-    public Map<String, Integer> comparaisonImage(String cheminImageTXT, String cheminFichierRecherche) {
-        Map<String, Integer> resultatFinale= new HashMap<>();
+    public ArrayList<String> comparaisonImage(String cheminFichierRecherche) {
+        ArrayList<String> resultatFinale= new ArrayList<>();
         String typeImage = null;
         if(cheminFichierRecherche.contains("bmp")){
             typeImage="bmp";
@@ -50,7 +52,7 @@ public class ControlMenuImage {
         else if(cheminFichierRecherche.contains("jpg")){
             typeImage="jpg";
         }
-        ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "comparaisonImage(" + cheminImageTXT + ")");
+        ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "comparaisonImage(" + cheminFichierRecherche.replace(typeImage,"txt") + ")");
         controlLancerExecutable.lancerOut();
         Affichage.setRequete(cheminFichierRecherche);
         return resultatFinale=controlLireResultat.affichage("image",null,typeImage);
