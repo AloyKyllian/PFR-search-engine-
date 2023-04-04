@@ -1,5 +1,7 @@
 package Entite;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,13 +20,13 @@ public class Affichage {
 		LireResultat.setRequete(str);
 		requete= str;
 	}
-	public static Map<String, Integer> affichageFinale(String type, List<String> requeteComplexe, String typeImage) {
+	public static ArrayList<String> affichageFinale(String type, List<String> requeteComplexe, String typeImage) {
 		ArrayList<Element> listeElement = new ArrayList<>();
 		List<String[]> pont = new ArrayList<>();
 		pont = LireResultat.lirePont();
 		String fileName;
 		String cheminFileName;
-		Map<String, Integer> resultatFinale = new HashMap<>();
+		ArrayList resultatFinale = new ArrayList<String>();
 		// affichage des resultat de recherche par mot cle :
 		if (type.contains("requeteComplexe")) {
 			if (requeteComplexe.size() == 0) {
@@ -38,7 +40,7 @@ public class Affichage {
 					for (Element element : listeElement) {
 						if (element.ID.equals(id)) {
 							cheminFileName = element.chemin;
-							resultatFinale.put(cheminFileName, null);
+							resultatFinale.add(cheminFileName);
 						}
 					}
 				}
@@ -60,7 +62,7 @@ public class Affichage {
 							fileName = TraitementChemin.extension(TypeFichier.TEXTE, element.chemin);
 							cheminFileName = element.chemin;
 							if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-								resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
+								resultatFinale.add(cheminFileName);
 							}
 						}
 					}
@@ -84,7 +86,7 @@ public class Affichage {
 							fileName = TraitementChemin.extension(TypeFichier.TEXTE, element.chemin);
 							cheminFileName = element.chemin;
 							if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-								resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
+								resultatFinale.add(cheminFileName);
 							}
 						}
 					}
@@ -112,7 +114,7 @@ public class Affichage {
 								fileName = TraitementChemin.extension(TypeFichier.NB, element.chemin);
 								cheminFileName = element.chemin.replace("txt", "bmp");
 								if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-									resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
+									resultatFinale.add(cheminFileName);
 								}
 							}
 						}
@@ -130,7 +132,7 @@ public class Affichage {
 								fileName = TraitementChemin.extension(TypeFichier.RGB, element.chemin);
 								cheminFileName = element.chemin.replace("txt", "jpg");
 								if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
-									resultatFinale.put(cheminFileName, Integer.parseInt(nombreOccurence));
+									resultatFinale.add(cheminFileName);
 								}
 							}
 						}
@@ -156,10 +158,9 @@ public class Affichage {
 							cheminFileName = element.chemin;
 							if (Integer.parseInt(nombreOccurence) == 100) {
 								if (fileName.contains("jingle")) {
-									resultatFinale.put("DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav",
-											2);
+									resultatFinale.add("DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav");
 								} else if (fileName.contains("corpus")) {
-									resultatFinale.put(null, 0);
+									resultatFinale.add(null);
 									resultatFinale.clear();
 								}
 

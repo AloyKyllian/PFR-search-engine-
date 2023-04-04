@@ -36,7 +36,7 @@ public class Config {
         String chaine="";
         chaine=ReadWriteFichier.readOn(ListCheminFichier.cheminConfig);
         String[] premier = chaine.split("\n");
-        String cle = premier[0].substring(25,premier[0].length());
+        String cle = premier[0].substring(24,premier[0].length());
         this.Nb_Mots_Cle=cle;
         cle = premier[1].substring(16,premier[1].length());
         this.Similariter=cle;

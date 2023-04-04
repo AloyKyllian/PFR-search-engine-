@@ -11,22 +11,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControlMenuTexte {
+    String typeRecherche;
     ControlLancerExecutable controlLancerExecutable;
     ControlLireResultat controlLireResultat;
     public ControlMenuTexte(ControlLancerExecutable controlLancerExecutable,ControlLireResultat controlLireResultat) {
         this.controlLancerExecutable = controlLancerExecutable ;
         this.controlLireResultat=controlLireResultat;
     }
-    public Map<String, Integer> comparaisonTexte(String cheminFichierRecherche) {
-        Map<String, Integer> resultatFinale = new HashMap<>();
+    public ArrayList<String> comparaisonTexte(String cheminFichierRecherche) {
+        ArrayList<String> resultatFinale = new ArrayList<>();
         ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "comparaisonTexte(" + cheminFichierRecherche + ")");
         controlLancerExecutable.lancerOut();
         Affichage.setRequete(cheminFichierRecherche);
         return resultatFinale=controlLireResultat.affichage("texte",null,null);
     }
 
-    public Map<String, Integer> rechercheMot(ArrayList<String> motsPlusAuMoins ) {
-        Map<String, Integer> resultatFinale = new HashMap<>();
+    public ArrayList<String> rechercheMot(ArrayList<String> listeMots,String type ) {
+        ArrayList resultatFinale = new ArrayList<String>();
         ArrayList<String> pont = new ArrayList<>();
         ArrayList<String> recup = new ArrayList<>();
         int repere=0;
@@ -57,11 +58,17 @@ public class ControlMenuTexte {
                 pont.removeAll(recup);
             }
         }
-        Affichage.setRequete(motsPlusAuMoins.toString()) ;
-        return resultatFinale=controlLireResultat.affichage("requeteComplexe",pont,null);
+}
+        //Affichage.setRequete(motsPlusAuMoins.toString()) ;
+
+         return resultatFinale=controlLireResultat.affichage("requeteComplexe",pont,null);
     }
 
-
-
+    public void setTypeRecherche(String typeRecherche){
+       this.typeRecherche=typeRecherche;
+    }
+        public String getTypeRecherche(){
+            return this.typeRecherche;
+        }
 
 }
