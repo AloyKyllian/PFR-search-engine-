@@ -61,7 +61,8 @@ public class Affichage {
 						if (element.ID.equals(id)) {
 							fileName = TraitementChemin.extension(TypeFichier.TEXTE, element.chemin);
 							cheminFileName = element.chemin;
-							if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
+
+							if (Integer.parseInt(nombreOccurence) > 0  && Integer.parseInt(nombreOccurence) < 100) {
 								resultatFinale.add(cheminFileName);
 							}
 						}
@@ -113,8 +114,10 @@ public class Affichage {
 							if (element.ID.equals(id)) {
 								fileName = TraitementChemin.extension(TypeFichier.NB, element.chemin);
 								cheminFileName = element.chemin.replace("txt", "bmp");
+								System.out.println("dans affichage  bmp"+cheminFileName);
 								if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
 									resultatFinale.add(cheminFileName);
+
 								}
 							}
 						}
@@ -131,6 +134,7 @@ public class Affichage {
 							if (element.ID.equals(id)) {
 								fileName = TraitementChemin.extension(TypeFichier.RGB, element.chemin);
 								cheminFileName = element.chemin.replace("txt", "jpg");
+								System.out.println("dans affichage  jpg"+cheminFileName);
 								if (Integer.parseInt(nombreOccurence) > 0 && Integer.parseInt(nombreOccurence) < 100) {
 									resultatFinale.add(cheminFileName);
 								}
@@ -139,38 +143,6 @@ public class Affichage {
 					}
 				}
 			}
-		}
-		// affichage des resultat de comparaison Audio :
-		else if (type.contains("audio")) {
-			if (pont.size() == 0) {
-				return null;
-			} else {
-				// Appel de la fonction lire_chemin pour afficher les résultats de comparaison
-				// de texte
-				listeElement = LireResultat.lireChemin("audio");
-
-				for (String[] premiereCase : pont) {
-					String id = premiereCase[0];
-					String nombreOccurence = premiereCase[1];
-					for (Element element : listeElement) {
-						if (element.ID.equals(id)) {
-							fileName = TraitementChemin.extension(TypeFichier.AUDIO, element.chemin);
-							cheminFileName = element.chemin;
-							if (Integer.parseInt(nombreOccurence) == 100) {
-								if (fileName.contains("jingle")) {
-									resultatFinale.add("DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav");
-								} else if (fileName.contains("corpus")) {
-									resultatFinale.add(null);
-									resultatFinale.clear();
-								}
-
-							}
-						}
-					}
-				}
-
-			}
-
 		}
 		return resultatFinale;
 	}

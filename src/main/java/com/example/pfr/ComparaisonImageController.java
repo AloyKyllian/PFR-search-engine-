@@ -84,6 +84,7 @@ public class ComparaisonImageController{
         //controlMenuTexte.comparaisonTexte(texte);
         //resultatFinale=controlMenuAudio.comparaisonAudio(texte.replace("wav","txt"),texte);
         resultatFinale=controlMenuImage.comparaisonImage(texte);
+        //System.out.println(resultatFinale.get(0));
         setBouttons(resultatFinale);
         System.out.println(texte);
     }
