@@ -10,10 +10,20 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class ComparaisonTexteController{
     ControlLancerExecutable controlLancerExecutable=new ControlLancerExecutable();

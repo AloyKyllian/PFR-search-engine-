@@ -88,20 +88,33 @@ public class ResultatImageController {
         stage.show();
     }
 
-    public void setBouttons(int nbResultat){
+    public void setBouttons(ArrayList<String> listColor){
         //controlMenuImage.comparaisonImage();
         int i=1;
-        while(i!=nbResultat+1){
+        String namefile;
+        while(i!=listColor.size()+1){
 
             tailleVbox = tailleVbox +60;
             vbox.setPrefSize(224,tailleVbox);
-            Button Bouttons = new Button("Image "+i);
+            Button Bouttons = new Button(listColor.get(i-1));
             Bouttons.setPrefSize(224,60);
            // private final Image image = new Image("file:HYLYK.png");
             i=i+1;
-            Bouttons.setOnAction(e -> {
-                Image.setImage(image);
-            });
+            if(listColor.get(i-1).contains("jpg")){
+                namefile="file:DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_RGB/"+listColor.get(i-1).toString();
+                Object objet=namefile;
+                Bouttons.setOnAction(e -> {
+                                Image.setImage((Image)objet);
+                            });
+            }
+            else if(listColor.get(i-1).contains("bmp")){
+                namefile="DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_NB/"+listColor.get(i-1);
+                Object objet=namefile;
+                Bouttons.setOnAction(e -> {
+                    Image.setImage((Image)objet);
+                });
+            }
+
             vbox.getChildren().add(Bouttons);
         }
     }
