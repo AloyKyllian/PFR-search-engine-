@@ -83,7 +83,7 @@ public class ResultatImageController {
         FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("MenuImage.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1000, 750);
-        stage.setTitle("Recherhce");
+        stage.setTitle("Recherche");
         stage.setScene(scene);
         stage.show();
     }
@@ -97,6 +97,7 @@ public class ResultatImageController {
             vbox.setPrefSize(224,tailleVbox);
             Button Bouttons = new Button("Image "+i);
             Bouttons.setPrefSize(224,60);
+           // private final Image image = new Image("file:HYLYK.png");
             i=i+1;
             Bouttons.setOnAction(e -> {
                 Image.setImage(image);
@@ -137,7 +138,7 @@ public class ResultatImageController {
         assert Texte != null : "fx:id=\"Texte\" was not injected: check your FXML file 'ResultatTexte.fxml'.";
         //Récupération du nombre de résultats
         //passer la map en parametres pour setBouttons
-        setBouttons(10);    // Remplacer 21 par le nombre de résultats
+        //setBouttons(10);    // Remplacer 21 par le nombre de résultats
         controleIndexation.indexation();
         //colorpicker.setCustomColors(allowedColors.stream().collect(Collectors.toSet()));
     }
