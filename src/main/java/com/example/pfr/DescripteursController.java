@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class DescripteursController {
 
-    private ControleVisualiserDescripteur controleVisualiserDescripteur=new ControleVisualiserDescripteur();
+    private final ControleVisualiserDescripteur controleVisualiserDescripteur=new ControleVisualiserDescripteur();
     private Stage stage;
     @FXML
     private ResourceBundle resources;

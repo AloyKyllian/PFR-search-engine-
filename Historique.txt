@@ -11,3 +11,7 @@
 9:56 AUDIO Comparaison null ../../DATA_FIL_ROUGE_DEV/IMG_et_AUDIO/TEST_SON/corpus_fi.wav
 19:18 TEXTE Recherche Requete simple frames
 19:22 TEXTE Recherche Requete complexe [+saison, -football]
+23:20 TEXTE Recherche simple saison
+0:21 IMAGE Recherche Couleur rouge
+0:23 IMAGE Recherche Couleur rouge
+0:23 IMAGE Recherche Couleur vert

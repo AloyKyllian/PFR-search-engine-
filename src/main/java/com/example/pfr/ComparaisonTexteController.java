@@ -1,13 +1,5 @@
 package com.example.pfr;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.*;
-
 import Controle.ControlLancerExecutable;
 import Controle.ControlLireResultat;
 import Controle.ControlMenuTexte;
@@ -28,7 +20,8 @@ public class ComparaisonTexteController{
     ControlLireResultat controlLireResultat=new ControlLireResultat();
     ControlMenuTexte controlMenuTexte=new ControlMenuTexte(controlLancerExecutable,controlLireResultat);
     private Stage stage;
-    private TextField AideTexte;
+    @FXML
+    private TextArea AideTexte;
     private boolean aide = false;
     @FXML
     private ResourceBundle resources;
@@ -147,13 +140,21 @@ public class ComparaisonTexteController{
     }
 
     @FXML
-    void aide(ActionEvent event) {
+    void aide(ActionEvent event){
+        if(!aide){
+            AideTexte.setVisible(true);
+            aide = true;
+        }
+        else if(aide){
+            AideTexte.setVisible(false);
+            aide = false;
+        }
 
     }
 
     @FXML
     void initialize() {
-
+        AideTexte.setVisible(false);
     }
 }
 

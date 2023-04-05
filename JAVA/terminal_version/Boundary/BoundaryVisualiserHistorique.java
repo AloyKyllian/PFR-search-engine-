@@ -16,6 +16,7 @@ public class BoundaryVisualiserHistorique implements PropertyChangeListener{
     {
         this.control=control;
         this.control.setListener(PropertyName.ENREGISTRER_HISTORIQUE.toString(), this);
+        this.control.setListener(PropertyName.VIDER_HISTORIQUE.toString(), this);
     }
 
     public void propertyChange(PropertyChangeEvent evt)

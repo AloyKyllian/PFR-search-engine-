@@ -1,13 +1,11 @@
 package com.example.pfr;
 
 import java.io.IOException;
-import java.io.ObjectInputFilter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Controle.ControlConfig;
 import Controle.ControlIndexation;
-import Entite.Config;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +36,7 @@ public class ConfigurationController {
 
     @FXML
     private ChoiceBox<Integer> fenetre;
-    private Integer[] nombrefenetredispo = {512,1024,2048,4096,8192};
+    private final Integer[] nombrefenetredispo = {512,1024,2048,4096,8192};
 
     @FXML
     private TextField nbmot;
@@ -93,11 +91,11 @@ public class ConfigurationController {
     }
     @FXML
     void aide(ActionEvent event){
-        if(aide==false){
+        if(!aide){
             AideTexte.setVisible(true);
             aide = true;
         }
-        else if(aide==true){
+        else if(aide){
             AideTexte.setVisible(false);
             aide = false;
         }

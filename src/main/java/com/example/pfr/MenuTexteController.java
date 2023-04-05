@@ -65,11 +65,11 @@ public class MenuTexteController {
 
     @FXML
     void aide(ActionEvent event){
-        if(aide==false){
+        if(!aide){
             AideTexte.setVisible(true);
             aide = true;
         }
-        else if(aide==true){
+        else if(aide){
             AideTexte.setVisible(false);
             aide = false;
         }

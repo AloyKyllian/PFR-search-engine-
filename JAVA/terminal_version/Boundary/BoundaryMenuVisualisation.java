@@ -4,8 +4,6 @@ import Controle.ControlLancerExecutable;
 import Controle.ControleVisualiserDescripteur;
 import Entite.Clavier;
 import Entite.Etat;
-import Entite.ListCheminFichier;
-import Entite.ReadWriteFichier;
 
 public class BoundaryMenuVisualisation {
 	ControlLancerExecutable controlLancerExecutable;

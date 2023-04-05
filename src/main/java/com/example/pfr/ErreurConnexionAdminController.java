@@ -39,18 +39,7 @@ public class ErreurConnexionAdminController {
         public void initialize() {
             assert decompte != null : "fx:id=\"decompte\" was not injected: check your FXML file 'Erreur_Connexion.fxml'.";
             // Créer une ligne de temps pour mettre à jour le compte à rebours
-            timeline = new Timeline();
-            timeline.setCycleCount(Timeline.INDEFINITE);
-            timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), event -> {
-                timeSeconds--;
-                // Mettre à jour l'étiquette de décompte à rebours
-                countdownLabel.setText("Temps restant : " + timeSeconds + " secondes");
-                // Arrêter la ligne de temps une fois que le temps est écoulé
-                if (timeSeconds <= 0) {
-                    timeline.stop();
-                    countdownLabel.setText("Temps écoulé !");
-                }
-            }));
+
         }
 
         @FXML
@@ -64,7 +53,17 @@ public class ErreurConnexionAdminController {
                     countdownLabel.setText("Temps restant : " + timeSeconds + " secondes");
                     if (timeSeconds <= 0) {
                         timeline.stop();
-                        countdownLabel.setText("Temps écoulé !");
+                        FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("ConnexionAdministrateur.fxml"));
+                        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                        Scene scene = null;
+                        try {
+                            scene = new Scene(fxmlLoader.load(), 1000, 750);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        stage.setTitle("ConnexionUtilisateur");
+                        stage.setScene(scene);
+                        stage.show();
                     }
                 }));
                 timeline.play();

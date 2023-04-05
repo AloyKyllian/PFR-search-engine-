@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class BoundaryMenuTexte {
 	ControlLancerExecutable controlLancerExecutable;
-	BDHistorique bdHistorique = BDHistorique.getInstance();
+
 
 	public BoundaryMenuTexte(ControlLancerExecutable controlLancerExecutable) {
 		this.controlLancerExecutable = controlLancerExecutable ;
@@ -37,7 +37,6 @@ public class BoundaryMenuTexte {
 			case '2': {
 				System.out.println("\nEntrez votre mot-clé\n");
 				 motCleRecherche = Clavier.entrerClavierString();
-				 bdHistorique.enregistrerHistorique(  TypeFichier.TEXTE, "Recherche", "Requete simple", motCleRecherche);
 
 				ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "rechercheMot(" + motCleRecherche + ")");
 				controlLancerExecutable.lancerOut();
@@ -76,7 +75,7 @@ public class BoundaryMenuTexte {
 					motsPlusAuMoins.add(Clavier.entrerClavierString());
 					// motsCles.add(motsPlusAuMoins.get(i).replace("+", "").replace("-", ""));
 				}
-				bdHistorique.enregistrerHistorique(  TypeFichier.TEXTE, "Recherche", "Requete complexe", motsPlusAuMoins.toString());
+
 				for (int i = 0; i < nombreMot; i++) {
 					if (motsPlusAuMoins.get(i).contains("+")) {
 						ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,"rechercheMot(" + motsPlusAuMoins.get(i).replace("+", "") + ")");
@@ -162,7 +161,7 @@ public class BoundaryMenuTexte {
 			}
 			
 			if (etat_courant != Etat.Menu_Utilisateur) {
-				bdHistorique.enregistrerHistorique(  TypeFichier.TEXTE, "Comparaison", "", cheminFichierRecherche);
+
 				// verification si le fichier passer est un fichier texte
 				boolean isverifext = TraitementChemin.verifExtension(cheminFichierRecherche, "xml");
 				if (isverifext == false) {

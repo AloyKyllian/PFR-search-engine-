@@ -27,22 +27,23 @@ public class ThreadViderHistorique extends Thread{
 				e.printStackTrace();
 			}
 		//en reel
-			/*Calendar calendar = Calendar.getInstance();
+			BDHistorique bdHistorique = BDHistorique.getInstance();
+			Calendar calendar = Calendar.getInstance();
 			int jour= calendar.get(Calendar.DAY_OF_MONTH);
 			if(jour!=jourReference)
 			{
 				jourReference = jour;
-				System.out.println("Vider commande");
-			}*/
+				bdHistorique.viderHistorique();
+			}
 		//pour le test  
-			BDHistorique bdHistorique = BDHistorique.getInstance();
+			/*BDHistorique bdHistorique = BDHistorique.getInstance();
 			Calendar calendar = Calendar.getInstance();
 			int minute= calendar.get(Calendar.MINUTE);
 			if(minute==21)
 			{
 				bdHistorique.viderHistorique();
 			}
-			
+			*/
 			
 		}while(condition);
 	}

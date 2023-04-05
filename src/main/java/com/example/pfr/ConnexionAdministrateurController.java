@@ -2,7 +2,6 @@ package com.example.pfr;
 
 import Controle.ControlConnexion;
 import Controle.ControlIndexation;
-import com.example.pfr.PFRApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,7 +59,7 @@ public class ConnexionAdministrateurController {
         // Mettre la Fonction Connexion
         /*System.out.println(login);
         System.out.println(mdp);*/
-        if(result==true){
+        if(result){
             FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("MenuAdministrateur.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load(), 1000, 750);

@@ -1,26 +1,18 @@
 package com.example.pfr;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import Controle.ControlLancerExecutable;
 import Controle.ControlIndexation;
 import Controle.ControlLireResultat;
 import Controle.ControlMenuTexte;
-import Entite.Affichage;
-import Entite.LireResultat;
-import Entite.ListCheminFichier;
-import Entite.ReadWriteFichier;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -43,7 +35,7 @@ public class RechercheTexteController {
 
     @FXML
     private ChoiceBox<String> choix ;
-    private String[] requete = {"simple","complexe"};
+    private final String[] requete = {"simple","complexe"};
 
     @FXML
     private TextField Barre;
@@ -71,9 +63,7 @@ public class RechercheTexteController {
             ArrayList<String> motsPlusAuMoins = new ArrayList<String>();
 
 // Boucle sur le tableau de mots et ajoute chaque mot à la liste
-            for (String word : words) {
-                motsPlusAuMoins.add(word);
-            }
+            Collections.addAll(motsPlusAuMoins, words);
 
 // Affiche chaque mot et son signe associé
             for (String word : motsPlusAuMoins) {
@@ -93,11 +83,11 @@ public class RechercheTexteController {
 
     @FXML
     void aide(ActionEvent event){
-        if(aide==false){
+        if(!aide){
             AideTexte.setVisible(true);
             aide = true;
         }
-        else if(aide==true) {
+        else if(aide) {
             AideTexte.setVisible(false);
             aide = false;
         }

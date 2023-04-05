@@ -1,6 +1,6 @@
 package Controle;
 
-import Entite.*;
+import Entite.Config;
 
 public class ControlConfig {
 

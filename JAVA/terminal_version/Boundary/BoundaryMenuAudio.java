@@ -1,7 +1,10 @@
 package Boundary;
 
 import Controle.ControlMenuAudio;
-import Entite.*;
+import Entite.Clavier;
+import Entite.Etat;
+import Entite.LireResultat;
+import Entite.TraitementChemin;
 
 public class BoundaryMenuAudio {
 
@@ -17,7 +20,6 @@ public class BoundaryMenuAudio {
 		String cheminFichierRecherche = "";
 		char choix;
 		int erreur =0;
-		BDHistorique bdHistorique = BDHistorique.getInstance();
 		Etat etat_courant = Etat.Menu_audio;
 		System.out.println("\n__________________________Recherche fichier audio__________________________\n");
 		System.out.println("\nVeuillez faire votre choix  : \n");
@@ -56,7 +58,7 @@ public class BoundaryMenuAudio {
 					}
 				}
 				if (etat_courant != Etat.Menu_Utilisateur) {
-					bdHistorique.enregistrerHistorique(TypeFichier.AUDIO, "Comparaison", null, cheminFichierRecherche);
+
 					// verification si le fichier passer est un fichier texte
 					boolean isverifext = TraitementChemin.verifExtension(cheminFichierRecherche, "wav");
 					if (!isverifext) {

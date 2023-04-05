@@ -23,13 +23,13 @@ import javafx.stage.Stage;
 public class ResultatAudioController {
 
     private Stage stage;
-    private ControlLireResultat controlLireResultat = new ControlLireResultat();
-    private ControlLancerExecutable controlLancerExecutable = new ControlLancerExecutable();
+    private final ControlLireResultat controlLireResultat = new ControlLireResultat();
+    private final ControlLancerExecutable controlLancerExecutable = new ControlLancerExecutable();
 
-    private ControlMenuAudio controlMenuAudio = new ControlMenuAudio(controlLancerExecutable,controlLireResultat);
+    private final ControlMenuAudio controlMenuAudio = new ControlMenuAudio(controlLancerExecutable,controlLireResultat);
     @FXML
     private ImageView Image;
-    private Image image = new Image("file:50.jpg");
+    private final Image image = new Image("file:50.jpg");
     @FXML
     private VBox vbox;
     private int tailleVbox=0;

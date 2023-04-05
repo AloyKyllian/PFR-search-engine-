@@ -8,9 +8,7 @@ import java.util.ResourceBundle;
 
 import Controle.ControlLancerExecutable;
 import Controle.ControlLireResultat;
-import Controle.ControlMenuAudio;
 import Controle.ControlMenuImage;
-import Entite.LireResultat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +31,8 @@ public class ComparaisonImageController{
     @FXML
     private ImageView Image;
     private Stage stage;
-    private TextField AideTexte;
+    @FXML
+    private TextArea AideTexte;
     private boolean aide = false;
     @FXML
     private ResourceBundle resources;
@@ -83,6 +82,7 @@ public class ComparaisonImageController{
         //controlMenuTexte.comparaisonTexte(texte);
         //resultatFinale=controlMenuAudio.comparaisonAudio(texte.replace("wav","txt"),texte);
         resultatFinale=controlMenuImage.comparaisonImage(texte);
+        //System.out.println(resultatFinale.get(0));
         setBouttons(resultatFinale);
         System.out.println(texte);
     }
@@ -93,6 +93,7 @@ public class ComparaisonImageController{
 
         int dernierSeparateur ;
         String nomFichier;
+        System.out.println("size premier : "+resultatFinale.size());
         Image [] image=new Image[resultatFinale.size()];
         for(Object file : resultatFinale){
             image[j]=(Image) file;
@@ -116,13 +117,21 @@ public class ComparaisonImageController{
 
 
     @FXML
-    void aide(ActionEvent event) {
+    void aide(ActionEvent event){
+        if(!aide){
+            AideTexte.setVisible(true);
+            aide = true;
+        }
+        else if(aide){
+            AideTexte.setVisible(false);
+            aide = false;
+        }
 
     }
 
     @FXML
     void initialize() {
-
+        AideTexte.setVisible(false);
     }
 }
 
