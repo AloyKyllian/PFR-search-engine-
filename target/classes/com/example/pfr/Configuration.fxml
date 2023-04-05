@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfr.ConfigurationController">
+   <children>
+      <ImageView fitHeight="752.0" fitWidth="1023.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@configuration.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="150.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de fenêtre : " wrappingWidth="223.00000512599945">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="150.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de mots clés : " wrappingWidth="264.00000512599945">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nbmot" layoutX="508.0" layoutY="191.0" prefHeight="42.0" prefWidth="322.0" promptText="Nombre..." />
+      <Text layoutX="150.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seuil de similarité :" wrappingWidth="213.5273478925228">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="150.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intervalle de temps :" wrappingWidth="223.00000488758087">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Slider fx:id="similarite" layoutX="508.0" layoutY="244.0" majorTickUnit="10.0" minorTickCount="1" prefHeight="42.0" prefWidth="332.0" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="temps" layoutX="503.0" layoutY="424.0" majorTickUnit="10.0" minorTickCount="1" prefHeight="42.0" prefWidth="332.0" showTickLabels="true" showTickMarks="true" />
+      <Text layoutX="150.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de bit de poids forts :" wrappingWidth="321.9999969005585">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Slider fx:id="bitfort" layoutX="508.0" layoutY="303.0" majorTickUnit="1.0" max="8.0" min="1.0" minorTickCount="1" prefHeight="42.0" prefWidth="332.0" showTickLabels="true" showTickMarks="true" />
+      <Button layoutX="319.0" layoutY="569.0" mnemonicParsing="false" onAction="#Appliquer" opacity="0.0" prefHeight="73.0" prefWidth="177.0" text="Appliquer" />
+      <Button layoutX="545.0" layoutY="575.0" mnemonicParsing="false" onAction="#Retour" opacity="0.0" prefHeight="67.0" prefWidth="156.0" text="Retour" />
+      <ChoiceBox fx:id="fenetre" layoutX="508.0" layoutY="364.0" prefHeight="42.0" prefWidth="332.0" />
+      <TextArea fx:id="AideTexte" layoutX="103.0" layoutY="149.0" pickOnBounds="false" prefHeight="190.0" prefWidth="871.0" text="Ici vous pouvez modifier les paramètres des recherches afin d'influencer les résulats&#10;" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextArea>
+      <Button layoutX="907.0" layoutY="25.0" mnemonicParsing="false" onAction="#aide" opacity="0.0" prefHeight="66.0" prefWidth="67.0" text="Button" />
+   </children>
+</AnchorPane>

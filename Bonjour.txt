@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<article>
+<date>Sat, 17 Sep 2005 12:33:57 GMT</date>
+<auteur>Michel Cournot</auteur>
+<titre>Anouk Aim�e et Philippe Noiret magnifient "Love Letters"</titre>
+<resume>Sandrine Dumas met en sc�ne une pi�ce d'A. R. Gurney au Th��tre de la Madeleine � Paris.</resume>
+<texte>
+<phrase>D�s qu'ils sont enfants, � l'�cole, ils se passent de petits mots.</phrase>
+<phrase>Invitations � un go�ter, � un anniversaire...</phrase>
+<phrase>Ils grandissent, et ces billets, cela devient une habitude.</phrase>
+<phrase>Ils s'aiment bien, ils font un peu bande � part, ils se disent des choses.</phrase>
+<phrase>Et la vie va les s�parer, les �loigner.</phrase>
+<phrase>Raison de plus de s'�crire, mais ce n'est plus cette intimit� directe, ils �taient ensemble, et voici qu'ils connaissent, chacun de son c�t�, d'autres personnes, d'autres �v�nements.Surtout, ils sont deux �tres diff�rents : lui est calme, s�r de lui, elle est inqui�te, souvent triste.</phrase>
+<phrase>De loin ils se taquinent, se chamaillent, elle prend mal les plaisanteries.</phrase>
+<phrase>Les lettres vont s'espacer quand ils vont avoir d'autres liens.Plus tard, ils en viendront � ne s'�crire que pour se f�ter No�l, le jour de l'An.</phrase>
+<phrase>Lui, Thomas, va de mieux en mieux, c'est l'arm�e, puis il fait son droit, devient avocat, et m�me c'est la politique, il est �lu s�nateur.</phrase>
+<phrase>Il la prie de ne pas lui envoyer ses voeux, de ne pas lui t�l�phoner au bureau.</phrase>
+<phrase>Elle, Alexa, s'assombrit, se fait soigner, se met � boire.</phrase>
+<phrase>Est souvent hospitalis�e.</phrase>
+<phrase>Les lettres redeviennent plus proches, mais Alexa meurt.Le texte de Love Letters , la pi�ce d'A.</phrase>
+<phrase>R.</phrase>
+<phrase>Gurney, n'est pas inint�ressant, mais il est clair que ce n'est l�, avant tout, qu'un pr�texte au jeu de deux com�diens, comme il est clair que les spectateurs ne viennent � pr�sent remplir la salle que pour entendre de pr�s, pour voir dans le monde r�el, en personne, deux grands acteurs, auxquels ils sont tr�s attach�s, Anouk Aim�e et Philippe Noiret.Et c'est vrai, ils sont bien l�.</phrase>
+<phrase>Ils ne sont plus deux apparences, sur une toile, dans la p�nombre, presque en r�ve, elle ne court plus, de loin, sur la plage de Deauville, il ne r�ve plus, dans le r�le de Pablo Neruda, sur son �le d'Italie.</phrase>
+<phrase>Ils sont l� comme vous et moi, dans le m�me lieu, assis tous deux devant une table, sous des lampes �lectriques.</phrase>
+<phrase>C'est une �motion, une joie, de se trouver si pr�s d'eux, et ce n'est plus le m�me coup du coeur, le m�me sentiment d'irr�el qui nous prend lorsque nous avons la chance de les voir passant dans la rue, descendant d'une voiture : tiens, Anouk Aim�e, oui, c'est elle, regarde !Non, l� c'est annonc�, c'est arrang�, et durant une heure trente ils restent l� expr�s pour nous.</phrase>
+<phrase>Et ils sont sages, calmes, modestes.</phrase>
+<phrase>La metteuse en sc�ne, Sandrine Dumas, les a-t-elle pr�cis�ment orient�s vers cette mod�ration, cette r�serve, ou bien cette sobri�t� de jeu est-elle leur fait, leur caract�re ? Oui peut-�tre.</phrase>
+<phrase>Ils s'effacent devant eux-m�mes.</phrase>
+<phrase>Et c'est tr�s beau.Love Letters , d'A.</phrase>
+<phrase>R.</phrase>
+<phrase>Gurney.</phrase>
+<phrase>Mise en sc�ne : Sandrine Dumas.</phrase>
+<phrase>Avec Anouk Aim�e et Philippe Noiret.</phrase>
+<phrase>Th��tre de la Madeleine, 19, rue de Sur�ne, Paris-8e.</phrase>
+<phrase>Mo Madeleine.</phrase>
+<phrase>T�l.</phrase>
+<phrase>: 01-42-65-07-09.</phrase>
+<phrase>Du mardi au vendredi, � 19 heures ; samedi, � 16 heures ; dimanche, � 18 heures.</phrase>
+<phrase>De 15 � � 55 �.</phrase>
+<phrase>Dur�e : 1 heure.
+</phrase></texte>
+</article>
