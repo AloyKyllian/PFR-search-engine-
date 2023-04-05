@@ -27,7 +27,8 @@ public class ComparaisonAudioController{
     ControlLireResultat controlLireResultat=new ControlLireResultat();
     ControlMenuAudio controlMenuAudio=new ControlMenuAudio(controlLancerExecutable,controlLireResultat);
     private Stage stage;
-    private TextField AideTexte;
+    @FXML
+    private TextArea AideTexte;
     private boolean aide = false;
     @FXML
     private ResourceBundle resources;
@@ -109,14 +110,23 @@ public class ComparaisonAudioController{
         }
     }
 
+
     @FXML
-    void aide(ActionEvent event) {
+    void aide(ActionEvent event){
+        if(aide==false){
+            AideTexte.setVisible(true);
+            aide = true;
+        }
+        else if(aide==true){
+            AideTexte.setVisible(false);
+            aide = false;
+        }
 
     }
 
     @FXML
     void initialize() {
-
+        AideTexte.setVisible(false);
     }
 }
 

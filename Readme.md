@@ -4,13 +4,13 @@ control comparaison image à checker de couleur aussi [DONE]
 control config [DONE]
 lien entre interface et JAVA Administrateur[DONE]
 lien entre interface et JAVA utilisateur
-    - recherche texte []
-        - recherche complexe []
-        - recherche simple []
+    - recherche texte [DONE] attention une recherche a la fois
+        - recherche complexe [DONE]
+        - recherche simple [DONE]
     - comparaison texte []
     - recherche image []
     - comparaison image []
-    - comparaison audio []
+    - comparaison audio [DONE]
 
 pb avec l'enchainement de l'interface pour la recherche et la comparaison peut importe le type
 

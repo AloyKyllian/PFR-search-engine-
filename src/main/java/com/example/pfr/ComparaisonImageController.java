@@ -33,7 +33,8 @@ public class ComparaisonImageController{
     @FXML
     private ImageView Image;
     private Stage stage;
-    private TextField AideTexte;
+    @FXML
+    private TextArea AideTexte;
     private boolean aide = false;
     @FXML
     private ResourceBundle resources;
@@ -93,6 +94,7 @@ public class ComparaisonImageController{
 
         int dernierSeparateur ;
         String nomFichier;
+        System.out.println("size premier : "+resultatFinale.size());
         Image [] image=new Image[resultatFinale.size()];
         for(Object file : resultatFinale){
             image[j]=(Image) file;
@@ -116,13 +118,21 @@ public class ComparaisonImageController{
 
 
     @FXML
-    void aide(ActionEvent event) {
+    void aide(ActionEvent event){
+        if(aide==false){
+            AideTexte.setVisible(true);
+            aide = true;
+        }
+        else if(aide==true){
+            AideTexte.setVisible(false);
+            aide = false;
+        }
 
     }
 
     @FXML
     void initialize() {
-
+        AideTexte.setVisible(false);
     }
 }
 

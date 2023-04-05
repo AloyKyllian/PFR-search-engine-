@@ -1,8 +1,6 @@
 package Controle;
 
-import Entite.Affichage;
-import Entite.ListCheminFichier;
-import Entite.ReadWriteFichier;
+import Entite.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,6 +14,7 @@ public class ControlMenuImage {
     private List<String> listImgRouge;
     private List<String> listImgVert;
     private List<String> listImgBleu;
+    BDHistorique bdHistorique = BDHistorique.getInstance();
 
     public ControlMenuImage(ControlLancerExecutable controlLancerExecutable, ControlLireResultat controlLireResultat) {
         this.controlLancerExecutable = controlLancerExecutable ;
@@ -48,17 +47,23 @@ public class ControlMenuImage {
         String typeImage = null;
         if(cheminFichierRecherche.contains("bmp")){
             typeImage="bmp";
+            cheminFichierRecherche.replace("bmp","txt");
         }
         else if(cheminFichierRecherche.contains("jpg")){
             typeImage="jpg";
+            cheminFichierRecherche.replace("jpg","txt");
         }
-        ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "comparaisonImage(" + cheminFichierRecherche.replace(typeImage,"txt") + ")");
+        ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "comparaisonImage(" + cheminFichierRecherche + ")");
         controlLancerExecutable.lancerOut();
         Affichage.setRequete(cheminFichierRecherche);
-        return resultatFinale=controlLireResultat.affichage("image",null,typeImage);
+        bdHistorique.enregistrerHistorique(  TypeFichier.AUDIO, "Comparaison", "", cheminFichierRecherche);
+        resultatFinale=controlLireResultat.affichage("image",null,typeImage);
+        //System.out.println("dans control Image : "+resultatFinale.get(0));
+        return resultatFinale;
     }
 
     public  List<String> rechercheCouleur(String couleur) {
+        bdHistorique.enregistrerHistorique(  TypeFichier.IMAGE, "Recherche", "Couleur", couleur);
         if(couleur.equals("rouge")){
             return listImgRouge;
         }

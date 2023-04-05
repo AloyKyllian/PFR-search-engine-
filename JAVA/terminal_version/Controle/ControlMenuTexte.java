@@ -1,10 +1,7 @@
 package Controle;
 
 import Boundary.BoundaryErreur;
-import Entite.Affichage;
-import Entite.LireResultat;
-import Entite.ListCheminFichier;
-import Entite.ReadWriteFichier;
+import Entite.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,6 +12,7 @@ public class ControlMenuTexte {
     String typeRecherche;
     ControlLancerExecutable controlLancerExecutable;
     ControlLireResultat controlLireResultat;
+    BDHistorique bdHistorique = BDHistorique.getInstance();
     public ControlMenuTexte(ControlLancerExecutable controlLancerExecutable,ControlLireResultat controlLireResultat) {
         this.controlLancerExecutable = controlLancerExecutable ;
         this.controlLireResultat=controlLireResultat;
@@ -23,6 +21,7 @@ public class ControlMenuTexte {
         ArrayList<String> resultatFinale = new ArrayList<>();
         ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC, "comparaisonTexte(" + cheminFichierRecherche + ")");
         controlLancerExecutable.lancerOut();
+        bdHistorique.enregistrerHistorique(  TypeFichier.TEXTE, "Comparaison", "", cheminFichierRecherche);
         Affichage.setRequete(cheminFichierRecherche);
         return resultatFinale=controlLireResultat.affichage("texte",null,null);
     }
@@ -38,6 +37,7 @@ public class ControlMenuTexte {
             System.out.println("Simpleeeee");
             ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,"rechercheMot(" + listeMots.get(0) + ")");
             controlLancerExecutable.lancerOut();
+            bdHistorique.enregistrerHistorique(  TypeFichier.TEXTE, "Recherche", "simple", listeMots.get(0) );
             if (pont.size() == 0) {
                 pont = LireResultat.lirePontComplexe();
             }}}
@@ -55,6 +55,7 @@ public class ControlMenuTexte {
             if (motsPlusAuMoins.get(i).contains("+")) {
                 ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,"rechercheMot(" + motsPlusAuMoins.get(i).replace("+", "") + ")");
                 controlLancerExecutable.lancerOut();
+                bdHistorique.enregistrerHistorique(  TypeFichier.TEXTE, "Recherche", "complexe", motsPlusAuMoins.toString() );
                 if (pont.size() == 0 && repere == 0) {
                     pont = LireResultat.lirePontComplexe();
                     repere = 1;
@@ -75,6 +76,7 @@ public class ControlMenuTexte {
             if (motsPlusAuMoins.get(k).contains("-")) {
                 ReadWriteFichier.writeOn(ListCheminFichier.cheminPontJC,"rechercheMot(" + motsPlusAuMoins.get(k).replace("-", "") + ")");
                 controlLancerExecutable.lancerOut();
+                bdHistorique.enregistrerHistorique(  TypeFichier.TEXTE, "Recherche", "complexe", motsPlusAuMoins.toString() );
                 recup = LireResultat.lirePontComplexe();
                 pont.removeAll(recup);
             }

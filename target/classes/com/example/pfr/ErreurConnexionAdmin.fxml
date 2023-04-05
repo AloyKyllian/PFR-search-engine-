@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.pfr.ErreurConnexionAdminController">
-    <Label fx:id="countdownLabel" text="Temps restant : 10 secondes"/>
+<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfr.ErreurConnexionAdminController">
+   <AnchorPane onMouseEntered="#handleMouseMoved" onMouseMoved="#handleMouseMoved" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: White;">
+      <children>
+          <Label fx:id="countdownLabel" layoutX="326.0" layoutY="360.0" text="Temps restant : 10 secondes">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Text layoutX="170.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous avez fait trois erreurs en rentrant vos Identifiants">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Text>
+         <Text layoutX="235.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous êtes bloqué avant de pouoir réessayer">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
 </VBox>

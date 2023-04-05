@@ -16,7 +16,7 @@ public class BoundaryMenuImage {
 		int erreur = 0;
 		String cheminFichierRecherche = "";
 		Etat etat_courant = Etat.Menu_image;
-		BDHistorique bdHistorique = BDHistorique.getInstance();
+
 
 		System.out.println("\n__________________________Recherche fichier image__________________________\n");
 		System.out.println("\nVeuillez faire votre choix  : \n");
@@ -58,7 +58,6 @@ public class BoundaryMenuImage {
 			}
 			if (etat_courant != Etat.Menu_Utilisateur) {
 				// verification si le fichier passer est un fichier texte
-				bdHistorique.enregistrerHistorique(  TypeFichier.IMAGE, "Comparaison", "", cheminFichierRecherche);
 				boolean isverifext = TraitementChemin.verifExtension(cheminFichierRecherche, "jpg");
 				boolean bmp = TraitementChemin.verifExtension(cheminFichierRecherche, "bmp");
 
@@ -101,7 +100,6 @@ public class BoundaryMenuImage {
 			String couleur = Clavier.entrerClavierString();
 			System.out.println("\nEntrer le seuil de couleur voulue");
 			int seuil = Clavier.entrerClavierInt();
-			bdHistorique.enregistrerHistorique(  TypeFichier.IMAGE, "Recherche couleur", "", couleur);
 			BoundarySimuRechercheCouleur simu = new BoundarySimuRechercheCouleur();
 			simu.recherche(couleur, seuil);
 			etat_courant = Etat.Menu_Utilisateur;

@@ -58,8 +58,6 @@ public class AccueilController {
     void Admin(ActionEvent event)  throws IOException {
         Admin=true;
         FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("ConnexionAdministrateur.fxml"));
-        //ConnexionController connexionController = fxmlLoader.getController();
-        //connexionController.testAdmin(Admin);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1000, 750);
         stage.setTitle("ConnexionAdministrateur");
@@ -67,9 +65,13 @@ public class AccueilController {
         stage.show();
     }
     @FXML
-    void historique(ActionEvent event){
-
-
+    void historique(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("Historique.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 750);
+        stage.setTitle("Historique");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

@@ -28,7 +28,8 @@ public class ComparaisonTexteController{
     ControlLireResultat controlLireResultat=new ControlLireResultat();
     ControlMenuTexte controlMenuTexte=new ControlMenuTexte(controlLancerExecutable,controlLireResultat);
     private Stage stage;
-    private TextField AideTexte;
+    @FXML
+    private TextArea AideTexte;
     private boolean aide = false;
     @FXML
     private ResourceBundle resources;
@@ -147,13 +148,21 @@ public class ComparaisonTexteController{
     }
 
     @FXML
-    void aide(ActionEvent event) {
+    void aide(ActionEvent event){
+        if(aide==false){
+            AideTexte.setVisible(true);
+            aide = true;
+        }
+        else if(aide==true){
+            AideTexte.setVisible(false);
+            aide = false;
+        }
 
     }
 
     @FXML
     void initialize() {
-
+        AideTexte.setVisible(false);
     }
 }
 

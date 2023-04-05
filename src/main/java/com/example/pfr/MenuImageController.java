@@ -45,7 +45,7 @@ public class MenuImageController {
 
     @FXML
     void Recherche(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("Recherche.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("ResultatImage.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1000, 750);
         stage.setTitle("RechercheImage");

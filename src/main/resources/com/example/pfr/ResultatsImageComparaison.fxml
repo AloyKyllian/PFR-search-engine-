@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfr.ComparaisonImageController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfr.ComparaisonImageController">
     <children>
-        <ImageView fitHeight="743.0" fitWidth="1000.0" layoutY="7.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="750.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@HYLYKSL.png" />
+                <Image url="@RESULTAT_GENE.png" />
             </image>
         </ImageView>
-        <ScrollPane layoutX="83.0" layoutY="136.0" prefHeight="548.0" prefWidth="225.0">
+        <ScrollPane layoutX="98.0" layoutY="215.0" prefHeight="512.0" prefWidth="225.0">
             <content>
                 <VBox fx:id="vbox" prefHeight="60.0" prefWidth="225.0" />
             </content>
         </ScrollPane>
-        <Text layoutX="382.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resultat Image">
-            <font>
-                <Font size="36.0" />
-            </font>
-        </Text>
-        <Button layoutX="862.0" layoutY="703.0" mnemonicParsing="false" onAction="#Retour" text="Retour" />
-        <Button layoutX="927.0" layoutY="703.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter" />
-      <ScrollPane layoutX="452.0" layoutY="136.0" prefHeight="548.0" prefWidth="503.0">
+        <Button layoutX="741.0" layoutY="685.0" mnemonicParsing="false" onAction="#Retour" opacity="0.0" prefHeight="53.0" prefWidth="116.0" text="Retour">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+        <Button layoutX="868.0" layoutY="688.0" mnemonicParsing="false" onAction="#Quitter" opacity="0.0" prefHeight="53.0" prefWidth="116.0" text="Quitter">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ScrollPane layoutX="452.0" layoutY="216.0" prefHeight="461.0" prefWidth="489.0">
          <content>
-            <ImageView fx:id="Image" fitHeight="544.0" fitWidth="493.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="Image" fitHeight="459.0" fitWidth="486.0" pickOnBounds="true" preserveRatio="true" />
          </content>
       </ScrollPane>
-      <TextField fx:id="Barre" layoutX="277.0" layoutY="71.0" prefHeight="53.0" prefWidth="401.0" promptText="Chemin..." />
-      <Button layoutX="704.0" layoutY="79.0" mnemonicParsing="false" onAction="#Valider" prefHeight="38.0" prefWidth="148.0" text="Valider" />
+      <TextField fx:id="Barre" layoutX="323.0" layoutY="142.0" prefHeight="53.0" prefWidth="401.0" promptText="Chemin..." />
+      <Button layoutX="789.0" layoutY="137.0" mnemonicParsing="false" onAction="#Valider" opacity="0.0" prefHeight="63.0" prefWidth="137.0" text="Valider">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="901.0" layoutY="22.0" mnemonicParsing="false" onAction="#aide" opacity="0.0" prefHeight="66.0" prefWidth="67.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextArea fx:id="AideTexte" layoutX="234.0" layoutY="145.0" pickOnBounds="false" prefHeight="79.0" prefWidth="743.0" text="Entrez le chemin du fichier que vous souhaitez ajouter et comparer à ceux déjà présent.&#10;Cliquez ensuite sur les boutons qui apparaissent pour afficher les images correspondantes" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextArea>
     </children>
 </AnchorPane>

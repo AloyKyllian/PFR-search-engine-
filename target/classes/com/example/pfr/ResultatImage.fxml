@@ -1,42 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfr.ResultatImageController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfr.ResultatImageController">
     <children>
-        <ImageView fitHeight="743.0" fitWidth="1000.0" layoutY="7.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="750.0" fitWidth="1000.0" layoutY="-1.0" opacity="0.96" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@HYLYKSL.png" />
+                <Image url="@RESULTAT_GENE.png" />
             </image>
         </ImageView>
-        <ScrollPane layoutX="83.0" layoutY="136.0" prefHeight="548.0" prefWidth="225.0">
+        <ScrollPane layoutX="86.0" layoutY="208.0" prefHeight="527.0" prefWidth="225.0">
             <content>
                 <VBox fx:id="vbox" prefHeight="60.0" prefWidth="225.0" />
             </content>
         </ScrollPane>
-        <Text layoutX="382.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resultat Image">
-            <font>
-                <Font size="36.0" />
-            </font>
-        </Text>
-        <Button layoutX="862.0" layoutY="703.0" mnemonicParsing="false" onAction="#Retour" text="Retour" />
-        <Button layoutX="927.0" layoutY="703.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter" />
-      <ScrollPane layoutX="452.0" layoutY="136.0" prefHeight="548.0" prefWidth="503.0">
+        <Button layoutX="740.0" layoutY="687.0" mnemonicParsing="false" onAction="#Retour" opacity="0.0" prefHeight="50.0" prefWidth="117.0" text="Retour">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+        <Button layoutX="869.0" layoutY="687.0" mnemonicParsing="false" onAction="#Quitter" opacity="0.0" prefHeight="50.0" prefWidth="111.0" text="Quitter">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ScrollPane layoutX="462.0" layoutY="208.0" prefHeight="469.0" prefWidth="465.0">
          <content>
-            <ImageView fx:id="Image" fitHeight="544.0" fitWidth="493.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="Image" fitHeight="467.0" fitWidth="460.0" pickOnBounds="true" preserveRatio="true" />
          </content>
       </ScrollPane>
-      <TextField fx:id="Barre" layoutX="323.0" layoutY="70.0" prefHeight="53.0" prefWidth="401.0" promptText="Recherche..." />
-      <Button layoutX="740.0" layoutY="78.0" mnemonicParsing="false" onAction="#Valider" prefHeight="38.0" prefWidth="148.0" text="Valider" />
-      <ChoiceBox fx:id="Choix" layoutX="151.0" layoutY="84.0" prefWidth="150.0" />
+      <Button layoutX="789.0" layoutY="137.0" mnemonicParsing="false" onAction="#Valider" opacity="0.0" prefHeight="62.0" prefWidth="136.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text="Valider">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Slider fx:id="seuil" layoutX="323.0" layoutY="152.0" majorTickUnit="10.0" minorTickCount="1" prefHeight="16.0" prefWidth="392.0" showTickLabels="true" showTickMarks="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="50.0" layoutX="87.0" layoutY="143.0" onMouseClicked="#Rouge" stroke="BLACK" strokeType="INSIDE" width="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff53" height="50.0" layoutX="137.0" layoutY="143.0" onMouseClicked="#Vert" stroke="BLACK" strokeType="INSIDE" width="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#481fff" height="50.0" layoutX="187.0" layoutY="143.0" onMouseClicked="#Bleu" stroke="BLACK" strokeType="INSIDE" width="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
     </children>
 </AnchorPane>

@@ -32,6 +32,9 @@ public class ResultatTexteController {
     private ControlLancerExecutable controlLancerExecutable = new ControlLancerExecutable();
 
     private ControlMenuTexte controlMenuTexte = new ControlMenuTexte(controlLancerExecutable,controlLireResultat);
+    @FXML
+    private TextArea AideTexte;
+    private boolean aide = false;
     private Stage stage;
     @FXML
     private VBox vbox;
@@ -125,10 +128,10 @@ public class ResultatTexteController {
     }
     @FXML
     void Retour(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("Recherche.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PFRApplication.class.getResource("MenuTexte.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1000, 750);
-        stage.setTitle("Recherhce");
+        stage.setTitle("MenuTexte");
         stage.setScene(scene);
         stage.show();
     }
@@ -172,6 +175,19 @@ public class ResultatTexteController {
         // par exemple, vous pouvez ajouter la zone de texte à un VBox
         // ou à une autre disposition de votre choix
     }
+
+    @FXML
+    void aide(ActionEvent event){
+        if(aide==false){
+            AideTexte.setVisible(true);
+            aide = true;
+        }
+        else if(aide==true){
+            AideTexte.setVisible(false);
+            aide = false;
+        }
+
+    }
     @FXML
     void initialize() {
         //assert texte1 != null : "fx:id=\"texte1\" was not injected: check your FXML file 'ResultatTexte.fxml'.";
@@ -182,6 +198,7 @@ public class ResultatTexteController {
         controleIndexation.indexation();
         Choix.getItems().addAll(requete);
         Choix.setValue("Simple");
+        AideTexte.setVisible(false);
     }
 }
 
